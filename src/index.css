@@ -21,19 +21,29 @@
     position: relative;
   }
 
+  button, a, [role="button"], select, input, textarea {
+    @apply cursor-pointer;
+  }
+  
+  *:focus-visible {
+    @apply outline-none ring-2 ring-emerald-500 ring-offset-2;
+  }
+
   /* Custom Clean Scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #F1F5F9;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #CBD5E1;
-    border-radius: 4px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #059669;
+  @media (min-width: 768px) {
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #059669;
+    }
   }
 }
 

@@ -125,13 +125,13 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({ onOpen
   };
 
   return (
-    <section id="universities" className="py-20 lg:py-24 bg-[#FAFCFF] relative overflow-hidden border-y border-slate-200">
+    <section id="universities" className="py-12 sm:py-16 lg:py-24 bg-[#FAFCFF] relative overflow-hidden border-y border-slate-200">
       
       {/* Ambient background glows */}
       <div className="absolute top-1/2 start-10 -translate-y-1/2 w-80 h-80 bg-emerald-500/8 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 end-10 -translate-y-1/2 w-80 h-80 bg-blue-500/8 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-8 sm:mb-10">
         
         {/* Section Header */}
         <div className="text-center space-y-3.5 max-w-3xl mx-auto">
@@ -157,33 +157,33 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({ onOpen
           {list1.map((uni, idx) => (
             <div
               key={`${uni.id}-${idx}`}
-              className="w-72 sm:w-80 shrink-0 p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-emerald-500/50 hover:shadow-xl transition-all shadow-sm group cursor-pointer"
+              className="w-60 sm:w-72 md:w-80 shrink-0 p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-emerald-500/50 hover:shadow-xl transition-all duration-200 shadow-sm group cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               onClick={() => onOpenLeadModal(`university_${uni.id}`)}
             >
               <div className="flex items-center gap-3 mb-3">
                 {renderOfficialLogo(uni.id, uni.shortName, uni.accent)}
                 <div className="overflow-hidden">
-                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-600 transition-colors truncate">
+                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-600 transition-colors duration-200 truncate">
                     {uni.nameAr}
                   </h3>
-                  <p className="text-[11px] text-slate-500 font-sans truncate">
+                  <p className="text-xs text-slate-600 font-sans truncate">
                     {uni.nameEn}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-[11px]">
+              <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
                 <div className="flex items-center gap-1.5 text-amber-600 font-bold">
                   <Award className="w-3.5 h-3.5" />
                   <span>{uni.ranking}</span>
                 </div>
-                <div className="flex items-center gap-1 text-slate-500 font-medium">
-                  <MapPin className="w-3 h-3 text-slate-400" />
+                <div className="flex items-center gap-1 text-slate-600 font-medium">
+                  <MapPin className="w-3 h-3 text-slate-600" />
                   <span>{uni.location}</span>
                 </div>
               </div>
 
-              <div className="mt-2.5 inline-block px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200/60 text-[10px] font-bold">
+              <div className="mt-2.5 inline-block px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200/60 text-xs font-bold">
                 {uni.badge}
               </div>
             </div>
@@ -197,33 +197,33 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({ onOpen
           {list2.map((uni, idx) => (
             <div
               key={`${uni.id}-rev-${idx}`}
-              className="w-72 sm:w-80 shrink-0 p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-emerald-500/50 hover:shadow-xl transition-all shadow-sm group cursor-pointer"
+              className="w-60 sm:w-72 md:w-80 shrink-0 p-5 rounded-2xl bg-white border border-slate-200/90 hover:border-emerald-500/50 hover:shadow-xl transition-all duration-200 shadow-sm group cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               onClick={() => onOpenLeadModal(`university_${uni.id}`)}
             >
               <div className="flex items-center gap-3 mb-3">
                 {renderOfficialLogo(uni.id, uni.shortName, uni.accent)}
                 <div className="overflow-hidden">
-                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-600 transition-colors truncate">
+                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-emerald-600 transition-colors duration-200 truncate">
                     {uni.nameAr}
                   </h3>
-                  <p className="text-[11px] text-slate-500 font-sans truncate">
+                  <p className="text-xs text-slate-600 font-sans truncate">
                     {uni.nameEn}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-[11px]">
+              <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
                 <div className="flex items-center gap-1.5 text-amber-600 font-bold">
                   <Award className="w-3.5 h-3.5" />
                   <span>{uni.ranking}</span>
                 </div>
-                <div className="flex items-center gap-1 text-slate-500 font-medium">
-                  <MapPin className="w-3 h-3 text-slate-400" />
+                <div className="flex items-center gap-1 text-slate-600 font-medium">
+                  <MapPin className="w-3 h-3 text-slate-600" />
                   <span>{uni.location}</span>
                 </div>
               </div>
 
-              <div className="mt-2.5 inline-block px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200/60 text-[10px] font-bold">
+              <div className="mt-2.5 inline-block px-2.5 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200/60 text-xs font-bold">
                 {uni.badge}
               </div>
             </div>
@@ -233,7 +233,7 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({ onOpen
 
       {/* Action Box Below Marquee */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
-        <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 p-6 sm:p-8 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-start border border-emerald-500/20">
+        <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 p-4 sm:p-6 lg:p-8 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-start border border-emerald-500/20">
           <div className="space-y-2">
             <h3 className="text-base sm:text-lg font-bold text-white flex items-center justify-center sm:justify-start gap-2">
               <CheckCircle2 className="w-5 h-5 text-emerald-400" />
@@ -244,10 +244,10 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({ onOpen
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
             <button
               onClick={() => onOpenLeadModal('universities_ticker_cta')}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl text-xs font-bold bg-gradient-to-l from-emerald-500 to-teal-500 text-slate-950 hover:from-emerald-400 hover:to-teal-400 shadow-md transition-all"
+              className="w-full sm:w-auto min-h-[44px] flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl text-xs font-bold bg-gradient-to-l from-emerald-500 to-teal-500 text-slate-950 hover:from-emerald-400 hover:to-teal-400 shadow-md transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
             >
               <span>طلب دراسة ومطابقة مجانية</span>
               <ArrowLeft className="w-4 h-4" />
@@ -257,7 +257,7 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({ onOpen
               href={`${WHATSAPP_BASE_URL}?text=${encodeURIComponent('مرحباً فريق جودة، أود الاستفسار عن الجامعات والتخصصات المتاحة.')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl text-xs font-semibold bg-slate-800 hover:bg-slate-750 text-white border border-slate-700 transition-all"
+              className="w-full sm:w-auto min-h-[44px] flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl text-xs font-semibold bg-slate-800 hover:bg-slate-750 text-white border border-slate-700 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
             >
               <MessageSquare className="w-4 h-4 text-emerald-400" />
               <span>واتساب مباشر</span>

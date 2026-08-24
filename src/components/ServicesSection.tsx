@@ -8,11 +8,11 @@ interface ServicesSectionProps {
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenLeadModal }) => {
   return (
-    <section id="services" className="py-20 lg:py-24 bg-[#FAFCFF] relative border-t border-slate-200">
+    <section id="services" className="py-12 sm:py-16 lg:py-24 bg-[#FAFCFF] relative border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-14">
+        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-purple-800 text-xs font-bold shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-purple-600" />
             <span>خدمات شاملة للطلاب الدوليين</span>
@@ -28,20 +28,20 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenLeadModa
         </div>
 
         {/* Services Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {CORE_SERVICES.map((s) => (
             <div
               key={s.id}
-              className="p-6 rounded-3xl bg-white border border-slate-200 hover:border-emerald-500/40 hover:shadow-lg transition-all flex flex-col justify-between space-y-4 shadow-xs group"
+              className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 hover:border-emerald-500/40 hover:shadow-lg transition-all duration-200 flex flex-col justify-between space-y-4 shadow-xs group"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
                     {s.highlight}
                   </span>
                 </div>
 
-                <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors duration-200">
                   {s.title}
                 </h3>
 
@@ -52,7 +52,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenLeadModa
 
               <button
                 onClick={() => onOpenLeadModal(`service_${s.id}`)}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-800 group-hover:bg-emerald-600 group-hover:text-white transition-all"
+                className="w-full min-h-[44px] flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-bold bg-slate-100 text-slate-800 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               >
                 <span>طلب هذه الخدمة</span>
                 <ArrowLeft className="w-3.5 h-3.5" />

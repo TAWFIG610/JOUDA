@@ -22,10 +22,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
   };
 
   return (
-    <footer className="bg-slate-950 text-white pt-16 pb-12 border-t border-slate-800">
+    <footer className="bg-slate-950 text-white pt-10 pb-8 sm:pt-16 sm:pb-12 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800/80">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 pb-12 border-b border-slate-800/80">
           
           <div className="space-y-4">
             <div className="flex items-center gap-3">
@@ -37,7 +37,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                   <span className="text-2xl font-bold tracking-tight text-white font-arabic">
                     جَــوْدَة
                   </span>
-                  <span className="text-[10px] font-bold tracking-widest px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                  <span className="text-xs font-bold tracking-widest px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
                     JOUDA
                   </span>
                 </div>
@@ -55,7 +55,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               واتساب المستشار: <span dir="ltr">{WHATSAPP_DISPLAY}</span>
             </div>
 
-            <div className="flex items-center gap-2.5 pt-1">
+            <div className="flex flex-wrap items-center gap-2.5 pt-1">
               {FOOTER_DATA.socials.map((s, i) => (
                 <a
                   key={i}
@@ -63,7 +63,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.name}
-                  className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 transition-all"
+                  className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/40 transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                 >
                   {getSocialIcon(s.name)}
                 </a>
@@ -76,7 +76,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
             <ul className="space-y-2 text-xs text-slate-400 font-medium">
               {FOOTER_DATA.links.map((l, i) => (
                 <li key={i}>
-                  <a href={l.href} className="hover:text-emerald-400 transition-colors">
+                  <a href={l.href} className="inline-block py-1 hover:text-emerald-400 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded">
                     {l.title}
                   </a>
                 </li>
@@ -87,11 +87,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
           <div className="space-y-3">
             <h4 className="text-sm font-bold text-white">الدراسة في ماليزيا</h4>
             <ul className="space-y-2 text-xs text-slate-400 font-medium">
-              <li><a href="#universities" className="hover:text-emerald-400 transition-colors">الجامعات الشريكة</a></li>
-              <li><a href="#programs" className="hover:text-emerald-400 transition-colors">تخصصات الذكاء الاصطناعي</a></li>
-              <li><a href="#programs" className="hover:text-emerald-400 transition-colors">الأمن السيبراني والبرمجة</a></li>
-              <li><a href="#journey" className="hover:text-emerald-400 transition-colors">متابعة تأشيرة EMGS</a></li>
-              <li><a href="#why-malaysia" className="hover:text-emerald-400 transition-colors">دليل المعيشة والسكن</a></li>
+              <li><a href="#universities" className="inline-block py-1 hover:text-emerald-400 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded">الجامعات الشريكة</a></li>
+              <li><a href="#programs" className="inline-block py-1 hover:text-emerald-400 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded">تخصصات الذكاء الاصطناعي</a></li>
+              <li><a href="#programs" className="inline-block py-1 hover:text-emerald-400 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded">الأمن السيبراني والبرمجة</a></li>
+              <li><a href="#journey" className="inline-block py-1 hover:text-emerald-400 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded">متابعة تأشيرة EMGS</a></li>
+              <li><a href="#why-malaysia" className="inline-block py-1 hover:text-emerald-400 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded">دليل المعيشة والسكن</a></li>
             </ul>
           </div>
 
@@ -101,7 +101,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               <li>
                 <button
                   onClick={() => onOpenLegal('privacy')}
-                  className="hover:text-emerald-400 transition-colors text-start"
+                  className="inline-block py-1 hover:text-emerald-400 transition-colors text-start cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded"
                 >
                   سياسة الخصوصية
                 </button>
@@ -109,7 +109,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               <li>
                 <button
                   onClick={() => onOpenLegal('terms')}
-                  className="hover:text-emerald-400 transition-colors text-start"
+                  className="inline-block py-1 hover:text-emerald-400 transition-colors text-start cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded"
                 >
                   الشروط والأحكام
                 </button>
@@ -117,7 +117,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               <li>
                 <button
                   onClick={() => onOpenLegal('refund')}
-                  className="hover:text-emerald-400 transition-colors text-start"
+                  className="inline-block py-1 hover:text-emerald-400 transition-colors text-start cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded"
                 >
                   سياسة الشفافية
                 </button>
@@ -128,7 +128,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         </div>
 
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <div>
+          <div className="text-center sm:text-start">
             © 2026 JOUDA (جَـوْدَة) للخدمات الطلابية. جميع الحقوق محفوظة.
           </div>
 
@@ -140,11 +140,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
 
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-1 p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all"
+              className="flex items-center justify-center gap-1 p-2.5 min-h-[44px] min-w-[44px] rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
               aria-label="الرجوع للأعلى"
             >
-              <span>للأعلى</span>
-              <ArrowUp className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">للأعلى</span>
+              <ArrowUp className="w-4 h-4" />
             </button>
           </div>
         </div>

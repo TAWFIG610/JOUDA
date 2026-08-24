@@ -9,11 +9,11 @@ interface ProgramsSectionProps {
 
 export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenLeadModal, onOpenAdvisorModal }) => {
   return (
-    <section id="programs" className="py-20 lg:py-24 bg-[#FAFCFF] relative border-t border-slate-200">
+    <section id="programs" className="py-12 sm:py-16 lg:py-24 bg-[#FAFCFF] relative border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-14">
+        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-xs font-bold shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-blue-600" />
             <span>تخصصات المستقبل الأكثر طلباً</span>
@@ -29,14 +29,14 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenLeadModa
         </div>
 
         {/* Program Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {STUDY_PROGRAMS.map((p) => (
             <div
               key={p.id}
-              className="p-6 rounded-3xl bg-white border border-slate-200 hover:border-emerald-500/40 hover:shadow-lg transition-all flex flex-col justify-between space-y-4 shadow-xs group"
+              className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 hover:border-emerald-500/40 hover:shadow-lg transition-all flex flex-col justify-between space-y-4 shadow-xs group"
             >
               <div className="space-y-3">
-                <div className="flex items-center justify-between text-[11px]">
+                <div className="flex items-center justify-between text-xs">
                   <span
                     className="font-bold px-2.5 py-0.5 rounded-md"
                     style={{ color: p.accentColor, backgroundColor: `${p.accentColor}15` }}
@@ -50,10 +50,10 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenLeadModa
                 </div>
 
                 <div>
-                  <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors">
+                  <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors duration-200">
                     {p.title}
                   </h3>
-                  <p className="text-[11px] text-slate-500 font-sans mt-0.5 font-medium">
+                  <p className="text-xs text-slate-500 font-sans mt-0.5 font-medium">
                     {p.titleEn}
                   </p>
                 </div>
@@ -63,10 +63,10 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenLeadModa
                 </p>
 
                 <div className="space-y-1.5 pt-2 border-t border-slate-100">
-                  <span className="text-[11px] font-bold text-slate-600">فرص العمل المستقبلية:</span>
+                  <span className="text-xs font-bold text-slate-600">فرص العمل المستقبلية:</span>
                   <div className="flex flex-wrap gap-1.5">
                     {p.careerPaths.map((c, i) => (
-                      <span key={i} className="text-[10px] font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                      <span key={i} className="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700">
                         {c}
                       </span>
                     ))}
@@ -76,7 +76,7 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenLeadModa
 
               <button
                 onClick={() => onOpenLeadModal(`program_${p.id}`)}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-500 transition-colors shadow-xs"
+                className="w-full flex items-center justify-center gap-2 py-3 min-h-[44px] rounded-xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-500 transition-colors duration-200 shadow-xs cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               >
                 <span>التقديم على هذا التخصص</span>
                 <ArrowLeft className="w-3.5 h-3.5" />
@@ -86,13 +86,13 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenLeadModa
         </div>
 
         {/* Advisor Help Box */}
-        <div className="rounded-3xl bg-white border border-slate-200 p-6 text-center space-y-3 shadow-xs">
+        <div className="rounded-3xl bg-white border border-slate-200 p-4 sm:p-6 text-center space-y-3 shadow-xs">
           <h4 className="text-sm font-bold text-slate-900">
             تريد استشارة خاصة لمعدلك وتخصصك؟
           </h4>
           <button
             onClick={onOpenAdvisorModal}
-            className="px-6 py-2.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-800 hover:bg-slate-200 transition-colors"
+            className="px-6 py-3 min-h-[44px] rounded-xl text-xs font-bold bg-slate-100 text-slate-800 hover:bg-slate-200 transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
           >
             افتح مستشار التخصصات السريع
           </button>

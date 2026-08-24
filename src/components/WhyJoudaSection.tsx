@@ -8,11 +8,11 @@ interface WhyJoudaProps {
 
 export const WhyJoudaSection: React.FC<WhyJoudaProps> = ({ onOpenLeadModal }) => {
   return (
-    <section id="why-jouda" className="py-20 lg:py-24 bg-white relative border-t border-slate-200">
+    <section id="why-jouda" className="py-12 sm:py-16 lg:py-24 bg-white relative border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-14">
+        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold shadow-xs">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
             <span>الفرق الذي يصنعه فريق جودة</span>
@@ -37,15 +37,15 @@ export const WhyJoudaSection: React.FC<WhyJoudaProps> = ({ onOpenLeadModal }) =>
 
           <div className="divide-y divide-slate-100">
             {COMPARISON_ROWS.map((row, idx) => (
-              <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 p-5 gap-4 items-center">
+              <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 p-3.5 sm:p-5 gap-4 items-center">
                 <div className="lg:col-span-4 font-bold text-sm text-slate-900">
                   {row.feature}
                 </div>
-                <div className="lg:col-span-4 flex items-start gap-2 text-xs text-rose-800 bg-rose-50 p-3 rounded-xl border border-rose-100">
+                <div className="lg:col-span-4 flex items-start gap-2 text-xs text-rose-800 bg-rose-50 p-2.5 sm:p-3 rounded-xl border border-rose-100">
                   <XCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
                   <span>{row.traditional}</span>
                 </div>
-                <div className="lg:col-span-4 flex items-start gap-2 text-xs text-emerald-900 bg-emerald-50 p-3 rounded-xl border border-emerald-200 font-bold">
+                <div className="lg:col-span-4 flex items-start gap-2 text-xs text-emerald-900 bg-emerald-50 p-2.5 sm:p-3 rounded-xl border border-emerald-200 font-bold">
                   <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <span>{row.jouda}</span>
                 </div>
@@ -58,7 +58,7 @@ export const WhyJoudaSection: React.FC<WhyJoudaProps> = ({ onOpenLeadModal }) =>
         <div className="text-center">
           <button
             onClick={() => onOpenLeadModal('why_jouda_cta')}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-500 transition-all shadow-md"
+            className="inline-flex items-center gap-2 px-8 py-3.5 min-h-[44px] rounded-2xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-500 transition-all duration-200 shadow-md cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
           >
             <span>انضم للطلاب المسجلين مع جودة الآن</span>
             <ArrowLeft className="w-4 h-4" />
