@@ -1,28 +1,72 @@
-import React, { useState } from 'react';
-import { ArrowLeft, Clock, Compass } from 'lucide-react';
+import React, { useState } from "react";
+import { ArrowLeft, Clock, Compass } from "lucide-react";
 
 interface StudentJourneyVisualProps {
   onOpenLeadModal: (source?: string) => void;
 }
 
-export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOpenLeadModal }) => {
+export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
+  onOpenLeadModal,
+}) => {
   const [activeStage, setActiveStage] = useState(0);
 
   const stages = [
-    { num: '01', title: 'الاستشارة والتقييم', time: '1 - 2 يوم', role: 'دراسة معدلك وميزانيتك ومطابقة الجامعات مجاناً' },
-    { num: '02', title: 'تجهيز وتدقيق الملف', time: '2 - 3 أيام', role: 'ترجمة وتدقيق الشهادات لضمان استيفاء شروط القبول' },
-    { num: '03', title: 'استلام القبول الرسمي', time: '3 - 7 أيام', role: 'استخراج العرض الأكاديمي (Offer Letter) من الجامعة' },
-    { num: '04', title: 'إجراءات التأشيرة EMGS', time: '3 - 5 أسابيع', role: 'متابعة المعاملة وإصدار خطاب الموافقة الأمنية (VAL)' },
-    { num: '05', title: 'تأكيد السكن وتذكرة السفر', time: 'أسبوع قبل السفر', role: 'حجز السكن القريب وتجهيز تصريح الدخول' },
-    { num: '06', title: 'الاستقبال بمطار كوالالمبور', time: 'يوم الوصول', role: 'مندوبنا يستقبلك وينهي معك إجراءات الجوازات' },
-    { num: '07', title: 'الفحص الطبي وفتح الحساب', time: 'أول 3 أيام', role: 'مرافقتك للمركز الطبي المعتمد وتفعيل الشريحة والحساب' },
-    { num: '08', title: 'بدء الدراسة الجامعية', time: 'الأسبوع الأول', role: 'استلام بطاقة الطالب الجامعية وبدء محاضراتك بنجاح' },
+    {
+      num: "01",
+      title: "الاستشارة والتقييم",
+      time: "1 - 2 يوم",
+      role: "دراسة معدلك وميزانيتك ومطابقة الجامعات مجاناً",
+    },
+    {
+      num: "02",
+      title: "تجهيز وتدقيق الملف",
+      time: "2 - 3 أيام",
+      role: "ترجمة وتدقيق الشهادات لضمان استيفاء شروط القبول",
+    },
+    {
+      num: "03",
+      title: "استلام القبول الرسمي",
+      time: "3 - 7 أيام",
+      role: "استخراج العرض الأكاديمي (Offer Letter) من الجامعة",
+    },
+    {
+      num: "04",
+      title: "إجراءات التأشيرة EMGS",
+      time: "3 - 5 أسابيع",
+      role: "متابعة المعاملة وإصدار خطاب الموافقة الأمنية (VAL)",
+    },
+    {
+      num: "05",
+      title: "تأكيد السكن وتذكرة السفر",
+      time: "أسبوع قبل السفر",
+      role: "حجز السكن القريب وتجهيز تصريح الدخول",
+    },
+    {
+      num: "06",
+      title: "الاستقبال بمطار كوالالمبور",
+      time: "يوم الوصول",
+      role: "مندوبنا يستقبلك وينهي معك إجراءات الجوازات",
+    },
+    {
+      num: "07",
+      title: "الفحص الطبي وفتح الحساب",
+      time: "أول 3 أيام",
+      role: "مرافقتك للمركز الطبي المعتمد وتفعيل الشريحة والحساب",
+    },
+    {
+      num: "08",
+      title: "بدء الدراسة الجامعية",
+      time: "الأسبوع الأول",
+      role: "استلام بطاقة الطالب الجامعية وبدء محاضراتك بنجاح",
+    },
   ];
 
   return (
-    <section id="journey" className="py-12 sm:py-16 lg:py-24 bg-white relative border-t border-slate-200">
+    <section
+      id="journey"
+      className="py-12 sm:py-16 lg:py-24 bg-white relative border-t border-slate-200"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-xs font-bold shadow-xs">
@@ -31,7 +75,10 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOp
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            مسار الطالب مع جَـوْدَة: <span className="text-gradient-emerald">خطوة بخطوة حتى الحرم الجامعي</span>
+            مسار الطالب مع جَـوْدَة:{" "}
+            <span className="text-gradient-emerald">
+              خطوة بخطوة حتى الحرم الجامعي
+            </span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
@@ -47,8 +94,8 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOp
               onClick={() => setActiveStage(idx)}
               className={`p-3 min-h-[44px] shrink-0 w-28 sm:w-auto snap-start rounded-2xl border text-center transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 ${
                 activeStage === idx
-                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-600/20 font-bold sm:scale-105'
-                  : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100'
+                  ? "bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-600/20 font-bold sm:scale-105"
+                  : "bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100"
               }`}
             >
               <div className="text-xs font-sans opacity-90">{st.num}</div>
@@ -81,7 +128,9 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOp
             </div>
 
             <button
-              onClick={() => onOpenLeadModal(`journey_stage_${stages[activeStage].num}`)}
+              onClick={() =>
+                onOpenLeadModal(`journey_stage_${stages[activeStage].num}`)
+              }
               className="shrink-0 flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 min-h-[44px] rounded-2xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-500 transition-all duration-200 shadow-md cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
             >
               <span>ابدأ هذه المرحلة الآن</span>
@@ -89,7 +138,6 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOp
             </button>
           </div>
         </div>
-
       </div>
     </section>
   );

@@ -1,13 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { NAV_LINKS, WHATSAPP_BASE_URL } from '../data/joudaData';
-import { Menu, X, ArrowLeft, GraduationCap, Compass, MessageSquare } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { NAV_LINKS, WHATSAPP_BASE_URL } from "../data/joudaData";
+import {
+  Menu,
+  X,
+  ArrowLeft,
+  GraduationCap,
+  Compass,
+  MessageSquare,
+} from "lucide-react";
 
 interface NavbarProps {
   onOpenLeadModal: (source?: string) => void;
   onOpenAdvisorModal: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal, onOpenAdvisorModal }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  onOpenLeadModal,
+  onOpenAdvisorModal,
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -15,23 +25,25 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal, onOpenAdvisorMo
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
       className={`fixed top-0 start-0 end-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm py-3'
-          : 'bg-white/70 backdrop-blur-sm py-4 border-b border-slate-100'
+          ? "bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm py-3"
+          : "bg-white/70 backdrop-blur-sm py-4 border-b border-slate-100"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          
           {/* Brand Logo */}
-          <a href="#hero" className="flex items-center gap-3 group focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2">
+          <a
+            href="#hero"
+            className="flex items-center gap-3 group focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+          >
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform">
               <GraduationCap className="w-6 h-6" />
             </div>
@@ -74,7 +86,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal, onOpenAdvisorMo
             </button>
 
             <a
-              href={`${WHATSAPP_BASE_URL}?text=${encodeURIComponent('مرحباً جودة، أود الاستفسار عن فرص الدراسة في ماليزيا.')}`}
+              href={`${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً جودة، أود الاستفسار عن فرص الدراسة في ماليزيا.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-xl text-sm font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
@@ -84,7 +96,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal, onOpenAdvisorMo
             </a>
 
             <button
-              onClick={() => onOpenLeadModal('navbar_primary')}
+              onClick={() => onOpenLeadModal("navbar_primary")}
               className="flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl text-sm font-bold bg-gradient-to-l from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500 shadow-md shadow-emerald-600/20 hover:-translate-y-0.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
             >
               <span>ابدأ رحلتك</span>
@@ -95,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal, onOpenAdvisorMo
           {/* Mobile Menu Toggle */}
           <div className="lg:hidden flex items-center gap-2">
             <button
-              onClick={() => onOpenLeadModal('mobile_nav_quick')}
+              onClick={() => onOpenLeadModal("mobile_nav_quick")}
               className="sm:hidden px-3 py-1.5 min-h-[44px] rounded-lg text-sm font-bold bg-emerald-600 text-white shadow-xs cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
             >
               ابدأ الآن
@@ -106,10 +118,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal, onOpenAdvisorMo
               className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl text-slate-700 hover:text-slate-900 bg-slate-100 border border-slate-200 focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               aria-label="القائمة الرئيسية"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
-
         </div>
       </div>
 
@@ -145,7 +160,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal, onOpenAdvisorMo
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenLeadModal('mobile_drawer');
+                  onOpenLeadModal("mobile_drawer");
                 }}
                 className="w-full flex items-center justify-center gap-2 py-3 min-h-[44px] rounded-xl text-sm font-bold bg-emerald-600 text-white shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               >

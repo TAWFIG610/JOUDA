@@ -1,16 +1,20 @@
-import React from 'react';
-import { COMPARISON_ROWS } from '../data/joudaData';
-import { ShieldCheck, CheckCircle2, XCircle, ArrowLeft } from 'lucide-react';
+import React from "react";
+import { COMPARISON_ROWS } from "../data/joudaData";
+import { ShieldCheck, CheckCircle2, XCircle, ArrowLeft } from "lucide-react";
 
 interface WhyJoudaProps {
   onOpenLeadModal: (source?: string) => void;
 }
 
-export const WhyJoudaSection: React.FC<WhyJoudaProps> = ({ onOpenLeadModal }) => {
+export const WhyJoudaSection: React.FC<WhyJoudaProps> = ({
+  onOpenLeadModal,
+}) => {
   return (
-    <section id="why-jouda" className="py-12 sm:py-16 lg:py-24 bg-white relative border-t border-slate-200">
+    <section
+      id="why-jouda"
+      className="py-12 sm:py-16 lg:py-24 bg-white relative border-t border-slate-200"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold shadow-xs">
@@ -19,11 +23,13 @@ export const WhyJoudaSection: React.FC<WhyJoudaProps> = ({ onOpenLeadModal }) =>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            لماذا يختار الطلاب <span className="text-gradient-emerald">منظومة جَـوْدَة؟</span>
+            لماذا يختار الطلاب{" "}
+            <span className="text-gradient-emerald">منظومة جَـوْدَة؟</span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            مقارنة واضحة توضح الفارق الجوهري بين التعامل مع وكيل عشوائي وبين العمل مع منظومة جودة الاحترافية.
+            مقارنة واضحة توضح الفارق الجوهري بين التعامل مع وكيل عشوائي وبين
+            العمل مع منظومة جودة الاحترافية.
           </p>
         </div>
 
@@ -31,13 +37,20 @@ export const WhyJoudaSection: React.FC<WhyJoudaProps> = ({ onOpenLeadModal }) =>
         <div className="rounded-3xl bg-white border border-slate-200 overflow-hidden shadow-md mb-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 bg-slate-50 border-b border-slate-200 p-4 text-xs font-bold text-slate-700 hidden lg:grid">
             <div className="lg:col-span-4">المعيار والخدمة</div>
-            <div className="lg:col-span-4 text-rose-700">الوكيل أو المكتب التقليدي</div>
-            <div className="lg:col-span-4 text-emerald-700">منظومة جَـوْدَة (JOUDA)</div>
+            <div className="lg:col-span-4 text-rose-700">
+              الوكيل أو المكتب التقليدي
+            </div>
+            <div className="lg:col-span-4 text-emerald-700">
+              منظومة جَـوْدَة (JOUDA)
+            </div>
           </div>
 
           <div className="divide-y divide-slate-100">
             {COMPARISON_ROWS.map((row, idx) => (
-              <div key={idx} className="grid grid-cols-1 lg:grid-cols-12 p-3.5 sm:p-5 gap-4 items-center">
+              <div
+                key={idx}
+                className="grid grid-cols-1 lg:grid-cols-12 p-3.5 sm:p-5 gap-4 items-center"
+              >
                 <div className="lg:col-span-4 font-bold text-sm text-slate-900">
                   {row.feature}
                 </div>
@@ -57,14 +70,13 @@ export const WhyJoudaSection: React.FC<WhyJoudaProps> = ({ onOpenLeadModal }) =>
         {/* CTA */}
         <div className="text-center">
           <button
-            onClick={() => onOpenLeadModal('why_jouda_cta')}
+            onClick={() => onOpenLeadModal("why_jouda_cta")}
             className="inline-flex items-center gap-2 px-8 py-3.5 min-h-[44px] rounded-2xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-500 transition-all duration-200 shadow-md cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
           >
             <span>انضم للطلاب المسجلين مع جودة الآن</span>
             <ArrowLeft className="w-4 h-4" />
           </button>
         </div>
-
       </div>
     </section>
   );

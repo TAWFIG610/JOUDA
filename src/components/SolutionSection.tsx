@@ -1,16 +1,17 @@
-import React from 'react';
-import { JOUDA_STEPS } from '../data/joudaData';
-import { CheckCircle, ArrowLeft } from 'lucide-react';
+import React from "react";
+import { JOUDA_STEPS } from "../data/joudaData";
+import { CheckCircle, ArrowLeft } from "lucide-react";
 
 interface SolutionSectionProps {
   onOpenLeadModal: (source?: string) => void;
 }
 
-export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenLeadModal }) => {
+export const SolutionSection: React.FC<SolutionSectionProps> = ({
+  onOpenLeadModal,
+}) => {
   return (
     <section className="py-12 sm:py-16 lg:py-24 bg-[#FAFCFF] relative border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold shadow-xs">
@@ -19,11 +20,15 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenLeadModa
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            من أول سؤال... إلى <span className="text-gradient-emerald">أول يوم لك في جامعتك بماليزيا</span>
+            من أول سؤال... إلى{" "}
+            <span className="text-gradient-emerald">
+              أول يوم لك في جامعتك بماليزيا
+            </span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            قسمنا رحلتك إلى 6 محطات واضحة ومنظمة لتصل وأنت مرتاح البال ومستعد لبدء دراستك بنجاح.
+            قسمنا رحلتك إلى 6 محطات واضحة ومنظمة لتصل وأنت مرتاح البال ومستعد
+            لبدء دراستك بنجاح.
           </p>
         </div>
 
@@ -57,14 +62,13 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({ onOpenLeadModa
         {/* Quick CTA */}
         <div className="text-center">
           <button
-            onClick={() => onOpenLeadModal('solution_section')}
+            onClick={() => onOpenLeadModal("solution_section")}
             className="inline-flex items-center gap-2 px-8 py-3.5 min-h-[44px] rounded-2xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-500 transition-all duration-200 shadow-md shadow-emerald-600/20 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
           >
             <span>ابدأ الخطوة الأولى الآن مجاناً</span>
             <ArrowLeft className="w-4 h-4" />
           </button>
         </div>
-
       </div>
     </section>
   );

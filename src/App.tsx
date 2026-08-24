@@ -1,33 +1,35 @@
-import { useState } from 'react';
-import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
-import { TrustBar } from './components/TrustBar';
-import { UniversitiesSection } from './components/UniversitiesSection';
-import { ProblemSection } from './components/ProblemSection';
-import { SolutionSection } from './components/SolutionSection';
-import { StudentJourneyVisual } from './components/StudentJourneyVisual';
-import { ServicesSection } from './components/ServicesSection';
-import { WhyJoudaSection } from './components/WhyJoudaSection';
-import { ProgramsSection } from './components/ProgramsSection';
-import { MalaysiaSection } from './components/MalaysiaSection';
-import { TestimonialsSection } from './components/TestimonialsSection';
-import { FAQSection } from './components/FAQSection';
-import { FinalCTA } from './components/FinalCTA';
-import { Footer } from './components/Footer';
-import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
-import { LeadModal } from './components/LeadModal';
-import { PathwayAdvisorModal } from './components/PathwayAdvisorModal';
-import { LegalModal } from './components/LegalModal';
+import { useState } from "react";
+import { Navbar } from "./components/Navbar";
+import { Hero } from "./components/Hero";
+import { TrustBar } from "./components/TrustBar";
+import { UniversitiesSection } from "./components/UniversitiesSection";
+import { ProblemSection } from "./components/ProblemSection";
+import { SolutionSection } from "./components/SolutionSection";
+import { StudentJourneyVisual } from "./components/StudentJourneyVisual";
+import { ServicesSection } from "./components/ServicesSection";
+import { WhyJoudaSection } from "./components/WhyJoudaSection";
+import { ProgramsSection } from "./components/ProgramsSection";
+import { MalaysiaSection } from "./components/MalaysiaSection";
+import { TestimonialsSection } from "./components/TestimonialsSection";
+import { FAQSection } from "./components/FAQSection";
+import { FinalCTA } from "./components/FinalCTA";
+import { Footer } from "./components/Footer";
+import { WhatsAppFloatingButton } from "./components/WhatsAppFloatingButton";
+import { LeadModal } from "./components/LeadModal";
+import { PathwayAdvisorModal } from "./components/PathwayAdvisorModal";
+import { LegalModal } from "./components/LegalModal";
 
 export function App() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
-  const [leadInitialInterest, setLeadInitialInterest] = useState('');
-  
+  const [leadInitialInterest, setLeadInitialInterest] = useState("");
+
   const [isAdvisorModalOpen, setIsAdvisorModalOpen] = useState(false);
-  const [legalModalType, setLegalModalType] = useState<'privacy' | 'terms' | 'refund' | null>(null);
+  const [legalModalType, setLegalModalType] = useState<
+    "privacy" | "terms" | "refund" | null
+  >(null);
 
   const handleOpenLeadModal = (sourceOrInterest?: string) => {
-    setLeadInitialInterest(sourceOrInterest || '');
+    setLeadInitialInterest(sourceOrInterest || "");
     setIsLeadModalOpen(true);
   };
 
@@ -39,7 +41,6 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-arabic selection:bg-emerald-500/20 selection:text-emerald-950 overflow-x-hidden antialiased">
-      
       {/* Sticky Header */}
       <Navbar
         onOpenLeadModal={handleOpenLeadModal}
@@ -106,7 +107,6 @@ export function App() {
         type={legalModalType}
         onClose={() => setLegalModalType(null)}
       />
-
     </div>
   );
 }

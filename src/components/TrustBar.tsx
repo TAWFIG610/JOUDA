@@ -1,5 +1,5 @@
-import React from 'react';
-import { TRUST_STATS } from '../data/joudaData';
+import React from "react";
+import { TRUST_STATS } from "../data/joudaData";
 
 export const TrustBar: React.FC = () => {
   return (

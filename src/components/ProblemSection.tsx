@@ -1,12 +1,11 @@
-import React from 'react';
-import { CORE_PROBLEMS } from '../data/joudaData';
-import { HelpCircle, AlertCircle, ArrowDown, Sparkles } from 'lucide-react';
+import React from "react";
+import { CORE_PROBLEMS } from "../data/joudaData";
+import { HelpCircle, AlertCircle, ArrowDown, Sparkles } from "lucide-react";
 
 export const ProblemSection: React.FC = () => {
   return (
     <section className="py-12 sm:py-16 lg:py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold shadow-xs">
@@ -15,11 +14,15 @@ export const ProblemSection: React.FC = () => {
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            الدراسة في ماليزيا فرصة عظيمة... <span className="text-gradient-emerald">لكن البداية قد تكون مربكة</span>
+            الدراسة في ماليزيا فرصة عظيمة...{" "}
+            <span className="text-gradient-emerald">
+              لكن البداية قد تكون مربكة
+            </span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            معظم الطلاب يواجهون نفس المخاوف عند اتخاذ قرار الدراسة بالخارج، وإليك كيف نحول كل قلق إلى خطوة سهلة ومضمونة:
+            معظم الطلاب يواجهون نفس المخاوف عند اتخاذ قرار الدراسة بالخارج،
+            وإليك كيف نحول كل قلق إلى خطوة سهلة ومضمونة:
           </p>
         </div>
 
@@ -54,7 +57,6 @@ export const ProblemSection: React.FC = () => {
             <ArrowDown className="w-4 h-4 text-emerald-600 animate-bounce" />
           </div>
         </div>
-
       </div>
     </section>
   );

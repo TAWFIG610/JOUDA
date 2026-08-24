@@ -1,12 +1,14 @@
-import React from 'react';
-import { WHY_MALAYSIA_PILLARS } from '../data/joudaData';
-import { Globe } from 'lucide-react';
+import React from "react";
+import { WHY_MALAYSIA_PILLARS } from "../data/joudaData";
+import { Globe } from "lucide-react";
 
 export const MalaysiaSection: React.FC = () => {
   return (
-    <section id="why-malaysia" className="py-12 sm:py-16 lg:py-24 bg-white relative border-t border-slate-200">
+    <section
+      id="why-malaysia"
+      className="py-12 sm:py-16 lg:py-24 bg-white relative border-t border-slate-200"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold shadow-xs">
@@ -15,11 +17,13 @@ export const MalaysiaSection: React.FC = () => {
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            لماذا يختار آلاف الطلاب الدوليين <span className="text-gradient-emerald">الدراسة في ماليزيا؟</span>
+            لماذا يختار آلاف الطلاب الدوليين{" "}
+            <span className="text-gradient-emerald">الدراسة في ماليزيا؟</span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            بيئة تعليمية عالمية، أمان فائق، معيشة ميسرة، واعتراف أكاديمي معتمد في كافة أنحاء العالم.
+            بيئة تعليمية عالمية، أمان فائق، معيشة ميسرة، واعتراف أكاديمي معتمد
+            في كافة أنحاء العالم.
           </p>
         </div>
 
@@ -44,7 +48,6 @@ export const MalaysiaSection: React.FC = () => {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

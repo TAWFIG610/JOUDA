@@ -1,17 +1,22 @@
-import React from 'react';
-import { STUDY_PROGRAMS } from '../data/joudaData';
-import { Sparkles, ArrowLeft, Clock } from 'lucide-react';
+import React from "react";
+import { STUDY_PROGRAMS } from "../data/joudaData";
+import { Sparkles, ArrowLeft, Clock } from "lucide-react";
 
 interface ProgramsSectionProps {
   onOpenLeadModal: (source?: string) => void;
   onOpenAdvisorModal: () => void;
 }
 
-export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenLeadModal, onOpenAdvisorModal }) => {
+export const ProgramsSection: React.FC<ProgramsSectionProps> = ({
+  onOpenLeadModal,
+  onOpenAdvisorModal,
+}) => {
   return (
-    <section id="programs" className="py-12 sm:py-16 lg:py-24 bg-[#FAFCFF] relative border-t border-slate-200">
+    <section
+      id="programs"
+      className="py-12 sm:py-16 lg:py-24 bg-[#FAFCFF] relative border-t border-slate-200"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-xs font-bold shadow-xs">
@@ -20,11 +25,15 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenLeadModa
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            اختر تخصصك وابنِ <span className="text-gradient-emerald">مستقبلك المهني العالمي</span>
+            اختر تخصصك وابنِ{" "}
+            <span className="text-gradient-emerald">
+              مستقبلك المهني العالمي
+            </span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            برامج معتمدة بأعلى المعايير الأكاديمية مع ارتباط مباشر بأسواق العمل الإقليمية والدولية.
+            برامج معتمدة بأعلى المعايير الأكاديمية مع ارتباط مباشر بأسواق العمل
+            الإقليمية والدولية.
           </p>
         </div>
 
@@ -39,7 +48,10 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenLeadModa
                 <div className="flex items-center justify-between text-xs">
                   <span
                     className="font-bold px-2.5 py-0.5 rounded-md"
-                    style={{ color: p.accentColor, backgroundColor: `${p.accentColor}15` }}
+                    style={{
+                      color: p.accentColor,
+                      backgroundColor: `${p.accentColor}15`,
+                    }}
                   >
                     {p.level}
                   </span>
@@ -63,10 +75,15 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenLeadModa
                 </p>
 
                 <div className="space-y-1.5 pt-2 border-t border-slate-100">
-                  <span className="text-xs font-bold text-slate-600">فرص العمل المستقبلية:</span>
+                  <span className="text-xs font-bold text-slate-600">
+                    فرص العمل المستقبلية:
+                  </span>
                   <div className="flex flex-wrap gap-1.5">
                     {p.careerPaths.map((c, i) => (
-                      <span key={i} className="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                      <span
+                        key={i}
+                        className="text-xs font-semibold px-2 py-0.5 rounded bg-slate-100 text-slate-700"
+                      >
                         {c}
                       </span>
                     ))}
@@ -97,7 +114,6 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({ onOpenLeadModa
             افتح مستشار التخصصات السريع
           </button>
         </div>
-
       </div>
     </section>
   );

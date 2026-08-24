@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { WHATSAPP_BASE_URL } from '../data/joudaData';
-import { X, CheckCircle2, Send, Sparkles, MessageCircle } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import React, { useState } from "react";
+import { WHATSAPP_BASE_URL } from "../data/joudaData";
+import { X, CheckCircle2, Send, Sparkles, MessageCircle } from "lucide-react";
+import confetti from "canvas-confetti";
 
 interface LeadModalProps {
   isOpen: boolean;
@@ -9,14 +9,18 @@ interface LeadModalProps {
   initialInterest?: string;
 }
 
-export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialInterest }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [whatsapp, setWhatsapp] = useState('');
-  const [country, setCountry] = useState('');
-  const [degreeLevel, setDegreeLevel] = useState('بكالوريوس');
-  const [fieldOfInterest, setFieldOfInterest] = useState(initialInterest || '');
-  const [message, setMessage] = useState('');
+export const LeadModal: React.FC<LeadModalProps> = ({
+  isOpen,
+  onClose,
+  initialInterest,
+}) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [country, setCountry] = useState("");
+  const [degreeLevel, setDegreeLevel] = useState("بكالوريوس");
+  const [fieldOfInterest, setFieldOfInterest] = useState(initialInterest || "");
+  const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -34,7 +38,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialIn
         confetti({
           particleCount: 80,
           spread: 70,
-          origin: { y: 0.6 }
+          origin: { y: 0.6 },
         });
       } catch {
         // ignore
@@ -44,18 +48,17 @@ export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialIn
 
   const handleOpenWhatsAppDirect = () => {
     const text = encodeURIComponent(
-      `مرحباً جودة! أنا ${name} من ${country || 'الوطن العربي'}.
+      `مرحباً جودة! أنا ${name} من ${country || "الوطن العربي"}.
 المرحلة: ${degreeLevel}
-التخصص/الجامعة: ${fieldOfInterest || 'أحتاج استشارة ومطابقة'}
-الرسالة: ${message || 'أود البدء والحصول على القبول الأكاديمي'}`
+التخصص/الجامعة: ${fieldOfInterest || "أحتاج استشارة ومطابقة"}
+الرسالة: ${message || "أود البدء والحصول على القبول الأكاديمي"}`,
     );
-    window.open(`${WHATSAPP_BASE_URL}?text=${text}`, '_blank');
+    window.open(`${WHATSAPP_BASE_URL}?text=${text}`, "_blank");
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
       <div className="bg-white rounded-3xl max-w-lg w-full p-4 sm:p-6 lg:p-8 shadow-2xl border border-slate-200 relative overflow-hidden my-8 text-slate-900">
-        
         <button
           onClick={onClose}
           className="absolute top-4 start-4 sm:top-5 sm:start-5 min-h-[44px] min-w-[44px] p-2.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 flex items-center justify-center"
@@ -208,7 +211,10 @@ export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialIn
             </h3>
 
             <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto font-medium">
-              شكراً لك يا <span className="font-bold text-slate-900">{name}</span>. سيتواصل معك مستشار جودة المعتمد عبر واتساب لتقديم خطتك الأكاديمية المجانية.
+              شكراً لك يا{" "}
+              <span className="font-bold text-slate-900">{name}</span>. سيتواصل
+              معك مستشار جودة المعتمد عبر واتساب لتقديم خطتك الأكاديمية
+              المجانية.
             </p>
 
             <div className="pt-4 space-y-2">
@@ -229,7 +235,6 @@ export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialIn
             </div>
           </div>
         )}
-
       </div>
     </div>
   );

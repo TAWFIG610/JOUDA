@@ -1,9 +1,11 @@
-import React from 'react';
-import { WHATSAPP_BASE_URL, WHATSAPP_DISPLAY } from '../data/joudaData';
-import { MessageCircle } from 'lucide-react';
+import React from "react";
+import { WHATSAPP_BASE_URL, WHATSAPP_DISPLAY } from "../data/joudaData";
+import { MessageCircle } from "lucide-react";
 
 export const WhatsAppFloatingButton: React.FC = () => {
-  const message = encodeURIComponent('مرحباً فريق جودة، أود الاستفسار عن فرص الدراسة في ماليزيا والتخصصات المتاحة.');
+  const message = encodeURIComponent(
+    "مرحباً فريق جودة، أود الاستفسار عن فرص الدراسة في ماليزيا والتخصصات المتاحة.",
+  );
   const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${message}`;
 
   return (

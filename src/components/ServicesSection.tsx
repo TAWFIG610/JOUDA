@@ -1,16 +1,20 @@
-import React from 'react';
-import { CORE_SERVICES } from '../data/joudaData';
-import { Sparkles, ArrowLeft } from 'lucide-react';
+import React from "react";
+import { CORE_SERVICES } from "../data/joudaData";
+import { Sparkles, ArrowLeft } from "lucide-react";
 
 interface ServicesSectionProps {
   onOpenLeadModal: (source?: string) => void;
 }
 
-export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenLeadModal }) => {
+export const ServicesSection: React.FC<ServicesSectionProps> = ({
+  onOpenLeadModal,
+}) => {
   return (
-    <section id="services" className="py-12 sm:py-16 lg:py-24 bg-[#FAFCFF] relative border-t border-slate-200">
+    <section
+      id="services"
+      className="py-12 sm:py-16 lg:py-24 bg-[#FAFCFF] relative border-t border-slate-200"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-purple-800 text-xs font-bold shadow-xs">
@@ -19,11 +23,13 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenLeadModa
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            كل ما تحتاجه لبدء دراستك في <span className="text-gradient-emerald">ماليزيا بكل ثقة</span>
+            كل ما تحتاجه لبدء دراستك في{" "}
+            <span className="text-gradient-emerald">ماليزيا بكل ثقة</span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            خدمات متكاملة تغطي كافة مراحل التقديم والتأشيرة والاستقبال لتضمن تجربة دراسية ناجحة ومريحة.
+            خدمات متكاملة تغطي كافة مراحل التقديم والتأشيرة والاستقبال لتضمن
+            تجربة دراسية ناجحة ومريحة.
           </p>
         </div>
 
@@ -60,7 +66,6 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenLeadModa
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
