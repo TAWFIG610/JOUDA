@@ -23,11 +23,43 @@ export const LeadModal: React.FC<LeadModalProps> = ({
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   if (!isOpen) return null;
 
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    const nameWords = name.trim().split(/\s+/);
+    if (nameWords.length < 3) {
+      newErrors.name = "الرجاء إدخال الاسم الثلاثي";
+    }
+
+    if (!email.trim()) newErrors.email = "البريد الإلكتروني مطلوب";
+    if (!whatsapp.trim()) newErrors.whatsapp = "رقم الواتساب مطلوب";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleOpenWhatsAppDirect = () => {
+    const text = encodeURIComponent(
+      `مرحباً جودة! أريد التسجيل والبدء.
+الاسم: ${name}
+البريد: ${email}
+الواتساب: ${whatsapp}
+البلد: ${country || "غير محدد"}
+المرحلة: ${degreeLevel}
+التخصص/الجامعة: ${fieldOfInterest || "أحتاج استشارة ومطابقة"}
+الرسالة: ${message || "أود البدء والحصول على القبول الأكاديمي"}`,
+    );
+    window.open(`${WHATSAPP_BASE_URL}?text=${text}`, "_blank");
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) return;
+
     setLoading(true);
 
     setTimeout(() => {
@@ -43,17 +75,10 @@ export const LeadModal: React.FC<LeadModalProps> = ({
       } catch {
         // ignore
       }
-    }, 500);
-  };
 
-  const handleOpenWhatsAppDirect = () => {
-    const text = encodeURIComponent(
-      `مرحباً جودة! أنا ${name} من ${country || "الوطن العربي"}.
-المرحلة: ${degreeLevel}
-التخصص/الجامعة: ${fieldOfInterest || "أحتاج استشارة ومطابقة"}
-الرسالة: ${message || "أود البدء والحصول على القبول الأكاديمي"}`,
-    );
-    window.open(`${WHATSAPP_BASE_URL}?text=${text}`, "_blank");
+      // Auto-redirect to WhatsApp immediately after form is processed
+      handleOpenWhatsAppDirect();
+    }, 500);
   };
 
   return (
@@ -84,16 +109,24 @@ export const LeadModal: React.FC<LeadModalProps> = ({
             <form onSubmit={handleSubmit} className="space-y-3.5">
               <div>
                 <label className="block text-xs font-bold text-slate-700 mb-1">
-                  الاسم الكامل *
+                  الاسم الكامل (الاسم الثلاثي) *
                 </label>
                 <input
                   type="text"
                   required
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="مثال: عمر محمد"
-                  className="w-full px-4 py-2 min-h-[44px] rounded-xl bg-slate-50 border border-slate-200 text-sm sm:text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+                  onChange={(e) => {
+                    setName(e.target.value);
+                    if (errors.name) setErrors({ ...errors, name: "" });
+                  }}
+                  placeholder="مثال: عمر محمد أحمد"
+                  className={`w-full px-4 py-2 min-h-[44px] rounded-xl bg-slate-50 border ${errors.name ? "border-red-500" : "border-slate-200"} text-sm sm:text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2`}
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-xs mt-1 font-medium">
+                    {errors.name}
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -105,10 +138,18 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                     type="email"
                     required
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (errors.email) setErrors({ ...errors, email: "" });
+                    }}
                     placeholder="name@example.com"
-                    className="w-full px-4 py-2 min-h-[44px] rounded-xl bg-slate-50 border border-slate-200 text-sm sm:text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+                    className={`w-full px-4 py-2 min-h-[44px] rounded-xl bg-slate-50 border ${errors.email ? "border-red-500" : "border-slate-200"} text-sm sm:text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2`}
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-1 font-medium">
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -119,11 +160,20 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                     type="tel"
                     required
                     value={whatsapp}
-                    onChange={(e) => setWhatsapp(e.target.value)}
+                    onChange={(e) => {
+                      setWhatsapp(e.target.value);
+                      if (errors.whatsapp)
+                        setErrors({ ...errors, whatsapp: "" });
+                    }}
                     placeholder="+966 50..."
                     dir="ltr"
-                    className="w-full px-4 py-2 min-h-[44px] rounded-xl bg-slate-50 border border-slate-200 text-sm sm:text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 text-end"
+                    className={`w-full px-4 py-2 min-h-[44px] rounded-xl bg-slate-50 border ${errors.whatsapp ? "border-red-500" : "border-slate-200"} text-sm sm:text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 text-end`}
                   />
+                  {errors.whatsapp && (
+                    <p className="text-red-500 text-xs mt-1 font-medium">
+                      {errors.whatsapp}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -207,14 +257,14 @@ export const LeadModal: React.FC<LeadModalProps> = ({
             </div>
 
             <h3 className="text-2xl font-bold text-slate-900">
-              تم استلام طلبك بنجاح!
+              تم تحويلك للواتساب بنجاح!
             </h3>
 
             <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto font-medium">
               شكراً لك يا{" "}
-              <span className="font-bold text-slate-900">{name}</span>. سيتواصل
-              معك مستشار جودة المعتمد عبر واتساب لتقديم خطتك الأكاديمية
-              المجانية.
+              <span className="font-bold text-slate-900">{name}</span>. تم فتح
+              تطبيق الواتساب لتتمكن من إرسال تفاصيلك مباشرة إلى مستشار جودة
+              المعتمد.
             </p>
 
             <div className="pt-4 space-y-2">
@@ -223,7 +273,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                 className="w-full flex items-center justify-center gap-2 py-3 min-h-[44px] rounded-xl text-xs font-bold bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition-colors duration-200 shadow-md cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>متابعة المحادثة مباشرة عبر واتساب الآن</span>
+                <span>إعادة فتح الواتساب إذا لم يفتح تلقائياً</span>
               </button>
 
               <button
