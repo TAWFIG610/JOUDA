@@ -1,62 +1,78 @@
 import React from "react";
-import { JOUDA_STEPS } from "../data/joudaData";
-import { CheckCircle, ArrowLeft } from "lucide-react";
+import { GraduationCap, ShieldCheck, MapPin, ArrowLeft } from "lucide-react";
 
 interface SolutionSectionProps {
   onOpenLeadModal: (source?: string) => void;
 }
+
+const benefits = [
+  {
+    icon: GraduationCap,
+    color: "emerald",
+    title: "القبول الأكاديمي الرسمي",
+    desc: "نجهّز ملفك الكامل ونقدمه مباشرة للجامعات المعتمدة ونضمن حصولك على القبول الرسمي.",
+    iconBg: "bg-emerald-50 text-emerald-600",
+    border: "border-emerald-100",
+  },
+  {
+    icon: ShieldCheck,
+    color: "blue",
+    title: "تأشيرة الدراسة كاملة (EMGS)",
+    desc: "نتولى جميع إجراءات التأشيرة الطلابية من البداية حتى وصول الموافقة الرسمية إلى يدك.",
+    iconBg: "bg-blue-50 text-blue-600",
+    border: "border-blue-100",
+  },
+  {
+    icon: MapPin,
+    color: "amber",
+    title: "الاستقبال والاستقرار في ماليزيا",
+    desc: "مندوبنا يستقبلك في المطار ويرافقك حتى تبدأ أول محاضرة في جامعتك بثقة واطمئنان.",
+    iconBg: "bg-amber-50 text-amber-600",
+    border: "border-amber-100",
+  },
+];
 
 export const SolutionSection: React.FC<SolutionSectionProps> = ({
   onOpenLeadModal,
 }) => {
   return (
     <section className="py-12 sm:py-16 lg:py-24 bg-[#FAFCFF] relative border-t border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold shadow-xs">
-            <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-            <span>منظومة جودة المتكاملة</span>
-          </div>
-
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            من أول سؤال... إلى{" "}
+            من أول سؤال...{" "}
             <span className="text-gradient-emerald">
-              أول يوم لك في جامعتك بماليزيا
+              إلى أول يوم لك في جامعتك
             </span>
           </h2>
-
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            قسمنا رحلتك إلى 6 محطات واضحة ومنظمة لتصل وأنت مرتاح البال ومستعد
-            لبدء دراستك بنجاح.
-          </p>
         </div>
 
-        {/* 6 Step Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {JOUDA_STEPS.map((s) => (
-            <div
-              key={s.step}
-              className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200 hover:border-emerald-500/40 hover:shadow-lg transition-all duration-200 space-y-3 group shadow-xs"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-xl sm:text-2xl font-black text-emerald-600 font-sans">
-                  {s.step}
-                </span>
-                <span className="text-xs font-bold px-2.5 py-1 rounded bg-slate-100 text-slate-700">
-                  {s.badge}
-                </span>
+        {/* 3 Horizontal Benefit Blocks */}
+        <div className="flex flex-col gap-5 mb-10">
+          {benefits.map((b, idx) => {
+            const Icon = b.icon;
+            return (
+              <div
+                key={idx}
+                className={`flex items-center gap-5 p-5 sm:p-6 rounded-3xl bg-white border ${b.border} border-slate-200 shadow-xs hover:shadow-md transition-all duration-200`}
+              >
+                <div
+                  className={`shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center ${b.iconBg}`}
+                >
+                  <Icon className="w-7 h-7 sm:w-8 sm:h-8" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                    {b.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                    {b.desc}
+                  </p>
+                </div>
               </div>
-
-              <h3 className="text-base font-bold text-slate-900 group-hover:text-emerald-700 transition-colors duration-200">
-                {s.title}
-              </h3>
-
-              <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                {s.desc}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Quick CTA */}

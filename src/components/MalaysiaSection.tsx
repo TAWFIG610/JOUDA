@@ -1,8 +1,44 @@
 import React from "react";
-import { WHY_MALAYSIA_PILLARS } from "../data/joudaData";
-import { Globe } from "lucide-react";
+import { TrendingDown, Globe, Shield, ArrowLeft } from "lucide-react";
 
-export const MalaysiaSection: React.FC = () => {
+interface MalaysiaSectionProps {
+  onOpenLeadModal: (source?: string) => void;
+}
+
+const STAT_CARDS = [
+  {
+    icon: TrendingDown,
+    color: "emerald",
+    stat: "تكلفة أقل بنسبة 60%",
+    desc: "مقارنة بالدراسة في أوروبا أو كندا مع نفس جودة الشهادة.",
+  },
+  {
+    icon: Globe,
+    color: "blue",
+    stat: "شهادات معترف بها دولياً",
+    desc: "الجامعات الماليزية معتمدة من وزارة التعليم وهيئات دولية.",
+  },
+  {
+    icon: Shield,
+    color: "amber",
+    stat: "بيئة آمنة وودية للعرب",
+    desc: "مجتمع مسلم، حياة مريحة، وكوالالمبور وجهة طلابية عالمية.",
+  },
+];
+
+const colorMap: Record<string, { bg: string; text: string; icon: string }> = {
+  emerald: {
+    bg: "bg-emerald-100",
+    text: "text-emerald-900",
+    icon: "text-emerald-600",
+  },
+  blue: { bg: "bg-blue-100", text: "text-blue-900", icon: "text-blue-600" },
+  amber: { bg: "bg-amber-100", text: "text-amber-900", icon: "text-amber-600" },
+};
+
+export const MalaysiaSection: React.FC<MalaysiaSectionProps> = ({
+  onOpenLeadModal,
+}) => {
   return (
     <section
       id="why-malaysia"
@@ -17,36 +53,46 @@ export const MalaysiaSection: React.FC = () => {
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-            لماذا يختار آلاف الطلاب الدوليين{" "}
-            <span className="text-gradient-emerald">الدراسة في ماليزيا؟</span>
+            لماذا تختار ماليزيا{" "}
+            <span className="text-gradient-emerald">وجهة دراستك؟</span>
           </h2>
-
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-            بيئة تعليمية عالمية، أمان فائق، معيشة ميسرة، واعتراف أكاديمي معتمد
-            في كافة أنحاء العالم.
-          </p>
         </div>
 
-        {/* 5 Pillars Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {WHY_MALAYSIA_PILLARS.map((item, idx) => (
-            <div
-              key={idx}
-              className="p-4 sm:p-6 rounded-3xl bg-slate-50/70 border border-slate-200 hover:border-slate-300 transition-all duration-200 space-y-3 shadow-xs"
-            >
-              <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-black text-sm">
-                0{idx + 1}
+        {/* 3 Stat Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10 sm:mb-14">
+          {STAT_CARDS.map((card, idx) => {
+            const colors = colorMap[card.color];
+            const Icon = card.icon;
+            return (
+              <div
+                key={idx}
+                className="p-6 rounded-3xl bg-slate-50 border border-slate-200 hover:border-slate-300 transition-all duration-200 space-y-3 shadow-xs text-center"
+              >
+                <div
+                  className={`w-12 h-12 rounded-2xl ${colors.bg} flex items-center justify-center mx-auto`}
+                >
+                  <Icon className={`w-6 h-6 ${colors.icon}`} />
+                </div>
+                <h3 className={`text-lg font-extrabold ${colors.text}`}>
+                  {card.stat}
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                  {card.desc}
+                </p>
               </div>
+            );
+          })}
+        </div>
 
-              <h3 className="text-base font-bold text-slate-900">
-                {item.title}
-              </h3>
-
-              <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                {item.desc}
-              </p>
-            </div>
-          ))}
+        {/* CTA */}
+        <div className="text-center">
+          <button
+            onClick={() => onOpenLeadModal("malaysia_cta")}
+            className="inline-flex items-center gap-2 px-8 py-4 min-h-[48px] rounded-2xl text-base font-bold bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+          >
+            <span>ابدأ رحلتك في ماليزيا</span>
+            <ArrowLeft className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </section>

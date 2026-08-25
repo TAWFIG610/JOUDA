@@ -14,13 +14,13 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
 }) => {
   const [step, setStep] = useState(1);
   const [degree, setDegree] = useState("بكالوريوس");
-  const [field, setField] = useState("الذكاء الاصطناعي وهندسة البرمجيات");
+  const [field, setField] = useState("");
   const [budget, setBudget] = useState("متوسطة (4,000 - 7,000 دولار سنوياً)");
 
   if (!isOpen) return null;
 
   const handleFinish = () => {
-    const summary = `المسار المطلوب: ${degree} في ${field} (ميزانية: ${budget})`;
+    const summary = `المرحلة: ${degree} | الاهتمام: ${field || "لم يُحدد"} | الميزانية: ${budget}`;
     onSelectPathway(summary);
   };
 
@@ -42,7 +42,7 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
               <span>مستشار التخصص السريع • خطوة {step} من 3</span>
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-slate-900">
-              طابق ملفك الأكاديمي مع أفضل جامعة
+              أخبرنا عنك ونحن نجد الأنسب لك
             </h3>
           </div>
 
@@ -81,27 +81,16 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
           {step === 2 && (
             <div className="space-y-3">
               <label className="block text-xs font-bold text-slate-700">
-                2. ما هو المجال الدراسي المفضل؟
+                2. ما هو اهتمامك الدراسي؟ (اختياري)
               </label>
-              {[
-                "الذكاء الاصطناعي وهندسة البرمجيات",
-                "الأمن السيبراني والشبكات",
-                "إدارة الأعمال والتكنولوجيا المالية",
-                "الهندسة (ميكانيكا، كهرباء، مدني)",
-                "العلوم الصحية والصيدلة",
-              ].map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setField(f)}
-                  className={`w-full min-h-[48px] p-3.5 rounded-xl text-xs font-bold text-start border transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 ${
-                    field === f
-                      ? "bg-emerald-50 border-emerald-500 text-emerald-900"
-                      : "bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300"
-                  }`}
-                >
-                  {f}
-                </button>
-              ))}
+              <textarea
+                value={field}
+                onChange={(e) => setField(e.target.value)}
+                placeholder="مثال: أحب التقنية، أو لست متأكداً بعد..."
+                rows={3}
+                className="w-full p-3.5 rounded-xl text-xs text-slate-800 placeholder-slate-400 border border-slate-200 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 transition-all duration-200 resize-none bg-slate-50"
+                dir="rtl"
+              />
               <div className="flex gap-2 pt-2">
                 <button
                   onClick={() => setStep(1)}
@@ -152,7 +141,7 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
                   onClick={handleFinish}
                   className="w-2/3 min-h-[44px] py-3 rounded-xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-500 transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
                 >
-                  عرض النتيجة والتسجيل
+                  إرسال لمستشارنا والتسجيل
                 </button>
               </div>
             </div>

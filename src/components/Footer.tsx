@@ -114,23 +114,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                   href="#programs"
                   className="inline-block py-1 hover:text-emerald-400 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded"
                 >
-                  تخصصات الذكاء الاصطناعي
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#programs"
-                  className="inline-block py-1 hover:text-emerald-400 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded"
-                >
-                  الأمن السيبراني والبرمجة
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#journey"
-                  className="inline-block py-1 hover:text-emerald-400 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded"
-                >
-                  متابعة تأشيرة EMGS
+                  التخصصات المطلوبة
                 </a>
               </li>
               <li>
@@ -138,7 +122,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                   href="#why-malaysia"
                   className="inline-block py-1 hover:text-emerald-400 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded"
                 >
-                  دليل المعيشة والسكن
+                  لماذا ماليزيا؟
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#journey"
+                  className="inline-block py-1 hover:text-emerald-400 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded"
+                >
+                  خطوات القبول
                 </a>
               </li>
             </ul>

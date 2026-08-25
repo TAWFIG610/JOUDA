@@ -33,7 +33,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
           </h2>
 
           <p className="text-sm text-slate-600 leading-relaxed">
-            كل ما يهمك معرفته حول شروط القبول، التكاليف، والتأشيرة الدراسية.
+            كل ما يهمك معرفته قبل بدء رحلتك الدراسية في ماليزيا.
           </p>
         </div>
 
@@ -95,7 +95,8 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
               لديك استفسار خاص بحالتك ومعدلك؟
             </h4>
             <p className="text-sm text-slate-600 font-medium">
-              مستشار جودة جاهز للإجابة الفورية عبر واتساب مجاناً.
+              مستشار جودة جاهز للإجابة الفورية عبر واتساب مجاناً. مستشارنا يجيبك
+              خلال دقائق بدون التزام.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-2.5 shrink-0">

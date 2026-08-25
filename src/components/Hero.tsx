@@ -5,7 +5,6 @@ import {
   MessageSquare,
   CheckCircle2,
   Sparkles,
-  Compass,
   ShieldCheck,
 } from "lucide-react";
 
@@ -16,7 +15,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({
   onOpenLeadModal,
-  onOpenAdvisorModal,
+  onOpenAdvisorModal: _onOpenAdvisorModal,
 }) => {
   const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً فريق جودة، أود الاستفسار عن التقديم للجامعات الماليزية والتخصصات المتاحة.")}`;
 
@@ -48,9 +47,8 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* Subheadline */}
             <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
-              احصل على قبولك الجامعي المعتمد وتأشيرتك الرسمية خطوة بخطوة.
-              استشارة مجانية، إجراءات شفافة بدون رسوم خفية، ومرافقة ميدانية
-              متكاملة حتى استقرارك في ماليزيا.
+              نضمن لك القبول الأكاديمي الرسمي وتأشيرة الدراسة خطوة بخطوة.
+              استشارة مجانية بدون رسوم خفية.
             </p>
 
             {/* Dual High-Intent CTAs */}
@@ -107,56 +105,32 @@ export const Hero: React.FC<HeroProps> = ({
                 </span>
               </div>
 
-              {/* 4 Feature Quick Cards */}
+              {/* 4 Trust Stat Mini-Cards */}
               <div className="grid grid-cols-2 gap-3">
                 <div className="p-3.5 rounded-2xl bg-emerald-50/60 border border-emerald-100 space-y-1">
                   <span className="text-xs font-semibold text-slate-600">
-                    القبول الجامعي
+                    طلاب سجّلوا معنا
                   </span>
-                  <p className="text-xs font-bold text-emerald-900">
-                    رسمي وسريع
-                  </p>
+                  <p className="text-lg font-black text-emerald-900">+1,500</p>
                 </div>
                 <div className="p-3.5 rounded-2xl bg-blue-50/60 border border-blue-100 space-y-1">
                   <span className="text-xs font-semibold text-slate-600">
-                    تأشيرة EMGS
+                    جامعة شريكة معتمدة
                   </span>
-                  <p className="text-xs font-bold text-blue-900">متابعة 100%</p>
+                  <p className="text-lg font-black text-blue-900">+12</p>
                 </div>
                 <div className="p-3.5 rounded-2xl bg-purple-50/60 border border-purple-100 space-y-1">
                   <span className="text-xs font-semibold text-slate-600">
-                    الاستقبال والسكن
+                    رسوم الاستشارة
                   </span>
-                  <p className="text-xs font-bold text-purple-900">
-                    ميداني وآمن
-                  </p>
+                  <p className="text-lg font-black text-purple-900">0$</p>
                 </div>
                 <div className="p-3.5 rounded-2xl bg-amber-50/60 border border-amber-100 space-y-1">
                   <span className="text-xs font-semibold text-slate-600">
-                    دراسة الملف
+                    شفافية في التعامل
                   </span>
-                  <p className="text-xs font-bold text-amber-900">مجاني 0$</p>
+                  <p className="text-lg font-black text-amber-900">100%</p>
                 </div>
-              </div>
-
-              {/* Interactive Matcher trigger banner */}
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                <div className="flex items-center gap-2">
-                  <Compass className="w-5 h-5 text-emerald-600" />
-                  <h4 className="text-xs font-bold text-slate-900">
-                    لست متأكداً أي جامعة وتخصص يناسبك؟
-                  </h4>
-                </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  استخدم أداة المطابقة الذكية لمعرفة الجامعة والتخصص والميزانية
-                  المناسبة لك في 3 خطوات.
-                </p>
-                <button
-                  onClick={onOpenAdvisorModal}
-                  className="w-full py-2.5 min-h-[44px] rounded-xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-500 transition-colors shadow-xs cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
-                >
-                  جرّب مستشار التخصص الآن
-                </button>
               </div>
 
               {/* Direct advisor phone preview */}

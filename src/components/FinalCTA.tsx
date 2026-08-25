@@ -15,18 +15,17 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
         <div className="relative rounded-3xl bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 p-5 sm:p-8 md:p-12 lg:p-16 text-white shadow-2xl overflow-hidden border border-emerald-500/30 text-center space-y-6">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
             <Sparkles className="w-4 h-4 text-amber-400" />
-            <span>ابدأ مستقبلك الأكاديمي اليوم</span>
+            <span>ابدأ مستقبلك اليوم — قراراتك تصنع مستقبلك</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight">
-            مستعد لبدء دراستك في{" "}
-            <span className="text-gradient-emerald">ماليزيا</span>؟
+            قرارك اليوم يُحدد{" "}
+            <span className="text-gradient-emerald">مستقبلك غداً.</span>
           </h2>
 
           <p className="text-sm sm:text-base md:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto font-medium">
-            لا داعي للتردد أو القلق. تواصل معنا اليوم لتحصل على تقييم ملفك
-            الأكاديمي، واختيار تخصصك، وتأمين قبولك الجامعي والتأشيرة بكل سلاسة
-            ووضوح.
+            آلاف الطلاب العرب بدأوا رحلتهم في ماليزيا عبر جودة. أنت التالي —
+            تواصل معنا الآن مجاناً.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3">

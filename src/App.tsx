@@ -74,7 +74,7 @@ export function App() {
           onOpenAdvisorModal={() => setIsAdvisorModalOpen(true)}
         />
 
-        <MalaysiaSection />
+        <MalaysiaSection onOpenLeadModal={handleOpenLeadModal} />
 
         <TestimonialsSection />
 

@@ -14,50 +14,32 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
     {
       num: "01",
       title: "الاستشارة والتقييم",
-      time: "1 - 2 يوم",
-      role: "دراسة معدلك وميزانيتك ومطابقة الجامعات مجاناً",
+      time: "1-2 يوم",
+      role: "ندرس ملفك مجاناً ونحدد المسار الأنسب لك.",
     },
     {
       num: "02",
-      title: "تجهيز وتدقيق الملف",
-      time: "2 - 3 أيام",
-      role: "ترجمة وتدقيق الشهادات لضمان استيفاء شروط القبول",
+      title: "تجهيز الملف والتقديم",
+      time: "2-5 أيام",
+      role: "نجهّز مستنداتك ونقدّم طلبك للقبول الرسمي.",
     },
     {
       num: "03",
       title: "استلام القبول الرسمي",
-      time: "3 - 7 أيام",
-      role: "استخراج العرض الأكاديمي (Offer Letter) من الجامعة",
+      time: "3-7 أيام",
+      role: "تحصل على خطاب القبول الرسمي المعتمد.",
     },
     {
       num: "04",
       title: "إجراءات التأشيرة EMGS",
-      time: "3 - 5 أسابيع",
-      role: "متابعة المعاملة وإصدار خطاب الموافقة الأمنية (VAL)",
+      time: "3-5 أسابيع",
+      role: "نتابع معاملتك حتى وصول موافقة الدخول (VAL).",
     },
     {
       num: "05",
-      title: "تأكيد السكن وتذكرة السفر",
-      time: "أسبوع قبل السفر",
-      role: "حجز السكن القريب وتجهيز تصريح الدخول",
-    },
-    {
-      num: "06",
-      title: "الاستقبال بمطار كوالالمبور",
+      title: "الوصول والاستقرار",
       time: "يوم الوصول",
-      role: "مندوبنا يستقبلك وينهي معك إجراءات الجوازات",
-    },
-    {
-      num: "07",
-      title: "الفحص الطبي وفتح الحساب",
-      time: "أول 3 أيام",
-      role: "مرافقتك للمركز الطبي المعتمد وتفعيل الشريحة والحساب",
-    },
-    {
-      num: "08",
-      title: "بدء الدراسة الجامعية",
-      time: "الأسبوع الأول",
-      role: "استلام بطاقة الطالب الجامعية وبدء محاضراتك بنجاح",
+      role: "نستقبلك في المطار ونرافقك حتى تبدأ دراستك.",
     },
   ];
 
@@ -87,7 +69,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
         </div>
 
         {/* Roadmap Stepper Pills */}
-        <div className="flex overflow-x-auto gap-2 pb-2 sm:grid sm:grid-cols-4 lg:grid-cols-8 sm:gap-2.5 snap-x snap-mandatory mb-8">
+        <div className="flex overflow-x-auto gap-2 pb-2 sm:grid sm:grid-cols-5 sm:gap-2.5 snap-x snap-mandatory mb-8">
           {stages.map((st, idx) => (
             <button
               key={idx}
