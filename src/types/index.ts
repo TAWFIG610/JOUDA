@@ -16,18 +16,6 @@ export interface PartnerUniversity {
   popularFields: string[];
 }
 
-export interface StudyProgram {
-  id: string;
-  title: string;
-  titleEn: string;
-  duration: string;
-  level: string;
-  accentColor: string;
-  description: string;
-  careerPaths: string[];
-  recommendedUnis: string[];
-}
-
 export interface Testimonial {
   id: string;
   name: string;
