@@ -1,6 +1,6 @@
 import React from "react";
 import { CORE_PROBLEMS } from "../data/joudaData";
-import { HelpCircle, AlertCircle, ArrowDown, Sparkles } from "lucide-react";
+import { HelpCircle, AlertCircle, ArrowDown, CheckCircle2 } from "lucide-react";
 
 export const ProblemSection: React.FC = () => {
   return (
@@ -43,7 +43,7 @@ export const ProblemSection: React.FC = () => {
               </div>
 
               <div className="p-3 sm:p-4 rounded-2xl bg-emerald-50 border border-emerald-200/80 text-xs sm:text-sm text-emerald-900 leading-relaxed flex items-start gap-2.5 font-medium">
-                <Sparkles className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>{item.solution}</span>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { PARTNER_UNIVERSITIES } from "../data/joudaData";
-import { Sparkles, CheckCircle2, ArrowLeft } from "lucide-react";
+import { CheckCircle2, ArrowLeft } from "lucide-react";
 
 interface UniversitiesSectionProps {
   onOpenLeadModal: (source?: string) => void;
@@ -28,7 +28,7 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
         {/* Section Header */}
         <div className="text-center space-y-3.5 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-900 text-xs font-bold shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
             <span>شراكات وتنسيق رسمي معتمد</span>
           </div>
 

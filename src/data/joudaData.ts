@@ -10,13 +10,10 @@ export const WHATSAPP_DISPLAY = "+60 11-1763 3940";
 export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_PHONE}`;
 
 export const NAV_LINKS: NavLink[] = [
-  { name: "الرئيسية", href: "#hero" },
   { name: "الجامعات الشريكة", href: "#universities" },
   { name: "خدماتنا", href: "#services" },
   { name: "خطوات القبول", href: "#journey" },
-  { name: "التخصصات المطلوبة", href: "#programs" },
   { name: "لماذا ماليزيا؟", href: "#why-malaysia" },
-  { name: "آراء الطلاب", href: "#testimonials" },
   { name: "الأسئلة الشائعة", href: "#faq" },
 ];
 

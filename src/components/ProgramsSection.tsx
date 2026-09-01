@@ -1,5 +1,5 @@
 import React from "react";
-import { Sparkles, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, CheckCircle2 } from "lucide-react";
 
 interface ProgramsSectionProps {
   onOpenLeadModal: (source?: string) => void;
@@ -18,7 +18,7 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({
         <div className="rounded-3xl bg-gradient-to-br from-emerald-50/50 via-slate-50/70 to-teal-50/40 border border-emerald-200/60 p-7 sm:p-12 lg:p-16 shadow-xl relative overflow-hidden space-y-6">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-900 text-xs font-bold shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
             <span>ادرس ما تحب في ماليزيا</span>
           </div>
 

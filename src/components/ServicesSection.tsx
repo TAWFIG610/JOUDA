@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Sparkles,
   GraduationCap,
   ShieldCheck,
   MapPin,
@@ -67,7 +66,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         {/* Section Header */}
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-900 text-xs font-bold shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
             <span>خدمات شاملة للطلاب الدوليين</span>
           </div>
 

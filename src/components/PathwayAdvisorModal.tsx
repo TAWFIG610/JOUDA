@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, Sparkles } from "lucide-react";
+import { X, Compass } from "lucide-react";
 
 interface PathwayAdvisorModalProps {
   isOpen: boolean;
@@ -38,7 +38,7 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
         <div className="space-y-6 mt-4 sm:mt-0">
           <div className="text-center space-y-1">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+              <Compass className="w-3.5 h-3.5 text-emerald-600" />
               <span>مستشار التخصص السريع • خطوة {step} من 3</span>
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-slate-900">

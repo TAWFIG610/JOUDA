@@ -26,44 +26,32 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header
       className={`fixed top-0 start-0 end-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm py-3"
-          : "bg-white/70 backdrop-blur-sm py-4 border-b border-slate-100"
+          ? "bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-md py-2"
+          : "bg-white/80 backdrop-blur-sm py-3.5 border-b border-slate-100"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Brand Logo */}
+        <div className="flex items-center justify-between gap-4">
+          {/* Brand Logo - Extra Large & Prominent */}
           <a
             href="#hero"
-            className="flex items-center gap-3 group focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+            className="flex items-center group focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 shrink-0 py-0.5"
+            aria-label="الرئيسية - جودة للخدمات والاستشارات الطلابية"
           >
             <img
               src="/logo.png"
               alt="شعار جودة للدراسة في ماليزيا"
-              className="h-11 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+              className="h-14 sm:h-16 lg:h-20 w-auto object-contain transition-transform duration-200 group-hover:scale-105 drop-shadow-xs"
             />
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <span className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 font-arabic">
-                  جَــوْدَة
-                </span>
-                <span className="text-[11px] sm:text-[12px] font-bold tracking-widest px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">
-                  JOUDA
-                </span>
-              </div>
-              <span className="hidden sm:block text-[11px] sm:text-[12px] text-slate-500 font-medium">
-                بوابتك للدراسة في ماليزيا
-              </span>
-            </div>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6">
+          {/* Desktop Navigation Links - Centered & Spacious */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 justify-center">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-bold text-slate-700 hover:text-emerald-600 transition-colors py-1 focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+                className="text-sm font-bold text-slate-700 hover:text-emerald-600 transition-colors py-1.5 focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 whitespace-nowrap"
               >
                 {link.name}
               </a>
@@ -71,10 +59,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
             <button
               onClick={onOpenAdvisorModal}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-xl text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+              className="flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 whitespace-nowrap"
             >
               <Compass className="w-4 h-4 text-emerald-600" />
               <span>مستشار التخصص</span>
@@ -84,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               href={`${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً جودة، أود الاستفسار عن فرص الدراسة في ماليزيا.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-xl text-sm font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+              className="flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 whitespace-nowrap"
             >
               <MessageSquare className="w-4 h-4 text-emerald-600" />
               <span>واتساب</span>
@@ -92,7 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => onOpenLeadModal("navbar_primary")}
-              className="flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl text-sm font-bold bg-gradient-to-l from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500 shadow-md shadow-emerald-600/20 hover:-translate-y-0.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+              className="flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-l from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500 shadow-md shadow-emerald-600/20 hover:-translate-y-0.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 whitespace-nowrap"
             >
               <span>ابدأ رحلتك</span>
               <ArrowLeft className="w-4 h-4" />
@@ -100,17 +88,17 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="lg:hidden flex items-center gap-2">
+          <div className="lg:hidden flex items-center gap-2 shrink-0">
             <button
               onClick={() => onOpenLeadModal("mobile_nav_quick")}
-              className="sm:hidden px-3 py-1.5 min-h-[44px] rounded-lg text-sm font-bold bg-emerald-600 text-white shadow-xs cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+              className="sm:hidden px-3.5 py-2 min-h-[44px] rounded-xl text-xs font-bold bg-emerald-600 text-white shadow-xs cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
             >
               ابدأ الآن
             </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl text-slate-700 hover:text-slate-900 bg-slate-100 border border-slate-200 focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+              className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl text-slate-700 hover:text-slate-900 bg-slate-100 border border-slate-200 focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               aria-label="القائمة الرئيسية"
             >
               {mobileMenuOpen ? (
@@ -125,7 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 shadow-xl animate-in fade-in slide-in-from-top-2 overflow-y-auto max-h-[80vh]">
+        <div className="lg:hidden bg-white border-b border-slate-200 shadow-2xl animate-in fade-in slide-in-from-top-2 overflow-y-auto max-h-[80vh]">
           <div className="max-w-7xl mx-auto px-4 py-6 space-y-4">
             <nav className="flex flex-col space-y-2">
               {NAV_LINKS.map((link) => (
@@ -133,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3 py-2 min-h-[44px] flex items-center rounded-xl text-sm font-bold text-slate-800 hover:bg-emerald-50 hover:text-emerald-700 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+                  className="px-3.5 py-2.5 min-h-[44px] flex items-center rounded-xl text-sm font-bold text-slate-800 hover:bg-emerald-50 hover:text-emerald-700 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
                 >
                   {link.name}
                 </a>
@@ -157,7 +145,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setMobileMenuOpen(false);
                   onOpenLeadModal("mobile_drawer");
                 }}
-                className="w-full flex items-center justify-center gap-2 py-3 min-h-[44px] rounded-xl text-sm font-bold bg-emerald-600 text-white shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+                className="w-full flex items-center justify-center gap-2 py-3.5 min-h-[44px] rounded-xl text-sm font-bold bg-gradient-to-l from-emerald-600 to-teal-600 text-white shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               >
                 <span>ابدأ رحلتك الآن مجاناً</span>
                 <ArrowLeft className="w-4 h-4" />

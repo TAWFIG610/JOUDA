@@ -3,7 +3,6 @@ import { WHATSAPP_BASE_URL, WHATSAPP_DISPLAY } from "../data/joudaData";
 import {
   ArrowLeft,
   MessageSquare,
-  Sparkles,
   CheckCircle2,
   PhoneCall,
   ShieldCheck,
@@ -26,7 +25,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
 
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold shadow-xs">
-            <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>ابدأ مستقبلك اليوم — قراراتك تصنع مستقبلك</span>
           </div>
 

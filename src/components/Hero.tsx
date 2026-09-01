@@ -4,7 +4,6 @@ import {
   ArrowLeft,
   MessageSquare,
   CheckCircle2,
-  Sparkles,
   ShieldCheck,
   PhoneCall,
 } from "lucide-react";
@@ -35,7 +34,7 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="lg:col-span-7 space-y-6 text-center lg:text-start">
             {/* Top Pill Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-900 text-xs font-bold shadow-xs">
-              <Sparkles className="w-4 h-4 text-emerald-600 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
               <span>شريكك المعتمد والرسمي للدراسة في ماليزيا</span>
             </div>
 
