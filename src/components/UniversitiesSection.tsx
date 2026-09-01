@@ -53,21 +53,21 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
           {list1.map((uni, idx) => (
             <div
               key={`${uni.id}-row1-${idx}`}
-              className="w-52 sm:w-60 shrink-0 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col items-center gap-3 text-center cursor-pointer hover:border-emerald-500/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+              className="w-56 sm:w-64 shrink-0 p-4 sm:p-5 rounded-3xl bg-white border border-slate-200/90 shadow-sm flex flex-col items-center gap-3 text-center cursor-pointer hover:border-emerald-500/60 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               onClick={() => onOpenLeadModal(`university_${uni.id}`)}
             >
               {/* Official University Logo Container */}
-              <div className="w-full h-14 sm:h-16 rounded-xl bg-slate-50/70 border border-slate-100 flex items-center justify-center p-2 group-hover:bg-white group-hover:shadow-xs transition-all duration-300">
+              <div className="w-full h-16 sm:h-18 rounded-2xl bg-slate-50/80 border border-slate-100 flex items-center justify-center p-2.5 group-hover:bg-white group-hover:border-emerald-100 group-hover:shadow-sm transition-all duration-300">
                 {uni.logoUrl ? (
                   <img
                     src={uni.logoUrl}
-                    alt={`شعار ${uni.nameAr}`}
-                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    alt={uni.nameEn}
+                    className="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
                 ) : (
                   <div
-                    className="w-11 h-11 rounded-full flex items-center justify-center text-white font-black text-xs shadow-xs"
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-white font-black text-xs shadow-xs"
                     style={{ backgroundColor: uni.accent }}
                   >
                     {uni.shortName}
@@ -75,41 +75,39 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
                 )}
               </div>
 
-              {/* University Name */}
-              <div className="space-y-0.5 w-full">
-                <p className="text-xs font-black text-slate-800 font-sans leading-snug group-hover:text-emerald-700 transition-colors line-clamp-1">
-                  {uni.nameEn}
-                </p>
-                <p className="text-[11px] text-slate-500 font-medium line-clamp-1">
-                  {uni.nameAr}
-                </p>
-              </div>
+              {/* Official English Name Only */}
+              <p
+                className="text-xs sm:text-sm font-bold text-slate-800 font-sans tracking-wide leading-snug group-hover:text-emerald-700 transition-colors line-clamp-1 w-full text-center"
+                dir="ltr"
+              >
+                {uni.nameEn}
+              </p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Row 2: Reverse Marquee with Official Logos */}
-      <div className="relative w-full overflow-hidden py-3 mt-2">
+      <div className="relative w-full overflow-hidden py-3 mt-2.5">
         <div className="animate-marquee-reverse-rtl flex items-center gap-5 hover:[animation-play-state:paused]">
           {list2.map((uni, idx) => (
             <div
               key={`${uni.id}-row2-${idx}`}
-              className="w-52 sm:w-60 shrink-0 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col items-center gap-3 text-center cursor-pointer hover:border-emerald-500/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+              className="w-56 sm:w-64 shrink-0 p-4 sm:p-5 rounded-3xl bg-white border border-slate-200/90 shadow-sm flex flex-col items-center gap-3 text-center cursor-pointer hover:border-emerald-500/60 hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               onClick={() => onOpenLeadModal(`university_${uni.id}`)}
             >
               {/* Official University Logo Container */}
-              <div className="w-full h-14 sm:h-16 rounded-xl bg-slate-50/70 border border-slate-100 flex items-center justify-center p-2 group-hover:bg-white group-hover:shadow-xs transition-all duration-300">
+              <div className="w-full h-16 sm:h-18 rounded-2xl bg-slate-50/80 border border-slate-100 flex items-center justify-center p-2.5 group-hover:bg-white group-hover:border-emerald-100 group-hover:shadow-sm transition-all duration-300">
                 {uni.logoUrl ? (
                   <img
                     src={uni.logoUrl}
-                    alt={`شعار ${uni.nameAr}`}
-                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    alt={uni.nameEn}
+                    className="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
                 ) : (
                   <div
-                    className="w-11 h-11 rounded-full flex items-center justify-center text-white font-black text-xs shadow-xs"
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-white font-black text-xs shadow-xs"
                     style={{ backgroundColor: uni.accent }}
                   >
                     {uni.shortName}
@@ -117,15 +115,13 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
                 )}
               </div>
 
-              {/* University Name */}
-              <div className="space-y-0.5 w-full">
-                <p className="text-xs font-black text-slate-800 font-sans leading-snug group-hover:text-emerald-700 transition-colors line-clamp-1">
-                  {uni.nameEn}
-                </p>
-                <p className="text-[11px] text-slate-500 font-medium line-clamp-1">
-                  {uni.nameAr}
-                </p>
-              </div>
+              {/* Official English Name Only */}
+              <p
+                className="text-xs sm:text-sm font-bold text-slate-800 font-sans tracking-wide leading-snug group-hover:text-emerald-700 transition-colors line-clamp-1 w-full text-center"
+                dir="ltr"
+              >
+                {uni.nameEn}
+              </p>
             </div>
           ))}
         </div>

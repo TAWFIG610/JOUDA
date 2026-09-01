@@ -1,10 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" fill="none">
-  <g transform="translate(10, 8)">
-    <path d="M12 10 L40 10 C40 10 42 32 26 44 C10 32 12 10 12 10 Z" fill="#6B21A8" stroke="#EF4444" stroke-width="2"/>
-    <circle cx="26" cy="22" r="8" fill="#FBBF24"/>
-    <path d="M18 30 L34 30 L26 38 Z" fill="#FFF"/>
-    <text x="50" y="31" font-size="23" font-family="Arial, sans-serif" font-weight="900" fill="#6B21A8" letter-spacing="1">UKM</text>
-    <text x="51" y="42" font-size="6.5" font-family="Arial, sans-serif" font-weight="800" fill="#1E293B">UNIVERSITI KEBANGSAAN</text>
-    <text x="51" y="50" font-size="6.5" font-family="Arial, sans-serif" font-weight="700" fill="#64748B">MALAYSIA (The National University)</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" fill="none">
+  <!-- UKM Official Vector Logo -->
+  <g transform="translate(6, 6)">
+    <path d="M10 8 L36 8 C36 8 38 28 23 39 C8 28 10 8 10 8 Z" fill="#581C87" stroke="#DC2626" stroke-width="1.8"/>
+    <circle cx="23" cy="19" r="7" fill="#FBBF24"/>
+    <path d="M16 26 L30 26 L23 34 Z" fill="#FFFFFF"/>
+    <text x="46" y="27" font-size="22" font-family="Arial, Helvetica, sans-serif" font-weight="900" fill="#581C87" letter-spacing="1">UKM</text>
+    <text x="47" y="37" font-size="6" font-family="Arial, Helvetica, sans-serif" font-weight="800" fill="#1E293B">UNIVERSITI KEBANGSAAN</text>
+    <text x="47" y="44" font-size="5.8" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#64748B">MALAYSIA (The National University)</text>
   </g>
 </svg>

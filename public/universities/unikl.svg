@@ -1,10 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" fill="none">
-  <g transform="translate(10, 8)">
-    <path d="M12 10 L38 10 C38 10 40 32 25 45 C10 32 12 10 12 10 Z" fill="#002B49" stroke="#E5A823" stroke-width="2"/>
-    <circle cx="25" cy="24" r="9" fill="#E5A823"/>
-    <path d="M25 17 L27 22 L32 22 L28 25 L30 30 L25 27 L20 30 L22 25 L18 22 L23 22 Z" fill="#002B49"/>
-    <text x="50" y="32" font-size="26" font-family="Arial, sans-serif" font-style="italic" font-weight="900" fill="#002B49">Uni<tspan fill="#E5A823">KL</tspan></text>
-    <text x="51" y="44" font-size="8" font-family="Arial, sans-serif" font-weight="800" fill="#002B49" letter-spacing="0.8">UNIVERSITI</text>
-    <text x="51" y="52" font-size="7" font-family="Arial, sans-serif" font-weight="700" fill="#666" letter-spacing="0.8">KUALA LUMPUR</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" fill="none">
+  <!-- UniKL Official Vector Logo -->
+  <g transform="translate(6, 6)">
+    <!-- Blue Shield Crest -->
+    <path d="M12 6 L36 6 C36 6 38 28 24 40 C10 28 12 6 12 6 Z" fill="#002D62" stroke="#E5A823" stroke-width="2"/>
+    <circle cx="24" cy="20" r="8" fill="#E5A823"/>
+    <path d="M24 14 L26 18 L30 18 L27 21 L28 25 L24 22 L20 25 L21 21 L18 18 L22 18 Z" fill="#002D62"/>
+    <!-- Text -->
+    <text x="48" y="27" font-size="24" font-family="Arial, Helvetica, sans-serif" font-style="italic" font-weight="900" fill="#002D62">Uni<tspan fill="#E5A823">KL</tspan></text>
+    <text x="49" y="37" font-size="7.5" font-family="Arial, Helvetica, sans-serif" font-weight="800" fill="#002D62" letter-spacing="0.6">UNIVERSITI</text>
+    <text x="49" y="44" font-size="6.8" font-family="Arial, Helvetica, sans-serif" font-weight="700" fill="#666666" letter-spacing="0.6">KUALA LUMPUR</text>
   </g>
 </svg>

@@ -1,10 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" fill="none">
-  <g transform="translate(10, 8)">
-    <circle cx="24" cy="27" r="18" stroke="#581C87" stroke-width="3.5" fill="none"/>
-    <circle cx="24" cy="27" r="12" stroke="#7E22CE" stroke-width="2.5" fill="none" stroke-dasharray="40 10"/>
-    <circle cx="24" cy="27" r="6" stroke="#A855F7" stroke-width="2" fill="none"/>
-    <circle cx="24" cy="27" r="2.5" fill="#581C87"/>
-    <text x="50" y="26" font-size="11" font-family="Arial, sans-serif" font-weight="800" fill="#581C87" letter-spacing="1">UNIVERSITY OF</text>
-    <text x="50" y="42" font-size="17" font-family="Arial, sans-serif" font-weight="900" fill="#581C87" letter-spacing="0.5">CYBERJAYA</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60" fill="none">
+  <!-- University of Cyberjaya Official Vector Logo -->
+  <g transform="translate(6, 6)">
+    <!-- Spiral C Emblem -->
+    <circle cx="22" cy="24" r="16" stroke="#4C1D95" stroke-width="3" fill="none"/>
+    <circle cx="22" cy="24" r="11" stroke="#7C3AED" stroke-width="2.2" fill="none" stroke-dasharray="35 10"/>
+    <circle cx="22" cy="24" r="5.5" stroke="#A78BFA" stroke-width="1.8" fill="none"/>
+    <circle cx="22" cy="24" r="2.2" fill="#4C1D95"/>
+    <!-- Text -->
+    <text x="46" y="21" font-size="10" font-family="Arial, Helvetica, sans-serif" font-weight="800" fill="#4C1D95" letter-spacing="1.2">UNIVERSITY OF</text>
+    <text x="46" y="37" font-size="16" font-family="Arial, Helvetica, sans-serif" font-weight="900" fill="#4C1D95" letter-spacing="0.5">CYBERJAYA</text>
   </g>
 </svg>
