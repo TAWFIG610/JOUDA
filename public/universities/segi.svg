@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" fill="none">
+  <g transform="translate(10, 8)">
+    <ellipse cx="26" cy="27" rx="18" ry="14" fill="#DC2626"/>
+    <text x="26" y="32" font-size="12" font-family="Arial, sans-serif" font-weight="900" fill="#FFF" text-anchor="middle">SEGi</text>
+    <text x="52" y="31" font-size="22" font-family="Arial, sans-serif" font-weight="900" fill="#DC2626" letter-spacing="1">SEGi</text>
+    <text x="53" y="43" font-size="8.5" font-family="Arial, sans-serif" font-weight="800" fill="#1E3A8A" letter-spacing="1.5">University</text>
+  </g>
+</svg>

@@ -9,8 +9,9 @@ interface UniversitiesSectionProps {
 export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
   onOpenLeadModal,
 }) => {
-  const row1 = PARTNER_UNIVERSITIES.slice(0, 6);
-  const row2 = PARTNER_UNIVERSITIES.slice(6);
+  const half = Math.ceil(PARTNER_UNIVERSITIES.length / 2);
+  const row1 = PARTNER_UNIVERSITIES.slice(0, half);
+  const row2 = PARTNER_UNIVERSITIES.slice(half);
 
   const list1 = [...row1, ...row1, ...row1];
   const list2 = [...row2, ...row2, ...row2];
@@ -40,65 +41,103 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-medium">
-            نؤمن لك القبول الجامعي الرسمي من أقوى الجامعات الحكومية والخاصة
-            وفروع الجامعات العالمية البريطانية والأسترالية في ماليزيا.
+            نؤمن لك القبول الجامعي الرسمي مع كافة الشركاء المعتمدين من الجامعات
+            الحكومية والخاصة وفروع الجامعات العالمية.
           </p>
         </div>
       </div>
 
-      {/* Row 1: Forward Marquee */}
+      {/* Row 1: Forward Marquee with Official Logos */}
       <div className="relative w-full overflow-hidden py-3">
-        <div className="animate-marquee-rtl flex items-center gap-4 hover:[animation-play-state:paused]">
+        <div className="animate-marquee-rtl flex items-center gap-5 hover:[animation-play-state:paused]">
           {list1.map((uni, idx) => (
             <div
-              key={`${uni.id}-${idx}`}
-              className="w-44 sm:w-52 shrink-0 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col items-center gap-2.5 text-center cursor-pointer hover:border-emerald-500/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+              key={`${uni.id}-row1-${idx}`}
+              className="w-52 sm:w-60 shrink-0 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col items-center gap-3 text-center cursor-pointer hover:border-emerald-500/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               onClick={() => onOpenLeadModal(`university_${uni.id}`)}
             >
-              <div
-                className="w-13 h-13 rounded-full flex items-center justify-center text-white font-black text-sm shadow-md shrink-0 ring-4 ring-slate-100"
-                style={{ backgroundColor: uni.accent }}
-              >
-                {uni.shortName}
+              {/* Official University Logo Container */}
+              <div className="w-full h-14 sm:h-16 rounded-xl bg-slate-50/70 border border-slate-100 flex items-center justify-center p-2 group-hover:bg-white group-hover:shadow-xs transition-all duration-300">
+                {uni.logoUrl ? (
+                  <img
+                    src={uni.logoUrl}
+                    alt={`شعار ${uni.nameAr}`}
+                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div
+                    className="w-11 h-11 rounded-full flex items-center justify-center text-white font-black text-xs shadow-xs"
+                    style={{ backgroundColor: uni.accent }}
+                  >
+                    {uni.shortName}
+                  </div>
+                )}
               </div>
-              <p className="text-xs font-bold text-slate-800 font-sans leading-snug">
-                {uni.nameEn}
-              </p>
+
+              {/* University Name */}
+              <div className="space-y-0.5 w-full">
+                <p className="text-xs font-black text-slate-800 font-sans leading-snug group-hover:text-emerald-700 transition-colors line-clamp-1">
+                  {uni.nameEn}
+                </p>
+                <p className="text-[11px] text-slate-500 font-medium line-clamp-1">
+                  {uni.nameAr}
+                </p>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Row 2: Reverse Marquee */}
-      <div className="relative w-full overflow-hidden py-3 mt-1.5">
-        <div className="animate-marquee-reverse-rtl flex items-center gap-4 hover:[animation-play-state:paused]">
+      {/* Row 2: Reverse Marquee with Official Logos */}
+      <div className="relative w-full overflow-hidden py-3 mt-2">
+        <div className="animate-marquee-reverse-rtl flex items-center gap-5 hover:[animation-play-state:paused]">
           {list2.map((uni, idx) => (
             <div
-              key={`${uni.id}-rev-${idx}`}
-              className="w-44 sm:w-52 shrink-0 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col items-center gap-2.5 text-center cursor-pointer hover:border-emerald-500/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+              key={`${uni.id}-row2-${idx}`}
+              className="w-52 sm:w-60 shrink-0 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col items-center gap-3 text-center cursor-pointer hover:border-emerald-500/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
               onClick={() => onOpenLeadModal(`university_${uni.id}`)}
             >
-              <div
-                className="w-13 h-13 rounded-full flex items-center justify-center text-white font-black text-sm shadow-md shrink-0 ring-4 ring-slate-100"
-                style={{ backgroundColor: uni.accent }}
-              >
-                {uni.shortName}
+              {/* Official University Logo Container */}
+              <div className="w-full h-14 sm:h-16 rounded-xl bg-slate-50/70 border border-slate-100 flex items-center justify-center p-2 group-hover:bg-white group-hover:shadow-xs transition-all duration-300">
+                {uni.logoUrl ? (
+                  <img
+                    src={uni.logoUrl}
+                    alt={`شعار ${uni.nameAr}`}
+                    className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div
+                    className="w-11 h-11 rounded-full flex items-center justify-center text-white font-black text-xs shadow-xs"
+                    style={{ backgroundColor: uni.accent }}
+                  >
+                    {uni.shortName}
+                  </div>
+                )}
               </div>
-              <p className="text-xs font-bold text-slate-800 font-sans leading-snug">
-                {uni.nameEn}
-              </p>
+
+              {/* University Name */}
+              <div className="space-y-0.5 w-full">
+                <p className="text-xs font-black text-slate-800 font-sans leading-snug group-hover:text-emerald-700 transition-colors line-clamp-1">
+                  {uni.nameEn}
+                </p>
+                <p className="text-[11px] text-slate-500 font-medium line-clamp-1">
+                  {uni.nameAr}
+                </p>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Action Box Below Marquee */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-14">
         <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-slate-800 to-emerald-950 p-5 sm:p-8 text-white shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-start border border-emerald-500/30">
           <div className="space-y-1.5">
             <h3 className="text-base sm:text-lg font-bold text-white flex items-center justify-center sm:justify-start gap-2">
               <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
-              <span>شريك معتمد مع أكثر من 12 جامعة ماليزية مرموقة</span>
+              <span>شريك معتمد مع أكثر من 17 جامعة ماليزية مرموقة</span>
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
               تواصل معنا ونحن نجد الجامعة الأنسب لملفك ومعدلك الأكاديمي مجاناً.

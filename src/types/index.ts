@@ -13,6 +13,7 @@ export interface PartnerUniversity {
   badge: string;
   accent: string;
   logoBg: string;
+  logoUrl?: string;
   popularFields: string[];
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { WHATSAPP_BASE_URL } from "../data/joudaData";
+import { WHATSAPP_BASE_URL, PARTNER_UNIVERSITIES } from "../data/joudaData";
 import {
   X,
   CheckCircle2,
@@ -170,6 +170,11 @@ export const LeadModal: React.FC<LeadModalProps> = ({
     (whatsapp.trim().startsWith("+") || whatsapp.trim().startsWith("00")) &&
     whatsapp.replace(/[^\d]/g, "").length >= 9;
 
+  const selectedUniId = initialInterest?.startsWith("university_")
+    ? initialInterest.replace("university_", "")
+    : null;
+  const selectedUni = PARTNER_UNIVERSITIES.find((u) => u.id === selectedUniId);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
       <div className="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-7 lg:p-8 shadow-2xl border border-slate-200/80 relative overflow-hidden my-6 text-slate-900">
@@ -200,6 +205,33 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                 سجل بياناتك لدراسة ملفك واقتراح أنسب التخصصات والجامعات مجاناً.
               </p>
             </div>
+
+            {/* Selected University Official Banner if opened from university ticker */}
+            {selectedUni && (
+              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-emerald-50/70 border border-emerald-200 shadow-xs">
+                <div className="w-14 h-10 p-1 bg-white rounded-xl border border-emerald-100 flex items-center justify-center shrink-0 shadow-xs">
+                  {selectedUni.logoUrl ? (
+                    <img
+                      src={selectedUni.logoUrl}
+                      alt={selectedUni.nameEn}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  ) : (
+                    <span className="text-xs font-bold text-emerald-800">
+                      {selectedUni.shortName}
+                    </span>
+                  )}
+                </div>
+                <div className="text-start space-y-0.5">
+                  <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
+                    الجامعة المستهدفة
+                  </span>
+                  <p className="text-xs font-black text-slate-900 leading-tight">
+                    {selectedUni.nameEn}
+                  </p>
+                </div>
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} noValidate className="space-y-3.5">
               {/* Full Name */}

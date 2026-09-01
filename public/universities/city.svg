@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" fill="none">
+  <g transform="translate(15, 8)">
+    <path d="M22 6 L26 6 L27 18 L21 18 Z" fill="#E11D48"/>
+    <path d="M17 18 L31 18 L33 30 L15 30 Z" fill="#E11D48" opacity="0.9"/>
+    <path d="M12 30 L36 30 L38 42 L10 42 Z" fill="#E11D48" opacity="0.8"/>
+    <text x="46" y="24" font-size="15" font-family="'Times New Roman', serif" font-weight="900" fill="#E11D48" letter-spacing="1.2">CITY UNIVERSITY</text>
+    <text x="47" y="38" font-size="11" font-family="'Times New Roman', serif" font-weight="800" fill="#E11D48" letter-spacing="2">MALAYSIA</text>
+    <text x="48" y="48" font-size="6.5" font-family="Arial, sans-serif" font-weight="700" fill="#888" letter-spacing="1">EST. 1984</text>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" fill="none">
+  <g transform="translate(20, 8)">
+    <rect x="12" y="10" width="6" height="34" rx="2" fill="#E11D48"/>
+    <rect x="22" y="10" width="6" height="34" rx="2" fill="#1E293B"/>
+    <path d="M8 10 L32 10 L32 16 L8 16 Z" fill="#1E293B"/>
+    <text x="42" y="34" font-size="20" font-family="Arial, sans-serif" font-weight="900" fill="#0F172A" letter-spacing="1.5">TAYLOR'S</text>
+    <text x="43" y="45" font-size="7.5" font-family="Arial, sans-serif" font-weight="700" fill="#64748B" letter-spacing="2">UNIVERSITY</text>
+  </g>
+</svg>

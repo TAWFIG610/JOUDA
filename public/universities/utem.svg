@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" fill="none">
+  <g transform="translate(10, 8)">
+    <path d="M10 12 C10 12 25 8 40 12 L40 38 C40 38 25 44 10 38 Z" fill="#003366"/>
+    <path d="M14 18 L36 18 M14 24 L36 24 M14 30 L36 30" stroke="#FFF" stroke-width="1.5"/>
+    <circle cx="16" cy="14" r="4" fill="#E65100"/>
+    <text x="48" y="32" font-size="26" font-family="Arial, sans-serif" font-weight="900" fill="#003366" letter-spacing="1">UTeM</text>
+    <text x="49" y="44" font-size="7.5" font-family="Arial, sans-serif" font-weight="800" fill="#003366">UNIVERSITI TEKNIKAL MALAYSIA MELAKA</text>
+    <text x="49" y="52" font-size="6.5" font-family="Arial, sans-serif" font-weight="600" fill="#777">EXCELLENCE THROUGH TECHNOLOGY</text>
+  </g>
+</svg>

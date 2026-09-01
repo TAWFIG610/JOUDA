@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" fill="none">
+  <g transform="translate(10, 8)">
+    <circle cx="26" cy="27" r="22" stroke="#800000" stroke-width="3" fill="#FFF9F9"/>
+    <circle cx="26" cy="27" r="16" stroke="#800000" stroke-width="1.5" stroke-dasharray="3,2"/>
+    <path d="M26 12 L30 20 L38 22 L32 28 L34 36 L26 31 L18 36 L20 28 L14 22 L22 20 Z" fill="#D4AF37"/>
+    <circle cx="26" cy="27" r="6" fill="#800000"/>
+    <text x="26" y="30" font-size="8" font-family="Arial, sans-serif" font-weight="900" fill="#FFF" text-anchor="middle">UTM</text>
+    <text x="60" y="34" font-size="28" font-family="'Times New Roman', serif" font-weight="900" fill="#800000" letter-spacing="1.5">UTM</text>
+    <text x="61" y="46" font-size="7.5" font-family="Arial, sans-serif" font-weight="700" fill="#666" letter-spacing="0.5">UNIVERSITI TEKNOLOGI MALAYSIA</text>
+  </g>
+</svg>

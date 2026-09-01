@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" fill="none">
+  <g transform="translate(10, 8)">
+    <circle cx="26" cy="27" r="19" fill="#EA580C"/>
+    <path d="M28 13 L18 27 L26 27 L24 41 L34 27 L26 27 Z" fill="#FFF"/>
+    <text x="52" y="32" font-size="22" font-family="Arial, sans-serif" font-weight="900" fill="#EA580C" letter-spacing="1">UNITEN</text>
+    <text x="53" y="44" font-size="7" font-family="Arial, sans-serif" font-weight="800" fill="#1E293B">UNIVERSITI TENAGA NASIONAL</text>
+  </g>
+</svg>

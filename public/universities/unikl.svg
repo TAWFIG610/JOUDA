@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" fill="none">
+  <g transform="translate(10, 8)">
+    <path d="M12 10 L38 10 C38 10 40 32 25 45 C10 32 12 10 12 10 Z" fill="#002B49" stroke="#E5A823" stroke-width="2"/>
+    <circle cx="25" cy="24" r="9" fill="#E5A823"/>
+    <path d="M25 17 L27 22 L32 22 L28 25 L30 30 L25 27 L20 30 L22 25 L18 22 L23 22 Z" fill="#002B49"/>
+    <text x="50" y="32" font-size="26" font-family="Arial, sans-serif" font-style="italic" font-weight="900" fill="#002B49">Uni<tspan fill="#E5A823">KL</tspan></text>
+    <text x="51" y="44" font-size="8" font-family="Arial, sans-serif" font-weight="800" fill="#002B49" letter-spacing="0.8">UNIVERSITI</text>
+    <text x="51" y="52" font-size="7" font-family="Arial, sans-serif" font-weight="700" fill="#666" letter-spacing="0.8">KUALA LUMPUR</text>
+  </g>
+</svg>
