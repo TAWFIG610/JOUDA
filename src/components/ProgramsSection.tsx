@@ -1,5 +1,5 @@
 import React from "react";
-import { Sparkles, ArrowLeft } from "lucide-react";
+import { Sparkles, ArrowLeft, CheckCircle2 } from "lucide-react";
 
 interface ProgramsSectionProps {
   onOpenLeadModal: (source?: string) => void;
@@ -12,49 +12,56 @@ export const ProgramsSection: React.FC<ProgramsSectionProps> = ({
   return (
     <section
       id="programs"
-      className="py-12 sm:py-16 lg:py-24 bg-white relative border-t border-slate-200"
+      className="py-14 sm:py-20 lg:py-28 bg-white relative border-t border-slate-200/80"
     >
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold shadow-xs mb-6">
-          <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-          <span>ادرس ما تحب في ماليزيا</span>
-        </div>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="rounded-3xl bg-gradient-to-br from-emerald-50/50 via-slate-50/70 to-teal-50/40 border border-emerald-200/60 p-7 sm:p-12 lg:p-16 shadow-xl relative overflow-hidden space-y-6">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-900 text-xs font-bold shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+            <span>ادرس ما تحب في ماليزيا</span>
+          </div>
 
-        {/* Headline */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
-          لديك تخصص في بالك؟{" "}
-          <span className="text-gradient-emerald">أخبرنا به.</span>
-        </h2>
+          {/* Headline */}
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight text-balance">
+            لديك تخصص في بالك؟{" "}
+            <span className="text-gradient-emerald">
+              أخبرنا به وسنجد الأنسب لك.
+            </span>
+          </h2>
 
-        {/* Sub-headline */}
-        <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mx-auto mb-10">
-          لدينا شراكات في جميع المجالات — تقنية، صحة، أعمال، هندسة، وأكثر. لا
-          تقلق، مستشارنا يجد الأنسب لملفك.
-        </p>
+          {/* Sub-headline */}
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mx-auto font-medium">
+            تنسيق مباشر وشراكات معتمدة في كافة التخصصات — تقنية، طب وعلوم صحية،
+            أعمال وتمويل، هندسة متقدمة، وأكثر.
+          </p>
 
-        {/* Main CTA Button */}
-        <button
-          onClick={() => onOpenLeadModal("programs_cta")}
-          className="inline-flex items-center justify-center gap-2 px-10 py-4 min-h-[52px] rounded-2xl text-sm font-bold bg-gradient-to-l from-emerald-600 to-emerald-500 text-white hover:from-emerald-500 hover:to-emerald-400 transition-all duration-200 shadow-lg shadow-emerald-600/25 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 mb-6"
-        >
-          <span>تواصل معنا الآن مجاناً</span>
-          <ArrowLeft className="w-4 h-4" />
-        </button>
+          {/* Main CTA Button */}
+          <div className="pt-2">
+            <button
+              onClick={() => onOpenLeadModal("programs_cta")}
+              className="inline-flex items-center justify-center gap-3 px-10 py-4 min-h-[50px] rounded-2xl text-sm sm:text-base font-bold bg-gradient-to-l from-emerald-600 via-emerald-500 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500 transition-all duration-200 shadow-xl shadow-emerald-600/25 hover:shadow-2xl hover:-translate-y-0.5 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+            >
+              <span>تواصل معنا الآن مجاناً</span>
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+          </div>
 
-        {/* Trust Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-slate-600">
-          <span className="flex items-center gap-1">
-            <span className="text-emerald-600 font-bold">✓</span> تقييم مجاني
-          </span>
-          <span className="w-px h-4 bg-slate-200 hidden sm:block" />
-          <span className="flex items-center gap-1">
-            <span className="text-emerald-600 font-bold">✓</span> رد خلال ساعات
-          </span>
-          <span className="w-px h-4 bg-slate-200 hidden sm:block" />
-          <span className="flex items-center gap-1">
-            <span className="text-emerald-600 font-bold">✓</span> بدون التزام
-          </span>
+          {/* Trust Badges */}
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-bold text-slate-700">
+            <span className="inline-flex items-center gap-1.5 bg-white/90 px-3 py-1.5 rounded-full border border-slate-200 shadow-xs">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span>تقييم مجاني 100%</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 bg-white/90 px-3 py-1.5 rounded-full border border-slate-200 shadow-xs">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span>رد سريع خلال ساعات</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 bg-white/90 px-3 py-1.5 rounded-full border border-slate-200 shadow-xs">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              <span>بدون أي التزام مالي</span>
+            </span>
+          </div>
         </div>
       </div>
     </section>
