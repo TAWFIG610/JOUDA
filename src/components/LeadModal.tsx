@@ -4,7 +4,6 @@ import {
   X,
   CheckCircle2,
   Send,
-  Sparkles,
   MessageCircle,
   AlertCircle,
 } from "lucide-react";
@@ -145,8 +144,12 @@ export const LeadModal: React.FC<LeadModalProps> = ({
         {!submitted ? (
           <div>
             <div className="text-center space-y-2 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center mx-auto mb-2 mt-4 sm:mt-0">
-                <Sparkles className="w-6 h-6" />
+              <div className="w-16 h-16 rounded-2xl bg-white p-1 flex items-center justify-center mx-auto mb-2 mt-4 sm:mt-0 shadow-md border border-slate-100">
+                <img
+                  src="/logo.png"
+                  alt="شعار جودة للدراسة في ماليزيا"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
                 ابدأ رحلتك الأكاديمية مع جَـوْدَة

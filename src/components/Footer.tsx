@@ -1,7 +1,6 @@
 import React from "react";
 import { FOOTER_DATA, WHATSAPP_DISPLAY } from "../data/joudaData";
 import {
-  GraduationCap,
   MessageCircle,
   Video,
   Send,
@@ -40,8 +39,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 pb-12 border-b border-slate-800/80">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md">
-                <GraduationCap className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-2xl bg-white p-1 flex items-center justify-center shadow-md border border-white/10 shrink-0">
+                <img
+                  src="/logo.png"
+                  alt="شعار جودة للدراسة في ماليزيا"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">

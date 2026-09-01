@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NAV_LINKS, WHATSAPP_BASE_URL } from "../data/joudaData";
-import {
-  Menu,
-  X,
-  ArrowLeft,
-  GraduationCap,
-  Compass,
-  MessageSquare,
-} from "lucide-react";
+import { Menu, X, ArrowLeft, Compass, MessageSquare } from "lucide-react";
 
 interface NavbarProps {
   onOpenLeadModal: (source?: string) => void;
@@ -44,19 +37,21 @@ export const Navbar: React.FC<NavbarProps> = ({
             href="#hero"
             className="flex items-center gap-3 group focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform">
-              <GraduationCap className="w-6 h-6" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="شعار جودة للدراسة في ماليزيا"
+              className="h-11 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+            />
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold tracking-tight text-slate-900 font-arabic">
+                <span className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 font-arabic">
                   جَــوْدَة
                 </span>
-                <span className="text-[12px] font-bold tracking-widest px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">
+                <span className="text-[11px] sm:text-[12px] font-bold tracking-widest px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">
                   JOUDA
                 </span>
               </div>
-              <span className="hidden sm:block text-[12px] text-slate-500 font-medium">
+              <span className="hidden sm:block text-[11px] sm:text-[12px] text-slate-500 font-medium">
                 بوابتك للدراسة في ماليزيا
               </span>
             </div>
