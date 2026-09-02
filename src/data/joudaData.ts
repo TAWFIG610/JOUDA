@@ -5,8 +5,8 @@ import type {
   FAQItem,
 } from "../types";
 
-export const WHATSAPP_PHONE = "601117633940";
-export const WHATSAPP_DISPLAY = "+60 11-1763 3940";
+export const WHATSAPP_PHONE = "60175341969";
+export const WHATSAPP_DISPLAY = "+60 17-534 1969";
 export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_PHONE}`;
 
 export const NAV_LINKS: NavLink[] = [
