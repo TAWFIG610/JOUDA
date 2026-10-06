@@ -17,7 +17,7 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenLeadModal,
   onOpenAdvisorModal,
 }) => {
-  const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً فريق THIQA UNI، أود الاستفسار عن التقديم للجامعات المعترف بها والتخصصات الأنسب لي.")}`;
+  const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً فريق ثقة يوني، أود الاستفسار عن التقديم للجامعات المعترف بها والتخصصات الأنسب لي.")}`;
 
   return (
     <section
@@ -31,14 +31,14 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Top Pill Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold">
               <span className="w-1.5 h-1.5 rounded-full bg-[#D97706]" />
-              <span className="tracking-wider uppercase font-sans text-[11px] font-bold text-[#0F254B]">{BRAND_MOTTO}</span>
+              <span className="tracking-wide text-[11px] font-bold text-[#0F254B]">{BRAND_MOTTO}</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#0F254B] leading-[1.18] tracking-tight text-balance">
               بوابتك المعتمدة للتعليم العالي الدولي مع{" "}
               <span className="text-[#D97706]">
-                THIQA UNI
+                ثقة يوني
               </span>
             </h1>
 

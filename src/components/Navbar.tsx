@@ -40,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <img
               src="/thiqa-logo.png"
-              alt="THIQA UNI — Your Global Education Partner"
+              alt="شعار ثقة يوني — الشريك الأكاديمي الدولي للتعليم العالي"
               className="h-12 sm:h-14 lg:h-16 w-auto object-contain transition-transform duration-200 group-hover:scale-102"
             />
           </a>
@@ -69,7 +69,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <a
-              href={`${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً فريق THIQA UNI، أود الاستفسار عن فرص القبول في الجامعات الدولية والماليزية.")}`}
+              href={`${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً فريق ثقة يوني، أود الاستفسار عن فرص القبول في الجامعات الدولية والماليزية.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 whitespace-nowrap"
@@ -147,7 +147,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
                 className="w-full flex items-center justify-center gap-2 py-3.5 min-h-[44px] rounded-xl text-sm font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
               >
-                <span>ابدأ رحلتك الآن مع THIQA UNI</span>
+                <span>ابدأ رحلتك الآن مع ثقة يوني</span>
                 <ArrowLeft className="w-4 h-4" />
               </button>
             </div>

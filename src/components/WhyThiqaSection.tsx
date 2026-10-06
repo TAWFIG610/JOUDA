@@ -19,12 +19,12 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
             <ShieldCheck className="w-4 h-4 text-[#F59E0B]" />
-            <span>THE THIQA UNI DIFFERENCE</span>
+            <span>فارق التميز مع ثقة يوني</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
             لماذا يختار الطلاب والآباء منظومة{" "}
-            <span className="text-[#D97706]">THIQA UNI</span>؟
+            <span className="text-[#D97706]">ثقة يوني</span>؟
           </h2>
 
           <p className="text-sm sm:text-base text-[#64748B] leading-relaxed font-medium">
@@ -41,7 +41,7 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({
             </div>
             <div className="lg:col-span-4 text-[#F59E0B] flex items-center gap-1.5">
               <Award className="w-4 h-4" />
-              <span>منظومة THIQA UNI الرسمية</span>
+              <span>منظومة ثقة يوني الرسمية</span>
             </div>
           </div>
 
@@ -73,7 +73,7 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({
             onClick={() => onOpenLeadModal("why_thiqa_cta")}
             className="inline-flex items-center gap-2.5 px-9 py-4 rounded-xl text-sm font-bold bg-[#0F254B] hover:bg-[#F59E0B] text-white transition-all duration-200 shadow-md hover:shadow-xl hover:-translate-y-0.5 cursor-pointer"
           >
-            <span>انضم للطلاب المقبولين مع THIQA UNI الآن</span>
+            <span>انضم للطلاب المقبولين مع ثقة يوني الآن</span>
             <ArrowLeft className="w-4 h-4" />
           </button>
         </div>

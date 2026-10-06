@@ -13,11 +13,11 @@ export const TestimonialsSection: React.FC = () => {
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
             <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-amber-500" />
-            <span>REAL STUDENT SUCCESS STORIES</span>
+            <span>قصص نجاح طلابنا الحقيقية</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight">
-            تجارب حقيقية لطلابنا المقبولين عبر THIQA UNI
+            تجارب حقيقية لطلابنا المقبولين عبر ثقة يوني
           </h2>
 
           <p className="text-sm sm:text-base text-[#64748B] leading-relaxed">

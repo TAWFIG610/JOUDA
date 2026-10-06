@@ -125,7 +125,7 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
               <span>شريك معتمد مع أكثر من 35 جامعة عالمية وماليزية مرموقة</span>
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-              تواصل مع مستشاري THIQA UNI وسنساعدك في اختيار الجامعة الأنسب لطموحك ومعدلك الأكاديمي مجاناً.
+              تواصل مع مستشاري ثقة يوني وسنساعدك في اختيار الجامعة الأنسب لطموحك ومعدلك الأكاديمي مجاناً.
             </p>
           </div>
 

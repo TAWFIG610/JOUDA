@@ -24,7 +24,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
         <div className="text-center space-y-3.5 mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
             <HelpCircle className="w-3.5 h-3.5 text-[#F59E0B]" />
-            <span>TRANSPARENT ANSWERS</span>
+            <span>إجابات واضحة وموثوقة</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
@@ -87,7 +87,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
               لديك سؤال خاص بملفك أو معدلك الأكاديمي؟
             </h4>
             <p className="text-xs text-slate-300">
-              مستشارو THIQA UNI جاهزون للإجابة المباشرة وتقديم المشورة مجاناً.
+              مستشارو ثقة يوني جاهزون للإجابة المباشرة وتقديم المشورة مجاناً.
             </p>
           </div>
 

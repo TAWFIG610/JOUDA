@@ -21,7 +21,7 @@ export const ProblemSection: React.FC = () => {
           </h2>
 
           <p className="text-sm sm:text-base text-[#64748B] leading-relaxed">
-            يواجه أغلب الطلاب تضارب المعلومات حول متطلبات القبول والفيزا والرسوم؛ إليك كيف تجعل THIQA UNI المسار سهلاً وموثوقاً:
+            يواجه أغلب الطلاب تضارب المعلومات حول متطلبات القبول والفيزا والرسوم؛ إليك كيف تجعل ثقة يوني المسار سهلاً وموثوقاً:
           </p>
         </div>
 
@@ -52,7 +52,7 @@ export const ProblemSection: React.FC = () => {
         {/* Transition Bridge to Solution */}
         <div className="text-center pt-2">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold">
-            <span>اكتشف كيف تقدم لك THIQA UNI الدعم الأكاديمي الشامل</span>
+            <span>اكتشف كيف تقدم لك ثقة يوني الدعم الأكاديمي الشامل</span>
             <ArrowDown className="w-4 h-4 text-[#F59E0B] animate-bounce" />
           </div>
         </div>

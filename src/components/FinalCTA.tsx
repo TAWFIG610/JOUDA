@@ -13,7 +13,7 @@ interface FinalCTAProps {
 }
 
 export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
-  const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً فريق THIQA UNI، أود بدء التقديم واستخراج القبول الجامعي.")}`;
+  const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً فريق ثقة يوني، أود بدء التقديم واستخراج القبول الجامعي.")}`;
 
   return (
     <section className="py-16 sm:py-24 bg-white relative border-t border-slate-200">
@@ -21,7 +21,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
         <div className="rounded-2xl bg-[#0F254B] p-8 sm:p-12 md:p-16 text-white shadow-lg border border-slate-800 text-center space-y-7">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-[#F59E0B] text-xs font-bold">
-            <span className="font-sans font-bold tracking-wider uppercase text-[11px]">{BRAND_MOTTO}</span>
+            <span className="tracking-wide text-[11px] font-bold">{BRAND_MOTTO}</span>
           </div>
 
           {/* Heading */}
@@ -32,7 +32,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
 
           {/* Subtitle */}
           <p className="text-sm sm:text-base md:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto font-medium">
-            آلاف الطلاب بدأت مسيرتهم الدولية بثقة تامة عبر THIQA UNI. احجز تقييمك واستشارتك المجانية اليوم وانطلق نحو طموحك.
+            آلاف الطلاب بدأت مسيرتهم الدولية بثقة تامة عبر ثقة يوني. احجز تقييمك واستشارتك المجانية اليوم وانطلق نحو طموحك.
           </p>
 
           {/* Dual CTAs */}

@@ -23,15 +23,15 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
             <Compass className="w-3.5 h-3.5 text-[#F59E0B]" />
-            <span>THE 4-STAGE EXPERIENCE</span>
+            <span>المسار المتكامل في 4 مراحل</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
-            رحلة الطالب مع THIQA UNI: من الاكتشاف حتى الوصول
+            رحلة الطالب مع ثقة يوني: من الاكتشاف حتى الوصول
           </h2>
 
           <p className="text-sm sm:text-base text-[#64748B] leading-relaxed font-medium">
-            Discover → Compare → Choose → Apply. خطوات واضحة ومدروسة تضمن لك قبولاً رسمياً وتأشيرة دراسية دون أي ارتباك.
+            استكشف ← قارن ← اختر ← قدّم. خطوات واضحة ومدروسة تضمن لك قبولاً رسمياً وتأشيرة دراسية دون أي ارتباك.
           </p>
         </div>
 
@@ -57,13 +57,13 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
                         isSelected ? "bg-white/10 text-[#F59E0B]" : "bg-slate-200/60 text-slate-700"
                       }`}
                     >
-                      STEP {step.number}
+                      المرحلة {step.number}
                     </span>
                     <Icon className={`w-5 h-5 ${isSelected ? "text-[#F59E0B]" : "text-[#0F254B]"}`} />
                   </div>
 
                   <span
-                    className={`text-[11px] font-sans font-bold uppercase tracking-wider block mb-1 ${
+                    className={`text-[11px] font-bold block mb-1 ${
                       isSelected ? "text-amber-400" : "text-[#D97706]"
                     }`}
                   >
@@ -118,7 +118,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
                 onClick={() => onOpenLeadModal(`journey_step_${activeStep + 1}`)}
                 className="w-full md:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl text-sm font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-lg shadow-amber-500/25 transition-all cursor-pointer whitespace-nowrap"
               >
-                <span>ابدأ هذه الخطوة الآن مع THIQA UNI</span>
+                <span>ابدأ هذه الخطوة الآن مع ثقة يوني</span>
                 <ArrowLeft className="w-4 h-4" />
               </button>
             </div>

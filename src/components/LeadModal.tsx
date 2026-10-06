@@ -126,7 +126,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
 
   const handleOpenWhatsAppDirect = () => {
     const text = encodeURIComponent(
-      `مرحباً فريق THIQA UNI! أود بدء التقديم واستخراج القبول الجامعي.
+      `مرحباً فريق ثقة يوني! أود بدء التقديم واستخراج القبول الجامعي.
 الاسم الثلاثي: ${name.trim()}
 البريد الإلكتروني: ${email.trim()}
 رقم الواتساب: ${whatsapp.trim()}
@@ -193,13 +193,13 @@ export const LeadModal: React.FC<LeadModalProps> = ({
               <div className="h-16 flex items-center justify-center mx-auto">
                 <img
                   src="/thiqa-logo.png"
-                  alt="THIQA UNI — Your Global Education Partner"
+                  alt="شعار ثقة يوني — الشريك الأكاديمي الدولي"
                   className="max-h-full w-auto object-contain"
                 />
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-[#0F254B] tracking-tight">
                 ابدأ رحلتك الأكاديمية مع{" "}
-                <span className="text-[#F59E0B]">THIQA UNI</span>
+                <span className="text-[#F59E0B]">ثقة يوني</span>
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-medium max-w-xs mx-auto">
                 سجل بياناتك لتقييم مؤهلاتك واقتراح أفضل البرامج والجامعات مجاناً.
@@ -479,7 +479,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
             <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto font-medium">
               شكراً لك يا{" "}
               <span className="font-bold text-slate-900">{name}</span>. تم فتح
-              تطبيق الواتساب لتتمكن من إرسال تفاصيلك مباشرة إلى مستشار THIQA UNI
+              تطبيق الواتساب لتتمكن من إرسال تفاصيلك مباشرة إلى مستشار ثقة يوني
               المعتمد.
             </p>
 

@@ -3,7 +3,6 @@ import {
   FOOTER_DATA,
   WHATSAPP_DISPLAY,
   WHATSAPP_BASE_URL,
-  BRAND_NAME_EN,
   BRAND_NAME_AR,
   BRAND_TAGLINE,
   BRAND_MOTTO,
@@ -22,7 +21,7 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
-  const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً، أود التواصل مع مستشار THIQA UNI.")}`;
+  const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً، أود التواصل مع مستشار ثقة يوني.")}`;
 
   const getSocialIcon = (name: string) => {
     switch (name) {
@@ -49,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               <div className="h-14 bg-white p-1.5 rounded-xl shadow-md border border-white/20 shrink-0">
                 <img
                   src="/thiqa-logo.png"
-                  alt={`${BRAND_NAME_EN} — ${BRAND_TAGLINE}`}
+                  alt={`${BRAND_NAME_AR} — ${BRAND_TAGLINE}`}
                   className="h-full w-auto object-contain"
                 />
               </div>
@@ -142,7 +141,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                   href="#journey"
                   className="inline-block py-1 hover:text-[#F59E0B] transition-colors cursor-pointer"
                 >
-                  مسار التقديم (Discover → Apply)
+                  مسار التقديم (من الاستكشاف للتقديم)
                 </a>
               </li>
               <li>
@@ -150,7 +149,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                   href="#why-thiqa"
                   className="inline-block py-1 hover:text-[#F59E0B] transition-colors cursor-pointer"
                 >
-                  الاعتمادات ومزايا THIQA UNI
+                  الاعتمادات ومزايا ثقة يوني
                 </a>
               </li>
             </ul>
@@ -193,13 +192,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="text-center sm:text-start">
-            © 2026 {BRAND_NAME_EN} ({BRAND_NAME_AR}) Global Education Partner. جميع الحقوق محفوظة.
+            © 2026 ثقة يوني (THIQA UNI) للخدمات الأكاديمية والتعليم الدولي. جميع الحقوق محفوظة.
           </div>
 
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-slate-300 font-medium">
               <ShieldCheck className="w-4 h-4 text-[#F59E0B]" />
-              <span>TRUST • EDUCATION • GLOBAL FUTURE</span>
+              <span>{BRAND_MOTTO}</span>
             </span>
 
             <button

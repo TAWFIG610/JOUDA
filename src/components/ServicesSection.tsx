@@ -52,7 +52,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
             <Briefcase className="w-3.5 h-3.5 text-[#F59E0B]" />
-            <span>EXECUTIVE STUDENT SERVICES</span>
+            <span>خدمات طلابية متكاملة</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
