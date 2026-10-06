@@ -30,11 +30,14 @@ export const LegalModal: React.FC<LegalModalProps> = ({
   }[type];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
-      <div className="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-7 lg:p-8 shadow-2xl border border-slate-200 relative text-slate-900 space-y-4 my-8">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
+      <div className="bg-white rounded-t-[32px] sm:rounded-3xl max-w-lg w-full p-5 sm:p-7 lg:p-8 shadow-2xl border-t sm:border border-slate-200/90 relative text-slate-900 space-y-4 my-0 sm:my-8 overflow-y-auto max-h-[92vh] sm:max-h-[90vh] animate-in slide-in-from-bottom-4 duration-300">
+        {/* Mobile Pull / Drag Indicator */}
+        <div className="w-12 h-1.5 rounded-full bg-slate-300 mx-auto mb-2 block sm:hidden" />
+
         <button
           onClick={onClose}
-          className="absolute top-4 start-4 sm:top-5 sm:start-5 min-h-[44px] min-w-[44px] p-2.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 flex items-center justify-center"
+          className="absolute top-4 start-4 sm:top-5 sm:start-5 min-h-[44px] min-w-[44px] p-2.5 rounded-2xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 flex items-center justify-center"
           aria-label="إغلاق"
         >
           <X className="w-5 h-5" />
