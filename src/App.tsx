@@ -17,6 +17,7 @@ import { WhatsAppFloatingButton } from "./components/WhatsAppFloatingButton";
 import { LeadModal } from "./components/LeadModal";
 import { PathwayAdvisorModal } from "./components/PathwayAdvisorModal";
 import { LegalModal } from "./components/LegalModal";
+import { MobileBottomNav } from "./components/MobileBottomNav";
 
 export function App() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
@@ -47,7 +48,7 @@ export function App() {
       />
 
       {/* Main Content Flow */}
-      <main className="overflow-x-hidden">
+      <main className="overflow-x-hidden pb-16 lg:pb-0">
         <Hero
           onOpenLeadModal={handleOpenLeadModal}
           onOpenAdvisorModal={() => setIsAdvisorModalOpen(true)}
@@ -80,8 +81,12 @@ export function App() {
       {/* Footer */}
       <Footer onOpenLegal={(type) => setLegalModalType(type)} />
 
-      {/* Floating Elements */}
+      {/* Floating Elements & Mobile Navigation */}
       <WhatsAppFloatingButton />
+      <MobileBottomNav
+        onOpenLeadModal={handleOpenLeadModal}
+        onOpenAdvisorModal={() => setIsAdvisorModalOpen(true)}
+      />
 
       {/* Modals */}
       <LeadModal

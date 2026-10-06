@@ -195,15 +195,18 @@ export const LeadModal: React.FC<LeadModalProps> = ({
   const selectedUni = PARTNER_UNIVERSITIES.find((u) => u.id === selectedUniId);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
-      <div className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200/90 relative overflow-hidden my-6 text-slate-900">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
+      <div className="bg-white rounded-t-[32px] sm:rounded-3xl max-w-xl w-full p-5 sm:p-8 shadow-2xl border-t sm:border border-slate-200/90 relative overflow-y-auto max-h-[92vh] sm:max-h-[90vh] my-0 sm:my-6 text-slate-900 animate-in slide-in-from-bottom-4 duration-300">
+        {/* Mobile Pull / Drag Indicator */}
+        <div className="w-12 h-1.5 rounded-full bg-slate-300 mx-auto mb-2 block sm:hidden" />
+
         {/* Subtle Top Gold Accent Bar */}
-        <div className="absolute top-0 start-0 end-0 h-1.5 bg-gradient-to-r from-[#0F254B] via-[#F59E0B] to-[#0F254B]" />
+        <div className="absolute top-0 start-0 end-0 h-1.5 bg-gradient-to-r from-[#0F254B] via-[#F59E0B] to-[#0F254B] hidden sm:block" />
 
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 start-4 sm:top-5 sm:start-5 min-h-[40px] min-w-[40px] p-2 rounded-xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 flex items-center justify-center"
+          className="absolute top-4 start-4 sm:top-5 sm:start-5 min-h-[44px] min-w-[44px] p-2.5 rounded-2xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 flex items-center justify-center"
           aria-label="إغلاق"
         >
           <X className="w-5 h-5" />
@@ -280,6 +283,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                   <input
                     type="text"
                     value={name}
+                    autoComplete="name"
                     onChange={(e) => {
                       setName(e.target.value);
                       if (errors.name)
@@ -313,6 +317,8 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                     <input
                       type="email"
                       value={email}
+                      autoComplete="email"
+                      inputMode="email"
                       onChange={(e) => {
                         setEmail(e.target.value);
                         if (errors.email)
@@ -345,6 +351,8 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                     <input
                       type="tel"
                       value={whatsapp}
+                      autoComplete="tel"
+                      inputMode="tel"
                       onChange={(e) => {
                         setWhatsapp(e.target.value);
                         if (errors.whatsapp)
