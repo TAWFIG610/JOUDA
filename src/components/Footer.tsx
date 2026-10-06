@@ -131,10 +131,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               </li>
               <li>
                 <a
-                  href="#programs"
+                  href="#services"
                   className="inline-block py-1 hover:text-[#F59E0B] transition-colors cursor-pointer"
                 >
-                  تخصصات الذكاء الاصطناعي والتكنولوجيا
+                  الخدمات والاستشارات الأكاديمية
                 </a>
               </li>
               <li>

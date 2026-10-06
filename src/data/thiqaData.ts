@@ -17,7 +17,7 @@ export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_PHONE}`;
 
 export const NAV_LINKS: NavLink[] = [
   { name: "الجامعات الشريكة", href: "#universities" },
-  { name: "التخصصات الأكاديمية", href: "#programs" },
+  { name: "خدماتنا", href: "#services" },
   { name: "رحلة الطالب (Discover to Apply)", href: "#journey" },
   { name: "لماذا THIQA UNI؟", href: "#why-thiqa" },
   { name: "الأسئلة الشائعة", href: "#faq" },
@@ -522,7 +522,7 @@ export const FOOTER_DATA = {
   links: [
     { title: "الرئيسية", href: "#hero" },
     { title: "الجامعات المعتمدة", href: "#universities" },
-    { title: "التخصصات الأكاديمية", href: "#programs" },
+    { title: "خدماتنا الطلابية", href: "#services" },
     { title: "مسار الطالب (الخطوات)", href: "#journey" },
     { title: "لماذا ثقة يوني؟", href: "#why-thiqa" },
     { title: "الأسئلة الشائعة", href: "#faq" },

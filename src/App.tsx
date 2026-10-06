@@ -8,7 +8,6 @@ import { SolutionSection } from "./components/SolutionSection";
 import { StudentJourneyVisual } from "./components/StudentJourneyVisual";
 import { ServicesSection } from "./components/ServicesSection";
 import { WhyThiqaSection } from "./components/WhyThiqaSection";
-import { ProgramsSection } from "./components/ProgramsSection";
 import { MalaysiaSection } from "./components/MalaysiaSection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
 import { FAQSection } from "./components/FAQSection";
@@ -68,11 +67,6 @@ export function App() {
         <ServicesSection onOpenLeadModal={handleOpenLeadModal} />
 
         <WhyThiqaSection onOpenLeadModal={handleOpenLeadModal} />
-
-        <ProgramsSection
-          onOpenLeadModal={handleOpenLeadModal}
-          onOpenAdvisorModal={() => setIsAdvisorModalOpen(true)}
-        />
 
         <MalaysiaSection onOpenLeadModal={handleOpenLeadModal} />
 
