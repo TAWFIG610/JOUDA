@@ -7,7 +7,7 @@ import { ProblemSection } from "./components/ProblemSection";
 import { SolutionSection } from "./components/SolutionSection";
 import { StudentJourneyVisual } from "./components/StudentJourneyVisual";
 import { ServicesSection } from "./components/ServicesSection";
-import { WhyJoudaSection } from "./components/WhyJoudaSection";
+import { WhyThiqaSection } from "./components/WhyThiqaSection";
 import { ProgramsSection } from "./components/ProgramsSection";
 import { MalaysiaSection } from "./components/MalaysiaSection";
 import { TestimonialsSection } from "./components/TestimonialsSection";
@@ -40,7 +40,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-arabic selection:bg-emerald-500/20 selection:text-emerald-950 overflow-x-hidden antialiased">
+    <div className="min-h-screen bg-white text-slate-900 font-arabic selection:bg-amber-500/20 selection:text-[#0F254B] overflow-x-hidden antialiased">
       {/* Sticky Header */}
       <Navbar
         onOpenLeadModal={handleOpenLeadModal}
@@ -67,7 +67,7 @@ export function App() {
 
         <ServicesSection onOpenLeadModal={handleOpenLeadModal} />
 
-        <WhyJoudaSection onOpenLeadModal={handleOpenLeadModal} />
+        <WhyThiqaSection onOpenLeadModal={handleOpenLeadModal} />
 
         <ProgramsSection
           onOpenLeadModal={handleOpenLeadModal}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { WHATSAPP_BASE_URL, PARTNER_UNIVERSITIES } from "../data/joudaData";
+import { WHATSAPP_BASE_URL, PARTNER_UNIVERSITIES } from "../data/thiqaData";
 import {
   X,
   CheckCircle2,
@@ -126,7 +126,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
 
   const handleOpenWhatsAppDirect = () => {
     const text = encodeURIComponent(
-      `مرحباً جودة! أريد التسجيل والبدء للدراسة في ماليزيا.
+      `مرحباً فريق THIQA UNI! أود بدء التقديم واستخراج القبول الجامعي.
 الاسم الثلاثي: ${name.trim()}
 البريد الإلكتروني: ${email.trim()}
 رقم الواتساب: ${whatsapp.trim()}
@@ -180,7 +180,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
       <div className="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-7 lg:p-8 shadow-2xl border border-slate-200/80 relative overflow-hidden my-6 text-slate-900">
         <button
           onClick={onClose}
-          className="absolute top-4 start-4 sm:top-5 sm:start-5 min-h-[44px] min-w-[44px] p-2.5 rounded-2xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 flex items-center justify-center"
+          className="absolute top-4 start-4 sm:top-5 sm:start-5 min-h-[44px] min-w-[44px] p-2.5 rounded-2xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 flex items-center justify-center"
           aria-label="إغلاق"
         >
           <X className="w-5 h-5" />
@@ -190,19 +190,19 @@ export const LeadModal: React.FC<LeadModalProps> = ({
           <div className="space-y-5">
             {/* Modal Header with Official Logo */}
             <div className="text-center space-y-2 pt-2">
-              <div className="w-16 h-16 rounded-2xl bg-white p-1 flex items-center justify-center mx-auto shadow-md border border-slate-100/90 ring-4 ring-emerald-500/10">
+              <div className="h-16 flex items-center justify-center mx-auto">
                 <img
-                  src="/logo.png"
-                  alt="شعار جودة للدراسة في ماليزيا"
-                  className="w-full h-full object-contain"
+                  src="/thiqa-logo.png"
+                  alt="THIQA UNI — Your Global Education Partner"
+                  className="max-h-full w-auto object-contain"
                 />
               </div>
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+              <h3 className="text-xl sm:text-2xl font-black text-[#0F254B] tracking-tight">
                 ابدأ رحلتك الأكاديمية مع{" "}
-                <span className="text-gradient-emerald">جَـوْدَة</span>
+                <span className="text-[#F59E0B]">THIQA UNI</span>
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed font-medium max-w-xs mx-auto">
-                سجل بياناتك لدراسة ملفك واقتراح أنسب التخصصات والجامعات مجاناً.
+                سجل بياناتك لتقييم مؤهلاتك واقتراح أفضل البرامج والجامعات مجاناً.
               </p>
             </div>
 
@@ -446,20 +446,20 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="أي تفاصيل عن معدلك أو ميزانيتك أو تفضيلاتك..."
-                  className="w-full px-4 py-2 min-h-[44px] rounded-xl bg-slate-50 border border-slate-200 text-sm sm:text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 resize-none"
+                  className="w-full px-4 py-2 min-h-[44px] rounded-xl bg-slate-50 border border-slate-200 text-sm sm:text-base text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 resize-none"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center gap-2.5 py-4 min-h-[48px] rounded-2xl text-sm font-bold bg-gradient-to-l from-emerald-600 via-emerald-500 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500 shadow-lg shadow-emerald-600/25 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
+                className="w-full flex items-center justify-center gap-2.5 py-4 min-h-[48px] rounded-xl text-sm font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-lg shadow-amber-500/25 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
               >
                 {loading ? (
                   <span>جاري التحقق والإرسال...</span>
                 ) : (
                   <>
-                    <span>إرسال طلب التسجيل والتواصل الفوري</span>
+                    <span>إرسال طلب التقديم والتواصل الفوري</span>
                     <Send className="w-4 h-4" />
                   </>
                 )}
@@ -468,18 +468,18 @@ export const LeadModal: React.FC<LeadModalProps> = ({
           </div>
         ) : (
           <div className="text-center py-6 space-y-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto ring-8 ring-emerald-50">
+            <div className="w-16 h-16 rounded-full bg-amber-100 text-[#D97706] flex items-center justify-center mx-auto ring-8 ring-amber-50">
               <CheckCircle2 className="w-10 h-10" />
             </div>
 
-            <h3 className="text-2xl font-black text-slate-900">
+            <h3 className="text-2xl font-black text-[#0F254B]">
               تم تحويلك للواتساب بنجاح!
             </h3>
 
             <p className="text-xs text-slate-600 leading-relaxed max-w-sm mx-auto font-medium">
               شكراً لك يا{" "}
               <span className="font-bold text-slate-900">{name}</span>. تم فتح
-              تطبيق الواتساب لتتمكن من إرسال تفاصيلك مباشرة إلى مستشار جودة
+              تطبيق الواتساب لتتمكن من إرسال تفاصيلك مباشرة إلى مستشار THIQA UNI
               المعتمد.
             </p>
 

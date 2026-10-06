@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { ArrowLeft, Clock, Compass, CheckCircle2 } from "lucide-react";
+import { DISCOVER_TO_APPLY_STEPS } from "../data/thiqaData";
+import { ArrowLeft, CheckCircle2, Compass, Sparkles, ShieldCheck, FileCheck, PlaneTakeoff, Search } from "lucide-react";
 
 interface StudentJourneyVisualProps {
   onOpenLeadModal: (source?: string) => void;
@@ -8,129 +9,119 @@ interface StudentJourneyVisualProps {
 export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
   onOpenLeadModal,
 }) => {
-  const [activeStage, setActiveStage] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
 
-  const stages = [
-    {
-      num: "01",
-      title: "الاستشارة والتقييم",
-      time: "1 - 2 يوم",
-      role: "ندرس ملفك ومعدلك ونحدد معك أفضل المسارات الأكاديمية مجاناً.",
-      highlight: "مجاناً 100%",
-    },
-    {
-      num: "02",
-      title: "تجهيز الملف والتقديم",
-      time: "2 - 5 أيام",
-      role: "نجهّز أوراقك ونترجمها ونقدّم طلبك مباشرة للجامعة المعتمدة.",
-      highlight: "تدقيق سريع",
-    },
-    {
-      num: "03",
-      title: "استلام القبول الرسمي",
-      time: "3 - 7 أيام",
-      role: "تحصل على خطاب القبول الرسمي المعتمد (Offer Letter) ومراجعة شروطه.",
-      highlight: "قبول رسمي",
-    },
-    {
-      num: "04",
-      title: "إجراءات التأشيرة EMGS",
-      time: "3 - 5 أسابيع",
-      role: "نتابع ملفك مع هيئة EMGS حتى صدور موافقة الدخول الرسمية (VAL).",
-      highlight: "متابعة دقيقة",
-    },
-    {
-      num: "05",
-      title: "الوصول والاستقرار",
-      time: "يوم الوصول",
-      role: "نستقبلك في المطار ونوفر السكن ونرافقك للفحص الطبي وبدء دراستك.",
-      highlight: "مرافقة شاملة",
-    },
-  ];
+  const stepIcons = [Search, Compass, FileCheck, PlaneTakeoff];
 
   return (
     <section
       id="journey"
-      className="py-14 sm:py-20 lg:py-28 bg-white relative border-t border-slate-200/80"
+      className="py-16 sm:py-24 bg-white relative border-t border-slate-200/80"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-900 text-xs font-bold shadow-xs">
-            <Compass className="w-3.5 h-3.5 text-blue-600" />
-            <span>خريطة الطريق المباشرة</span>
+        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
+            <Compass className="w-3.5 h-3.5 text-[#F59E0B]" />
+            <span>THE 4-STAGE EXPERIENCE</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight text-balance">
-            مسار الطالب مع جَـوْدَة:{" "}
-            <span className="text-gradient-emerald">
-              خطوة بخطوة حتى الحرم الجامعي
-            </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
+            رحلة الطالب مع THIQA UNI: من الاكتشاف حتى الوصول
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-medium">
-            انقر على أي مرحلة لاستكشاف المهام والمدة الزمنية المتوقعة لها.
+          <p className="text-sm sm:text-base text-[#64748B] leading-relaxed font-medium">
+            Discover → Compare → Choose → Apply. خطوات واضحة ومدروسة تضمن لك قبولاً رسمياً وتأشيرة دراسية دون أي ارتباك.
           </p>
         </div>
 
-        {/* Roadmap Stepper Pills */}
-        <div className="flex overflow-x-auto gap-2.5 pb-2.5 sm:grid sm:grid-cols-5 sm:gap-3 snap-x snap-mandatory mb-8 scrollbar-none">
-          {stages.map((st, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActiveStage(idx)}
-              className={`p-3.5 min-h-[52px] shrink-0 w-32 sm:w-auto snap-start rounded-2xl border text-center transition-all duration-300 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 ${
-                activeStage === idx
-                  ? "bg-emerald-600 text-white border-emerald-600 shadow-lg shadow-emerald-600/25 font-bold sm:scale-105"
-                  : "bg-slate-50 text-slate-700 border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/40"
-              }`}
-            >
-              <div className="text-[11px] font-sans opacity-85 font-black">
-                {st.num}
-              </div>
-              <div className="text-xs font-bold mt-0.5 whitespace-nowrap">
-                {st.title}
-              </div>
-            </button>
-          ))}
+        {/* 4 Steps Interactive Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {DISCOVER_TO_APPLY_STEPS.map((step, idx) => {
+            const Icon = stepIcons[idx] || Compass;
+            const isSelected = activeStep === idx;
+            return (
+              <button
+                key={idx}
+                onClick={() => setActiveStep(idx)}
+                className={`p-5 rounded-2xl border text-start transition-all duration-300 cursor-pointer flex flex-col justify-between ${
+                  isSelected
+                    ? "bg-[#0F254B] text-white border-[#0F254B] shadow-xl sm:-translate-y-1"
+                    : "bg-[#F8FAFC] text-slate-800 border-slate-200 hover:border-[#F59E0B]/50 hover:bg-white"
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span
+                      className={`text-xs font-black font-sans px-2.5 py-1 rounded-lg ${
+                        isSelected ? "bg-white/10 text-[#F59E0B]" : "bg-slate-200/60 text-slate-700"
+                      }`}
+                    >
+                      STEP {step.number}
+                    </span>
+                    <Icon className={`w-5 h-5 ${isSelected ? "text-[#F59E0B]" : "text-[#0F254B]"}`} />
+                  </div>
+
+                  <span
+                    className={`text-[11px] font-sans font-bold uppercase tracking-wider block mb-1 ${
+                      isSelected ? "text-amber-400" : "text-[#D97706]"
+                    }`}
+                  >
+                    {step.phase}
+                  </span>
+                  <h3 className="text-base font-bold mb-2">{step.titleAr}</h3>
+                </div>
+
+                <div
+                  className={`text-[11px] font-bold mt-4 pt-3 border-t ${
+                    isSelected ? "border-white/15 text-slate-200" : "border-slate-200 text-[#0F254B]"
+                  }`}
+                >
+                  {step.badge}
+                </div>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Active Stage Spotlight Card */}
-        <div className="rounded-3xl bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 border border-slate-200/90 p-5 sm:p-8 lg:p-10 shadow-xl relative overflow-hidden">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-3.5 text-center md:text-start">
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
-                <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-200">
-                  المرحلة {stages[activeStage].num}
-                </span>
-                <span className="text-xs text-slate-600 font-medium flex items-center gap-1 bg-white px-3 py-1 rounded-full border border-slate-200/70">
-                  <Clock className="w-3.5 h-3.5 text-amber-600" />
-                  <span>المدة التقديرية: {stages[activeStage].time}</span>
-                </span>
-                <span className="text-xs text-emerald-800 font-bold bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/70 flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>{stages[activeStage].highlight}</span>
-                </span>
+        {/* Active Stage Detailed Spotlight Box */}
+        <div className="rounded-3xl bg-[#F8FAFC] border border-slate-200 p-6 sm:p-10 shadow-sm relative overflow-hidden">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="space-y-4 max-w-2xl text-center md:text-start">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0F254B]/10 text-[#0F254B] text-xs font-bold">
+                <Sparkles className="w-4 h-4 text-[#F59E0B]" />
+                <span>المرحلة {DISCOVER_TO_APPLY_STEPS[activeStep].number}: {DISCOVER_TO_APPLY_STEPS[activeStep].phase}</span>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900">
-                {stages[activeStage].title}
+              <h3 className="text-xl sm:text-2xl font-black text-[#0F254B]">
+                {DISCOVER_TO_APPLY_STEPS[activeStep].titleAr}
               </h3>
 
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl font-medium">
-                {stages[activeStage].role}
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-medium">
+                {DISCOVER_TO_APPLY_STEPS[activeStep].desc}
               </p>
+
+              <div className="pt-2 flex flex-wrap gap-4 justify-center md:justify-start text-xs font-bold text-slate-700">
+                <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
+                  <CheckCircle2 className="w-4 h-4 text-[#F59E0B]" />
+                  <span>تنسيق ومتابعة معتمدة 100%</span>
+                </span>
+                <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
+                  <ShieldCheck className="w-4 h-4 text-[#0F254B]" />
+                  <span>مرافقة شاملة حتى دخول الحرم الجامعي</span>
+                </span>
+              </div>
             </div>
 
-            <button
-              onClick={() =>
-                onOpenLeadModal(`journey_stage_${stages[activeStage].num}`)
-              }
-              className="shrink-0 flex items-center justify-center gap-2.5 w-full sm:w-auto px-7 py-4 min-h-[48px] rounded-2xl text-sm font-bold bg-gradient-to-l from-emerald-600 to-teal-600 text-white hover:from-emerald-500 hover:to-teal-500 transition-all duration-200 shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:-translate-y-0.5 cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
-            >
-              <span>ابدأ هذه المرحلة الآن</span>
-              <ArrowLeft className="w-4 h-4" />
-            </button>
+            <div className="shrink-0 w-full md:w-auto">
+              <button
+                onClick={() => onOpenLeadModal(`journey_step_${activeStep + 1}`)}
+                className="w-full md:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl text-sm font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-lg shadow-amber-500/25 transition-all cursor-pointer whitespace-nowrap"
+              >
+                <span>ابدأ هذه الخطوة الآن مع THIQA UNI</span>
+                <ArrowLeft className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

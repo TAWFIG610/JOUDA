@@ -15,6 +15,24 @@ export interface PartnerUniversity {
   logoBg: string;
   logoUrl?: string;
   popularFields: string[];
+  type?: "حكومية" | "خاصة" | "دولية فرع";
+  annualTuitionUSD?: string;
+  nextAdmissionIntakes?: string[];
+  scholarshipAvailable?: string;
+  worldRank?: number;
+}
+
+export interface UniversityProgram {
+  id: string;
+  nameAr: string;
+  nameEn: string;
+  category: "ai_tech" | "engineering" | "business" | "health" | "arts";
+  level: "بكالوريوس" | "ماجستير" | "دكتوراه" | "سنة تحضيرية";
+  durationYears: string;
+  careerRoles: string[];
+  intakes: string;
+  avgTuitionAnnual: string;
+  popularUniversities: string[];
 }
 
 export interface Testimonial {
@@ -33,3 +51,4 @@ export interface FAQItem {
   q: string;
   a: string;
 }
+
