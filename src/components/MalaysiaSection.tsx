@@ -29,33 +29,33 @@ export const MalaysiaSection: React.FC<MalaysiaSectionProps> = ({
   return (
     <section
       id="why-malaysia"
-      className="py-16 sm:py-24 bg-white relative border-t border-slate-200/80"
+      className="py-10 sm:py-20 lg:py-24 bg-white relative border-t border-slate-200/80"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
+        <div className="text-center space-y-2.5 sm:space-y-3.5 max-w-3xl mx-auto mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-2xs">
             <Globe className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span>وجهة دراسية عالمية رائدة</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
+          <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
             لماذا تعد ماليزيا الوجهة الأذكى للطلاب الدوليين؟
           </h2>
 
-          <p className="text-sm sm:text-base text-[#64748B] leading-relaxed font-medium">
+          <p className="text-xs sm:text-base text-[#64748B] leading-relaxed font-medium">
             تجمع بين قوة التصنيف الأكاديمي العالمي، الرسوم الميسرة، ونمط الحياة الحديث الآمن.
           </p>
         </div>
 
         {/* 3 Metric Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {STAT_CARDS.map((card, idx) => {
             const Icon = card.icon;
             return (
               <div
                 key={idx}
-                className="rounded-2xl p-6 sm:p-8 bg-[#F8FAFC] border border-slate-200/90 hover:border-[#F59E0B]/50 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 space-y-4 group"
+                className="rounded-2xl p-5 sm:p-8 bg-[#F8FAFC] border border-slate-200/90 hover:border-[#F59E0B]/50 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 space-y-3 sm:space-y-4 group"
               >
                 <div className="w-12 h-12 rounded-xl bg-[#0F254B]/5 text-[#0F254B] group-hover:bg-[#0F254B] group-hover:text-white transition-colors flex items-center justify-center">
                   <Icon className="w-6 h-6" />

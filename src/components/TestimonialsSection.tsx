@@ -6,31 +6,31 @@ export const TestimonialsSection: React.FC = () => {
   return (
     <section
       id="testimonials"
-      className="py-16 sm:py-24 bg-[#F8FAFC] relative border-t border-slate-200"
+      className="py-10 sm:py-20 lg:py-24 bg-[#F8FAFC] relative border-t border-slate-200"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
+        <div className="text-center space-y-2.5 sm:space-y-3.5 max-w-3xl mx-auto mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-2xs">
             <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-amber-500" />
             <span>قصص نجاح طلابنا الحقيقية</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight">
+          <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight">
             تجارب حقيقية لطلابنا المقبولين عبر ثقة يوني
           </h2>
 
-          <p className="text-sm sm:text-base text-[#64748B] leading-relaxed">
+          <p className="text-xs sm:text-base text-[#64748B] leading-relaxed">
             قصص نجاح واقعية لطلاب انطلقوا من مختلف الدول العربية وبدأوا دراستهم في جامعاتهم المفضلة باطمئنان.
           </p>
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {TESTIMONIALS.map((t) => (
             <div
               key={t.id}
-              className="p-6 rounded-2xl bg-white border border-slate-200 hover:border-[#F59E0B]/50 hover:shadow-lg transition-all duration-300 space-y-4 flex flex-col justify-between"
+              className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 hover:border-[#F59E0B]/50 hover:shadow-lg transition-all duration-300 space-y-3 sm:space-y-4 flex flex-col justify-between"
             >
               <div className="space-y-3">
                 {/* Rating stars */}

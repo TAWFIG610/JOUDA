@@ -17,21 +17,21 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
   return (
     <section
       id="faq"
-      className="py-16 sm:py-24 bg-white relative border-t border-slate-200/80"
+      className="py-10 sm:py-20 lg:py-24 bg-white relative border-t border-slate-200/80"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-3.5 mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
+        <div className="text-center space-y-2.5 sm:space-y-3.5 mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-2xs">
             <HelpCircle className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span>إجابات واضحة وموثوقة</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
+          <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
             الأسئلة الأكثر شيوعاً واستفساراً
           </h2>
 
-          <p className="text-sm sm:text-base text-[#64748B] leading-relaxed font-medium">
+          <p className="text-xs sm:text-base text-[#64748B] leading-relaxed font-medium">
             كل ما يهمك معرفته حول شروط القبول، التكاليف المالية، وإجراءات تأشيرة الطالب الدولية.
           </p>
         </div>

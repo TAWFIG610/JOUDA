@@ -45,27 +45,27 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   return (
     <section
       id="services"
-      className="py-16 sm:py-24 bg-[#F8FAFC] relative border-t border-slate-200/80"
+      className="py-10 sm:py-20 lg:py-24 bg-[#F8FAFC] relative border-t border-slate-200/80"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
+        <div className="text-center space-y-2.5 sm:space-y-3.5 max-w-3xl mx-auto mb-8 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-2xs">
             <Briefcase className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span>خدمات طلابية متكاملة</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
+          <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
             خدمات متكاملة تغطي كافة متطلبات دراستك
           </h2>
 
-          <p className="text-sm sm:text-base text-[#64748B] leading-relaxed font-medium">
+          <p className="text-xs sm:text-base text-[#64748B] leading-relaxed font-medium">
             من تجهيز الأوراق الأكاديمية حتى الاستقرار الكامل في الحرم الجامعي، نقدم حلولاً احترافية بمعايير عالمية.
           </p>
         </div>
 
         {/* 4 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {services.map((item, idx) => {
             const Icon = item.icon;
             return (
