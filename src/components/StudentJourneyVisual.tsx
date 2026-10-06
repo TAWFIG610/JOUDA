@@ -35,8 +35,35 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
           </p>
         </div>
 
-        {/* 4 Steps Interactive Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        {/* Mobile Horizontal Pill Selector (< sm) */}
+        <div className="flex sm:hidden overflow-x-auto gap-2 pb-3 mb-4 no-scrollbar -mx-4 px-4">
+          {DISCOVER_TO_APPLY_STEPS.map((step, idx) => {
+            const isSelected = activeStep === idx;
+            return (
+              <button
+                key={`mobile-tab-${idx}`}
+                onClick={() => setActiveStep(idx)}
+                className={`flex-none inline-flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                  isSelected
+                    ? "bg-[#0F254B] text-white border-[#0F254B] shadow-xs"
+                    : "bg-[#F8FAFC] text-slate-700 border-slate-200"
+                }`}
+              >
+                <span
+                  className={`w-5 h-5 rounded-md flex items-center justify-center text-[10px] font-black ${
+                    isSelected ? "bg-amber-400 text-[#0F254B]" : "bg-slate-200 text-slate-700"
+                  }`}
+                >
+                  {step.number}
+                </span>
+                <span>{step.phase}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Desktop / Tablet Cards Grid (>= sm) */}
+        <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {DISCOVER_TO_APPLY_STEPS.map((step, idx) => {
             const Icon = stepIcons[idx] || Compass;
             const isSelected = activeStep === idx;

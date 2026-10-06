@@ -90,21 +90,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile Menu Toggle */}
           <div className="lg:hidden flex items-center gap-2 shrink-0">
             <button
-              onClick={() => onOpenLeadModal("mobile_nav_quick")}
-              className="sm:hidden px-3.5 py-2 min-h-[44px] rounded-xl text-xs font-bold bg-[#F59E0B] text-white shadow-xs cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
-            >
-              قدّم الآن
-            </button>
-
-            <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl text-slate-700 hover:text-slate-900 bg-slate-100 border border-slate-200 focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+              className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl text-slate-700 hover:text-slate-900 bg-slate-100/80 hover:bg-slate-200/80 border border-slate-200 focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 transition-colors"
               aria-label="القائمة الرئيسية"
             >
               {mobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
               )}
             </button>
           </div>

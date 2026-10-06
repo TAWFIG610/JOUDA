@@ -49,18 +49,31 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({
             {COMPARISON_ROWS.map((row, idx) => (
               <div
                 key={idx}
-                className="grid grid-cols-1 lg:grid-cols-12 p-4 sm:p-6 gap-3.5 sm:gap-4 items-center hover:bg-slate-50 transition-colors"
+                className="p-4 sm:p-6 space-y-3 lg:space-y-0 lg:grid lg:grid-cols-12 lg:gap-4 items-center hover:bg-slate-50/80 transition-colors"
               >
-                <div className="lg:col-span-4 font-bold text-sm sm:text-base text-[#0F172A]">
-                  {row.feature}
+                <div className="lg:col-span-4 font-black text-sm sm:text-base text-[#0F172A] flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#D97706] lg:hidden"></span>
+                  <span>{row.feature}</span>
                 </div>
-                <div className="lg:col-span-4 flex items-start gap-2.5 text-xs sm:text-sm text-rose-800 bg-rose-50/70 p-3.5 rounded-xl border border-rose-100">
-                  <XCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
-                  <span>{row.traditional}</span>
-                </div>
-                <div className="lg:col-span-4 flex items-start gap-2.5 text-xs sm:text-sm text-[#0F254B] bg-amber-500/10 p-3.5 rounded-xl border border-amber-500/20 font-bold shadow-xs">
-                  <CheckCircle2 className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5" />
-                  <span>{row.thiqa}</span>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-2 gap-2.5 sm:gap-4">
+                  {/* Traditional */}
+                  <div className="flex items-start gap-2.5 text-xs sm:text-sm text-rose-800 bg-rose-50/70 p-3 sm:p-3.5 rounded-xl border border-rose-100">
+                    <XCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+                    <div>
+                      <span className="block text-[10px] font-bold text-rose-600 lg:hidden mb-0.5">الوسطاء التجاريون:</span>
+                      <span className="font-medium">{row.traditional}</span>
+                    </div>
+                  </div>
+
+                  {/* Thiqa Uni */}
+                  <div className="flex items-start gap-2.5 text-xs sm:text-sm text-[#0F254B] bg-amber-500/10 p-3 sm:p-3.5 rounded-xl border border-amber-500/25 font-bold shadow-2xs">
+                    <CheckCircle2 className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5" />
+                    <div>
+                      <span className="block text-[10px] font-bold text-[#D97706] lg:hidden mb-0.5">ثقة يوني المعتمدة:</span>
+                      <span>{row.thiqa}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}

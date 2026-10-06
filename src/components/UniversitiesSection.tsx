@@ -41,15 +41,15 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
       </div>
 
       {/* Row 1: Forward Marquee */}
-      <div className="relative w-full overflow-hidden py-3">
-        <div className="animate-marquee-rtl flex items-center gap-5 hover:[animation-play-state:paused]">
+      <div className="relative w-full overflow-hidden py-2 sm:py-3">
+        <div className="animate-marquee-rtl flex items-center gap-3 sm:gap-5 hover:[animation-play-state:paused]">
           {list1.map((uni, idx) => (
             <div
               key={`${uni.id}-row1-${idx}`}
-              className="w-56 sm:w-64 shrink-0 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col items-center gap-3 text-center cursor-pointer hover:border-[#F59E0B]/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+              className="w-44 sm:w-60 shrink-0 p-3 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs flex flex-col items-center gap-2.5 text-center cursor-pointer hover:border-[#F59E0B]/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
               onClick={() => onOpenLeadModal(`university_${uni.id}`)}
             >
-              <div className="w-full h-16 sm:h-18 rounded-xl bg-[#F8FAFC] border border-slate-100 flex items-center justify-center p-2.5 group-hover:bg-white transition-colors">
+              <div className="w-full h-14 sm:h-18 rounded-xl bg-[#F8FAFC] border border-slate-100 flex items-center justify-center p-2 group-hover:bg-white transition-colors">
                 {uni.logoUrl ? (
                   <img
                     src={uni.logoUrl}
@@ -62,8 +62,8 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
                 )}
               </div>
 
-              <div className="w-full text-center space-y-1">
-                <span className="text-[11px] font-bold text-[#D97706] block">
+              <div className="w-full text-center space-y-0.5">
+                <span className="text-[10px] sm:text-[11px] font-bold text-[#D97706] block">
                   {uni.ranking}
                 </span>
                 <p
@@ -79,15 +79,15 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
       </div>
 
       {/* Row 2: Reverse Marquee */}
-      <div className="relative w-full overflow-hidden py-3 mt-2">
-        <div className="animate-marquee-reverse-rtl flex items-center gap-5 hover:[animation-play-state:paused]">
+      <div className="relative w-full overflow-hidden py-2 sm:py-3 mt-1 sm:mt-2">
+        <div className="animate-marquee-reverse-rtl flex items-center gap-3 sm:gap-5 hover:[animation-play-state:paused]">
           {list2.map((uni, idx) => (
             <div
               key={`${uni.id}-row2-${idx}`}
-              className="w-56 sm:w-64 shrink-0 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm flex flex-col items-center gap-3 text-center cursor-pointer hover:border-[#F59E0B]/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+              className="w-44 sm:w-60 shrink-0 p-3 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs flex flex-col items-center gap-2.5 text-center cursor-pointer hover:border-[#F59E0B]/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
               onClick={() => onOpenLeadModal(`university_${uni.id}`)}
             >
-              <div className="w-full h-16 sm:h-18 rounded-xl bg-[#F8FAFC] border border-slate-100 flex items-center justify-center p-2.5 group-hover:bg-white transition-colors">
+              <div className="w-full h-14 sm:h-18 rounded-xl bg-[#F8FAFC] border border-slate-100 flex items-center justify-center p-2 group-hover:bg-white transition-colors">
                 {uni.logoUrl ? (
                   <img
                     src={uni.logoUrl}
@@ -100,8 +100,8 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
                 )}
               </div>
 
-              <div className="w-full text-center space-y-1">
-                <span className="text-[11px] font-bold text-[#D97706] block">
+              <div className="w-full text-center space-y-0.5">
+                <span className="text-[10px] sm:text-[11px] font-bold text-[#D97706] block">
                   {uni.ranking}
                 </span>
                 <p

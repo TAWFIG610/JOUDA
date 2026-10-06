@@ -39,9 +39,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
   };
 
   return (
-    <footer className="bg-[#0F254B] text-white pt-16 pb-10 border-t border-slate-800 relative overflow-hidden">
+    <footer className="bg-[#0F254B] text-white pt-10 sm:pt-16 pb-8 sm:pb-10 border-t border-slate-800 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-10 pb-8 sm:pb-12 border-b border-white/10">
           {/* Brand Column */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
