@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, Compass, Sparkles, ArrowLeft } from "lucide-react";
+import { X, Compass, ArrowLeft } from "lucide-react";
 
 interface PathwayAdvisorModalProps {
   isOpen: boolean;
@@ -37,9 +37,9 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
 
         <div className="space-y-6 mt-4 sm:mt-0">
           <div className="text-center space-y-1">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0F254B]/5 text-[#0F254B] text-xs font-bold border border-[#0F254B]/15">
-              <Compass className="w-3.5 h-3.5 text-[#F59E0B]" />
-              <span>مستشار THIQA UNI الذكي • خطوة {step} من 3</span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#0F254B]/5 text-[#0F254B] text-xs font-bold border border-[#0F254B]/10">
+              <Compass className="w-3.5 h-3.5 text-[#D97706]" />
+              <span>مستشار التوجيه الأكاديمي • خطوة {step} من 3</span>
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-[#0F254B]">
               حدد أهدافك وسنقترح لك المسار المعتمد الأنسب
@@ -142,10 +142,10 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
                 </button>
                 <button
                   onClick={handleFinish}
-                  className="w-2/3 min-h-[44px] py-3 rounded-xl text-xs font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2 shadow-md"
+                  className="w-2/3 min-h-[44px] py-3 rounded-xl text-xs font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2 shadow-sm"
                 >
-                  <Sparkles className="w-4 h-4" />
                   <span>تأكيد ومطابقة المسار</span>
+                  <ArrowLeft className="w-4 h-4" />
                 </button>
               </div>
             </div>

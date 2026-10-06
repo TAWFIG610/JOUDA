@@ -21,9 +21,6 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
       id="universities"
       className="py-14 sm:py-20 lg:py-24 bg-[#F8FAFC] relative overflow-hidden border-y border-slate-200/80"
     >
-      {/* Ambient background glows */}
-      <div className="absolute top-1/2 start-10 -translate-y-1/2 w-80 h-80 bg-[#0F254B]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 end-10 -translate-y-1/2 w-80 h-80 bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-8 sm:mb-12">
         {/* Section Header */}

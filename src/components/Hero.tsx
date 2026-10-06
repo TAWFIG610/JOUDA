@@ -6,7 +6,6 @@ import {
   ShieldCheck,
   PhoneCall,
   GraduationCap,
-  Sparkles,
 } from "lucide-react";
 
 interface HeroProps {
@@ -23,26 +22,22 @@ export const Hero: React.FC<HeroProps> = ({
   return (
     <section
       id="hero"
-      className="relative min-h-[92vh] flex items-center pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden bg-gradient-to-b from-[#0F254B]/5 via-[#F8FAFC] to-white"
+      className="relative min-h-[90vh] flex items-center pt-28 pb-16 sm:pt-36 sm:pb-24 bg-white border-b border-slate-200/80"
     >
-      {/* Background ambient lighting - Navy & Gold luxury glow */}
-      <div className="absolute top-12 start-1/2 -translate-x-1/2 w-[350px] h-[350px] sm:w-[650px] sm:h-[650px] bg-[#0F254B]/8 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 end-4 w-[280px] h-[280px] sm:w-[500px] sm:h-[500px] bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Main Copywriting Column */}
           <div className="lg:col-span-7 space-y-6 text-center lg:text-start">
             {/* Top Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0F254B]/10 border border-[#0F254B]/20 text-[#0F254B] text-xs font-bold shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-[#F59E0B] animate-pulse" />
-              <span className="tracking-wider uppercase font-sans text-[11px] font-extrabold text-[#0F254B]">{BRAND_MOTTO}</span>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#D97706]" />
+              <span className="tracking-wider uppercase font-sans text-[11px] font-bold text-[#0F254B]">{BRAND_MOTTO}</span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#0F254B] leading-[1.18] tracking-tight text-balance">
               بوابتك المعتمدة للتعليم العالي الدولي مع{" "}
-              <span className="text-[#F59E0B] underline decoration-[#0F254B]/20 decoration-wavy decoration-2 underline-offset-8">
+              <span className="text-[#D97706]">
                 THIQA UNI
               </span>
             </h1>
@@ -57,55 +52,51 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <button
                 onClick={() => onOpenLeadModal("hero_primary")}
-                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 min-h-[48px] rounded-2xl text-base font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-xl shadow-amber-500/25 hover:shadow-2xl hover:shadow-amber-500/35 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 min-h-[48px] rounded-xl text-base font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
               >
-                <Sparkles className="w-5 h-5 text-white" />
                 <span>قدّم طلب قبولك الآن</span>
                 <ArrowLeft className="w-5 h-5" />
               </button>
 
               <button
                 onClick={onOpenAdvisorModal}
-                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-4 min-h-[48px] rounded-2xl text-base font-bold text-[#0F254B] bg-white hover:bg-slate-50 border border-slate-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-7 py-4 min-h-[48px] rounded-xl text-base font-bold text-[#0F254B] bg-[#F8FAFC] hover:bg-slate-100 border border-slate-300 shadow-2xs hover:shadow-sm transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
               >
-                <GraduationCap className="w-5 h-5 text-[#F59E0B]" />
+                <GraduationCap className="w-5 h-5 text-[#0F254B]" />
                 <span>مستشار التخصص والجامعة</span>
               </button>
             </div>
 
             {/* Trust highlights with refined styling */}
             <div className="pt-3 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2.5 text-xs text-slate-700 font-bold">
-              <div className="inline-flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-xs">
-                <CheckCircle2 className="w-4 h-4 text-[#F59E0B]" />
+              <div className="inline-flex items-center gap-1.5 bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-slate-200">
+                <CheckCircle2 className="w-4 h-4 text-[#D97706]" />
                 <span>استشارة وتقييم أكاديمي 0$</span>
               </div>
-              <div className="inline-flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-xs">
+              <div className="inline-flex items-center gap-1.5 bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-[#0F254B]" />
                 <span>تمثيل جامعي رسمي ومعتمد</span>
               </div>
-              <div className="inline-flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-xs">
+              <div className="inline-flex items-center gap-1.5 bg-[#F8FAFC] px-3 py-1.5 rounded-lg border border-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-[#D97706]" />
                 <span>متابعة تأشيرة EMGS 100%</span>
               </div>
             </div>
           </div>
 
-          {/* Interactive Hero Visual / Advisor Card */}
+          {/* Institutional Advisor Card */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl bg-white/95 backdrop-blur-md border border-slate-200/90 p-5 sm:p-7 shadow-2xl space-y-6">
+            <div className="rounded-2xl bg-[#F8FAFC] border border-slate-200 p-5 sm:p-7 shadow-sm space-y-6">
               {/* Card Header with Status */}
-              <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+              <div className="flex items-center justify-between pb-4 border-b border-slate-200">
                 <div className="flex items-center gap-2.5">
-                  <div className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-[#F59E0B]"></span>
-                  </div>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
                   <span className="text-xs sm:text-sm font-bold text-[#0F254B]">
-                    مستشار THIQA UNI الأكاديمي
+                    مكتب الاستشارات الأكاديمية المعتمد
                   </span>
                 </div>
-                <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#0F254B]/5 text-[#0F254B] border border-[#0F254B]/15">
-                  جاهز للرد 🟢
+                <span className="text-xs font-bold px-3 py-1 rounded-md bg-white text-[#0F254B] border border-slate-200">
+                  استشارة رسمية
                 </span>
               </div>
 

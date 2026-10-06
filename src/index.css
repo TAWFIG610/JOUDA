@@ -54,42 +54,6 @@
   }
 }
 
-/* THIQA UNI Subtle Ambient Lighting & Academic Mesh Gradients */
-.vibrant-mesh-hero {
-  background:
-    radial-gradient(at 10% 10%, rgba(15, 37, 75, 0.08) 0px, transparent 50%),
-    radial-gradient(at 90% 20%, rgba(245, 158, 11, 0.08) 0px, transparent 50%),
-    radial-gradient(at 50% 80%, rgba(217, 119, 6, 0.05) 0px, transparent 50%),
-    radial-gradient(at 80% 90%, rgba(15, 37, 75, 0.06) 0px, transparent 50%);
-}
-
-.text-gradient-navy {
-  background: linear-gradient(135deg, #0f254b 0%, #1e3a8a 60%, #1d4ed8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-gold {
-  background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #b45309 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Glassmorphism helpers for Clean Institutional White UI */
-.glass-card-white {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 4px 20px -2px rgba(15, 37, 75, 0.04);
-}
-
-.glass-card-white:hover {
-  border-color: rgba(245, 158, 11, 0.4);
-  box-shadow: 0 12px 30px -4px rgba(15, 37, 75, 0.08);
-  transform: translateY(-2px);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
 /* Infinite Marquee Animations (RTL Direction) */
 @keyframes marquee-rtl {

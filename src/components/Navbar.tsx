@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NAV_LINKS, WHATSAPP_BASE_URL, BRAND_NAME_EN, BRAND_TAGLINE } from "../data/thiqaData";
-import { Menu, X, ArrowLeft, Compass, MessageSquare, Sparkles } from "lucide-react";
+import { Menu, X, ArrowLeft, Compass, MessageSquare } from "lucide-react";
 
 interface NavbarProps {
   onOpenLeadModal: (source?: string) => void;
@@ -80,9 +80,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => onOpenLeadModal("navbar_primary")}
-              className="flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-md shadow-amber-500/25 hover:-translate-y-0.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 whitespace-nowrap"
+              className="flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 whitespace-nowrap"
             >
-              <Sparkles className="w-4 h-4" />
               <span>قدّم طلبك الآن</span>
               <ArrowLeft className="w-4 h-4" />
             </button>

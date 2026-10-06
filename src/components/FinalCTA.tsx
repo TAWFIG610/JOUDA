@@ -6,7 +6,6 @@ import {
   CheckCircle2,
   PhoneCall,
   ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 
 interface FinalCTAProps {
@@ -17,17 +16,12 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
   const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً فريق THIQA UNI، أود بدء التقديم واستخراج القبول الجامعي.")}`;
 
   return (
-    <section className="py-16 sm:py-24 bg-white relative overflow-hidden border-t border-slate-200">
+    <section className="py-16 sm:py-24 bg-white relative border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl bg-[#0F254B] p-8 sm:p-12 md:p-16 text-white shadow-2xl overflow-hidden border border-[#F59E0B]/30 text-center space-y-7">
-          {/* Ambient background glows */}
-          <div className="absolute -top-24 -start-24 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -end-24 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-
+        <div className="rounded-2xl bg-[#0F254B] p-8 sm:p-12 md:p-16 text-white shadow-lg border border-slate-800 text-center space-y-7">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#F59E0B] text-xs font-bold shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#F59E0B] animate-pulse" />
-            <span className="font-sans font-bold tracking-wider uppercase">{BRAND_MOTTO}</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-[#F59E0B] text-xs font-bold">
+            <span className="font-sans font-bold tracking-wider uppercase text-[11px]">{BRAND_MOTTO}</span>
           </div>
 
           {/* Heading */}
@@ -45,9 +39,8 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <button
               onClick={() => onOpenLeadModal("final_cta_primary")}
-              className="w-full sm:w-auto flex items-center justify-center gap-3 px-9 py-4 min-h-[48px] rounded-xl text-base font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-xl shadow-amber-500/25 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
+              className="w-full sm:w-auto flex items-center justify-center gap-3 px-9 py-4 min-h-[48px] rounded-xl text-base font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
             >
-              <Sparkles className="w-5 h-5" />
               <span>قدّم طلب القبول الآن مجاناً</span>
               <ArrowLeft className="w-5 h-5" />
             </button>

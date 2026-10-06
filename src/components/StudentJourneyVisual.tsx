@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DISCOVER_TO_APPLY_STEPS } from "../data/thiqaData";
-import { ArrowLeft, CheckCircle2, Compass, Sparkles, ShieldCheck, FileCheck, PlaneTakeoff, Search } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Compass, ShieldCheck, FileCheck, PlaneTakeoff, Search } from "lucide-react";
 
 interface StudentJourneyVisualProps {
   onOpenLeadModal: (source?: string) => void;
@@ -88,8 +88,8 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
         <div className="rounded-3xl bg-[#F8FAFC] border border-slate-200 p-6 sm:p-10 shadow-sm relative overflow-hidden">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="space-y-4 max-w-2xl text-center md:text-start">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0F254B]/10 text-[#0F254B] text-xs font-bold">
-                <Sparkles className="w-4 h-4 text-[#F59E0B]" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0F254B]/5 border border-[#0F254B]/10 text-[#0F254B] text-xs font-bold">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#D97706]" />
                 <span>المرحلة {DISCOVER_TO_APPLY_STEPS[activeStep].number}: {DISCOVER_TO_APPLY_STEPS[activeStep].phase}</span>
               </div>
 
