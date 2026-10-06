@@ -22,19 +22,6 @@ export interface PartnerUniversity {
   worldRank?: number;
 }
 
-export interface UniversityProgram {
-  id: string;
-  nameAr: string;
-  nameEn: string;
-  category: "ai_tech" | "engineering" | "business" | "health" | "arts";
-  level: "بكالوريوس" | "ماجستير" | "دكتوراه" | "سنة تحضيرية";
-  durationYears: string;
-  careerRoles: string[];
-  intakes: string;
-  avgTuitionAnnual: string;
-  popularUniversities: string[];
-}
-
 export interface Testimonial {
   id: string;
   name: string;
