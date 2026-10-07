@@ -49,6 +49,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                 <img
                   src="/thiqa-logo.png"
                   alt={`${BRAND_NAME_AR} — ${BRAND_TAGLINE}`}
+                  width="112"
+                  height="56"
+                  loading="lazy"
                   className="h-full w-auto object-contain"
                 />
               </div>

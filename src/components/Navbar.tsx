@@ -41,6 +41,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <img
               src="/thiqa-logo.png"
               alt="شعار ثقة يوني — الشريك الأكاديمي الدولي للتعليم العالي"
+              width="128"
+              height="64"
+              fetchPriority="high"
               className="h-12 sm:h-14 lg:h-16 w-auto object-contain transition-transform duration-200 group-hover:scale-102"
             />
           </a>
