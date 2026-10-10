@@ -56,7 +56,7 @@ export const TestimonialsSection: React.FC = () => {
                   </p>
                 </div>
                 <div className="flex items-center gap-1 text-[11px] text-[#0F254B] font-bold bg-[#0F254B]/5 px-2.5 py-1 rounded-md border border-[#0F254B]/10">
-                  <CheckCircle className="w-3 h-3 text-[#D97706]" />
+                  <CheckCircle className="w-3 h-3 text-thiqa-gold" />
                   <span>طالب معتمد</span>
                 </div>
               </div>

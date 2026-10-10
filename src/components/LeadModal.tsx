@@ -233,7 +233,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
 
               <h2 id="lead-modal-title" className="text-xl font-black tracking-tight text-[#0F254B] sm:text-2xl">
                 ابدأ رحلتك الأكاديمية مع{" "}
-                <span className="text-[#D97706]">ثقة يوني</span>
+                <span className="text-thiqa-gold">ثقة يوني</span>
               </h2>
               <p className="mx-auto max-w-md text-sm leading-relaxed text-slate-600">
                 اترك بيانات التواصل واهتماماتك الدراسية، وسنساعدك على فهم الخيارات والخطوات التالية. تختلف الشروط والرسوم حسب البرنامج والجامعة.
@@ -273,7 +273,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                   )}
                 </div>
                 <div className="text-start space-y-0.5">
-                  <span className="text-[10px] font-bold text-[#D97706] bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+                  <span className="text-[10px] font-bold text-thiqa-gold bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
                     الجامعة المحددة
                   </span>
                   <p className="text-xs font-black text-slate-900 leading-tight">
@@ -311,7 +311,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                     placeholder="مثال: عمر محمد أحمد"
                     className={`w-full px-4 py-2.5 min-h-[44px] rounded-xl bg-white border ${
                       errors.name
-                        ? "border-red-500 bg-red-50/20"
+                        ? "border-thiqa-danger bg-thiqa-danger-soft"
                         : name.trim().length >= 2
                           ? "border-[#0F254B]/40"
                           : "border-slate-200"
@@ -320,7 +320,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                     aria-describedby={errors.name ? "lead-name-error" : undefined}
                   />
                   {errors.name && (
-                    <p id="lead-name-error" className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
+                    <p id="lead-name-error" className="field-error">
                       <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                       <span>{errors.name}</span>
                     </p>
@@ -350,7 +350,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                       dir="ltr"
                       className={`w-full px-3.5 py-2.5 min-h-[44px] rounded-xl bg-white border ${
                         errors.email
-                          ? "border-red-500 bg-red-50/20"
+                          ? "border-thiqa-danger bg-thiqa-danger-soft"
                           : isEmailValid
                             ? "border-[#0F254B]/40"
                             : "border-slate-200"
@@ -359,7 +359,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                       aria-describedby={errors.email ? "lead-email-error" : undefined}
                     />
                     {errors.email && (
-                      <p id="lead-email-error" className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
+                      <p id="lead-email-error" className="field-error">
                         <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                         <span>{errors.email}</span>
                       </p>
@@ -387,7 +387,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                       dir="ltr"
                       className={`w-full px-3.5 py-2.5 min-h-[44px] rounded-xl bg-white border ${
                         errors.whatsapp
-                          ? "border-red-500 bg-red-50/20"
+                          ? "border-thiqa-danger bg-thiqa-danger-soft"
                           : isWhatsappValid
                             ? "border-[#0F254B]/40"
                             : "border-slate-200"
@@ -396,7 +396,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                       aria-describedby={errors.whatsapp ? "lead-whatsapp-error" : undefined}
                     />
                     {errors.whatsapp && (
-                      <p id="lead-whatsapp-error" className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
+                      <p id="lead-whatsapp-error" className="field-error">
                         <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                         <span>{errors.whatsapp}</span>
                       </p>
@@ -459,14 +459,14 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                     placeholder="السعودية، مصر، اليمن، الإمارات..."
                     className={`w-full px-4 py-2.5 min-h-[44px] rounded-xl bg-white border ${
                       errors.country
-                        ? "border-red-500 bg-red-50/20"
+                        ? "border-thiqa-danger bg-thiqa-danger-soft"
                         : "border-slate-200"
                     } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15`}
                     aria-invalid={Boolean(errors.country)}
                     aria-describedby={errors.country ? "lead-country-error" : undefined}
                   />
                   {errors.country && (
-                    <p id="lead-country-error" className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
+                    <p id="lead-country-error" className="field-error">
                       <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                       <span>{errors.country}</span>
                     </p>
@@ -528,14 +528,14 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                     placeholder="مثال: الأمن السيبراني، الذكاء الاصطناعي، الطب، إدارة الأعمال..."
                     className={`w-full px-4 py-2.5 min-h-[44px] rounded-xl bg-white border ${
                       errors.fieldOfInterest
-                        ? "border-red-500 bg-red-50/20"
+                        ? "border-thiqa-danger bg-thiqa-danger-soft"
                         : "border-slate-200"
                     } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15`}
                     aria-invalid={Boolean(errors.fieldOfInterest)}
                     aria-describedby={errors.fieldOfInterest ? "lead-interest-error" : undefined}
                   />
                   {errors.fieldOfInterest && (
-                    <p id="lead-interest-error" className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
+                    <p id="lead-interest-error" className="field-error">
                       <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                       <span>{errors.fieldOfInterest}</span>
                     </p>
@@ -588,14 +588,14 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
               <div className="space-y-2 pt-1">
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2.5 py-4 min-h-[50px] rounded-2xl text-base font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+                  className="w-full flex items-center justify-center gap-2.5 py-4 min-h-[50px] rounded-2xl text-base font-bold bg-thiqa-gold hover:bg-thiqa-gold-hover text-white shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
                 >
                   <span>متابعة إلى واتساب</span>
                   <ArrowLeft className="w-5 h-5" />
                 </button>
 
                 {errors.form && (
-                  <p role="alert" className="text-center text-xs font-medium text-red-700">
+                  <p role="alert" className="field-error justify-center text-center">
                     {errors.form}
                   </p>
                 )}
@@ -611,7 +611,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
           </div>
         ) : (
           <div className="text-center py-8 space-y-5">
-            <div className="w-16 h-16 rounded-2xl bg-amber-500/10 text-[#D97706] border border-amber-500/20 flex items-center justify-center mx-auto shadow-sm">
+            <div className="w-16 h-16 rounded-2xl bg-amber-500/10 text-thiqa-gold border border-amber-500/20 flex items-center justify-center mx-auto shadow-sm">
               <CheckCircle2 className="w-9 h-9" />
             </div>
 

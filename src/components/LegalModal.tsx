@@ -44,7 +44,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
         </button>
 
         <div className="flex items-center gap-3 mt-8 sm:mt-0">
-          <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-[#D97706] flex items-center justify-center">
+          <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-thiqa-gold flex items-center justify-center">
             <Shield className="w-5 h-5" />
           </div>
           <h3 className="text-lg font-bold text-[#0F254B]">{content.title}</h3>
@@ -56,7 +56,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
 
         <button
           onClick={onClose}
-          className="w-full py-3 min-h-[44px] rounded-xl text-xs font-bold bg-[#0F254B] hover:bg-[#F59E0B] text-white transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+          className="w-full py-3 min-h-[44px] rounded-xl text-xs font-bold bg-[#0F254B] hover:bg-thiqa-gold text-white transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
         >
           إغلاق
         </button>

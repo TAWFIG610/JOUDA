@@ -195,7 +195,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="text-center sm:text-start">
-            © 2026 ثقة يوني (THIQA UNI) للخدمات الأكاديمية والتعليم الدولي. جميع الحقوق محفوظة.
+            © {new Date().getFullYear()} ثقة يوني. يسعدنا أن نكون جزءاً من رحلتك الأكاديمية. جميع الحقوق محفوظة.
           </div>
 
           <div className="flex items-center gap-4">

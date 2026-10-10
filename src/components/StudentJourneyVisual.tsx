@@ -93,7 +93,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
 
                   <span
                     className={`text-[11px] font-bold block mb-1 ${
-                      isSelected ? "text-amber-400" : "text-[#D97706]"
+                      isSelected ? "text-amber-400" : "text-thiqa-gold"
                     }`}
                   >
                     {step.phase}
@@ -118,7 +118,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="space-y-4 max-w-2xl text-center md:text-start">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0F254B]/5 border border-[#0F254B]/10 text-[#0F254B] text-xs font-bold">
-                <CheckCircle2 className="w-3.5 h-3.5 text-[#D97706]" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-thiqa-gold" />
                 <span>المرحلة {DISCOVER_TO_APPLY_STEPS[activeStep].number}: {DISCOVER_TO_APPLY_STEPS[activeStep].phase}</span>
               </div>
 
@@ -145,7 +145,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
             <div className="shrink-0 w-full md:w-auto">
               <button
                 onClick={() => onOpenLeadModal(`journey_step_${activeStep + 1}`)}
-                className="flex min-h-12 w-full items-center justify-center gap-2.5 whitespace-normal rounded-xl bg-[#F59E0B] px-6 py-4 text-sm font-bold text-white shadow-md shadow-amber-500/20 transition-colors hover:bg-[#D97706] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 md:w-auto md:whitespace-nowrap"
+                className="flex min-h-12 w-full items-center justify-center gap-2.5 whitespace-normal rounded-xl bg-thiqa-gold px-6 py-4 text-sm font-bold text-white shadow-md shadow-thiqa-gold/20 transition-colors hover:bg-thiqa-gold-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 md:w-auto md:whitespace-nowrap"
               >
                 <span>ابدأ هذه الخطوة الآن مع ثقة يوني</span>
                 <ArrowLeft className="w-4 h-4" />

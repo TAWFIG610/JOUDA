@@ -24,7 +24,7 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({
 
           <h2 className="section-title">
             لماذا يختار الطلاب والآباء منظومة{" "}
-            <span className="text-[#D97706]">ثقة يوني</span>؟
+            <span className="text-thiqa-gold">ثقة يوني</span>؟
           </h2>
 
           <p className="section-description">
@@ -68,9 +68,9 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({
 
                   {/* Thiqa Uni */}
                   <div className="flex items-start gap-2.5 rounded-xl border border-amber-500/25 bg-amber-500/10 p-3 text-sm font-bold leading-relaxed text-[#0F254B] sm:p-3.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-thiqa-gold shrink-0 mt-0.5" />
                     <div>
-                      <span className="block text-[10px] font-bold text-[#D97706] lg:hidden mb-0.5">ثقة يوني:</span>
+                      <span className="block text-[10px] font-bold text-thiqa-gold lg:hidden mb-0.5">ثقة يوني:</span>
                       <span>{row.thiqa}</span>
                     </div>
                   </div>

@@ -41,7 +41,7 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
         <div className="mt-4 space-y-6 sm:mt-0">
           <div className="text-center space-y-1">
             <div className="section-eyebrow">
-              <Compass className="w-3.5 h-3.5 text-[#D97706]" />
+              <Compass className="w-3.5 h-3.5 text-thiqa-gold" />
               <span>مستشار التوجيه الأكاديمي • خطوة {step} من 3</span>
             </div>
             <h2 id="advisor-modal-title" className="text-xl font-black text-[#0F254B] sm:text-2xl">
@@ -155,7 +155,7 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
                 </button>
                 <button
                   onClick={handleFinish}
-                  className="w-2/3 min-h-[44px] py-3 rounded-xl text-xs font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2 shadow-sm"
+                  className="w-2/3 min-h-[44px] py-3 rounded-xl text-xs font-bold bg-thiqa-gold hover:bg-thiqa-gold-hover text-white transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2 shadow-sm"
                 >
                   <span>مشاركة اختياراتي مع المستشار</span>
                   <ArrowLeft className="w-4 h-4" />

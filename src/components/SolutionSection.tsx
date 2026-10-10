@@ -68,7 +68,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({
                     <div className="w-12 h-12 rounded-xl bg-[#0F254B]/5 text-[#0F254B] group-hover:bg-[#0F254B] group-hover:text-white transition-colors flex items-center justify-center">
                       <Icon className="h-6 w-6" aria-hidden="true" />
                     </div>
-                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-amber-50 text-[#D97706] border border-amber-200">
+                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-amber-50 text-thiqa-gold border border-amber-200">
                       {b.badge}
                     </span>
                   </div>
@@ -90,7 +90,7 @@ export const SolutionSection: React.FC<SolutionSectionProps> = ({
         <div className="text-center">
           <button
             onClick={() => onOpenLeadModal("solution_section_cta")}
-            className="inline-flex min-h-12 items-center gap-2.5 rounded-xl bg-[#F59E0B] px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-amber-500/25 transition-all hover:bg-[#D97706] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+            className="inline-flex min-h-12 items-center gap-2.5 rounded-xl bg-thiqa-gold px-8 py-3.5 text-sm font-bold text-white shadow-md shadow-thiqa-gold/20 transition-all hover:bg-thiqa-gold-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
           >
             <span>ابدأ الآن بتأمين قبولك الجامعي</span>
             <ArrowLeft className="w-4 h-4" />

@@ -22,14 +22,14 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="text-center lg:text-start space-y-6 sm:space-y-7">
         {/* Top Focused Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs sm:text-sm font-bold shadow-2xs">
-          <ShieldCheck className="w-4 h-4 text-[#D97706]" />
+          <ShieldCheck className="w-4 h-4 text-thiqa-gold" />
           <span>إرشاد أكاديمي للطلاب الراغبين بالدراسة في ماليزيا</span>
         </div>
 
         {/* Big Bold Headline */}
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#0F254B] leading-[1.2] tracking-tight max-w-3xl mx-auto lg:mx-0 text-balance">
           خطوتك للدراسة في ماليزيا{" "}
-          <span className="text-[#D97706] block">
+          <span className="text-thiqa-gold block">
             تبدأ باختيارٍ واعٍ.
           </span>
         </h1>
@@ -43,7 +43,7 @@ export const Hero: React.FC<HeroProps> = ({
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3.5 sm:gap-4 pt-1 max-w-md sm:max-w-none mx-auto lg:mx-0">
           <button
             onClick={() => onOpenLeadModal("hero_primary")}
-            className="flex items-center justify-center gap-3 px-8 py-4 min-h-[52px] rounded-xl text-base sm:text-lg font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+            className="flex items-center justify-center gap-3 px-8 py-4 min-h-[52px] rounded-xl text-base sm:text-lg font-bold bg-thiqa-gold hover:bg-thiqa-gold-hover text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
           >
             <span>تحدث مع مستشار أكاديمي</span>
             <ArrowLeft className="w-5 h-5" />
@@ -61,7 +61,7 @@ export const Hero: React.FC<HeroProps> = ({
         {/* Clean Trust Proof Strip */}
         <div className="pt-1 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-sm text-slate-700 font-semibold">
           <span className="inline-flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-[#D97706]" />
+            <CheckCircle2 className="w-4 h-4 text-thiqa-gold" />
             معلومات للمقارنة واتخاذ القرار
           </span>
           <span className="inline-flex items-center gap-2">

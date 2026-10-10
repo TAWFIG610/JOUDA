@@ -1,10 +1,70 @@
 import React from "react";
 import { PARTNER_UNIVERSITIES } from "../data/thiqaData";
+import type { PartnerUniversity } from "../types";
 import { CheckCircle2, ArrowLeft, Award } from "lucide-react";
 
 interface UniversitiesSectionProps {
   onOpenLeadModal: (source?: string) => void;
 }
+
+interface UniversityMarqueeRowProps {
+  universities: PartnerUniversity[];
+  onOpenLeadModal: (source?: string) => void;
+  reverse?: boolean;
+}
+
+const UniversityMarqueeRow: React.FC<UniversityMarqueeRowProps> = ({
+  universities,
+  onOpenLeadModal,
+  reverse = false,
+}) => (
+  <div
+    className={`universities-marquee relative w-full overflow-hidden py-2 sm:py-3 ${
+      reverse ? "mt-1 sm:mt-2" : ""
+    }`}
+  >
+    <div
+      className={`${reverse ? "animate-marquee-reverse-rtl" : "animate-marquee-rtl"} flex items-center gap-3 sm:gap-5 hover:[animation-play-state:paused]`}
+    >
+      {[...universities, ...universities, ...universities].map((uni, index) => (
+        <button
+          type="button"
+          key={`${uni.id}-${index}`}
+          aria-label={`استفسر عن ${uni.nameAr}، ${uni.ranking}`}
+          className="group flex w-44 shrink-0 cursor-pointer flex-col items-center gap-2.5 rounded-2xl border border-slate-200/90 bg-white p-3 text-center shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-[#F59E0B]/60 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 sm:w-60 sm:p-5"
+          onClick={() => onOpenLeadModal(`university_${uni.id}`)}
+        >
+          <div className="flex h-14 w-full items-center justify-center rounded-xl border border-slate-100 bg-[#F8FAFC] p-2 transition-colors group-hover:bg-white sm:h-[4.5rem]">
+            {uni.logoUrl ? (
+              <img
+                src={uni.logoUrl}
+                alt={uni.nameEn}
+                className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+            ) : (
+              <span className="text-xs font-bold text-[#0F254B]">
+                {uni.shortName}
+              </span>
+            )}
+          </div>
+
+          <div className="w-full space-y-0.5 text-center">
+            <span             className="block text-[10px] font-bold text-thiqa-gold sm:text-[11px]">
+              {uni.ranking}
+            </span>
+            <p
+              className="line-clamp-1 w-full text-center font-sans text-xs font-bold leading-snug tracking-wide text-[#0F172A] transition-colors group-hover:text-[#0F254B] sm:text-sm"
+              dir="ltr"
+            >
+              {uni.nameEn}
+            </p>
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>
+);
 
 export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
   onOpenLeadModal,
@@ -12,9 +72,6 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
   const half = Math.ceil(PARTNER_UNIVERSITIES.length / 2);
   const row1 = PARTNER_UNIVERSITIES.slice(0, half);
   const row2 = PARTNER_UNIVERSITIES.slice(half);
-
-  const list1 = [...row1, ...row1, ...row1];
-  const list2 = [...row2, ...row2, ...row2];
 
   return (
     <section
@@ -31,7 +88,7 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
             <span className="text-[11px] text-slate-500 block">شراكات وتمثيل مباشر</span>
           </div>
           <div className="text-center p-3.5 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
-            <span className="text-2xl sm:text-3xl font-black font-sans text-[#D97706] block">100%</span>
+            <span className="text-2xl sm:text-3xl font-black font-sans text-thiqa-gold block">100%</span>
             <span className="text-xs sm:text-sm font-bold text-slate-800">متابعة تأشيرة EMGS</span>
             <span className="text-[11px] text-slate-500 block">إشراف حكومي رسمي</span>
           </div>
@@ -41,7 +98,7 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
             <span className="text-[11px] text-slate-500 block">من كافة الدول العربية</span>
           </div>
           <div className="text-center p-3.5 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
-            <span className="text-2xl sm:text-3xl font-black font-sans text-[#D97706] block">0$</span>
+            <span className="text-2xl sm:text-3xl font-black font-sans text-thiqa-gold block">0$</span>
             <span className="text-xs sm:text-sm font-bold text-slate-800">رسوم الاستشارة والتقديم</span>
             <span className="text-[11px] text-slate-500 block">خدمة مجانية بالكامل</span>
           </div>
@@ -64,85 +121,15 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
         </div>
       </div>
 
-      {/* Row 1: Forward Marquee */}
-      <div className="universities-marquee relative w-full overflow-hidden py-2 sm:py-3">
-        <div className="animate-marquee-rtl flex items-center gap-3 sm:gap-5 hover:[animation-play-state:paused]">
-          {list1.map((uni, idx) => (
-            <button
-              type="button"
-              key={`${uni.id}-row1-${idx}`}
-              aria-label={`استفسر عن ${uni.nameAr}، ${uni.ranking}`}
-              className="group flex w-44 shrink-0 cursor-pointer flex-col items-center gap-2.5 rounded-2xl border border-slate-200/90 bg-white p-3 text-center shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-[#F59E0B]/60 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 sm:w-60 sm:p-5"
-              onClick={() => onOpenLeadModal(`university_${uni.id}`)}
-            >
-              <div className="w-full h-14 sm:h-18 rounded-xl bg-[#F8FAFC] border border-slate-100 flex items-center justify-center p-2 group-hover:bg-white transition-colors">
-                {uni.logoUrl ? (
-                  <img
-                    src={uni.logoUrl}
-                    alt={uni.nameEn}
-                    className="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                ) : (
-                  <span className="font-bold text-xs text-[#0F254B]">{uni.shortName}</span>
-                )}
-              </div>
-
-              <div className="w-full text-center space-y-0.5">
-                <span className="text-[10px] sm:text-[11px] font-bold text-[#D97706] block">
-                  {uni.ranking}
-                </span>
-                <p
-                  className="text-xs sm:text-sm font-bold text-[#0F172A] font-sans tracking-wide leading-snug group-hover:text-[#0F254B] transition-colors line-clamp-1 w-full text-center"
-                  dir="ltr"
-                >
-                  {uni.nameEn}
-                </p>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Row 2: Reverse Marquee */}
-      <div className="universities-marquee relative mt-1 w-full overflow-hidden py-2 sm:mt-2 sm:py-3">
-        <div className="animate-marquee-reverse-rtl flex items-center gap-3 sm:gap-5 hover:[animation-play-state:paused]">
-          {list2.map((uni, idx) => (
-            <button
-              type="button"
-              key={`${uni.id}-row2-${idx}`}
-              aria-label={`استفسر عن ${uni.nameAr}، ${uni.ranking}`}
-              className="group flex w-44 shrink-0 cursor-pointer flex-col items-center gap-2.5 rounded-2xl border border-slate-200/90 bg-white p-3 text-center shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-[#F59E0B]/60 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 sm:w-60 sm:p-5"
-              onClick={() => onOpenLeadModal(`university_${uni.id}`)}
-            >
-              <div className="w-full h-14 sm:h-18 rounded-xl bg-[#F8FAFC] border border-slate-100 flex items-center justify-center p-2 group-hover:bg-white transition-colors">
-                {uni.logoUrl ? (
-                  <img
-                    src={uni.logoUrl}
-                    alt={uni.nameEn}
-                    className="max-h-full max-w-full object-contain filter group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                ) : (
-                  <span className="font-bold text-xs text-[#0F254B]">{uni.shortName}</span>
-                )}
-              </div>
-
-              <div className="w-full text-center space-y-0.5">
-                <span className="text-[10px] sm:text-[11px] font-bold text-[#D97706] block">
-                  {uni.ranking}
-                </span>
-                <p
-                  className="text-xs sm:text-sm font-bold text-[#0F172A] font-sans tracking-wide leading-snug group-hover:text-[#0F254B] transition-colors line-clamp-1 w-full text-center"
-                  dir="ltr"
-                >
-                  {uni.nameEn}
-                </p>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
+      <UniversityMarqueeRow
+        universities={row1}
+        onOpenLeadModal={onOpenLeadModal}
+      />
+      <UniversityMarqueeRow
+        universities={row2}
+        onOpenLeadModal={onOpenLeadModal}
+        reverse
+      />
 
       {/* Action Box Below Marquee */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-12">
@@ -160,7 +147,7 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
           <div className="shrink-0 w-full sm:w-auto">
             <button
               onClick={() => onOpenLeadModal("universities_ticker_cta")}
-              className="w-full sm:w-auto min-h-[44px] flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl text-xs sm:text-sm font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-lg transition-all duration-200 cursor-pointer"
+              className="w-full sm:w-auto min-h-[44px] flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl text-xs sm:text-sm font-bold bg-thiqa-gold hover:bg-thiqa-gold-hover text-white shadow-lg transition-all duration-200 cursor-pointer"
             >
               <span>استشر مجاناً الآن</span>
               <ArrowLeft className="w-4 h-4" />

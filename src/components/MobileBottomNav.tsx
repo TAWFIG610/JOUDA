@@ -55,7 +55,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           onClick={onOpenAdvisorModal}
           className="group flex min-h-12 min-w-12 flex-col items-center justify-center rounded-xl py-1 text-center text-slate-600 transition-colors hover:text-[#0F254B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B]"
         >
-          <Compass className="w-5 h-5 text-[#D97706] group-hover:text-[#0F254B] transition-colors" />
+          <Compass className="w-5 h-5 text-thiqa-gold group-hover:text-[#0F254B] transition-colors" />
           <span className="mt-1 text-[11px] font-bold tracking-tight">
             المستشار
           </span>
@@ -78,7 +78,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
         <button
           type="button"
           onClick={() => onOpenLeadModal("mobile_bottom_bar")}
-          className="flex min-h-11 items-center gap-1.5 rounded-xl bg-[#F59E0B] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#D97706] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 sm:px-3.5 sm:text-sm"
+          className="flex min-h-11 items-center gap-1.5 rounded-xl bg-thiqa-gold px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-thiqa-gold-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 sm:px-3.5 sm:text-sm"
         >
           <Award className="w-4 h-4 shrink-0" />
           <span className="whitespace-nowrap">قدّم الآن</span>

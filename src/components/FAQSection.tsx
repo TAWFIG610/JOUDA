@@ -71,7 +71,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
                   </span>
                   <ChevronDown
                     className={`w-5 h-5 text-slate-500 shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-[#D97706]" : ""
+                      isOpen ? "rotate-180 text-thiqa-gold" : ""
                     }`}
                   />
                 </button>
@@ -106,7 +106,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
 
           <button
             onClick={() => onOpenLeadModal("faq_bottom_cta")}
-            className="min-h-11 rounded-xl bg-[#F59E0B] px-6 py-3 text-sm font-bold text-white shadow-md transition-colors hover:bg-[#D97706] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F254B]"
+            className="min-h-11 rounded-xl bg-thiqa-gold px-6 py-3 text-sm font-bold text-white shadow-md transition-colors hover:bg-thiqa-gold-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F254B]"
           >
             تحدث مع مستشار أكاديمي
           </button>

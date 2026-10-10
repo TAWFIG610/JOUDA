@@ -78,7 +78,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     <div className="w-12 h-12 rounded-xl bg-[#0F254B]/5 text-[#0F254B] group-hover:bg-[#0F254B] group-hover:text-white transition-colors flex items-center justify-center">
                       <Icon className="h-6 w-6" aria-hidden="true" />
                     </div>
-                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-amber-50 text-[#D97706] border border-amber-200">
+                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-amber-50 text-thiqa-gold border border-amber-200">
                       {item.badge}
                     </span>
                   </div>

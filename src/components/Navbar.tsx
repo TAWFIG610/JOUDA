@@ -67,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onOpenAdvisorModal}
               className="flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold text-[#0F254B] bg-[#0F254B]/5 hover:bg-[#0F254B]/10 border border-[#0F254B]/15 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 whitespace-nowrap"
             >
-              <Compass className="w-4 h-4 text-[#D97706]" />
+              <Compass className="w-4 h-4 text-thiqa-gold" />
               <span>مستشار التخصص</span>
             </button>
 
@@ -83,7 +83,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => onOpenLeadModal("navbar_primary")}
-              className="flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 whitespace-nowrap"
+              className="flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold bg-thiqa-gold hover:bg-thiqa-gold-hover text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 whitespace-nowrap"
             >
               <span>قدّم طلبك الآن</span>
               <ArrowLeft className="w-4 h-4" />
@@ -134,7 +134,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
                 className="w-full flex items-center justify-center gap-2 py-3 min-h-[44px] rounded-xl text-sm font-bold text-[#0F254B] bg-slate-100 border border-slate-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
               >
-                <Compass className="w-4 h-4 text-[#D97706]" />
+                <Compass className="w-4 h-4 text-thiqa-gold" />
                 <span>مستشار التخصص والجامعة السريع</span>
               </button>
 
@@ -143,7 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setMobileMenuOpen(false);
                   onOpenLeadModal("mobile_drawer");
                 }}
-                className="w-full flex items-center justify-center gap-2 py-3.5 min-h-[44px] rounded-xl text-sm font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+                className="w-full flex items-center justify-center gap-2 py-3.5 min-h-[44px] rounded-xl text-sm font-bold bg-thiqa-gold hover:bg-thiqa-gold-hover text-white shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
               >
                 <span>ابدأ رحلتك الآن مع ثقة يوني</span>
                 <ArrowLeft className="w-4 h-4" />

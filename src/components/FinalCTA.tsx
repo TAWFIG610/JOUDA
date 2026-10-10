@@ -43,7 +43,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
           <div className="flex flex-col items-stretch justify-center gap-3 pt-1 sm:flex-row sm:items-center sm:gap-4 sm:pt-2">
             <button
               onClick={() => onOpenLeadModal("final_cta_primary")}
-              className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-xl bg-[#F59E0B] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#D97706] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F254B] sm:w-auto sm:px-9 sm:text-base"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-xl bg-thiqa-gold px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-thiqa-gold-hover hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F254B] sm:w-auto sm:px-9 sm:text-base"
             >
               <span>ناقش طلب القبول مع مستشار</span>
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
