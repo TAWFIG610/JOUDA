@@ -196,7 +196,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto" role="presentation">
-      <div className="bg-white rounded-t-[32px] sm:rounded-3xl max-w-xl w-full p-5 sm:p-8 shadow-2xl border-t sm:border border-slate-200/90 relative overflow-y-auto max-h-[92vh] sm:max-h-[90vh] my-0 sm:my-6 text-slate-900 animate-in slide-in-from-bottom-4 duration-300" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
+      <div className="relative my-0 max-h-[94dvh] w-full max-w-xl overflow-y-auto rounded-t-[28px] border-t border-slate-200/90 bg-white p-5 text-slate-900 shadow-2xl animate-in slide-in-from-bottom-4 duration-300 sm:my-6 sm:max-h-[90vh] sm:rounded-3xl sm:border sm:p-8" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
         {/* Mobile Pull / Drag Indicator */}
         <div className="w-12 h-1.5 rounded-full bg-slate-300 mx-auto mb-2 block sm:hidden" />
 
@@ -213,10 +213,10 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
         </button>
 
         {!submitted ? (
-          <div className="space-y-6">
+          <div className="space-y-5 sm:space-y-6">
             {/* Modal Header */}
             <div className="text-center space-y-2.5 pt-2">
-              <div className="h-18 sm:h-22 flex items-center justify-center mx-auto mb-1">
+              <div className="mx-auto mb-1 flex h-14 items-center justify-center sm:h-16">
                 <img
                   src="/thiqa-logo.png"
                   alt="شعار ثقة يوني — الشريك الأكاديمي الدولي"
@@ -226,29 +226,29 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                 />
               </div>
 
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/10 text-[#0F254B] text-xs font-bold shadow-2xs">
+              <div className="section-eyebrow">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#F59E0B]" />
                 <span>تواصل مباشر مع فريق ثقة يوني</span>
               </div>
 
-              <h2 id="lead-modal-title" className="text-xl sm:text-2xl font-black text-[#0F254B] tracking-tight">
+              <h2 id="lead-modal-title" className="text-xl font-black tracking-tight text-[#0F254B] sm:text-2xl">
                 ابدأ رحلتك الأكاديمية مع{" "}
                 <span className="text-[#D97706]">ثقة يوني</span>
               </h2>
-              <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed font-medium max-w-md mx-auto">
+              <p className="mx-auto max-w-md text-sm leading-relaxed text-slate-600">
                 اترك بيانات التواصل واهتماماتك الدراسية، وسنساعدك على فهم الخيارات والخطوات التالية. تختلف الشروط والرسوم حسب البرنامج والجامعة.
               </p>
             </div>
 
             {pathwaySummary && (
-              <div className="rounded-2xl border border-[#0F254B]/15 bg-[#0F254B]/5 p-4 text-start">
+              <div className="rounded-2xl border border-[#0F254B]/15 bg-[#F8FAFC] p-4 text-start">
                 <p className="text-xs font-bold text-[#0F254B]">ملخص اختياراتك في مستشار المسار</p>
                 <p className="mt-1 text-sm leading-relaxed text-slate-700">{pathwaySummary}</p>
               </div>
             )}
 
             {selectedStep && (
-              <div className="rounded-2xl border border-[#0F254B]/15 bg-[#0F254B]/5 p-4 text-start">
+              <div className="rounded-2xl border border-[#0F254B]/15 bg-[#F8FAFC] p-4 text-start">
                 <p className="text-xs font-bold text-[#0F254B]">الخطوة التي تريد مناقشتها</p>
                 <p className="mt-1 text-sm leading-relaxed text-slate-700">
                   {selectedStep.titleAr}
@@ -258,7 +258,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
 
             {/* Selected University Official Banner if opened from university ticker */}
             {selectedUni && (
-              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-[#0F254B]/5 border border-[#0F254B]/15 shadow-xs">
+              <div className="flex items-center gap-3.5 rounded-2xl border border-[#0F254B]/15 bg-[#F8FAFC] p-3 shadow-xs">
                 <div className="w-14 h-10 p-1 bg-white rounded-xl border border-slate-200 flex items-center justify-center shrink-0 shadow-2xs">
                   {selectedUni.logoUrl ? (
                     <img
@@ -285,7 +285,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
 
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
               {/* Group 1: Personal Contact Info */}
-              <div className="space-y-3 p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200/80">
+              <div className="space-y-4 rounded-2xl border border-slate-200/80 bg-[#F8FAFC] p-4 sm:p-5">
                 <div className="flex items-center gap-2 pb-1 border-b border-slate-200/60">
                   <User className="w-4 h-4 text-[#0F254B]" />
                   <span className="text-xs font-black text-[#0F254B]">
@@ -295,10 +295,11 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
 
                 {/* Full Name */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label htmlFor="lead-name" className="mb-1 block text-sm font-bold text-slate-700">
                     الاسم الكامل *
                   </label>
                   <input
+                    id="lead-name"
                     type="text"
                     value={name}
                     autoComplete="name"
@@ -314,7 +315,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                         : name.trim().length >= 2
                           ? "border-[#0F254B]/40"
                           : "border-slate-200"
-                    } text-sm text-slate-900 focus:outline-none focus:border-[#0F254B] focus:ring-2 focus:ring-[#0F254B]/15 transition-all`}
+                    } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15`}
                     aria-invalid={Boolean(errors.name)}
                     aria-describedby={errors.name ? "lead-name-error" : undefined}
                   />
@@ -330,11 +331,12 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {/* Email */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1">
+                    <label htmlFor="lead-email" className="mb-1 flex items-center gap-1 text-sm font-bold text-slate-700">
                       <Mail className="w-3.5 h-3.5 text-[#0F254B]" />
                       <span>البريد الإلكتروني (اختياري)</span>
                     </label>
                     <input
+                      id="lead-email"
                       type="email"
                       value={email}
                       autoComplete="email"
@@ -352,7 +354,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                           : isEmailValid
                             ? "border-[#0F254B]/40"
                             : "border-slate-200"
-                      } text-sm text-slate-900 focus:outline-none focus:border-[#0F254B] focus:ring-2 focus:ring-[#0F254B]/15 transition-all text-start`}
+                      } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15 text-start`}
                       aria-invalid={Boolean(errors.email)}
                       aria-describedby={errors.email ? "lead-email-error" : undefined}
                     />
@@ -366,11 +368,12 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
 
                   {/* WhatsApp */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1">
+                    <label htmlFor="lead-whatsapp" className="mb-1 flex items-center gap-1 text-sm font-bold text-slate-700">
                       <Phone className="w-3.5 h-3.5 text-[#0F254B]" />
                       <span>رقم واتساب (مع الرمز) *</span>
                     </label>
                     <input
+                      id="lead-whatsapp"
                       type="tel"
                       value={whatsapp}
                       autoComplete="tel"
@@ -388,7 +391,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                           : isWhatsappValid
                             ? "border-[#0F254B]/40"
                             : "border-slate-200"
-                      } text-sm text-slate-900 focus:outline-none focus:border-[#0F254B] focus:ring-2 focus:ring-[#0F254B]/15 text-start transition-all font-sans`}
+                      } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15 text-start font-sans`}
                       aria-invalid={Boolean(errors.whatsapp)}
                       aria-describedby={errors.whatsapp ? "lead-whatsapp-error" : undefined}
                     />
@@ -416,7 +419,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                           key={c.code}
                           type="button"
                           onClick={() => handleCountrySelect(c)}
-                          className={`inline-flex min-h-[40px] items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border ${
+                          className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-bold transition-all ${
                             isActive
                               ? "bg-[#0F254B] text-white border-[#0F254B] shadow-xs scale-102"
                               : "bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
@@ -440,11 +443,12 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
 
                 {/* Country of Residence */}
                 <div className="pt-1">
-                  <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1">
+                  <label htmlFor="lead-country" className="mb-1 flex items-center gap-1 text-sm font-bold text-slate-700">
                     <MapPin className="w-3.5 h-3.5 text-[#0F254B]" />
                     <span>دولة الإقامة الحالية *</span>
                   </label>
                   <input
+                    id="lead-country"
                     type="text"
                     value={country}
                     onChange={(e) => {
@@ -457,7 +461,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                       errors.country
                         ? "border-red-500 bg-red-50/20"
                         : "border-slate-200"
-                    } text-sm text-slate-900 focus:outline-none focus:border-[#0F254B] focus:ring-2 focus:ring-[#0F254B]/15 transition-all`}
+                    } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15`}
                     aria-invalid={Boolean(errors.country)}
                     aria-describedby={errors.country ? "lead-country-error" : undefined}
                   />
@@ -481,7 +485,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
 
                 {/* Degree Level as Interactive Pills */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                  <label className="mb-2 block text-sm font-bold text-slate-700">
                     المرحلة الدراسية المطلوبة *
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -508,11 +512,12 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
 
                 {/* Field of Interest */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1">
+                  <label htmlFor="lead-interest" className="mb-1 flex items-center gap-1 text-sm font-bold text-slate-700">
                     <BookOpen className="w-3.5 h-3.5 text-[#0F254B]" />
                     <span>التخصص أو المجال الدراسي المطلوب *</span>
                   </label>
                   <input
+                    id="lead-interest"
                     type="text"
                     value={fieldOfInterest}
                     onChange={(e) => {
@@ -525,7 +530,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                       errors.fieldOfInterest
                         ? "border-red-500 bg-red-50/20"
                         : "border-slate-200"
-                    } text-sm text-slate-900 focus:outline-none focus:border-[#0F254B] focus:ring-2 focus:ring-[#0F254B]/15 transition-all`}
+                    } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15`}
                     aria-invalid={Boolean(errors.fieldOfInterest)}
                     aria-describedby={errors.fieldOfInterest ? "lead-interest-error" : undefined}
                   />
@@ -553,7 +558,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                               fieldOfInterest: "",
                             }));
                         }}
-                        className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-white border border-slate-200 hover:border-[#F59E0B] hover:text-[#0F254B] text-slate-600 transition-colors cursor-pointer"
+                        className="min-h-11 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 transition-colors hover:border-[#F59E0B] hover:text-[#0F254B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
                         aria-pressed={fieldOfInterest === major}
                       >
                         {major}
@@ -564,16 +569,17 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
 
                 {/* Optional Message */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1">
+                  <label htmlFor="lead-message" className="mb-1 flex items-center gap-1 text-sm font-bold text-slate-700">
                     <FileText className="w-3.5 h-3.5 text-[#0F254B]" />
                     <span>ملاحظات أو أسئلة إضافية (اختياري)</span>
                   </label>
                   <textarea
+                    id="lead-message"
                     rows={2}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="أي تفاصيل عن معدلك، ميزانيتك، أو الجامعة المفضلة..."
-                    className="w-full px-4 py-2 min-h-[44px] rounded-xl bg-white border border-slate-200 text-sm text-slate-900 focus:outline-none focus:border-[#0F254B] focus:ring-2 focus:ring-[#0F254B]/15 transition-all resize-none"
+                    className="min-h-20 w-full resize-y rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15"
                   />
                 </div>
               </div>

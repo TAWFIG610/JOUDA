@@ -57,7 +57,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               </div>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed font-medium">
+            <p className="text-sm leading-relaxed text-slate-300">
               {FOOTER_DATA.brandDesc}
             </p>
 
@@ -71,7 +71,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/10 border border-[#F59E0B]/40 text-[#F59E0B] hover:bg-white/20 transition-colors text-xs font-bold"
+                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[#F59E0B]/40 bg-white/10 px-3.5 py-2 text-sm font-bold text-[#F59E0B] transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F254B]"
               >
                 <PhoneCall className="w-3.5 h-3.5 text-[#F59E0B]" />
                 <span>واتساب الاستشارات:</span>
@@ -90,9 +90,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.name}
-                  className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/10 border border-white/10 text-slate-300 hover:text-[#F59E0B] hover:border-[#F59E0B]/40 hover:bg-white/15 transition-all cursor-pointer"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/10 text-slate-300 transition-all hover:border-[#F59E0B]/40 hover:bg-white/15 hover:text-[#F59E0B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
-                  {getSocialIcon(s.name)}
+                  <span aria-hidden="true">{getSocialIcon(s.name)}</span>
                 </a>
               ))}
             </div>
@@ -103,12 +103,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
             <h4 className="text-sm font-bold text-white tracking-wide border-b border-white/10 pb-2">
               الروابط السريعة
             </h4>
-            <ul className="space-y-2 text-xs text-slate-300 font-medium">
+            <ul className="space-y-1.5 text-sm font-medium text-slate-300">
               {FOOTER_DATA.links.map((l, i) => (
                 <li key={i}>
                   <a
                     href={l.href}
-                    className="inline-block py-1 hover:text-[#F59E0B] transition-colors cursor-pointer"
+                    className="inline-flex min-h-10 items-center py-1 transition-colors hover:text-[#F59E0B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                   >
                     {l.title}
                   </a>
@@ -122,11 +122,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
             <h4 className="text-sm font-bold text-white tracking-wide border-b border-white/10 pb-2">
               استكشاف التعليم الدولي
             </h4>
-            <ul className="space-y-2 text-xs text-slate-300 font-medium">
+            <ul className="space-y-1.5 text-sm font-medium text-slate-300">
               <li>
                 <a
                   href="#universities"
-                  className="inline-block py-1 hover:text-[#F59E0B] transition-colors cursor-pointer"
+                  className="inline-flex min-h-10 items-center py-1 transition-colors hover:text-[#F59E0B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   الجامعات الشريكة والمعتمدة
                 </a>
@@ -134,7 +134,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               <li>
                 <a
                   href="#services"
-                  className="inline-block py-1 hover:text-[#F59E0B] transition-colors cursor-pointer"
+                  className="inline-flex min-h-10 items-center py-1 transition-colors hover:text-[#F59E0B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   الخدمات والاستشارات الأكاديمية
                 </a>
@@ -142,7 +142,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               <li>
                 <a
                   href="#journey"
-                  className="inline-block py-1 hover:text-[#F59E0B] transition-colors cursor-pointer"
+                  className="inline-flex min-h-10 items-center py-1 transition-colors hover:text-[#F59E0B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   مسار التقديم (من الاستكشاف للتقديم)
                 </a>
@@ -150,7 +150,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               <li>
                 <a
                   href="#why-thiqa"
-                  className="inline-block py-1 hover:text-[#F59E0B] transition-colors cursor-pointer"
+                  className="inline-flex min-h-10 items-center py-1 transition-colors hover:text-[#F59E0B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   الاعتمادات ومزايا ثقة يوني
                 </a>
@@ -163,11 +163,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
             <h4 className="text-sm font-bold text-white tracking-wide border-b border-white/10 pb-2">
               المعايير والشفافية
             </h4>
-            <ul className="space-y-2 text-xs text-slate-300 font-medium">
+            <ul className="space-y-1.5 text-sm font-medium text-slate-300">
               <li>
                 <button
                   onClick={() => onOpenLegal("privacy")}
-                  className="inline-block py-1 hover:text-[#F59E0B] transition-colors text-start cursor-pointer"
+                  className="inline-flex min-h-10 items-center py-1 text-start transition-colors hover:text-[#F59E0B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   سياسة الخصوصية
                 </button>
@@ -175,7 +175,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               <li>
                 <button
                   onClick={() => onOpenLegal("terms")}
-                  className="inline-block py-1 hover:text-[#F59E0B] transition-colors text-start cursor-pointer"
+                  className="inline-flex min-h-10 items-center py-1 text-start transition-colors hover:text-[#F59E0B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   الشروط والأحكام الأكاديمية
                 </button>
@@ -183,7 +183,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               <li>
                 <button
                   onClick={() => onOpenLegal("refund")}
-                  className="inline-block py-1 hover:text-[#F59E0B] transition-colors text-start cursor-pointer"
+                  className="inline-flex min-h-10 items-center py-1 text-start transition-colors hover:text-[#F59E0B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   ميثاق الشفافية والرسوم المباشرة
                 </button>

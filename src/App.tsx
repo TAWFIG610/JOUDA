@@ -71,7 +71,7 @@ export function App() {
       />
 
       {/* Main Content Flow */}
-      <main className="overflow-x-hidden pb-16 lg:pb-0">
+      <main className="overflow-x-hidden pb-24 lg:pb-0">
         <Hero
           onOpenLeadModal={handleOpenLeadModal}
           onOpenAdvisorModal={() => setIsAdvisorModalOpen(true)}

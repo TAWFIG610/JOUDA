@@ -16,21 +16,21 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
   return (
     <section
       id="journey"
-      className="py-16 sm:py-24 bg-white relative border-t border-slate-200/80"
+      className="relative border-t border-slate-200/80 bg-white py-14 sm:py-20 lg:py-24"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
+        <div className="mx-auto mb-10 max-w-3xl space-y-3 text-center sm:mb-14">
+          <div className="section-eyebrow">
             <Compass className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span>المسار المتكامل في 4 مراحل</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
+          <h2 className="section-title">
             رحلة الطالب مع ثقة يوني: من الاكتشاف حتى الوصول
           </h2>
 
-          <p className="text-sm sm:text-base text-[#64748B] leading-relaxed font-medium">
+          <p className="section-description">
             استكشف ← قارن ← اختر ← قدّم. خطوات واضحة ومدروسة تضمن لك قبولاً رسمياً وتأشيرة دراسية دون أي ارتباك.
           </p>
         </div>
@@ -64,7 +64,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
         </div>
 
         {/* Desktop / Tablet Cards Grid (>= sm) */}
-        <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="mb-8 hidden grid-cols-2 gap-4 sm:grid lg:grid-cols-4">
           {DISCOVER_TO_APPLY_STEPS.map((step, idx) => {
             const Icon = stepIcons[idx] || Compass;
             const isSelected = activeStep === idx;
@@ -73,7 +73,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
                 key={idx}
                 onClick={() => setActiveStep(idx)}
                 aria-pressed={isSelected}
-                className={`p-5 rounded-2xl border text-start transition-all duration-300 cursor-pointer flex flex-col justify-between ${
+                className={`flex min-h-52 flex-col justify-between rounded-2xl border p-5 text-start transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 ${
                   isSelected
                     ? "bg-[#0F254B] text-white border-[#0F254B] shadow-xl sm:-translate-y-1"
                     : "bg-[#F8FAFC] text-slate-800 border-slate-200 hover:border-[#F59E0B]/50 hover:bg-white"
@@ -114,7 +114,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
         </div>
 
         {/* Active Stage Detailed Spotlight Box */}
-        <div className="rounded-3xl bg-[#F8FAFC] border border-slate-200 p-6 sm:p-10 shadow-sm relative overflow-hidden">
+        <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-[#F8FAFC] p-5 shadow-sm sm:p-8 lg:p-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="space-y-4 max-w-2xl text-center md:text-start">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0F254B]/5 border border-[#0F254B]/10 text-[#0F254B] text-xs font-bold">
@@ -145,7 +145,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
             <div className="shrink-0 w-full md:w-auto">
               <button
                 onClick={() => onOpenLeadModal(`journey_step_${activeStep + 1}`)}
-                className="w-full md:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl text-sm font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-lg shadow-amber-500/25 transition-all cursor-pointer whitespace-nowrap"
+                className="flex min-h-12 w-full items-center justify-center gap-2.5 whitespace-normal rounded-xl bg-[#F59E0B] px-6 py-4 text-sm font-bold text-white shadow-md shadow-amber-500/20 transition-colors hover:bg-[#D97706] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 md:w-auto md:whitespace-nowrap"
               >
                 <span>ابدأ هذه الخطوة الآن مع ثقة يوني</span>
                 <ArrowLeft className="w-4 h-4" />

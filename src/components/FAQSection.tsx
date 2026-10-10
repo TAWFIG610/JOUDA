@@ -21,23 +21,23 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-2.5 sm:space-y-3.5 mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-2xs">
+        <div className="mb-10 space-y-3 text-center sm:mb-14">
+          <div className="section-eyebrow">
             <HelpCircle className="w-3.5 h-3.5 text-[#F59E0B]" />
             <span>إجابات واضحة وموثوقة</span>
           </div>
 
-          <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
+          <h2 className="section-title">
             الأسئلة الأكثر شيوعاً واستفساراً
           </h2>
 
-          <p className="text-xs sm:text-base text-[#64748B] leading-relaxed font-medium">
+          <p className="section-description">
             كل ما يهمك معرفته حول شروط القبول، التكاليف المالية، وإجراءات تأشيرة الطالب الدولية.
           </p>
         </div>
 
         {/* Search */}
-        <div className="mb-8 relative">
+        <div className="relative mb-8">
           <Search className="w-4 h-4 text-slate-400 absolute top-1/2 start-4 -translate-y-1/2" />
           <input
             type="text"
@@ -46,7 +46,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
             aria-label="ابحث في الأسئلة الشائعة"
             aria-controls="faq-results"
             placeholder="ابحث في الأسئلة الشائعة (مثال: التأشيرة، التكاليف، شروط اللغة)..."
-            className="w-full ps-11 pe-4 py-3.5 min-h-[48px] rounded-xl bg-[#F8FAFC] border border-slate-200 text-sm text-[#0F172A] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F254B]"
+            className="min-h-12 w-full rounded-xl border border-slate-200 bg-[#F8FAFC] py-3.5 pe-4 ps-11 text-base text-[#0F172A] placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#0F254B]"
           />
         </div>
 
@@ -57,14 +57,14 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
             return (
               <div
                 key={idx}
-                className="rounded-xl bg-[#F8FAFC] border border-slate-200 overflow-hidden transition-all duration-200 hover:border-[#F59E0B]/50"
+                className="overflow-hidden rounded-2xl border border-slate-200 bg-[#F8FAFC] transition-colors duration-200 hover:border-amber-300"
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
                   id={`faq-question-${idx}`}
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${idx}`}
-                  className="w-full flex items-center justify-between p-4 sm:p-5 text-start cursor-pointer transition-colors"
+                  className="flex min-h-14 w-full items-center justify-between p-4 text-start transition-colors sm:p-5"
                 >
                   <span className="text-sm sm:text-base font-bold text-[#0F172A] pe-4">
                     {faq.q}
@@ -79,7 +79,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
                   id={`faq-answer-${idx}`}
                   aria-labelledby={`faq-question-${idx}`}
                   hidden={!isOpen}
-                  className="px-4 pb-5 sm:px-5 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white"
+                  className="border-t border-slate-200/60 bg-white px-4 pb-5 pt-3 text-sm leading-relaxed text-slate-700 sm:px-5"
                 >
                   {faq.a}
                 </div>
@@ -106,7 +106,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
 
           <button
             onClick={() => onOpenLeadModal("faq_bottom_cta")}
-            className="px-6 py-3 rounded-xl text-xs sm:text-sm font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white transition-all cursor-pointer whitespace-nowrap shadow-md"
+            className="min-h-11 rounded-xl bg-[#F59E0B] px-6 py-3 text-sm font-bold text-white shadow-md transition-colors hover:bg-[#D97706] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F254B]"
           >
             تحدث مع مستشار أكاديمي
           </button>

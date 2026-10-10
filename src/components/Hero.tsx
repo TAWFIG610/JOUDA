@@ -13,12 +13,12 @@ export const Hero: React.FC<HeroProps> = ({
   return (
     <section
       id="hero"
-      className="relative flex items-center justify-center pt-28 pb-14 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-24 bg-white border-b border-slate-200/80 overflow-hidden"
+      className="relative flex items-center justify-center overflow-hidden border-b border-slate-200/80 bg-[linear-gradient(135deg,#F8FAFC_0%,#FFFFFF_56%,#FFF8E8_100%)] pb-14 pt-28 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-40"
     >
       {/* Subtle Radial Glow in background */}
       <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-amber-500/5 blur-[120px] rounded-full pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full grid lg:grid-cols-[1.15fr_0.85fr] items-center gap-10 lg:gap-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:px-8">
         <div className="text-center lg:text-start space-y-6 sm:space-y-7">
         {/* Top Focused Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs sm:text-sm font-bold shadow-2xs">
@@ -71,33 +71,36 @@ export const Hero: React.FC<HeroProps> = ({
         </div>
         </div>
 
-        <aside className="relative mx-auto w-full max-w-md rounded-3xl border border-slate-200 bg-[#F8FAFC] p-5 sm:p-7 shadow-sm">
-          <div className="absolute inset-x-8 top-0 h-1 rounded-b-full bg-gradient-to-l from-[#F59E0B] to-[#0F254B]" />
-          <p className="text-xs font-bold text-[#D97706]">ابدأ من هنا</p>
-          <h2 className="mt-2 text-xl sm:text-2xl font-black text-[#0F254B]">
+        <aside className="relative mx-auto w-full max-w-md overflow-hidden rounded-3xl border border-[#0F254B] bg-[#0F254B] p-6 text-white shadow-xl shadow-[#0F254B]/15 sm:p-8">
+          <div className="absolute -end-20 -top-24 h-64 w-64 rounded-full border border-white/10" aria-hidden="true" />
+          <div className="absolute -end-10 -top-14 h-44 w-44 rounded-full border border-white/10" aria-hidden="true" />
+          <div className="relative">
+          <p className="text-xs font-bold text-amber-300">دليلك للدراسة بالخارج</p>
+          <h2 className="mt-2 text-xl font-black leading-snug text-white sm:text-2xl">
             رحلة التقديم، خطوة بخطوة
           </h2>
-          <ol className="mt-5 space-y-4">
+          <ol className="relative mt-6 space-y-5 before:absolute before:bottom-5 before:start-4 before:top-5 before:w-px before:bg-white/20">
             {[
               ["١", "حدّد المرحلة والتخصص", "وضّح ما تريد دراسته."],
               ["٢", "قارن الخيارات", "راجع البرامج والرسوم والمتطلبات."],
               ["٣", "تحقق من أهليتك", "ناقش تفاصيل ملفك مع مستشار."],
               ["٤", "ابدأ التقديم", "جهّز مستنداتك وتابع الإجراءات."],
             ].map(([number, title, description]) => (
-              <li key={number} className="flex items-start gap-3">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white text-sm font-black text-[#0F254B] border border-slate-200">
+              <li key={number} className="relative flex items-start gap-3">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/10 text-sm font-black text-amber-300">
                   {number}
                 </span>
                 <span>
-                  <span className="block text-sm font-bold text-slate-900">{title}</span>
-                  <span className="mt-0.5 block text-sm leading-relaxed text-slate-600">{description}</span>
+                  <span className="block text-sm font-bold text-white">{title}</span>
+                  <span className="mt-0.5 block text-sm leading-relaxed text-slate-300">{description}</span>
                 </span>
               </li>
             ))}
           </ol>
-          <p className="mt-5 border-t border-slate-200 pt-4 text-xs leading-relaxed text-slate-500">
+          <p className="mt-6 border-t border-white/15 pt-4 text-xs leading-relaxed text-slate-300">
             تختلف شروط القبول والرسوم ومواعيد التقديم حسب الجامعة والبرنامج.
           </p>
+          </div>
         </aside>
       </div>
     </section>

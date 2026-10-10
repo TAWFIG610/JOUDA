@@ -16,32 +16,36 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
   const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً فريق ثقة يوني، أود بدء التقديم واستخراج القبول الجامعي.")}`;
 
   return (
-    <section className="py-10 sm:py-24 bg-white relative border-t border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-2xl sm:rounded-3xl bg-[#0F254B] p-6 sm:p-12 md:p-16 text-white shadow-xl border border-slate-800 text-center space-y-5 sm:space-y-7">
+    <section className="relative border-t border-slate-200 bg-[#F8FAFC] py-14 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative isolate overflow-hidden rounded-3xl border border-[#0F254B] bg-[#0F254B] px-5 py-10 text-center text-white shadow-xl shadow-[#0F254B]/15 sm:px-10 sm:py-14 lg:px-16 lg:py-16">
+          <div className="pointer-events-none absolute -end-20 -top-36 -z-10 h-96 w-96 rounded-full border border-white/10" aria-hidden="true" />
+          <div className="pointer-events-none absolute -end-4 -top-20 -z-10 h-64 w-64 rounded-full border border-white/10" aria-hidden="true" />
+          <div className="pointer-events-none absolute -start-28 -bottom-52 -z-10 h-96 w-96 rounded-full bg-amber-500/10 blur-3xl" aria-hidden="true" />
+          <div className="mx-auto max-w-3xl space-y-5 sm:space-y-7">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-[#F59E0B] text-xs font-bold">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-amber-300 text-xs font-bold">
             <span className="tracking-wide text-[11px] font-bold">{BRAND_MOTTO}</span>
           </div>
 
           {/* Heading */}
-          <h2 className="text-xl sm:text-3xl lg:text-5xl font-black tracking-tight leading-[1.25] sm:leading-[1.2] text-balance">
+          <h2 className="text-balance text-2xl font-black leading-tight tracking-tight sm:text-3xl lg:text-5xl">
             قرارك الأكاديمي اليوم يصنع{" "}
             <span className="text-[#F59E0B]">مستقبلك المهني غداً.</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="text-xs sm:text-base md:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto font-medium">
+          <p className="mx-auto max-w-2xl text-sm font-medium leading-relaxed text-slate-300 sm:text-base lg:text-lg">
             ناقش خيارات الدراسة ومتطلبات القبول مع فريق ثقة يوني، ثم قرر خطوتك التالية بناءً على معلومات واضحة.
           </p>
 
           {/* Dual CTAs */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 pt-1 sm:pt-2">
+          <div className="flex flex-col items-stretch justify-center gap-3 pt-1 sm:flex-row sm:items-center sm:gap-4 sm:pt-2">
             <button
               onClick={() => onOpenLeadModal("final_cta_primary")}
-              className="w-full sm:w-auto flex items-center justify-center gap-3 px-6 sm:px-9 py-3.5 sm:py-4 min-h-[48px] rounded-xl text-sm sm:text-base font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-xl bg-[#F59E0B] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#D97706] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F254B] sm:w-auto sm:px-9 sm:text-base"
             >
-              <span>قدّم طلب القبول الآن مجاناً</span>
+              <span>ناقش طلب القبول مع مستشار</span>
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
@@ -49,7 +53,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 min-h-[48px] rounded-xl text-sm sm:text-base font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 transition-all duration-200 cursor-pointer shadow-md"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-xl border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-colors duration-200 hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F254B] sm:w-auto sm:px-7 sm:text-base"
             >
               <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 text-[#F59E0B]" />
               <span>تواصل مباشرة عبر واتساب</span>
@@ -57,7 +61,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
           </div>
 
           {/* Contact Bar */}
-          <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-300">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 border-t border-white/10 pt-5 text-sm text-slate-300">
             <span className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-[#F59E0B]" />
               <span>شريك معتمد وممثل رسمي للجامعات</span>
@@ -70,6 +74,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
               <CheckCircle2 className="w-4 h-4 text-[#F59E0B]" />
               <span>اسأل عن خطوات تقييم المؤهلات</span>
             </span>
+          </div>
           </div>
         </div>
       </div>

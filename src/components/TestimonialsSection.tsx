@@ -10,27 +10,27 @@ export const TestimonialsSection: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-2.5 sm:space-y-3.5 max-w-3xl mx-auto mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-2xs">
+        <div className="mx-auto mb-10 max-w-3xl space-y-3 text-center sm:mb-14">
+          <div className="section-eyebrow">
             <Star className="w-3.5 h-3.5 text-[#F59E0B] fill-amber-500" />
             <span>قصص نجاح طلابنا الحقيقية</span>
           </div>
 
-          <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight">
+          <h2 className="section-title">
             تجارب حقيقية لطلابنا المقبولين عبر ثقة يوني
           </h2>
 
-          <p className="text-xs sm:text-base text-[#64748B] leading-relaxed">
+          <p className="section-description">
             قصص نجاح واقعية لطلاب انطلقوا من مختلف الدول العربية وبدأوا دراستهم في جامعاتهم المفضلة باطمئنان.
           </p>
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {TESTIMONIALS.map((t) => (
             <div
               key={t.id}
-              className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-200 hover:border-[#F59E0B]/50 hover:shadow-lg transition-all duration-300 space-y-3 sm:space-y-4 flex flex-col justify-between"
+              className="content-card flex flex-col justify-between space-y-4 p-6"
             >
               <div className="space-y-3">
                 {/* Rating stars */}
@@ -43,7 +43,7 @@ export const TestimonialsSection: React.FC = () => {
                   ))}
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                <p className="text-sm leading-relaxed text-slate-700">
                   "{t.quote}"
                 </p>
               </div>

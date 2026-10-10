@@ -1,5 +1,29 @@
 @import "tailwindcss";
 
+@theme {
+  --color-thiqa-navy: #0f254b;
+  --color-thiqa-gold: #d97706;
+  --color-thiqa-paper: #f8fafc;
+}
+
+@layer components {
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-[#0F254B]/15 bg-[#0F254B]/5 px-4 py-2 text-xs font-bold text-[#0F254B];
+  }
+
+  .section-title {
+    @apply text-balance text-2xl font-black leading-tight tracking-tight text-[#0F254B] sm:text-3xl lg:text-4xl;
+  }
+
+  .section-description {
+    @apply text-sm leading-relaxed text-slate-600 sm:text-base;
+  }
+
+  .content-card {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-lg;
+  }
+}
+
 @layer base {
   :root {
     --font-arabic:
@@ -41,6 +65,11 @@
 
   :disabled {
     cursor: not-allowed;
+  }
+
+  ::selection {
+    background: rgb(245 158 11 / 0.25);
+    color: #0f254b;
   }
 
   *:focus-visible {
@@ -117,5 +146,10 @@
   .animate-marquee-rtl,
   .animate-marquee-reverse-rtl {
     animation: none !important;
+  }
+
+  .universities-marquee {
+    overflow-x: auto;
+    scrollbar-width: thin;
   }
 }
