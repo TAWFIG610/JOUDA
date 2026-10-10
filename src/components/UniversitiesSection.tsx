@@ -23,19 +23,43 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
     >
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-8 sm:mb-12">
+        {/* KPI Trust Metrics */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-12">
+          <div className="text-center p-3.5 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
+            <span className="text-2xl sm:text-3xl font-black font-sans text-[#0F254B] block">+35</span>
+            <span className="text-xs sm:text-sm font-bold text-slate-800">جامعة ماليزية معتمدة</span>
+            <span className="text-[11px] text-slate-500 block">شراكات وتمثيل مباشر</span>
+          </div>
+          <div className="text-center p-3.5 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
+            <span className="text-2xl sm:text-3xl font-black font-sans text-[#D97706] block">100%</span>
+            <span className="text-xs sm:text-sm font-bold text-slate-800">متابعة تأشيرة EMGS</span>
+            <span className="text-[11px] text-slate-500 block">إشراف حكومي رسمي</span>
+          </div>
+          <div className="text-center p-3.5 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
+            <span className="text-2xl sm:text-3xl font-black font-sans text-[#0F254B] block">+1,500</span>
+            <span className="text-xs sm:text-sm font-bold text-slate-800">طالب تم توجيههم</span>
+            <span className="text-[11px] text-slate-500 block">من كافة الدول العربية</span>
+          </div>
+          <div className="text-center p-3.5 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
+            <span className="text-2xl sm:text-3xl font-black font-sans text-[#D97706] block">0$</span>
+            <span className="text-xs sm:text-sm font-bold text-slate-800">رسوم الاستشارة والتقديم</span>
+            <span className="text-[11px] text-slate-500 block">خدمة مجانية بالكامل</span>
+          </div>
+        </div>
+
         {/* Section Header */}
-        <div className="text-center space-y-3.5 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
+        <div className="text-center space-y-3 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-2xs">
             <Award className="w-3.5 h-3.5 text-[#F59E0B]" />
-            <span>شراكات وتنسيق رسمي معتمد</span>
+            <span>شراكات وتمثيل رسمي معتمد</span>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
-            الجامعات العالمية والماليزية الشريكة
+            أعرق الجامعات الحكومية والخاصة في ماليزيا
           </h2>
 
-          <p className="text-sm sm:text-base text-[#64748B] leading-relaxed font-medium">
-            تمثيل رسمي معتمد لأعرق الجامعات الحكومية والخاصة وفروع الجامعات الأسترالية والبريطانية.
+          <p className="text-xs sm:text-base text-[#64748B] leading-relaxed font-medium">
+            استكشف أفضل الجامعات الماليزية وفروع الجامعات البريطانية والأسترالية العالمية، وقارن بين تخصصاتها بكل شفافية.
           </p>
         </div>
       </div>

@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
-import { TrustBar } from "./components/TrustBar";
 import { UniversitiesSection } from "./components/UniversitiesSection";
-import { ProblemSection } from "./components/ProblemSection";
 import { SolutionSection } from "./components/SolutionSection";
 import { StudentJourneyVisual } from "./components/StudentJourneyVisual";
 import { ServicesSection } from "./components/ServicesSection";
@@ -54,12 +52,8 @@ export function App() {
           onOpenAdvisorModal={() => setIsAdvisorModalOpen(true)}
         />
 
-        <TrustBar />
-
-        {/* The Requested Infinite Marquee of Partner Universities */}
+        {/* Accredited Partner Universities & Verified Performance Metrics */}
         <UniversitiesSection onOpenLeadModal={handleOpenLeadModal} />
-
-        <ProblemSection />
 
         <SolutionSection onOpenLeadModal={handleOpenLeadModal} />
 
