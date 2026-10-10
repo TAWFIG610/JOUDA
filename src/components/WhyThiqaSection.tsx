@@ -1,6 +1,6 @@
 import React from "react";
 import { COMPARISON_ROWS } from "../data/thiqaData";
-import { ShieldCheck, CheckCircle2, XCircle, ArrowLeft, Award } from "lucide-react";
+import { ShieldCheck, CheckCircle2, ArrowLeft, Award } from "lucide-react";
 
 interface WhyThiqaProps {
   onOpenLeadModal: (source?: string) => void;
@@ -28,20 +28,20 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({
           </h2>
 
           <p className="text-sm sm:text-base text-[#64748B] leading-relaxed font-medium">
-            مقارنة موضوعية توضح الفارق الجوهري بين التعامل التجاري العشوائي وبين الشريك الأكاديمي الدولي المعتمد.
+            نقاط عملية تساعدك على فهم الرسوم، المدد، والجهات المسؤولة قبل اختيار برنامجك.
           </p>
         </div>
 
         {/* Comparison Table */}
         <div className="rounded-3xl bg-white border border-slate-200 overflow-hidden shadow-sm mb-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 bg-[#0F254B] p-4 text-xs font-bold text-white hidden lg:grid">
-            <div className="lg:col-span-4 text-slate-200">المعيار والخدمة</div>
-            <div className="lg:col-span-4 text-rose-200">
-              المكاتب والوسطاء التجاريون
+            <div className="lg:col-span-4 text-slate-200">المعيار</div>
+            <div className="lg:col-span-4 text-slate-200">
+              ما ينبغي التحقق منه
             </div>
             <div className="lg:col-span-4 text-[#F59E0B] flex items-center gap-1.5">
               <Award className="w-4 h-4" />
-              <span>منظومة ثقة يوني الرسمية</span>
+              <span>كيف نساعدك</span>
             </div>
           </div>
 
@@ -57,11 +57,11 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-2 gap-2.5 sm:gap-4">
-                  {/* Traditional */}
-                  <div className="flex items-start gap-2.5 text-xs sm:text-sm text-rose-800 bg-rose-50/70 p-3 sm:p-3.5 rounded-xl border border-rose-100">
-                    <XCircle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+                  {/* General consideration */}
+                  <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 bg-slate-50 p-3 sm:p-3.5 rounded-xl border border-slate-200">
+                    <CheckCircle2 className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
                     <div>
-                      <span className="block text-[10px] font-bold text-rose-600 lg:hidden mb-0.5">الوسطاء التجاريون:</span>
+                      <span className="block text-[10px] font-bold text-slate-600 lg:hidden mb-0.5">تحقق من:</span>
                       <span className="font-medium">{row.traditional}</span>
                     </div>
                   </div>
@@ -70,7 +70,7 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({
                   <div className="flex items-start gap-2.5 text-xs sm:text-sm text-[#0F254B] bg-amber-500/10 p-3 sm:p-3.5 rounded-xl border border-amber-500/25 font-bold shadow-2xs">
                     <CheckCircle2 className="w-4 h-4 text-[#D97706] shrink-0 mt-0.5" />
                     <div>
-                      <span className="block text-[10px] font-bold text-[#D97706] lg:hidden mb-0.5">ثقة يوني المعتمدة:</span>
+                      <span className="block text-[10px] font-bold text-[#D97706] lg:hidden mb-0.5">ثقة يوني:</span>
                       <span>{row.thiqa}</span>
                     </div>
                   </div>
@@ -86,7 +86,7 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({
             onClick={() => onOpenLeadModal("why_thiqa_cta")}
             className="inline-flex items-center gap-2.5 px-9 py-4 rounded-xl text-sm font-bold bg-[#0F254B] hover:bg-[#F59E0B] text-white transition-all duration-200 shadow-md hover:shadow-xl hover:-translate-y-0.5 cursor-pointer"
           >
-            <span>انضم للطلاب المقبولين مع ثقة يوني الآن</span>
+            <span>ناقش خياراتك مع مستشار أكاديمي</span>
             <ArrowLeft className="w-4 h-4" />
           </button>
         </div>

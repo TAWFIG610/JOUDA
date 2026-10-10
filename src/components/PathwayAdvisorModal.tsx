@@ -13,9 +13,9 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
   onSelectPathway,
 }) => {
   const [step, setStep] = useState(1);
-  const [degree, setDegree] = useState("بكالوريوس");
+  const [degree, setDegree] = useState("بكالوريوس (جامعي)");
   const [field, setField] = useState("");
-  const [budget, setBudget] = useState("متوسطة (4,000 - 7,000 دولار سنوياً)");
+  const [budget, setBudget] = useState("متوسطة (4,000 - 7,500 دولار سنوياً)");
 
   if (!isOpen) return null;
 
@@ -26,7 +26,7 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
-      <div className="bg-white rounded-t-[32px] sm:rounded-3xl max-w-lg w-full p-5 sm:p-7 lg:p-8 shadow-2xl border-t sm:border border-slate-200/90 relative text-slate-900 overflow-y-auto max-h-[92vh] sm:max-h-[90vh] my-0 sm:my-8 animate-in slide-in-from-bottom-4 duration-300">
+      <div className="bg-white rounded-t-[32px] sm:rounded-3xl max-w-lg w-full p-5 sm:p-7 lg:p-8 shadow-2xl border-t sm:border border-slate-200/90 relative text-slate-900 overflow-y-auto max-h-[92vh] sm:max-h-[90vh] my-0 sm:my-8 animate-in slide-in-from-bottom-4 duration-300" role="dialog" aria-modal="true" aria-labelledby="advisor-modal-title">
         {/* Mobile Pull / Drag Indicator */}
         <div className="w-12 h-1.5 rounded-full bg-slate-300 mx-auto mb-2 block sm:hidden" />
 
@@ -44,9 +44,12 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
               <Compass className="w-3.5 h-3.5 text-[#D97706]" />
               <span>مستشار التوجيه الأكاديمي • خطوة {step} من 3</span>
             </div>
-            <h3 className="text-lg sm:text-xl font-bold text-[#0F254B]">
-              حدد أهدافك وسنقترح لك المسار المعتمد الأنسب
-            </h3>
+            <h2 id="advisor-modal-title" className="text-lg sm:text-xl font-bold text-[#0F254B]">
+              شاركنا تفضيلاتك الدراسية
+            </h2>
+            <p className="text-sm leading-relaxed text-slate-600">
+              أجب عن ثلاثة أسئلة قصيرة. سنلخّص اختياراتك لتشاركها مع المستشار؛ هذه ليست نتيجة قبول نهائية.
+            </p>
           </div>
 
           {step === 1 && (
@@ -64,6 +67,7 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
                 <button
                   key={d}
                   onClick={() => setDegree(d)}
+                  aria-pressed={degree === d}
                   className={`w-full min-h-[48px] p-3.5 rounded-xl text-xs font-bold text-start border transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 ${
                     degree === d
                       ? "bg-amber-500/10 border-[#F59E0B] text-[#0F254B]"
@@ -127,6 +131,7 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
                 <button
                   key={b}
                   onClick={() => setBudget(b)}
+                  aria-pressed={budget === b}
                   className={`w-full min-h-[48px] p-3.5 rounded-xl text-xs font-bold text-start border transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 ${
                     budget === b
                       ? "bg-amber-500/10 border-[#F59E0B] text-[#0F254B]"
@@ -147,7 +152,7 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
                   onClick={handleFinish}
                   className="w-2/3 min-h-[44px] py-3 rounded-xl text-xs font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2 shadow-sm"
                 >
-                  <span>تأكيد ومطابقة المسار</span>
+                  <span>مشاركة اختياراتي مع المستشار</span>
                   <ArrowLeft className="w-4 h-4" />
                 </button>
               </div>

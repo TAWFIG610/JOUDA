@@ -32,7 +32,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
 
           {/* Subtitle */}
           <p className="text-xs sm:text-base md:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto font-medium">
-            آلاف الطلاب بدأت مسيرتهم الدولية بثقة تامة عبر ثقة يوني. احجز تقييمك واستشارتك المجانية اليوم وانطلق نحو طموحك.
+            ناقش خيارات الدراسة ومتطلبات القبول مع فريق ثقة يوني، ثم قرر خطوتك التالية بناءً على معلومات واضحة.
           </p>
 
           {/* Dual CTAs */}
@@ -68,7 +68,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
             </span>
             <span className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#F59E0B]" />
-              <span>تقييم المؤهلات مجاني 100%</span>
+              <span>اسأل عن خطوات تقييم المؤهلات</span>
             </span>
           </div>
         </div>

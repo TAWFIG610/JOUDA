@@ -43,13 +43,15 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            aria-label="ابحث في الأسئلة الشائعة"
+            aria-controls="faq-results"
             placeholder="ابحث في الأسئلة الشائعة (مثال: التأشيرة، التكاليف، شروط اللغة)..."
             className="w-full ps-11 pe-4 py-3.5 min-h-[48px] rounded-xl bg-[#F8FAFC] border border-slate-200 text-sm text-[#0F172A] placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F254B]"
           />
         </div>
 
         {/* Accordion */}
-        <div className="space-y-3 mb-10">
+        <div id="faq-results" className="space-y-3 mb-10" aria-live="polite">
           {filtered.map((faq, idx) => {
             const isOpen = openIdx === idx;
             return (
@@ -59,6 +61,9 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
+                  id={`faq-question-${idx}`}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${idx}`}
                   className="w-full flex items-center justify-between p-4 sm:p-5 text-start cursor-pointer transition-colors"
                 >
                   <span className="text-sm sm:text-base font-bold text-[#0F172A] pe-4">
@@ -70,14 +75,22 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
                     }`}
                   />
                 </button>
-                {isOpen && (
-                  <div className="px-4 pb-5 sm:px-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white">
-                    {faq.a}
-                  </div>
-                )}
+                <div
+                  id={`faq-answer-${idx}`}
+                  aria-labelledby={`faq-question-${idx}`}
+                  hidden={!isOpen}
+                  className="px-4 pb-5 sm:px-5 pt-1 text-sm text-slate-600 leading-relaxed border-t border-slate-200/60 bg-white"
+                >
+                  {faq.a}
+                </div>
               </div>
             );
           })}
+          {filtered.length === 0 && (
+            <p className="rounded-xl border border-slate-200 bg-[#F8FAFC] px-4 py-6 text-center text-sm text-slate-600">
+              لا توجد أسئلة تطابق بحثك. جرّب كلمة أخرى أو تواصل مع مستشارنا.
+            </p>
+          )}
         </div>
 
         {/* Help Banner */}

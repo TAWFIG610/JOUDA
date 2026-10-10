@@ -14,6 +14,10 @@
     overflow-x: hidden;
   }
 
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+
   body {
     background-color: #ffffff;
     color: #0f172a;
@@ -26,10 +30,17 @@
   button,
   a,
   [role="button"],
-  select,
+  select {
+    @apply cursor-pointer;
+  }
+
   input,
   textarea {
-    @apply cursor-pointer;
+    cursor: text;
+  }
+
+  :disabled {
+    cursor: not-allowed;
   }
 
   *:focus-visible {

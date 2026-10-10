@@ -43,6 +43,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
               <button
                 key={`mobile-tab-${idx}`}
                 onClick={() => setActiveStep(idx)}
+                aria-pressed={isSelected}
                 className={`flex-none inline-flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                   isSelected
                     ? "bg-[#0F254B] text-white border-[#0F254B] shadow-xs"
@@ -71,6 +72,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
               <button
                 key={idx}
                 onClick={() => setActiveStep(idx)}
+                aria-pressed={isSelected}
                 className={`p-5 rounded-2xl border text-start transition-all duration-300 cursor-pointer flex flex-col justify-between ${
                   isSelected
                     ? "bg-[#0F254B] text-white border-[#0F254B] shadow-xl sm:-translate-y-1"
@@ -131,7 +133,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({
               <div className="pt-2 flex flex-wrap gap-4 justify-center md:justify-start text-xs font-bold text-slate-700">
                 <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
                   <CheckCircle2 className="w-4 h-4 text-[#F59E0B]" />
-                  <span>تنسيق ومتابعة معتمدة 100%</span>
+                  <span>إرشاد ومتابعة خلال الإجراءات</span>
                 </span>
                 <span className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-slate-200">
                   <ShieldCheck className="w-4 h-4 text-[#0F254B]" />

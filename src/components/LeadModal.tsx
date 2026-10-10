@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { WHATSAPP_BASE_URL, PARTNER_UNIVERSITIES } from "../data/thiqaData";
+import {
+  WHATSAPP_BASE_URL,
+  PARTNER_UNIVERSITIES,
+  DISCOVER_TO_APPLY_STEPS,
+} from "../data/thiqaData";
 import {
   X,
   CheckCircle2,
@@ -15,12 +19,12 @@ import {
   ArrowLeft,
   FileText,
 } from "lucide-react";
-import confetti from "canvas-confetti";
 
 interface LeadModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialInterest?: string;
+  pathwaySummary?: string;
 }
 
 interface CountryQuickPick {
@@ -63,16 +67,20 @@ export const LeadModal: React.FC<LeadModalProps> = ({
   isOpen,
   onClose,
   initialInterest,
+  pathwaySummary = "",
 }) => {
+  const selectedUniId = initialInterest?.startsWith("university_")
+    ? initialInterest.replace("university_", "")
+    : null;
+  const selectedUni = PARTNER_UNIVERSITIES.find((u) => u.id === selectedUniId);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [country, setCountry] = useState("");
   const [degreeLevel, setDegreeLevel] = useState("بكالوريوس");
-  const [fieldOfInterest, setFieldOfInterest] = useState(initialInterest || "");
+  const [fieldOfInterest, setFieldOfInterest] = useState(selectedUni?.nameAr ?? "");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   if (!isOpen) return null;
@@ -89,21 +97,16 @@ export const LeadModal: React.FC<LeadModalProps> = ({
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    // 1. Name validation (Must be at least 3 parts, each >= 2 chars)
+    // 1. Name validation
     const trimmedName = name.trim();
-    const nameParts = trimmedName.split(/\s+/).filter((p) => p.length >= 2);
-    if (!trimmedName) {
+    if (trimmedName.length < 2) {
       newErrors.name = "الاسم الكامل مطلوب";
-    } else if (nameParts.length < 3) {
-      newErrors.name = "يرجى إدخال الاسم الثلاثي كاملاً (مثال: محمد أحمد علي)";
     }
 
-    // 2. Email validation
+    // 2. Email is optional; validate its format only when provided.
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const trimmedEmail = email.trim();
-    if (!trimmedEmail) {
-      newErrors.email = "البريد الإلكتروني مطلوب";
-    } else if (!emailRegex.test(trimmedEmail)) {
+    if (trimmedEmail && !emailRegex.test(trimmedEmail)) {
       newErrors.email = "يرجى إدخال بريد إلكتروني صحيح (مثال: name@gmail.com)";
     }
 
@@ -143,18 +146,22 @@ export const LeadModal: React.FC<LeadModalProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleOpenWhatsAppDirect = () => {
+  const getWhatsAppUrl = () => {
     const text = encodeURIComponent(
-      `مرحباً فريق ثقة يوني! أود بدء التقديم واستخراج القبول الجامعي.
-الاسم الثلاثي: ${name.trim()}
-البريد الإلكتروني: ${email.trim()}
+      `مرحباً فريق ثقة يوني! أود الاستفسار عن الدراسة في ماليزيا.
+الاسم: ${name.trim()}
+البريد الإلكتروني: ${email.trim() || "لم يذكر"}
 رقم الواتساب: ${whatsapp.trim()}
 دولة الإقامة: ${country.trim()}
 المرحلة الدراسية: ${degreeLevel}
 التخصص/المجال المطلوب: ${fieldOfInterest.trim()}
-ملاحظات إضافية: ${message.trim() || "لا يوجد"}`,
+${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : ""}ملاحظات إضافية: ${message.trim() || "لا يوجد"}`,
     );
-    window.open(`${WHATSAPP_BASE_URL}?text=${text}`, "_blank");
+    return `${WHATSAPP_BASE_URL}?text=${text}`;
+  };
+
+  const handleOpenWhatsAppDirect = () => {
+    window.open(getWhatsAppUrl(), "_blank");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -162,25 +169,16 @@ export const LeadModal: React.FC<LeadModalProps> = ({
 
     if (!validateForm()) return;
 
-    setLoading(true);
+    const whatsappWindow = window.open(getWhatsAppUrl(), "_blank");
+    if (!whatsappWindow) {
+      setErrors((prev) => ({
+        ...prev,
+        form: "تعذر فتح واتساب. يرجى السماح بالنوافذ المنبثقة ثم المحاولة مجدداً.",
+      }));
+      return;
+    }
 
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-
-      try {
-        confetti({
-          particleCount: 90,
-          spread: 75,
-          origin: { y: 0.6 },
-        });
-      } catch {
-        // ignore
-      }
-
-      // Auto-redirect to WhatsApp immediately
-      handleOpenWhatsAppDirect();
-    }, 350);
+    setSubmitted(true);
   };
 
   // Helper to check valid live formats
@@ -189,14 +187,16 @@ export const LeadModal: React.FC<LeadModalProps> = ({
     (whatsapp.trim().startsWith("+") || whatsapp.trim().startsWith("00")) &&
     whatsapp.replace(/[^\d]/g, "").length >= 9;
 
-  const selectedUniId = initialInterest?.startsWith("university_")
-    ? initialInterest.replace("university_", "")
+  const selectedStepNumber = initialInterest?.startsWith("journey_step_")
+    ? Number(initialInterest.replace("journey_step_", ""))
     : null;
-  const selectedUni = PARTNER_UNIVERSITIES.find((u) => u.id === selectedUniId);
+  const selectedStep = selectedStepNumber
+    ? DISCOVER_TO_APPLY_STEPS[selectedStepNumber - 1]
+    : undefined;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
-      <div className="bg-white rounded-t-[32px] sm:rounded-3xl max-w-xl w-full p-5 sm:p-8 shadow-2xl border-t sm:border border-slate-200/90 relative overflow-y-auto max-h-[92vh] sm:max-h-[90vh] my-0 sm:my-6 text-slate-900 animate-in slide-in-from-bottom-4 duration-300">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto" role="presentation">
+      <div className="bg-white rounded-t-[32px] sm:rounded-3xl max-w-xl w-full p-5 sm:p-8 shadow-2xl border-t sm:border border-slate-200/90 relative overflow-y-auto max-h-[92vh] sm:max-h-[90vh] my-0 sm:my-6 text-slate-900 animate-in slide-in-from-bottom-4 duration-300" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
         {/* Mobile Pull / Drag Indicator */}
         <div className="w-12 h-1.5 rounded-full bg-slate-300 mx-auto mb-2 block sm:hidden" />
 
@@ -228,17 +228,33 @@ export const LeadModal: React.FC<LeadModalProps> = ({
 
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/10 text-[#0F254B] text-xs font-bold shadow-2xs">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#F59E0B]" />
-                <span>استشارة وتقييم أكاديمي رسمي • مجاني 100%</span>
+                <span>تواصل مباشر مع فريق ثقة يوني</span>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-black text-[#0F254B] tracking-tight">
+              <h2 id="lead-modal-title" className="text-xl sm:text-2xl font-black text-[#0F254B] tracking-tight">
                 ابدأ رحلتك الأكاديمية مع{" "}
                 <span className="text-[#D97706]">ثقة يوني</span>
-              </h3>
+              </h2>
               <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed font-medium max-w-md mx-auto">
-                سجل بياناتك لتقييم مؤهلاتك واقتراح أفضل البرامج والجامعات المعتمدة بدون أي رسوم خفية.
+                اترك بيانات التواصل واهتماماتك الدراسية، وسنساعدك على فهم الخيارات والخطوات التالية. تختلف الشروط والرسوم حسب البرنامج والجامعة.
               </p>
             </div>
+
+            {pathwaySummary && (
+              <div className="rounded-2xl border border-[#0F254B]/15 bg-[#0F254B]/5 p-4 text-start">
+                <p className="text-xs font-bold text-[#0F254B]">ملخص اختياراتك في مستشار المسار</p>
+                <p className="mt-1 text-sm leading-relaxed text-slate-700">{pathwaySummary}</p>
+              </div>
+            )}
+
+            {selectedStep && (
+              <div className="rounded-2xl border border-[#0F254B]/15 bg-[#0F254B]/5 p-4 text-start">
+                <p className="text-xs font-bold text-[#0F254B]">الخطوة التي تريد مناقشتها</p>
+                <p className="mt-1 text-sm leading-relaxed text-slate-700">
+                  {selectedStep.titleAr}
+                </p>
+              </div>
+            )}
 
             {/* Selected University Official Banner if opened from university ticker */}
             {selectedUni && (
@@ -280,7 +296,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                 {/* Full Name */}
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
-                    الاسم الكامل (ثلاثي) *
+                    الاسم الكامل *
                   </label>
                   <input
                     type="text"
@@ -295,13 +311,15 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                     className={`w-full px-4 py-2.5 min-h-[44px] rounded-xl bg-white border ${
                       errors.name
                         ? "border-red-500 bg-red-50/20"
-                        : name.trim().split(/\s+/).length >= 3
+                        : name.trim().length >= 2
                           ? "border-[#0F254B]/40"
                           : "border-slate-200"
                     } text-sm text-slate-900 focus:outline-none focus:border-[#0F254B] focus:ring-2 focus:ring-[#0F254B]/15 transition-all`}
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? "lead-name-error" : undefined}
                   />
                   {errors.name && (
-                    <p className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
+                    <p id="lead-name-error" className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
                       <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                       <span>{errors.name}</span>
                     </p>
@@ -314,7 +332,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                   <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1">
                       <Mail className="w-3.5 h-3.5 text-[#0F254B]" />
-                      <span>البريد الإلكتروني *</span>
+                      <span>البريد الإلكتروني (اختياري)</span>
                     </label>
                     <input
                       type="email"
@@ -335,9 +353,11 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                             ? "border-[#0F254B]/40"
                             : "border-slate-200"
                       } text-sm text-slate-900 focus:outline-none focus:border-[#0F254B] focus:ring-2 focus:ring-[#0F254B]/15 transition-all text-start`}
+                      aria-invalid={Boolean(errors.email)}
+                      aria-describedby={errors.email ? "lead-email-error" : undefined}
                     />
                     {errors.email && (
-                      <p className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
+                      <p id="lead-email-error" className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
                         <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                         <span>{errors.email}</span>
                       </p>
@@ -369,9 +389,11 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                             ? "border-[#0F254B]/40"
                             : "border-slate-200"
                       } text-sm text-slate-900 focus:outline-none focus:border-[#0F254B] focus:ring-2 focus:ring-[#0F254B]/15 text-start transition-all font-sans`}
+                      aria-invalid={Boolean(errors.whatsapp)}
+                      aria-describedby={errors.whatsapp ? "lead-whatsapp-error" : undefined}
                     />
                     {errors.whatsapp && (
-                      <p className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
+                      <p id="lead-whatsapp-error" className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
                         <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                         <span>{errors.whatsapp}</span>
                       </p>
@@ -394,7 +416,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                           key={c.code}
                           type="button"
                           onClick={() => handleCountrySelect(c)}
-                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border ${
+                          className={`inline-flex min-h-[40px] items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border ${
                             isActive
                               ? "bg-[#0F254B] text-white border-[#0F254B] shadow-xs scale-102"
                               : "bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
@@ -436,9 +458,11 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                         ? "border-red-500 bg-red-50/20"
                         : "border-slate-200"
                     } text-sm text-slate-900 focus:outline-none focus:border-[#0F254B] focus:ring-2 focus:ring-[#0F254B]/15 transition-all`}
+                    aria-invalid={Boolean(errors.country)}
+                    aria-describedby={errors.country ? "lead-country-error" : undefined}
                   />
                   {errors.country && (
-                    <p className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
+                    <p id="lead-country-error" className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
                       <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                       <span>{errors.country}</span>
                     </p>
@@ -468,7 +492,8 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                           key={d}
                           type="button"
                           onClick={() => setDegreeLevel(d)}
-                          className={`py-2 px-3 rounded-xl text-xs font-bold text-center transition-all cursor-pointer border ${
+                          aria-pressed={isSelected}
+                          className={`min-h-[44px] py-2 px-3 rounded-xl text-xs font-bold text-center transition-all cursor-pointer border ${
                             isSelected
                               ? "bg-[#0F254B] text-white border-[#0F254B] shadow-xs"
                               : "bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
@@ -501,9 +526,11 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                         ? "border-red-500 bg-red-50/20"
                         : "border-slate-200"
                     } text-sm text-slate-900 focus:outline-none focus:border-[#0F254B] focus:ring-2 focus:ring-[#0F254B]/15 transition-all`}
+                    aria-invalid={Boolean(errors.fieldOfInterest)}
+                    aria-describedby={errors.fieldOfInterest ? "lead-interest-error" : undefined}
                   />
                   {errors.fieldOfInterest && (
-                    <p className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
+                    <p id="lead-interest-error" className="text-red-600 text-xs mt-1 font-medium flex items-center gap-1">
                       <AlertCircle className="w-3.5 h-3.5 shrink-0" />
                       <span>{errors.fieldOfInterest}</span>
                     </p>
@@ -527,6 +554,7 @@ export const LeadModal: React.FC<LeadModalProps> = ({
                             }));
                         }}
                         className="text-[11px] font-medium px-2 py-0.5 rounded-md bg-white border border-slate-200 hover:border-[#F59E0B] hover:text-[#0F254B] text-slate-600 transition-colors cursor-pointer"
+                        aria-pressed={fieldOfInterest === major}
                       >
                         {major}
                       </button>
@@ -554,23 +582,22 @@ export const LeadModal: React.FC<LeadModalProps> = ({
               <div className="space-y-2 pt-1">
                 <button
                   type="submit"
-                  disabled={loading}
-                  className="w-full flex items-center justify-center gap-2.5 py-4 min-h-[50px] rounded-2xl text-base font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+                  className="w-full flex items-center justify-center gap-2.5 py-4 min-h-[50px] rounded-2xl text-base font-bold bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
                 >
-                  {loading ? (
-                    <span>جاري التحقق والتوجيه...</span>
-                  ) : (
-                    <>
-                      <span>إرسال طلب القبول وبدء الاستشارة المباشرة</span>
-                      <ArrowLeft className="w-5 h-5" />
-                    </>
-                  )}
+                  <span>متابعة إلى واتساب</span>
+                  <ArrowLeft className="w-5 h-5" />
                 </button>
+
+                {errors.form && (
+                  <p role="alert" className="text-center text-xs font-medium text-red-700">
+                    {errors.form}
+                  </p>
+                )}
 
                 <div className="flex items-center justify-center gap-1.5 text-center text-xs text-[#64748B] pt-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#F59E0B] shrink-0" />
                   <span>
-                    بياناتك سرية ومشفرة للتقديم الرسمي فقط • رسوم استشارة 0$ مجاناً
+                    ستفتح رسالة واتساب لتراجعها وترسلها بنفسك. لا تُرسل بياناتك قبل الضغط على إرسال داخل واتساب.
                   </span>
                 </div>
               </div>
@@ -583,15 +610,14 @@ export const LeadModal: React.FC<LeadModalProps> = ({
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-2xl font-black text-[#0F254B]">
-                تم تحويلك للواتساب بنجاح!
-              </h3>
+              <h2 id="lead-modal-title" className="text-2xl font-black text-[#0F254B]">
+              رسالتك جاهزة في واتساب
+              </h2>
 
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-sm mx-auto font-medium">
                 شكراً لك يا{" "}
                 <span className="font-bold text-slate-900">{name}</span>. تم فتح
-                تطبيق الواتساب لتتمكن من إرسال تفاصيلك مباشرة إلى مستشار ثقة يوني
-                المعتمد.
+                واتساب برسالة مُعبأة مسبقاً. راجعها ثم أرسلها إلى فريق ثقة يوني لبدء المحادثة.
               </p>
             </div>
 

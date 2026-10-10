@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { UniversitiesSection } from "./components/UniversitiesSection";
@@ -20,20 +20,45 @@ import { MobileBottomNav } from "./components/MobileBottomNav";
 export function App() {
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
   const [leadInitialInterest, setLeadInitialInterest] = useState("");
+  const [pathwaySummary, setPathwaySummary] = useState("");
 
   const [isAdvisorModalOpen, setIsAdvisorModalOpen] = useState(false);
   const [legalModalType, setLegalModalType] = useState<
     "privacy" | "terms" | "refund" | null
   >(null);
+  const hasOpenModal =
+    isLeadModalOpen || isAdvisorModalOpen || legalModalType !== null;
+
+  useEffect(() => {
+    if (!hasOpenModal) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setIsLeadModalOpen(false);
+      setIsAdvisorModalOpen(false);
+      setLegalModalType(null);
+      setPathwaySummary("");
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [hasOpenModal]);
 
   const handleOpenLeadModal = (sourceOrInterest?: string) => {
+    setPathwaySummary("");
     setLeadInitialInterest(sourceOrInterest || "");
     setIsLeadModalOpen(true);
   };
 
   const handlePathwaySelected = (pathwayResult: string) => {
     setIsAdvisorModalOpen(false);
-    setLeadInitialInterest(pathwayResult);
+    setLeadInitialInterest("");
+    setPathwaySummary(pathwayResult);
     setIsLeadModalOpen(true);
   };
 
@@ -52,18 +77,17 @@ export function App() {
           onOpenAdvisorModal={() => setIsAdvisorModalOpen(true)}
         />
 
-        {/* Accredited Partner Universities & Verified Performance Metrics */}
         <UniversitiesSection onOpenLeadModal={handleOpenLeadModal} />
-
-        <SolutionSection onOpenLeadModal={handleOpenLeadModal} />
 
         <StudentJourneyVisual onOpenLeadModal={handleOpenLeadModal} />
 
+        <SolutionSection onOpenLeadModal={handleOpenLeadModal} />
+
         <ServicesSection onOpenLeadModal={handleOpenLeadModal} />
 
-        <WhyThiqaSection onOpenLeadModal={handleOpenLeadModal} />
-
         <MalaysiaSection onOpenLeadModal={handleOpenLeadModal} />
+
+        <WhyThiqaSection onOpenLeadModal={handleOpenLeadModal} />
 
         <TestimonialsSection />
 
@@ -84,12 +108,18 @@ export function App() {
 
       {/* Modals */}
       <LeadModal
+        key={isLeadModalOpen ? "lead-open" : "lead-closed"}
         isOpen={isLeadModalOpen}
-        onClose={() => setIsLeadModalOpen(false)}
+        onClose={() => {
+          setIsLeadModalOpen(false);
+          setPathwaySummary("");
+        }}
         initialInterest={leadInitialInterest}
+        pathwaySummary={pathwaySummary}
       />
 
       <PathwayAdvisorModal
+        key={isAdvisorModalOpen ? "advisor-open" : "advisor-closed"}
         isOpen={isAdvisorModalOpen}
         onClose={() => setIsAdvisorModalOpen(false)}
         onSelectPathway={handlePathwaySelected}

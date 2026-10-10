@@ -9,7 +9,7 @@ export const WhatsAppFloatingButton: React.FC = () => {
   const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${message}`;
 
   return (
-    <div className="fixed bottom-20 lg:bottom-6 start-4 lg:start-6 z-30 group transition-all duration-300">
+    <div className="group fixed bottom-6 start-6 z-30 hidden transition-all duration-300 lg:block">
       {/* Tooltip */}
       <div className="absolute bottom-full start-0 mb-2.5 hidden sm:group-hover:flex items-center gap-2 whitespace-nowrap px-3.5 py-2 rounded-xl bg-[#0F254B] text-white text-xs font-bold shadow-xl border border-white/10 animate-in fade-in slide-in-from-bottom-1">
         <span>مستشار {BRAND_NAME_AR} المباشر:</span>
