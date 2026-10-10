@@ -12,11 +12,11 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({
   return (
     <section
       id="why-thiqa"
-      className="py-16 sm:py-24 bg-[#F8FAFC] relative border-t border-slate-200/80"
+      className="py-12 sm:py-20 lg:py-24 bg-[#F8FAFC] relative border-t border-slate-200/80"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-12">
+        <div className="text-center space-y-3.5 max-w-3xl mx-auto mb-8 sm:mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-xs">
             <ShieldCheck className="w-4 h-4 text-[#F59E0B]" />
             <span>فارق التميز مع ثقة يوني</span>

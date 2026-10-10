@@ -216,11 +216,13 @@ export const LeadModal: React.FC<LeadModalProps> = ({
           <div className="space-y-6">
             {/* Modal Header */}
             <div className="text-center space-y-2.5 pt-2">
-              <div className="h-14 sm:h-16 flex items-center justify-center mx-auto">
+              <div className="h-18 sm:h-22 flex items-center justify-center mx-auto mb-1">
                 <img
                   src="/thiqa-logo.png"
                   alt="شعار ثقة يوني — الشريك الأكاديمي الدولي"
-                  className="max-h-full w-auto object-contain"
+                  width="160"
+                  height="80"
+                  className="max-h-full w-auto object-contain drop-shadow-xs"
                 />
               </div>
 

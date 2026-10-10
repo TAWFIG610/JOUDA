@@ -45,12 +45,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
           {/* Brand Column */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="h-14 bg-white p-1.5 rounded-xl shadow-md border border-white/20 shrink-0">
+              <div className="h-18 sm:h-20 bg-white p-2.5 rounded-2xl shadow-lg border border-white/20 shrink-0">
                 <img
                   src="/thiqa-logo.png"
                   alt={`${BRAND_NAME_AR} — ${BRAND_TAGLINE}`}
-                  width="112"
-                  height="56"
+                  width="160"
+                  height="80"
                   loading="lazy"
                   className="h-full w-auto object-contain"
                 />

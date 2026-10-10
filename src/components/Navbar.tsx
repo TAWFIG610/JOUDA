@@ -35,16 +35,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Brand Logo - THIQA UNI Official Logo */}
           <a
             href="#hero"
-            className="flex items-center gap-3 group focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 shrink-0 py-0.5"
+            className="flex items-center gap-3 group focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 shrink-0 py-1"
             aria-label={`${BRAND_NAME_EN} - ${BRAND_TAGLINE}`}
           >
             <img
               src="/thiqa-logo.png"
               alt="شعار ثقة يوني — الشريك الأكاديمي الدولي للتعليم العالي"
-              width="128"
-              height="64"
+              width="176"
+              height="88"
               fetchPriority="high"
-              className="h-12 sm:h-14 lg:h-16 w-auto object-contain transition-transform duration-200 group-hover:scale-102"
+              className="h-15 sm:h-18 lg:h-22 w-auto object-contain transition-transform duration-200 group-hover:scale-102 drop-shadow-xs"
             />
           </a>
 
