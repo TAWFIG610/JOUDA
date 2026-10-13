@@ -159,7 +159,7 @@ export const PARTNER_UNIVERSITIES: PartnerUniversity[] = [
   },
 ];
 
-export const DISCOVER_TO_APPLY_STEPS: { number: string; title: Localized; desc: Localized }[] = [
+export const JOURNEY_STEPS: { number: string; title: Localized; desc: Localized }[] = [
   {
     number: "1",
     title: { ar: "نتعرّف على وضعك", en: "We learn about you" },

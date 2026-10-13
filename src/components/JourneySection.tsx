@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
-import { DISCOVER_TO_APPLY_STEPS } from "../data/thiqaData";
+import { JOURNEY_STEPS } from "../data/thiqaData";
 import { ArrowLeft } from "lucide-react";
 import { SectionHeader } from "./ui/SectionHeader";
 import { useElementProgress } from "../hooks/useScroll";
 import { useLang } from "../i18n/LanguageContext";
 
-interface StudentJourneyVisualProps {
+interface JourneySectionProps {
   onOpenLeadModal: (source?: string) => void;
 }
 
-const LAST = DISCOVER_TO_APPLY_STEPS.length - 1;
+const LAST = JOURNEY_STEPS.length - 1;
 
 const TEXT = {
   ar: {
@@ -24,7 +24,7 @@ const TEXT = {
   },
 };
 
-export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOpenLeadModal }) => {
+export const JourneySection: React.FC<JourneySectionProps> = ({ onOpenLeadModal }) => {
   const { lang, t } = useLang();
   const text = TEXT[lang];
   const listRef = useRef<HTMLOListElement>(null);
@@ -48,7 +48,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOp
             />
           </span>
 
-          {DISCOVER_TO_APPLY_STEPS.map((step, idx) => {
+          {JOURNEY_STEPS.map((step, idx) => {
             const reached = idx <= reachedIndex;
             return (
               <li key={step.number} className="relative flex gap-4 pb-8 last:pb-0 lg:flex-col lg:items-center lg:pb-0 lg:text-center">

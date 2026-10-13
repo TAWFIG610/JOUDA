@@ -3,7 +3,7 @@ import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { UniversitiesSection } from "./components/UniversitiesSection";
 import { AboutSection } from "./components/AboutSection";
-import { StudentJourneyVisual } from "./components/StudentJourneyVisual";
+import { JourneySection } from "./components/JourneySection";
 import { ServicesSection } from "./components/ServicesSection";
 import { WhyThiqaSection } from "./components/WhyThiqaSection";
 import { MalaysiaSection } from "./components/MalaysiaSection";
@@ -84,7 +84,7 @@ export function App() {
         <ServicesSection onOpenLeadModal={handleOpenLeadModal} />
 
         {/* 3. How it works */}
-        <StudentJourneyVisual onOpenLeadModal={handleOpenLeadModal} />
+        <JourneySection onOpenLeadModal={handleOpenLeadModal} />
 
         {/* 4. Where you can study */}
         <UniversitiesSection onOpenLeadModal={handleOpenLeadModal} />
