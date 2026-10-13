@@ -1,122 +1,132 @@
 import React from "react";
-import {
-  GraduationCap,
-  ShieldCheck,
-  MapPin,
-  FileCheck2,
-  ArrowLeft,
-  Briefcase,
-} from "lucide-react";
+import { ArrowLeft, Briefcase, FileCheck2, GraduationCap, MapPin, ShieldCheck } from "lucide-react";
+import { SectionHeader } from "./ui/SectionHeader";
+import { Reveal } from "./ui/Reveal";
 
 interface ServicesSectionProps {
   onOpenLeadModal: (source?: string) => void;
 }
 
-const services = [
+const SERVICES = [
   {
     icon: GraduationCap,
     title: "تأمين القبول الأكاديمي المباشر",
-    desc: "نقدّم ملفك ونتواصل مباشرة مع عمادات القبول في الجامعات الحكومية والخاصة المعتمدة لتسريع إصدار القبول الرسمي.",
-    badge: "استشارة مجانية 0$",
+    desc: "نراجع ملفك ونجهّز طلبك للجامعة التي تختارها، ونتواصل مع مكاتب القبول في الجامعات الحكومية والخاصة المعتمدة لمتابعة إصدار خطاب القبول الرسمي.",
+    badge: "استشارة مجانية",
+    span: "lg:col-span-2",
+    featured: true,
   },
   {
     icon: ShieldCheck,
     title: "معاملات تأشيرة الطالب EMGS",
-    desc: "إشراف وتدقيق متكامل على الفحص الطبي ومتطلبات الهجرة الرسمية حتى صدور خطاب الموافقة الأمنية والتأشيرة (VAL).",
+    desc: "إشراف وتدقيق على الفحص الطبي ومتطلبات الهجرة الرسمية حتى صدور خطاب الموافقة (VAL).",
     badge: "متابعة الإجراءات",
+    span: "",
+    featured: false,
   },
   {
     icon: MapPin,
     title: "الاستقبال والسكن الطلابي",
-    desc: "نوفر لك خيارات سكن آمنة ومريحة بالقرب من الحرم الجامعي، مع استقبال مندوبنا لك بصالة الوصول بمطار كوالالمبور.",
+    desc: "خيارات سكن آمنة بالقرب من الحرم الجامعي، واستقبال في مطار كوالالمبور ومرافقة حتى أول محاضرة.",
     badge: "مرافقة ميدانية",
+    span: "",
+    featured: false,
   },
   {
     icon: FileCheck2,
     title: "تدقيق ومعادلة المستندات",
-    desc: "تدقيق شامل لكافة الشهادات والأوراق وتجهيزها بالصيغة المعتمدة لدى وزارة التعليم العالي الماليزية وهيئات الاعتماد.",
+    desc: "تدقيق شامل للشهادات والأوراق وتجهيزها بالصيغة المعتمدة لدى وزارة التعليم العالي الماليزية وهيئات الاعتماد، لتقليل التأخير والرفض بسبب نقص المستندات.",
     badge: "تدقيق احترافي",
+    span: "lg:col-span-2",
+    featured: false,
   },
 ];
 
-export const ServicesSection: React.FC<ServicesSectionProps> = ({
-  onOpenLeadModal,
-}) => {
-  return (
-    <section
-      id="services"
-      className="py-10 sm:py-20 lg:py-24 bg-[#F8FAFC] relative border-t border-slate-200/80"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="mx-auto mb-10 max-w-3xl space-y-3 text-center sm:mb-14">
-          <div className="section-eyebrow">
-            <Briefcase className="w-3.5 h-3.5 text-[#F59E0B]" />
-            <span>خدمات طلابية متكاملة</span>
-          </div>
+export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenLeadModal }) => (
+  <section id="services" className="relative bg-white py-16 sm:py-24">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SectionHeader
+        icon={Briefcase}
+        eyebrow="منظومة خدمات متكاملة"
+        title={
+          <>
+            من أول استشارة... <span className="text-gradient-gold block">وحتى أول يوم في الحرم الجامعي</span>
+          </>
+        }
+        description="نساعدك على فهم إجراءات القبول والتأشيرة وتجهيز المستندات، مع توضيح ما يعتمد على الجامعة وما يخضع للجهات الرسمية."
+      />
 
-          <h2 className="section-title">
-            خدمات متكاملة تغطي كافة متطلبات دراستك
-          </h2>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+        {SERVICES.map(({ icon: Icon, title, desc, badge, span, featured }, idx) => (
+          <Reveal key={title} delay={idx * 100} className={span}>
+            <article
+              className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-[2rem] p-6 transition-all duration-300 hover:-translate-y-1 sm:p-8 ${
+                featured
+                  ? "bg-gradient-to-br from-brand-800 via-brand-900 to-ink text-white shadow-[0_30px_60px_-30px_rgb(10_24_56/0.7)]"
+                  : "content-card"
+              }`}
+            >
+              {featured && (
+                <>
+                  <div className="bg-dots-light absolute inset-0" aria-hidden="true" />
+                  <GraduationCap
+                    className="absolute -bottom-8 -end-6 h-44 w-44 rotate-[-12deg] text-white/5 transition-transform duration-500 group-hover:rotate-0 group-hover:scale-110"
+                    aria-hidden="true"
+                  />
+                </>
+              )}
 
-          <p className="section-description">
-            من تجهيز الأوراق الأكاديمية حتى الاستقرار الكامل في الحرم الجامعي، نقدم حلولاً احترافية بمعايير عالمية.
-          </p>
-        </div>
-
-        {/* 4 Cards Grid */}
-        <div className="mb-10 grid grid-cols-1 gap-4 sm:mb-14 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-          {services.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={idx}
-                className="content-card flex flex-col justify-between p-6 group"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-xl bg-[#0F254B]/5 text-[#0F254B] group-hover:bg-[#0F254B] group-hover:text-white transition-colors flex items-center justify-center">
-                      <Icon className="h-6 w-6" aria-hidden="true" />
-                    </div>
-                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-md bg-amber-50 text-thiqa-gold border border-amber-200">
-                      {item.badge}
-                    </span>
-                  </div>
-
-                  <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#0F254B] transition-colors">
-                    {item.title}
-                  </h3>
-
-                  <p className="text-sm leading-relaxed text-slate-600">
-                    {item.desc}
-                  </p>
-                </div>
-
-                <div className="pt-4 mt-4 border-t border-slate-100">
-                  <button
-                    onClick={() => onOpenLeadModal(`service_${idx + 1}`)}
-                    className="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#0F254B] transition-colors hover:text-[#B45309] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+              <div className="relative space-y-4">
+                <div className="flex items-center justify-between gap-3">
+                  <span
+                    className={`flex h-14 w-14 items-center justify-center rounded-2xl transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110 ${
+                      featured
+                        ? "bg-gradient-to-br from-gold-300 to-gold-500 text-ink"
+                        : "bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700 ring-1 ring-brand-200/70"
+                    }`}
                   >
-                    <span>طلب الخدمة</span>
-                    <ArrowLeft className="w-3.5 h-3.5" />
-                  </button>
+                    <Icon className="h-7 w-7" aria-hidden="true" />
+                  </span>
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-bold ${
+                      featured ? "bg-white/10 text-gold-300 ring-1 ring-white/15" : "bg-gold-50 text-gold-700 ring-1 ring-gold-200"
+                    }`}
+                  >
+                    {badge}
+                  </span>
                 </div>
-              </div>
-            );
-          })}
-        </div>
 
-        {/* Bottom Banner */}
-        <div className="text-center">
-          <button
-            onClick={() => onOpenLeadModal("services_general_cta")}
-            className="inline-flex min-h-12 items-center gap-2.5 rounded-xl bg-[#0F254B] px-8 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#17376B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
-          >
-            <span>استفسر عن باقة الخدمات الشاملة</span>
-            <ArrowLeft className="w-4 h-4" />
-          </button>
-        </div>
+                <h3 className={`text-xl font-bold leading-snug ${featured ? "sm:text-2xl" : "text-ink"}`}>{title}</h3>
+                <p className={`max-w-xl text-base leading-relaxed ${featured ? "text-brand-100/85" : "text-muted"}`}>{desc}</p>
+              </div>
+
+              <div className={`relative mt-6 border-t pt-4 ${featured ? "border-white/15" : "border-line"}`}>
+                <button
+                  type="button"
+                  onClick={() => onOpenLeadModal(`service_${idx + 1}`)}
+                  className={`inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-bold transition-colors ${
+                    featured ? "text-gold-300 hover:text-gold-200" : "text-brand-700 hover:text-gold-700"
+                  }`}
+                >
+                  <span>اطلب الخدمة</span>
+                  <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
+                </button>
+              </div>
+            </article>
+          </Reveal>
+        ))}
       </div>
-    </section>
-  );
-};
+
+      <Reveal className="mt-12 text-center">
+        <button
+          type="button"
+          onClick={() => onOpenLeadModal("services_general_cta")}
+          className="btn btn-primary btn-shimmer px-8"
+        >
+          <span>ابدأ الآن بتأمين قبولك الجامعي</span>
+          <ArrowLeft className="h-4 w-4" />
+        </button>
+      </Reveal>
+    </div>
+  </section>
+);

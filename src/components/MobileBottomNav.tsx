@@ -1,86 +1,58 @@
 import React from "react";
 import { WHATSAPP_BASE_URL } from "../data/thiqaData";
-import {
-  Home,
-  GraduationCap,
-  Compass,
-  MessageCircle,
-  Award,
-} from "lucide-react";
+import { Award, Compass, GraduationCap, Home, MessageCircle } from "lucide-react";
+import { useActiveSection } from "../hooks/useScroll";
 
 interface MobileBottomNavProps {
   onOpenLeadModal: (source?: string) => void;
   onOpenAdvisorModal: () => void;
 }
 
-export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
-  onOpenLeadModal,
-  onOpenAdvisorModal,
-}) => {
+const SECTIONS = ["hero", "universities"];
+
+const itemClass =
+  "group flex min-h-12 min-w-12 flex-col items-center justify-center rounded-xl px-1 py-1 text-center transition-colors";
+
+export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ onOpenLeadModal, onOpenAdvisorModal }) => {
+  const active = useActiveSection(SECTIONS);
   const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${encodeURIComponent(
     "مرحباً فريق ثقة يوني، أود الاستفسار عن فرص القبول والتسجيل في الجامعات.",
   )}`;
 
+  const tone = (id: string) => (active === id ? "text-brand-700" : "text-slate-500 hover:text-brand-700");
+
   return (
     <nav
       aria-label="شريط التنقل السريع للهاتف"
-      className="fixed bottom-0 start-0 end-0 z-40 border-t border-slate-200/90 bg-white/95 pb-[max(0.5rem,env(safe-area-inset-bottom))] shadow-[0_-4px_20px_rgba(15,37,75,0.06)] backdrop-blur-md transition-transform duration-300 lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/90 pb-[max(0.5rem,env(safe-area-inset-bottom))] shadow-[0_-10px_30px_-15px_rgb(10_24_56/0.25)] backdrop-blur-xl lg:hidden"
     >
-      <div className="mx-auto flex max-w-md items-center justify-around gap-1 px-2 py-1.5 sm:px-3">
-        {/* Home */}
-        <a
-          href="#hero"
-          className="group flex min-h-12 min-w-12 flex-col items-center justify-center rounded-xl py-1 text-center text-slate-600 transition-colors hover:text-[#0F254B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B]"
-        >
-          <Home className="w-5 h-5 text-slate-500 group-hover:text-[#0F254B] transition-colors" />
-          <span className="mt-1 text-[11px] font-bold tracking-tight">
-            الرئيسية
-          </span>
+      <div className="mx-auto flex max-w-md items-center justify-around gap-1 px-2 pt-1.5">
+        <a href="#hero" className={`${itemClass} ${tone("hero")}`} aria-current={active === "hero" ? "location" : undefined}>
+          <Home className="h-5 w-5" />
+          <span className="mt-1 text-[11px] font-bold">الرئيسية</span>
         </a>
 
-        {/* Universities */}
-        <a
-          href="#universities"
-          className="group flex min-h-12 min-w-12 flex-col items-center justify-center rounded-xl py-1 text-center text-slate-600 transition-colors hover:text-[#0F254B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B]"
-        >
-          <GraduationCap className="w-5 h-5 text-slate-500 group-hover:text-[#0F254B] transition-colors" />
-          <span className="mt-1 text-[11px] font-bold tracking-tight">
-            الجامعات
-          </span>
+        <a href="#universities" className={`${itemClass} ${tone("universities")}`} aria-current={active === "universities" ? "location" : undefined}>
+          <GraduationCap className="h-5 w-5" />
+          <span className="mt-1 text-[11px] font-bold">الجامعات</span>
         </a>
 
-        {/* Advisor Modal Trigger */}
-        <button
-          type="button"
-          onClick={onOpenAdvisorModal}
-          className="group flex min-h-12 min-w-12 flex-col items-center justify-center rounded-xl py-1 text-center text-slate-600 transition-colors hover:text-[#0F254B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B]"
-        >
-          <Compass className="w-5 h-5 text-thiqa-gold group-hover:text-[#0F254B] transition-colors" />
-          <span className="mt-1 text-[11px] font-bold tracking-tight">
-            المستشار
-          </span>
+        <button type="button" onClick={onOpenAdvisorModal} className={`${itemClass} text-slate-500 hover:text-brand-700`}>
+          <Compass className="h-5 w-5 text-gold-600" />
+          <span className="mt-1 text-[11px] font-bold">المستشار</span>
         </button>
 
-        {/* WhatsApp Direct */}
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex min-h-12 min-w-12 flex-col items-center justify-center rounded-xl py-1 text-center text-emerald-700 transition-colors hover:text-emerald-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-        >
-          <MessageCircle className="w-5 h-5 text-emerald-600 group-hover:scale-105 transition-transform" />
-          <span className="mt-1 text-[11px] font-bold tracking-tight">
-            واتساب
-          </span>
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className={`${itemClass} text-success-600 hover:text-success-700`}>
+          <MessageCircle className="h-5 w-5" />
+          <span className="mt-1 text-[11px] font-bold">واتساب</span>
         </a>
 
-        {/* Primary CTA Apply */}
         <button
           type="button"
           onClick={() => onOpenLeadModal("mobile_bottom_bar")}
-          className="flex min-h-11 items-center gap-1.5 rounded-xl bg-thiqa-gold px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-thiqa-gold-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 sm:px-3.5 sm:text-sm"
+          className="btn btn-primary min-h-11 gap-1.5 rounded-xl px-3.5 py-2 text-sm sm:text-sm"
         >
-          <Award className="w-4 h-4 shrink-0" />
+          <Award className="h-4 w-4 shrink-0" />
           <span className="whitespace-nowrap">قدّم الآن</span>
         </button>
       </div>

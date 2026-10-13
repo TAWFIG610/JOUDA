@@ -16,8 +16,9 @@ export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_PHONE}`;
 
 export const NAV_LINKS: NavLink[] = [
   { name: "الجامعات الشريكة", href: "#universities" },
+  { name: "رحلة الطالب", href: "#journey" },
   { name: "خدماتنا", href: "#services" },
-  { name: "رحلة الطالب (من الاستكشاف للتقديم)", href: "#journey" },
+  { name: "لماذا ماليزيا؟", href: "#why-malaysia" },
   { name: "لماذا ثقة يوني؟", href: "#why-thiqa" },
   { name: "الأسئلة الشائعة", href: "#faq" },
 ];
@@ -326,7 +327,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: "1",
     name: "عبدالرحمن العتيبي",
-    country: "المملكة العربية السعودية 🇸🇦",
+    country: "المملكة العربية السعودية",
     university: "Taylor's University",
     program: "بكالوريوس هندسة البرمجيات",
     quote:
@@ -337,7 +338,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: "2",
     name: "سارة المهدي",
-    country: "جمهورية مصر العربية 🇪🇬",
+    country: "جمهورية مصر العربية",
     university: "Asia Pacific University (APU)",
     program: "ماجستير الأمن السيبراني",
     quote:
@@ -348,7 +349,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: "3",
     name: "محمد باجعفر",
-    country: "اليمن 🇾🇪",
+    country: "اليمن",
     university: "Universiti Malaya (UM)",
     program: "بكالوريوس الهندسة الميكانيكية",
     quote:

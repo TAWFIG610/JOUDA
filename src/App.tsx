@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { UniversitiesSection } from "./components/UniversitiesSection";
-import { SolutionSection } from "./components/SolutionSection";
 import { StudentJourneyVisual } from "./components/StudentJourneyVisual";
 import { ServicesSection } from "./components/ServicesSection";
 import { WhyThiqaSection } from "./components/WhyThiqaSection";
@@ -63,7 +62,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-arabic selection:bg-amber-500/20 selection:text-[#0F254B] overflow-x-hidden antialiased">
+    <div className="min-h-screen overflow-x-hidden bg-paper font-arabic text-ink antialiased">
       {/* Sticky Header */}
       <Navbar
         onOpenLeadModal={handleOpenLeadModal}
@@ -71,7 +70,7 @@ export function App() {
       />
 
       {/* Main Content Flow */}
-      <main className="overflow-x-hidden pb-24 lg:pb-0">
+      <main className="overflow-x-hidden">
         <Hero
           onOpenLeadModal={handleOpenLeadModal}
           onOpenAdvisorModal={() => setIsAdvisorModalOpen(true)}
@@ -80,8 +79,6 @@ export function App() {
         <UniversitiesSection onOpenLeadModal={handleOpenLeadModal} />
 
         <StudentJourneyVisual onOpenLeadModal={handleOpenLeadModal} />
-
-        <SolutionSection onOpenLeadModal={handleOpenLeadModal} />
 
         <ServicesSection onOpenLeadModal={handleOpenLeadModal} />
 

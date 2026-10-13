@@ -1,41 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NAV_LINKS, WHATSAPP_BASE_URL, BRAND_NAME_EN, BRAND_TAGLINE } from "../data/thiqaData";
-import { Menu, X, ArrowLeft, Compass, MessageSquare } from "lucide-react";
+import { Menu, X, ArrowLeft, Compass, MessageCircle } from "lucide-react";
+import { useActiveSection, usePageScroll } from "../hooks/useScroll";
 
 interface NavbarProps {
   onOpenLeadModal: (source?: string) => void;
   onOpenAdvisorModal: () => void;
 }
 
+const SECTION_IDS = NAV_LINKS.map((link) => link.href.slice(1));
+
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenLeadModal,
   onOpenAdvisorModal,
 }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const { progress, scrolled } = usePageScroll();
+  const activeSection = useActiveSection(SECTION_IDS);
+  const solid = scrolled || mobileMenuOpen;
 
   return (
     <header
-      className={`fixed top-0 start-0 end-0 z-40 transition-all duration-300 ${
-        isScrolled
-          ? "border-b border-slate-200/90 bg-white/95 py-1.5 shadow-sm backdrop-blur-md"
-          : "border-b border-slate-100 bg-white/95 py-2 backdrop-blur-sm"
+      className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
+        solid
+          ? "border-b border-line/80 bg-white/90 shadow-[0_8px_30px_-18px_rgb(10_24_56/0.35)] backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-4">
-          {/* Brand Logo - THIQA UNI Official Logo */}
+      {/* Reading progress */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-0.5 origin-right bg-gradient-to-l from-gold-400 to-gold-600 transition-transform duration-150"
+        style={{ transform: `scaleX(${progress})` }}
+        aria-hidden="true"
+      />
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div
+          className={`flex items-center justify-between gap-4 transition-all duration-300 ${
+            solid ? "py-1.5" : "py-3"
+          }`}
+        >
           <a
             href="#hero"
-            className="flex items-center gap-3 group focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 shrink-0 py-1"
+            className="group shrink-0 rounded-xl py-1"
             aria-label={`${BRAND_NAME_EN} - ${BRAND_TAGLINE}`}
           >
             <img
@@ -44,30 +51,45 @@ export const Navbar: React.FC<NavbarProps> = ({
               width="176"
               height="88"
               fetchPriority="high"
-              className="h-12 w-auto object-contain drop-shadow-xs transition-transform duration-200 group-hover:scale-102 sm:h-14 lg:h-16"
+              className={`w-auto object-contain transition-all duration-300 group-hover:scale-[1.03] ${
+                solid ? "h-11 sm:h-12 lg:h-14" : "h-12 sm:h-14 lg:h-16"
+              }`}
             />
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden items-center justify-center gap-4 xl:gap-6 lg:flex">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="whitespace-nowrap rounded-lg py-2 text-[13px] font-semibold text-slate-700 transition-colors hover:text-[#0F254B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
-              >
-                {link.name}
-              </a>
-            ))}
+          <nav aria-label="التنقل الرئيسي" className="hidden items-center gap-0.5 xl:flex">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeSection === link.href.slice(1);
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? "location" : undefined}
+                  className={`relative whitespace-nowrap rounded-xl px-3 py-2 text-sm font-semibold transition-colors xl:px-3.5 ${
+                    isActive
+                      ? "bg-brand-50 text-brand-800"
+                      : "text-slate-600 hover:bg-brand-50/60 hover:text-brand-800"
+                  }`}
+                >
+                  {link.name}
+                  <span
+                    className={`absolute inset-x-3 -bottom-0.5 h-0.5 origin-center rounded-full bg-gold-500 transition-transform duration-300 ${
+                      isActive ? "scale-x-100" : "scale-x-0"
+                    }`}
+                    aria-hidden="true"
+                  />
+                </a>
+              );
+            })}
           </nav>
 
-          {/* Desktop Actions */}
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
+          <div className="ms-auto hidden shrink-0 items-center gap-2 lg:flex xl:ms-0">
             <button
+              type="button"
               onClick={onOpenAdvisorModal}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold text-[#0F254B] bg-[#0F254B]/5 hover:bg-[#0F254B]/10 border border-[#0F254B]/15 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 whitespace-nowrap"
+              className="btn min-h-11 px-3.5 py-2 text-sm text-brand-800 hover:bg-brand-50"
             >
-              <Compass className="w-4 h-4 text-thiqa-gold" />
+              <Compass className="h-4 w-4 text-gold-600" />
               <span>مستشار التخصص</span>
             </button>
 
@@ -75,78 +97,84 @@ export const Navbar: React.FC<NavbarProps> = ({
               href={`${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً فريق ثقة يوني، أود الاستفسار عن فرص القبول في الجامعات الدولية والماليزية.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3.5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 whitespace-nowrap"
+              aria-label="تواصل عبر واتساب"
+              className="flex h-11 w-11 items-center justify-center rounded-2xl border border-success-100 bg-success-50 text-success-600 transition-colors hover:bg-success-100"
             >
-              <MessageSquare className="w-4 h-4 text-[#0F254B]" />
-              <span>واتساب</span>
+              <MessageCircle className="h-5 w-5" />
             </a>
 
             <button
+              type="button"
               onClick={() => onOpenLeadModal("navbar_primary")}
-              className="flex items-center gap-2 px-5 py-2.5 min-h-[44px] rounded-xl text-xs sm:text-sm font-bold bg-thiqa-gold hover:bg-thiqa-gold-hover text-white shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 whitespace-nowrap"
+              className="btn btn-primary min-h-11 px-5 py-2 text-sm sm:text-sm"
             >
               <span>قدّم طلبك الآن</span>
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="h-4 w-4" />
             </button>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <div className="flex shrink-0 items-center gap-2 lg:hidden">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl text-slate-700 hover:text-slate-900 bg-slate-100/80 hover:bg-slate-200/80 border border-slate-200 focus:outline-none cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 transition-colors"
-              aria-label={mobileMenuOpen ? "إغلاق القائمة الرئيسية" : "فتح القائمة الرئيسية"}
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-navigation"
-            >
-              {mobileMenuOpen ? (
-                <X className="w-5 h-5 sm:w-6 sm:h-6" />
-              ) : (
-                <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
-              )}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="flex h-11 w-11 items-center justify-center rounded-2xl border border-line bg-white/80 text-brand-800 backdrop-blur transition-colors hover:bg-brand-50 xl:hidden"
+            aria-label={mobileMenuOpen ? "إغلاق القائمة الرئيسية" : "فتح القائمة الرئيسية"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div id="mobile-navigation" className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-slate-200 bg-white shadow-xl animate-in fade-in slide-in-from-top-2 lg:hidden">
+        <div
+          id="mobile-navigation"
+          className="max-h-[calc(100dvh-4.5rem)] animate-drawer-in overflow-y-auto border-t border-line bg-white shadow-xl xl:hidden"
+        >
           <div className="mx-auto max-w-7xl space-y-3 px-4 py-4 sm:px-6">
-            <nav className="flex flex-col gap-1.5">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex min-h-11 items-center rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-800 transition-colors hover:bg-[#0F254B]/5 hover:text-[#0F254B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
-                >
-                  {link.name}
-                </a>
-              ))}
+            <nav aria-label="التنقل الرئيسي" className="flex flex-col gap-1">
+              {NAV_LINKS.map((link, idx) => {
+                const isActive = activeSection === link.href.slice(1);
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    style={{ animationDelay: `${idx * 40}ms` }}
+                    className={`flex min-h-12 animate-fade-up items-center justify-between rounded-2xl px-4 py-2.5 text-base font-bold transition-colors ${
+                      isActive ? "bg-brand-50 text-brand-800" : "text-slate-800 hover:bg-brand-50"
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    <ArrowLeft className="h-4 w-4 text-slate-400" aria-hidden="true" />
+                  </a>
+                );
+              })}
             </nav>
 
-            <div className="flex flex-col gap-2.5 border-t border-slate-100 pt-3">
+            <div className="grid gap-2.5 border-t border-line pt-3">
               <button
+                type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenAdvisorModal();
                 }}
-                className="w-full flex items-center justify-center gap-2 py-3 min-h-[44px] rounded-xl text-sm font-bold text-[#0F254B] bg-slate-100 border border-slate-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+                className="btn btn-outline w-full"
               >
-                <Compass className="w-4 h-4 text-thiqa-gold" />
-                <span>مستشار التخصص والجامعة السريع</span>
+                <Compass className="h-4 w-4 text-gold-600" />
+                <span>اكتشف التخصص والجامعة المناسبة</span>
               </button>
 
               <button
+                type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenLeadModal("mobile_drawer");
                 }}
-                className="w-full flex items-center justify-center gap-2 py-3.5 min-h-[44px] rounded-xl text-sm font-bold bg-thiqa-gold hover:bg-thiqa-gold-hover text-white shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+                className="btn btn-primary w-full"
               >
                 <span>ابدأ رحلتك الآن مع ثقة يوني</span>
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="h-4 w-4" />
               </button>
             </div>
           </div>

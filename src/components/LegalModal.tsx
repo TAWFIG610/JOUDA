@@ -1,5 +1,6 @@
 import React from "react";
-import { X, Shield } from "lucide-react";
+import { Shield } from "lucide-react";
+import { Modal } from "./ui/Modal";
 
 interface LegalModalProps {
   isOpen: boolean;
@@ -7,60 +8,41 @@ interface LegalModalProps {
   onClose: () => void;
 }
 
-export const LegalModal: React.FC<LegalModalProps> = ({
-  isOpen,
-  type,
-  onClose,
-}) => {
-  if (!isOpen || !type) return null;
+const CONTENT = {
+  privacy: {
+    title: "سياسة الخصوصية وأمان البيانات",
+    body: "نحن في منصة ثقة يوني نلتزم بأعلى معايير حماية وخصوصية بيانات الطلاب والدارسين وأولياء الأمور. نقوم بجمع الوثائق الأكاديمية والمستندات الثبوتية لغرض التقديم الرسمي للجامعات الشريكة واستخراج الموافقات والتأشيرات فقط، مع تشفير وحفظ سري متكامل.",
+  },
+  terms: {
+    title: "الشروط والأحكام الأكاديمية",
+    body: "منصة ثقة يوني تقدم خدمات التمثيل الأكاديمي والتوجيه والتسجيل في الجامعات الدولية والماليزية المعتمدة طبقاً للوائح وزارات التعليم العالي وهيئة الهجرة (EMGS). كافة إجراءاتنا تتم بصفة قانونية معتمدة ومباشرة مع إدارات القبول.",
+  },
+  refund: {
+    title: "ميثاق الشفافية والرسوم المباشرة",
+    body: "خدمات الاستشارة والتقييم واختيار الجامعات لدى ثقة يوني مجانية تماماً (0$). الرسوم الدراسية تُسدد مباشرة للجامعات الرسمية بفواتير معتمدة بدون أي عمولات خفية أو وسطاء إضافيين.",
+  },
+};
 
-  const content = {
-    privacy: {
-      title: "سياسة الخصوصية وأمان البيانات",
-      body: "نحن في منصة ثقة يوني نلتزم بأعلى معايير حماية وخصوصية بيانات الطلاب والدارسين وأولياء الأمور. نقوم بجمع الوثائق الأكاديمية والمستندات الثبوتية لغرض التقديم الرسمي للجامعات الشريكة واستخراج الموافقات والتأشيرات فقط، مع تشفير وحفظ سري متكامل.",
-    },
-    terms: {
-      title: "الشروط والأحكام الأكاديمية",
-      body: "منصة ثقة يوني تقدم خدمات التمثيل الأكاديمي والتوجيه والتسجيل في الجامعات الدولية والماليزية المعتمدة طبقاً للوائح وزارات التعليم العالي وهيئة الهجرة (EMGS). كافة إجراءاتنا تتم بصفة قانونية معتمدة ومباشرة مع إدارات القبول.",
-    },
-    refund: {
-      title: "ميثاق الشفافية والرسوم المباشرة",
-      body: "خدمات الاستشارة والتقييم واختيار الجامعات لدى ثقة يوني مجانية تماماً (0$). الرسوم الدراسية تُسدد مباشرة للجامعات الرسمية بفواتير معتمدة بدون أي عمولات خفية أو وسطاء إضافيين.",
-    },
-  }[type];
+export const LegalModal: React.FC<LegalModalProps> = ({ isOpen, type, onClose }) => {
+  if (!type) return null;
+  const content = CONTENT[type];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
-      <div className="bg-white rounded-t-[32px] sm:rounded-3xl max-w-lg w-full p-5 sm:p-7 lg:p-8 shadow-2xl border-t sm:border border-slate-200/90 relative text-slate-900 space-y-4 my-0 sm:my-8 overflow-y-auto max-h-[92vh] sm:max-h-[90vh] animate-in slide-in-from-bottom-4 duration-300">
-        {/* Mobile Pull / Drag Indicator */}
-        <div className="w-12 h-1.5 rounded-full bg-slate-300 mx-auto mb-2 block sm:hidden" />
-
-        <button
-          onClick={onClose}
-          className="absolute top-4 start-4 sm:top-5 sm:start-5 min-h-[44px] min-w-[44px] p-2.5 rounded-2xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 flex items-center justify-center"
-          aria-label="إغلاق"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
-        <div className="flex items-center gap-3 mt-8 sm:mt-0">
-          <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-thiqa-gold flex items-center justify-center">
-            <Shield className="w-5 h-5" />
-          </div>
-          <h3 className="text-lg font-bold text-[#0F254B]">{content.title}</h3>
+    <Modal isOpen={isOpen} onClose={onClose} labelledBy="legal-modal-title" maxWidth="sm:max-w-lg">
+      <div className="space-y-5 pt-6 sm:pt-2">
+        <div className="flex items-center gap-3">
+          <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gold-100 text-gold-700">
+            <Shield className="h-5 w-5" />
+          </span>
+          <h2 id="legal-modal-title" className="text-lg font-bold text-ink">
+            {content.title}
+          </h2>
         </div>
-
-        <p className="text-sm text-slate-600 leading-relaxed bg-[#F8FAFC] p-4 rounded-2xl border border-slate-200 font-medium">
-          {content.body}
-        </p>
-
-        <button
-          onClick={onClose}
-          className="w-full py-3 min-h-[44px] rounded-xl text-xs font-bold bg-[#0F254B] hover:bg-thiqa-gold text-white transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
-        >
+        <p className="rounded-2xl border border-line bg-paper p-4 text-base leading-relaxed text-slate-700">{content.body}</p>
+        <button type="button" onClick={onClose} className="btn btn-dark w-full">
           إغلاق
         </button>
       </div>
-    </div>
+    </Modal>
   );
 };

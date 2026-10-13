@@ -1,5 +1,23 @@
 import React, { useState } from "react";
-import { X, Compass, ArrowLeft } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Briefcase,
+  CheckCircle2,
+  Compass,
+  Cpu,
+  GraduationCap,
+  Languages,
+  Library,
+  School,
+  Sparkles,
+  Stethoscope,
+  Wallet,
+  Wrench,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { Modal } from "./ui/Modal";
 
 interface PathwayAdvisorModalProps {
   isOpen: boolean;
@@ -7,164 +25,206 @@ interface PathwayAdvisorModalProps {
   onSelectPathway: (result: string) => void;
 }
 
-export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({
-  isOpen,
-  onClose,
-  onSelectPathway,
-}) => {
-  const [step, setStep] = useState(1);
-  const [degree, setDegree] = useState("بكالوريوس (جامعي)");
-  const [field, setField] = useState("");
-  const [budget, setBudget] = useState("متوسطة (4,000 - 7,500 دولار سنوياً)");
+interface Option {
+  label: string;
+  hint?: string;
+  icon: LucideIcon;
+}
 
-  if (!isOpen) return null;
+const DEGREES: Option[] = [
+  { label: "بكالوريوس (جامعي)", hint: "3–5 سنوات", icon: GraduationCap },
+  { label: "ماجستير", hint: "1–2 سنة", icon: Library },
+  { label: "دكتوراه", hint: "3+ سنوات", icon: BookOpen },
+  { label: "دورة لغة إنجليزية مكثفة", hint: "تبدأ شهرياً غالباً", icon: Languages },
+  { label: "سنة تحضيرية (Foundation)", hint: "قبل البكالوريوس", icon: School },
+];
+
+const FIELDS: Option[] = [
+  { label: "الطب والعلوم الصحية", icon: Stethoscope },
+  { label: "الحاسوب والذكاء الاصطناعي", icon: Cpu },
+  { label: "الهندسة", icon: Wrench },
+  { label: "إدارة الأعمال والمالية", icon: Briefcase },
+  { label: "لست متأكداً بعد", icon: Compass },
+];
+
+const BUDGETS: Option[] = [
+  { label: "اقتصادية", hint: "أقل من 4,000 دولار سنوياً", icon: Wallet },
+  { label: "متوسطة", hint: "4,000 – 7,500 دولار سنوياً", icon: Wallet },
+  { label: "متقدمة / جامعات عالمية", hint: "+7,500 دولار سنوياً", icon: Sparkles },
+];
+
+const TOTAL_STEPS = 3;
+
+const OptionCard: React.FC<{ option: Option; selected: boolean; onSelect: () => void; delay: number }> = ({
+  option,
+  selected,
+  onSelect,
+  delay,
+}) => {
+  const Icon = option.icon;
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-pressed={selected}
+      style={{ animationDelay: `${delay}ms` }}
+      className={`flex min-h-16 w-full animate-fade-up items-center gap-3 rounded-2xl border-2 p-3.5 text-start transition-all duration-200 ${
+        selected
+          ? "border-gold-500 bg-gold-50 shadow-[0_10px_24px_-14px_rgb(245_158_11/0.9)]"
+          : "border-line bg-white hover:-translate-y-0.5 hover:border-brand-200 hover:bg-brand-50/40"
+      }`}
+    >
+      <span
+        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors ${
+          selected ? "bg-gold-500 text-ink" : "bg-brand-50 text-brand-700"
+        }`}
+      >
+        <Icon className="h-5 w-5" aria-hidden="true" />
+      </span>
+      <span className="flex-1">
+        <span className="block text-sm font-bold text-ink sm:text-base">{option.label}</span>
+        {option.hint && <span className="block text-xs text-muted">{option.hint}</span>}
+      </span>
+      {selected && <CheckCircle2 className="h-5 w-5 shrink-0 animate-pop text-gold-600" aria-hidden="true" />}
+    </button>
+  );
+};
+
+export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({ isOpen, onClose, onSelectPathway }) => {
+  const [step, setStep] = useState(1);
+  const [degree, setDegree] = useState(DEGREES[0].label);
+  const [field, setField] = useState("");
+  const [fieldNote, setFieldNote] = useState("");
+  const [budget, setBudget] = useState(BUDGETS[1]);
+
+  const interest = [field, fieldNote.trim()].filter(Boolean).join(" — ");
+  const isResult = step > TOTAL_STEPS;
 
   const handleFinish = () => {
-    const summary = `المرحلة: ${degree} | الاهتمام: ${field || "لم يُحدد"} | الميزانية: ${budget}`;
+    const summary = `المرحلة: ${degree} | الاهتمام: ${interest || "لم يُحدد"} | الميزانية: ${budget.label} (${budget.hint})`;
     onSelectPathway(summary);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center overflow-y-auto bg-slate-950/75 p-0 backdrop-blur-md animate-in fade-in duration-200 sm:items-center sm:p-4">
-      <div className="relative my-0 max-h-[94dvh] w-full max-w-lg overflow-y-auto rounded-t-[28px] border-t border-slate-200/90 bg-white p-5 text-slate-900 shadow-2xl animate-in slide-in-from-bottom-4 duration-300 sm:my-8 sm:max-h-[90vh] sm:rounded-3xl sm:border sm:p-8" role="dialog" aria-modal="true" aria-labelledby="advisor-modal-title">
-        {/* Mobile Pull / Drag Indicator */}
-        <div className="w-12 h-1.5 rounded-full bg-slate-300 mx-auto mb-2 block sm:hidden" />
-
-        <button
-          onClick={onClose}
-          className="absolute top-4 start-4 sm:top-5 sm:start-5 min-h-[44px] min-w-[44px] p-2.5 rounded-2xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 flex items-center justify-center"
-          aria-label="إغلاق"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
-        <div className="mt-4 space-y-6 sm:mt-0">
-          <div className="text-center space-y-1">
-            <div className="section-eyebrow">
-              <Compass className="w-3.5 h-3.5 text-thiqa-gold" />
-              <span>مستشار التوجيه الأكاديمي • خطوة {step} من 3</span>
-            </div>
-            <h2 id="advisor-modal-title" className="text-xl font-black text-[#0F254B] sm:text-2xl">
-              شاركنا تفضيلاتك الدراسية
-            </h2>
-            <p className="text-sm leading-relaxed text-slate-600">
-              أجب عن ثلاثة أسئلة قصيرة. سنلخّص اختياراتك لتشاركها مع المستشار؛ هذه ليست نتيجة قبول نهائية.
-            </p>
+    <Modal isOpen={isOpen} onClose={onClose} labelledBy="advisor-modal-title" maxWidth="sm:max-w-lg">
+      <div className="space-y-6 pt-6 sm:pt-2">
+        <div className="space-y-3 text-center">
+          <div className="section-eyebrow">
+            <Compass className="h-3.5 w-3.5 text-gold-600" />
+            <span>{isResult ? "ملخص اختياراتك" : `مستشار التوجيه الأكاديمي • خطوة ${step} من ${TOTAL_STEPS}`}</span>
           </div>
+          <h2 id="advisor-modal-title" className="text-2xl font-bold text-ink">
+            {isResult ? "مسارك جاهز للمناقشة" : "اكتشف مسارك الدراسي"}
+          </h2>
 
-          {step === 1 && (
-            <div className="space-y-3">
-              <p id="advisor-degree-question" className="text-sm font-bold text-slate-700">
-                1. ما هي المرحلة الدراسية المستهدفة؟
-              </p>
-              <div role="group" aria-labelledby="advisor-degree-question" className="space-y-3">
-              {[
-                "بكالوريوس (جامعي)",
-                "ماجستير",
-                "دكتوراه",
-                "دورة لغة إنجليزية مكثفة",
-                "سنة تحضيرية (Foundation)",
-              ].map((d) => (
-                <button
-                  key={d}
-                  onClick={() => setDegree(d)}
-                  aria-pressed={degree === d}
-                  className={`w-full min-h-[48px] rounded-xl border p-3.5 text-sm font-bold text-start transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 ${
-                    degree === d
-                      ? "bg-amber-500/10 border-[#F59E0B] text-[#0F254B]"
-                      : "bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300"
+          {/* Progress */}
+          <div className="mx-auto flex max-w-xs gap-1.5" aria-hidden="true">
+            {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
+              <span key={i} className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100">
+                <span
+                  className={`block h-full origin-right rounded-full bg-gradient-to-l from-gold-400 to-gold-600 transition-transform duration-500 ${
+                    i < step ? "scale-x-100" : "scale-x-0"
                   }`}
-                >
-                  {d}
-                </button>
-              ))}
+                />
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div key={step} className="animate-fade-up space-y-3">
+          {step === 1 && (
+            <>
+              <p id="advisor-q1" className="text-base font-bold text-slate-800">ما هي المرحلة الدراسية المستهدفة؟</p>
+              <div role="group" aria-labelledby="advisor-q1" className="space-y-2.5">
+                {DEGREES.map((d, i) => (
+                  <OptionCard key={d.label} option={d} selected={degree === d.label} onSelect={() => setDegree(d.label)} delay={i * 50} />
+                ))}
               </div>
-              <button
-                onClick={() => setStep(2)}
-                className="mt-4 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#0F254B] py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#17376B] focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
-              >
-                <span>المتابعة للخطوة التالية</span>
-                <ArrowLeft className="w-4 h-4" />
-              </button>
-            </div>
+            </>
           )}
 
           {step === 2 && (
-            <div className="space-y-3">
-              <label htmlFor="advisor-field" className="block text-sm font-bold text-slate-700">
-                2. ما هو اهتمامك الدراسي أو ميولك المهنية؟ (اختياري)
-              </label>
-              <textarea
-                id="advisor-field"
-                value={field}
-                onChange={(e) => setField(e.target.value)}
-                placeholder="مثال: ذكاء اصطناعي، طب أسنان، هندسة، إدارة أعمال، أو لست متأكداً بعد..."
-                rows={3}
-                className="w-full resize-y rounded-xl border border-slate-200 bg-slate-50 p-3.5 text-base text-slate-800 placeholder:text-slate-500 transition-all duration-200 focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/20"
-                dir="rtl"
-              />
-              <div className="flex gap-2 pt-2">
-                <button
-                  onClick={() => setStep(1)}
-                  className="min-h-11 w-1/3 rounded-xl bg-slate-100 py-3 text-sm font-bold text-slate-700 transition-colors duration-200 hover:bg-slate-200 focus-visible:ring-2 focus-visible:ring-[#0F254B]"
-                >
-                  رجوع
-                </button>
-                <button
-                  onClick={() => setStep(3)}
-                  className="flex min-h-11 w-2/3 items-center justify-center gap-2 rounded-xl bg-[#0F254B] py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#17376B] focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
-                >
-                  <span>التالي</span>
-                  <ArrowLeft className="w-4 h-4" />
-                </button>
+            <>
+              <p id="advisor-q2" className="text-base font-bold text-slate-800">ما المجال الذي يجذبك أكثر؟</p>
+              <div role="group" aria-labelledby="advisor-q2" className="space-y-2.5">
+                {FIELDS.map((f, i) => (
+                  <OptionCard
+                    key={f.label}
+                    option={f}
+                    selected={field === f.label}
+                    onSelect={() => setField(field === f.label ? "" : f.label)}
+                    delay={i * 50}
+                  />
+                ))}
               </div>
-            </div>
+              <label htmlFor="advisor-field" className="field-label pt-2">
+                تخصص محدد في ذهنك؟ (اختياري)
+              </label>
+              <input
+                id="advisor-field"
+                value={fieldNote}
+                onChange={(e) => setFieldNote(e.target.value)}
+                placeholder="مثال: طب الأسنان، الأمن السيبراني..."
+                className="field-input"
+              />
+            </>
           )}
 
           {step === 3 && (
-            <div className="space-y-3">
-              <p id="advisor-budget-question" className="text-sm font-bold text-slate-700">
-                3. ما هي الميزانية السنوية المتوقعة للرسوم الدراسية؟
+            <>
+              <p id="advisor-q3" className="text-base font-bold text-slate-800">ما الميزانية السنوية المتوقعة للرسوم الدراسية؟</p>
+              <div role="group" aria-labelledby="advisor-q3" className="space-y-2.5">
+                {BUDGETS.map((b, i) => (
+                  <OptionCard key={b.label} option={b} selected={budget.label === b.label} onSelect={() => setBudget(b)} delay={i * 50} />
+                ))}
+              </div>
+            </>
+          )}
+
+          {isResult && (
+            <div className="space-y-4">
+              <div className="mx-auto flex h-16 w-16 animate-pop items-center justify-center rounded-3xl bg-gradient-to-br from-gold-300 to-gold-500 text-ink shadow-lg">
+                <GraduationCap className="h-8 w-8" />
+              </div>
+              <dl className="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-paper">
+                {[
+                  ["المرحلة", degree],
+                  ["الاهتمام", interest || "لم يُحدد بعد"],
+                  ["الميزانية", `${budget.label} (${budget.hint})`],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex items-start justify-between gap-4 px-4 py-3 text-sm">
+                    <dt className="font-bold text-muted">{k}</dt>
+                    <dd className="text-end font-bold text-ink">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="text-center text-sm leading-relaxed text-muted">
+                سنرسل هذا الملخص للمستشار ليقترح عليك جامعات وبرامج مناسبة. هذه ليست نتيجة قبول نهائية.
               </p>
-              <div role="group" aria-labelledby="advisor-budget-question" className="space-y-3">
-              {[
-                "اقتصادية (أقل من 4,000 دولار سنوياً)",
-                "متوسطة (4,000 - 7,500 دولار سنوياً)",
-                "متقدمة / جامعات عالمية (+7,500 دولار سنوياً)",
-              ].map((b) => (
-                <button
-                  key={b}
-                  onClick={() => setBudget(b)}
-                  aria-pressed={budget === b}
-                  className={`w-full min-h-[48px] rounded-xl border p-3.5 text-sm font-bold text-start transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 ${
-                    budget === b
-                      ? "bg-amber-500/10 border-[#F59E0B] text-[#0F254B]"
-                      : "bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-300"
-                  }`}
-                >
-                  {b}
-                </button>
-              ))}
-              </div>
-              <div className="flex gap-2 pt-2">
-                <button
-                  onClick={() => setStep(2)}
-                  className="w-1/3 min-h-[44px] py-3 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors duration-200 cursor-pointer"
-                >
-                  رجوع
-                </button>
-                <button
-                  onClick={handleFinish}
-                  className="w-2/3 min-h-[44px] py-3 rounded-xl text-xs font-bold bg-thiqa-gold hover:bg-thiqa-gold-hover text-white transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2 shadow-sm"
-                >
-                  <span>مشاركة اختياراتي مع المستشار</span>
-                  <ArrowLeft className="w-4 h-4" />
-                </button>
-              </div>
             </div>
           )}
         </div>
+
+        <div className="flex gap-2.5">
+          {step > 1 && (
+            <button type="button" onClick={() => setStep(step - 1)} className="btn btn-outline w-1/3 px-3">
+              <ArrowRight className="h-4 w-4" />
+              <span>رجوع</span>
+            </button>
+          )}
+          {isResult ? (
+            <button type="button" onClick={handleFinish} className="btn btn-primary btn-shimmer flex-1">
+              <span>أرسل اختياراتي للمستشار</span>
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+          ) : (
+            <button type="button" onClick={() => setStep(step + 1)} className="btn btn-dark flex-1">
+              <span>{step === TOTAL_STEPS ? "اعرض ملخصي" : "التالي"}</span>
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    </Modal>
   );
 };

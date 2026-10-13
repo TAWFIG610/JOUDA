@@ -1,24 +1,21 @@
 import React, { useState } from "react";
+import { WHATSAPP_BASE_URL, PARTNER_UNIVERSITIES, DISCOVER_TO_APPLY_STEPS } from "../data/thiqaData";
 import {
-  WHATSAPP_BASE_URL,
-  PARTNER_UNIVERSITIES,
-  DISCOVER_TO_APPLY_STEPS,
-} from "../data/thiqaData";
-import {
-  X,
-  CheckCircle2,
-  MessageCircle,
   AlertCircle,
-  Phone,
-  Mail,
-  User,
-  MapPin,
-  GraduationCap,
-  BookOpen,
-  ShieldCheck,
   ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  CheckCircle2,
   FileText,
+  GraduationCap,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  ShieldCheck,
+  User,
 } from "lucide-react";
+import { Modal } from "./ui/Modal";
 
 interface LeadModalProps {
   isOpen: boolean;
@@ -30,29 +27,22 @@ interface LeadModalProps {
 interface CountryQuickPick {
   name: string;
   code: string;
-  flag: string;
 }
 
 const POPULAR_COUNTRIES: CountryQuickPick[] = [
-  { name: "السعودية", code: "+966", flag: "🇸🇦" },
-  { name: "مصر", code: "+20", flag: "🇪🇬" },
-  { name: "اليمن", code: "+967", flag: "🇾🇪" },
-  { name: "الإمارات", code: "+971", flag: "🇦🇪" },
-  { name: "ماليزيا", code: "+60", flag: "🇲🇾" },
-  { name: "عُمان", code: "+968", flag: "🇴🇲" },
-  { name: "الكويت", code: "+965", flag: "🇰🇼" },
-  { name: "قطر", code: "+974", flag: "🇶🇦" },
-  { name: "الأردن", code: "+962", flag: "🇯🇴" },
-  { name: "السودان", code: "+249", flag: "🇸🇩" },
+  { name: "السعودية", code: "+966" },
+  { name: "مصر", code: "+20" },
+  { name: "اليمن", code: "+967" },
+  { name: "الإمارات", code: "+971" },
+  { name: "ماليزيا", code: "+60" },
+  { name: "عُمان", code: "+968" },
+  { name: "الكويت", code: "+965" },
+  { name: "قطر", code: "+974" },
+  { name: "الأردن", code: "+962" },
+  { name: "السودان", code: "+249" },
 ];
 
-const DEGREE_OPTIONS = [
-  "بكالوريوس",
-  "ماجستير",
-  "دكتوراه",
-  "لغة إنجليزية",
-  "دبلوم / تحضيري",
-];
+const DEGREE_OPTIONS = ["بكالوريوس", "ماجستير", "دكتوراه", "لغة إنجليزية", "دبلوم / تحضيري"];
 
 const SUGGESTED_MAJORS = [
   "الذكاء الاصطناعي",
@@ -63,16 +53,31 @@ const SUGGESTED_MAJORS = [
   "هندسة البرمجيات",
 ];
 
-export const LeadModal: React.FC<LeadModalProps> = ({
-  isOpen,
-  onClose,
-  initialInterest,
-  pathwaySummary = "",
-}) => {
-  const selectedUniId = initialInterest?.startsWith("university_")
-    ? initialInterest.replace("university_", "")
-    : null;
+const STEPS = [
+  { title: "خطتك الدراسية", icon: GraduationCap },
+  { title: "بياناتك", icon: User },
+  { title: "التواصل", icon: Phone },
+];
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** Fields validated on each step (0-based). */
+const STEP_FIELDS: string[][] = [["fieldOfInterest"], ["name", "country"], ["whatsapp", "email"]];
+
+const CONFETTI_COLORS = ["bg-gold-400", "bg-brand-500", "bg-success-600", "bg-gold-600", "bg-brand-300"];
+
+const FieldError: React.FC<{ id: string; message?: string }> = ({ id, message }) =>
+  message ? (
+    <p id={id} className="field-error">
+      <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+      <span>{message}</span>
+    </p>
+  ) : null;
+
+export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialInterest, pathwaySummary = "" }) => {
+  const selectedUniId = initialInterest?.startsWith("university_") ? initialInterest.replace("university_", "") : null;
   const selectedUni = PARTNER_UNIVERSITIES.find((u) => u.id === selectedUniId);
+  const [step, setStep] = useState(0);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
@@ -83,67 +88,61 @@ export const LeadModal: React.FC<LeadModalProps> = ({
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  if (!isOpen) return null;
+  const selectedStepNumber = initialInterest?.startsWith("journey_step_")
+    ? Number(initialInterest.replace("journey_step_", ""))
+    : null;
+  const selectedStep = selectedStepNumber ? DISCOVER_TO_APPLY_STEPS[selectedStepNumber - 1] : undefined;
+
+  const clearError = (key: string) => {
+    if (errors[key] || errors.form) setErrors((prev) => ({ ...prev, [key]: "", form: "" }));
+  };
 
   const handleCountrySelect = (c: CountryQuickPick) => {
     setCountry(c.name);
-    if (!whatsapp || whatsapp.startsWith("+")) {
-      setWhatsapp(c.code);
-    }
-    if (errors.country) setErrors((prev) => ({ ...prev, country: "" }));
-    if (errors.whatsapp) setErrors((prev) => ({ ...prev, whatsapp: "" }));
+    if (!whatsapp || whatsapp.startsWith("+")) setWhatsapp(c.code);
+    clearError("country");
   };
 
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
+  const collectErrors = () => {
+    const found: Record<string, string> = {};
 
-    // 1. Name validation
-    const trimmedName = name.trim();
-    if (trimmedName.length < 2) {
-      newErrors.name = "الاسم الكامل مطلوب";
-    }
+    if (name.trim().length < 2) found.name = "الاسم الكامل مطلوب";
 
-    // 2. Email is optional; validate its format only when provided.
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const trimmedEmail = email.trim();
-    if (trimmedEmail && !emailRegex.test(trimmedEmail)) {
-      newErrors.email = "يرجى إدخال بريد إلكتروني صحيح (مثال: name@gmail.com)";
+    if (trimmedEmail && !EMAIL_REGEX.test(trimmedEmail)) {
+      found.email = "يرجى إدخال بريد إلكتروني صحيح (مثال: name@gmail.com)";
     }
 
-    // 3. WhatsApp with country code validation
     const trimmedWhatsapp = whatsapp.trim();
     const cleanDigits = trimmedWhatsapp.replace(/[^\d]/g, "");
-    const hasPlusOrZero =
-      trimmedWhatsapp.startsWith("+") || trimmedWhatsapp.startsWith("00");
-
+    const hasPlusOrZero = trimmedWhatsapp.startsWith("+") || trimmedWhatsapp.startsWith("00");
     if (!trimmedWhatsapp) {
-      newErrors.whatsapp = "رقم الواتساب مع رمز الدولة مطلوب";
+      found.whatsapp = "رقم الواتساب مع رمز الدولة مطلوب";
     } else if (!hasPlusOrZero && cleanDigits.length < 10) {
-      newErrors.whatsapp =
-        "يرجى إدخال رقم الواتساب مع رمز الدولة (مثال: +966501234567)";
+      found.whatsapp = "يرجى إدخال رقم الواتساب مع رمز الدولة (مثال: +966501234567)";
     } else if (cleanDigits.length < 8 || cleanDigits.length > 16) {
-      newErrors.whatsapp =
-        "رقم الهاتف غير مكتمل، تأكد من كتابة الرقم مع مفتاح الدولة";
+      found.whatsapp = "رقم الهاتف غير مكتمل، تأكد من كتابة الرقم مع مفتاح الدولة";
     }
 
-    // 4. Country validation
     const trimmedCountry = country.trim();
-    if (!trimmedCountry) {
-      newErrors.country = "يرجى تحديد دولة الإقامة الحالية";
-    } else if (trimmedCountry.length < 2) {
-      newErrors.country = "يرجى كتابة اسم الدولة بشكل صحيح";
-    }
+    if (!trimmedCountry) found.country = "يرجى تحديد دولة الإقامة الحالية";
+    else if (trimmedCountry.length < 2) found.country = "يرجى كتابة اسم الدولة بشكل صحيح";
 
-    // 5. Field of interest validation
     const trimmedField = fieldOfInterest.trim();
-    if (!trimmedField) {
-      newErrors.fieldOfInterest = "يرجى كتابة التخصص أو المجال المطلوب";
-    } else if (trimmedField.length < 2) {
-      newErrors.fieldOfInterest = "يرجى توضيح التخصص أو اهتمامك الدراسي";
-    }
+    if (!trimmedField) found.fieldOfInterest = "يرجى كتابة التخصص أو المجال المطلوب";
+    else if (trimmedField.length < 2) found.fieldOfInterest = "يرجى توضيح التخصص أو اهتمامك الدراسي";
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return found;
+  };
+
+  /** Validates only the given step's fields; returns true when they pass. */
+  const validateStep = (index: number) => {
+    const found = collectErrors();
+    const stepErrors = Object.fromEntries(
+      Object.entries(found).filter(([key]) => STEP_FIELDS[index].includes(key)),
+    );
+    setErrors(stepErrors);
+    return Object.keys(stepErrors).length === 0;
   };
 
   const getWhatsAppUrl = () => {
@@ -160,492 +159,409 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
     return `${WHATSAPP_BASE_URL}?text=${text}`;
   };
 
-  const handleOpenWhatsAppDirect = () => {
-    window.open(getWhatsAppUrl(), "_blank");
+  const goNext = () => {
+    if (validateStep(step)) setStep(step + 1);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!validateForm()) return;
-
-    const whatsappWindow = window.open(getWhatsAppUrl(), "_blank");
-    if (!whatsappWindow) {
-      setErrors((prev) => ({
-        ...prev,
-        form: "تعذر فتح واتساب. يرجى السماح بالنوافذ المنبثقة ثم المحاولة مجدداً.",
-      }));
+    if (step < STEPS.length - 1) {
+      goNext();
       return;
     }
 
+    const found = collectErrors();
+    if (Object.keys(found).length > 0) {
+      // Send the visitor back to the first step that still has a problem.
+      const firstBad = STEP_FIELDS.findIndex((fields) => fields.some((f) => found[f]));
+      setStep(firstBad);
+      setErrors(found);
+      return;
+    }
+
+    const whatsappWindow = window.open(getWhatsAppUrl(), "_blank");
+    if (!whatsappWindow) {
+      setErrors({ form: "تعذر فتح واتساب. يرجى السماح بالنوافذ المنبثقة ثم المحاولة مجدداً." });
+      return;
+    }
     setSubmitted(true);
   };
 
-  // Helper to check valid live formats
-  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  const isEmailValid = EMAIL_REGEX.test(email.trim());
   const isWhatsappValid =
-    (whatsapp.trim().startsWith("+") || whatsapp.trim().startsWith("00")) &&
-    whatsapp.replace(/[^\d]/g, "").length >= 9;
-
-  const selectedStepNumber = initialInterest?.startsWith("journey_step_")
-    ? Number(initialInterest.replace("journey_step_", ""))
-    : null;
-  const selectedStep = selectedStepNumber
-    ? DISCOVER_TO_APPLY_STEPS[selectedStepNumber - 1]
-    : undefined;
+    (whatsapp.trim().startsWith("+") || whatsapp.trim().startsWith("00")) && whatsapp.replace(/[^\d]/g, "").length >= 9;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/75 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto" role="presentation">
-      <div className="relative my-0 max-h-[94dvh] w-full max-w-xl overflow-y-auto rounded-t-[28px] border-t border-slate-200/90 bg-white p-5 text-slate-900 shadow-2xl animate-in slide-in-from-bottom-4 duration-300 sm:my-6 sm:max-h-[90vh] sm:rounded-3xl sm:border sm:p-8" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
-        {/* Mobile Pull / Drag Indicator */}
-        <div className="w-12 h-1.5 rounded-full bg-slate-300 mx-auto mb-2 block sm:hidden" />
-
-        {/* Subtle Top Gold Accent Bar */}
-        <div className="absolute top-0 start-0 end-0 h-1.5 bg-gradient-to-r from-[#0F254B] via-[#F59E0B] to-[#0F254B] hidden sm:block" />
-
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 start-4 sm:top-5 sm:start-5 min-h-[44px] min-w-[44px] p-2.5 rounded-2xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 flex items-center justify-center"
-          aria-label="إغلاق"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
-        {!submitted ? (
-          <div className="space-y-5 sm:space-y-6">
-            {/* Modal Header */}
-            <div className="text-center space-y-2.5 pt-2">
-              <div className="mx-auto mb-1 flex h-14 items-center justify-center sm:h-16">
-                <img
-                  src="/thiqa-logo.png"
-                  alt="شعار ثقة يوني — الشريك الأكاديمي الدولي"
-                  width="160"
-                  height="80"
-                  className="max-h-full w-auto object-contain drop-shadow-xs"
-                />
-              </div>
-
-              <div className="section-eyebrow">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#F59E0B]" />
-                <span>تواصل مباشر مع فريق ثقة يوني</span>
-              </div>
-
-              <h2 id="lead-modal-title" className="text-xl font-black tracking-tight text-[#0F254B] sm:text-2xl">
-                ابدأ رحلتك الأكاديمية مع{" "}
-                <span className="text-thiqa-gold">ثقة يوني</span>
-              </h2>
-              <p className="mx-auto max-w-md text-sm leading-relaxed text-slate-600">
-                اترك بيانات التواصل واهتماماتك الدراسية، وسنساعدك على فهم الخيارات والخطوات التالية. تختلف الشروط والرسوم حسب البرنامج والجامعة.
-              </p>
+    <Modal isOpen={isOpen} onClose={onClose} labelledBy="lead-modal-title">
+      {!submitted ? (
+        <div className="space-y-6 pt-6 sm:pt-2">
+          <div className="space-y-2 text-center">
+            <div className="section-eyebrow">
+              <ShieldCheck className="h-3.5 w-3.5 text-gold-600" />
+              <span>تواصل مباشر مع فريق ثقة يوني</span>
             </div>
+            <h2 id="lead-modal-title" className="text-xl font-bold text-ink sm:text-[1.7rem]">
+              ابدأ رحلتك الأكاديمية مع <span className="text-gradient-gold">ثقة يوني</span>
+            </h2>
+            <p className="mx-auto max-w-md text-sm leading-relaxed text-muted">
+              ثلاث خطوات قصيرة، أقل من دقيقة. تختلف الشروط والرسوم حسب البرنامج والجامعة.
+            </p>
+          </div>
 
-            {pathwaySummary && (
-              <div className="rounded-2xl border border-[#0F254B]/15 bg-[#F8FAFC] p-4 text-start">
-                <p className="text-xs font-bold text-[#0F254B]">ملخص اختياراتك في مستشار المسار</p>
-                <p className="mt-1 text-sm leading-relaxed text-slate-700">{pathwaySummary}</p>
-              </div>
-            )}
-
-            {selectedStep && (
-              <div className="rounded-2xl border border-[#0F254B]/15 bg-[#F8FAFC] p-4 text-start">
-                <p className="text-xs font-bold text-[#0F254B]">الخطوة التي تريد مناقشتها</p>
-                <p className="mt-1 text-sm leading-relaxed text-slate-700">
-                  {selectedStep.titleAr}
-                </p>
-              </div>
-            )}
-
-            {/* Selected University Official Banner if opened from university ticker */}
-            {selectedUni && (
-              <div className="flex items-center gap-3.5 rounded-2xl border border-[#0F254B]/15 bg-[#F8FAFC] p-3 shadow-xs">
-                <div className="w-14 h-10 p-1 bg-white rounded-xl border border-slate-200 flex items-center justify-center shrink-0 shadow-2xs">
-                  {selectedUni.logoUrl ? (
-                    <img
-                      src={selectedUni.logoUrl}
-                      alt={selectedUni.nameEn}
-                      className="max-h-full max-w-full object-contain"
+          {/* Stepper */}
+          <ol className="grid grid-cols-3 gap-2" aria-label="خطوات النموذج">
+            {STEPS.map(({ title, icon: Icon }, i) => {
+              const done = i < step;
+              const current = i === step;
+              return (
+                <li key={title} aria-current={current ? "step" : undefined} className="space-y-2">
+                  <span className="block h-1.5 overflow-hidden rounded-full bg-slate-100">
+                    <span
+                      className={`block h-full origin-right rounded-full bg-gradient-to-l from-gold-400 to-gold-600 transition-transform duration-500 ${
+                        i <= step ? "scale-x-100" : "scale-x-0"
+                      }`}
                     />
-                  ) : (
-                    <span className="text-xs font-bold text-[#0F254B]">
-                      {selectedUni.shortName}
-                    </span>
+                  </span>
+                  <span className={`flex items-center justify-center gap-1.5 text-xs font-bold ${current ? "text-ink" : done ? "text-success-600" : "text-slate-400"}`}>
+                    {done ? <CheckCircle2 className="h-3.5 w-3.5" /> : <Icon className="h-3.5 w-3.5" />}
+                    {title}
+                  </span>
+                </li>
+              );
+            })}
+          </ol>
+
+          <form onSubmit={handleSubmit} noValidate className="space-y-5">
+            <div key={step} className="animate-fade-up space-y-4">
+              {step === 0 && (
+                <>
+                  {pathwaySummary && (
+                    <div className="rounded-2xl border border-brand-100 bg-brand-50/60 p-4">
+                      <p className="text-xs font-bold text-brand-700">ملخص اختياراتك في مستشار المسار</p>
+                      <p className="mt-1 text-sm leading-relaxed text-slate-700">{pathwaySummary}</p>
+                    </div>
                   )}
-                </div>
-                <div className="text-start space-y-0.5">
-                  <span className="text-[10px] font-bold text-thiqa-gold bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
-                    الجامعة المحددة
-                  </span>
-                  <p className="text-xs font-black text-slate-900 leading-tight">
-                    {selectedUni.nameEn}
-                  </p>
-                </div>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} noValidate className="space-y-4">
-              {/* Group 1: Personal Contact Info */}
-              <div className="space-y-4 rounded-2xl border border-slate-200/80 bg-[#F8FAFC] p-4 sm:p-5">
-                <div className="flex items-center gap-2 pb-1 border-b border-slate-200/60">
-                  <User className="w-4 h-4 text-[#0F254B]" />
-                  <span className="text-xs font-black text-[#0F254B]">
-                    بيانات الطالب والتواصل المباشر
-                  </span>
-                </div>
-
-                {/* Full Name */}
-                <div>
-                  <label htmlFor="lead-name" className="mb-1 block text-sm font-bold text-slate-700">
-                    الاسم الكامل *
-                  </label>
-                  <input
-                    id="lead-name"
-                    type="text"
-                    value={name}
-                    autoComplete="name"
-                    onChange={(e) => {
-                      setName(e.target.value);
-                      if (errors.name)
-                        setErrors((prev) => ({ ...prev, name: "" }));
-                    }}
-                    placeholder="مثال: عمر محمد أحمد"
-                    className={`w-full px-4 py-2.5 min-h-[44px] rounded-xl bg-white border ${
-                      errors.name
-                        ? "border-thiqa-danger bg-thiqa-danger-soft"
-                        : name.trim().length >= 2
-                          ? "border-[#0F254B]/40"
-                          : "border-slate-200"
-                    } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15`}
-                    aria-invalid={Boolean(errors.name)}
-                    aria-describedby={errors.name ? "lead-name-error" : undefined}
-                  />
-                  {errors.name && (
-                    <p id="lead-name-error" className="field-error">
-                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                      <span>{errors.name}</span>
-                    </p>
+                  {selectedStep && (
+                    <div className="rounded-2xl border border-brand-100 bg-brand-50/60 p-4">
+                      <p className="text-xs font-bold text-brand-700">الخطوة التي تريد مناقشتها</p>
+                      <p className="mt-1 text-sm leading-relaxed text-slate-700">{selectedStep.titleAr}</p>
+                    </div>
                   )}
-                </div>
-
-                {/* Email & WhatsApp Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {/* Email */}
-                  <div>
-                    <label htmlFor="lead-email" className="mb-1 flex items-center gap-1 text-sm font-bold text-slate-700">
-                      <Mail className="w-3.5 h-3.5 text-[#0F254B]" />
-                      <span>البريد الإلكتروني (اختياري)</span>
-                    </label>
-                    <input
-                      id="lead-email"
-                      type="email"
-                      value={email}
-                      autoComplete="email"
-                      inputMode="email"
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                        if (errors.email)
-                          setErrors((prev) => ({ ...prev, email: "" }));
-                      }}
-                      placeholder="name@example.com"
-                      dir="ltr"
-                      className={`w-full px-3.5 py-2.5 min-h-[44px] rounded-xl bg-white border ${
-                        errors.email
-                          ? "border-thiqa-danger bg-thiqa-danger-soft"
-                          : isEmailValid
-                            ? "border-[#0F254B]/40"
-                            : "border-slate-200"
-                      } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15 text-start`}
-                      aria-invalid={Boolean(errors.email)}
-                      aria-describedby={errors.email ? "lead-email-error" : undefined}
-                    />
-                    {errors.email && (
-                      <p id="lead-email-error" className="field-error">
-                        <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                        <span>{errors.email}</span>
-                      </p>
-                    )}
-                  </div>
-
-                  {/* WhatsApp */}
-                  <div>
-                    <label htmlFor="lead-whatsapp" className="mb-1 flex items-center gap-1 text-sm font-bold text-slate-700">
-                      <Phone className="w-3.5 h-3.5 text-[#0F254B]" />
-                      <span>رقم واتساب (مع الرمز) *</span>
-                    </label>
-                    <input
-                      id="lead-whatsapp"
-                      type="tel"
-                      value={whatsapp}
-                      autoComplete="tel"
-                      inputMode="tel"
-                      onChange={(e) => {
-                        setWhatsapp(e.target.value);
-                        if (errors.whatsapp)
-                          setErrors((prev) => ({ ...prev, whatsapp: "" }));
-                      }}
-                      placeholder="+966501234567"
-                      dir="ltr"
-                      className={`w-full px-3.5 py-2.5 min-h-[44px] rounded-xl bg-white border ${
-                        errors.whatsapp
-                          ? "border-thiqa-danger bg-thiqa-danger-soft"
-                          : isWhatsappValid
-                            ? "border-[#0F254B]/40"
-                            : "border-slate-200"
-                      } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15 text-start font-sans`}
-                      aria-invalid={Boolean(errors.whatsapp)}
-                      aria-describedby={errors.whatsapp ? "lead-whatsapp-error" : undefined}
-                    />
-                    {errors.whatsapp && (
-                      <p id="lead-whatsapp-error" className="field-error">
-                        <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                        <span>{errors.whatsapp}</span>
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Quick Country Selector Pills */}
-                <div className="space-y-1.5 pt-1">
-                  <span className="block text-[11px] font-bold text-slate-500">
-                    اختر دولتك للرمز السريع:
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {POPULAR_COUNTRIES.map((c) => {
-                      const isActive =
-                        country === c.name ||
-                        (whatsapp.length > 2 && whatsapp.startsWith(c.code));
-                      return (
-                        <button
-                          key={c.code}
-                          type="button"
-                          onClick={() => handleCountrySelect(c)}
-                          className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-bold transition-all ${
-                            isActive
-                              ? "bg-[#0F254B] text-white border-[#0F254B] shadow-xs scale-102"
-                              : "bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
-                          }`}
-                        >
-                          <span>{c.flag}</span>
-                          <span className="text-[11px]">{c.name}</span>
-                          <span
-                            dir="ltr"
-                            className={`text-[10px] ${
-                              isActive ? "text-[#F59E0B]" : "text-slate-400"
-                            }`}
-                          >
-                            {c.code}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Country of Residence */}
-                <div className="pt-1">
-                  <label htmlFor="lead-country" className="mb-1 flex items-center gap-1 text-sm font-bold text-slate-700">
-                    <MapPin className="w-3.5 h-3.5 text-[#0F254B]" />
-                    <span>دولة الإقامة الحالية *</span>
-                  </label>
-                  <input
-                    id="lead-country"
-                    type="text"
-                    value={country}
-                    onChange={(e) => {
-                      setCountry(e.target.value);
-                      if (errors.country)
-                        setErrors((prev) => ({ ...prev, country: "" }));
-                    }}
-                    placeholder="السعودية، مصر، اليمن، الإمارات..."
-                    className={`w-full px-4 py-2.5 min-h-[44px] rounded-xl bg-white border ${
-                      errors.country
-                        ? "border-thiqa-danger bg-thiqa-danger-soft"
-                        : "border-slate-200"
-                    } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15`}
-                    aria-invalid={Boolean(errors.country)}
-                    aria-describedby={errors.country ? "lead-country-error" : undefined}
-                  />
-                  {errors.country && (
-                    <p id="lead-country-error" className="field-error">
-                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                      <span>{errors.country}</span>
-                    </p>
+                  {selectedUni && (
+                    <div className="flex items-center gap-3.5 rounded-2xl border border-brand-100 bg-brand-50/60 p-3">
+                      <span className="flex h-11 w-16 shrink-0 items-center justify-center rounded-xl border border-line bg-white p-1.5">
+                        {selectedUni.logoUrl ? (
+                          <img src={selectedUni.logoUrl} alt={selectedUni.nameEn} className="max-h-full max-w-full object-contain" />
+                        ) : (
+                          <span className="text-xs font-bold text-brand-800">{selectedUni.shortName}</span>
+                        )}
+                      </span>
+                      <span className="space-y-0.5">
+                        <span className="inline-block rounded-full bg-gold-100 px-2 py-0.5 text-[11px] font-bold text-gold-700">الجامعة المحددة</span>
+                        <span className="block font-latin text-sm font-bold text-ink" dir="ltr">{selectedUni.nameEn}</span>
+                      </span>
+                    </div>
                   )}
-                </div>
-              </div>
 
-              {/* Group 2: Academic Goals */}
-              <div className="space-y-3 p-4 rounded-2xl bg-[#F8FAFC] border border-slate-200/80">
-                <div className="flex items-center gap-2 pb-1 border-b border-slate-200/60">
-                  <GraduationCap className="w-4 h-4 text-[#0F254B]" />
-                  <span className="text-xs font-black text-[#0F254B]">
-                    المسار الأكاديمي والتخصص المستهدف
-                  </span>
-                </div>
-
-                {/* Degree Level as Interactive Pills */}
-                <div>
-                  <label className="mb-2 block text-sm font-bold text-slate-700">
-                    المرحلة الدراسية المطلوبة *
-                  </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    {DEGREE_OPTIONS.map((d) => {
-                      const isSelected = degreeLevel === d;
-                      return (
+                  <fieldset>
+                    <legend className="field-label">المرحلة الدراسية المطلوبة *</legend>
+                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                      {DEGREE_OPTIONS.map((d) => (
                         <button
                           key={d}
                           type="button"
                           onClick={() => setDegreeLevel(d)}
-                          aria-pressed={isSelected}
-                          className={`min-h-[44px] py-2 px-3 rounded-xl text-xs font-bold text-center transition-all cursor-pointer border ${
-                            isSelected
-                              ? "bg-[#0F254B] text-white border-[#0F254B] shadow-xs"
-                              : "bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
-                          }`}
+                          aria-pressed={degreeLevel === d}
+                          className={`choice-pill ${degreeLevel === d ? "choice-pill-on" : "choice-pill-off"}`}
                         >
                           {d}
                         </button>
-                      );
-                    })}
+                      ))}
+                    </div>
+                  </fieldset>
+
+                  <div>
+                    <label htmlFor="lead-interest" className="field-label">
+                      <BookOpen className="h-4 w-4 text-brand-600" />
+                      التخصص أو المجال الدراسي المطلوب *
+                    </label>
+                    <input
+                      id="lead-interest"
+                      type="text"
+                      value={fieldOfInterest}
+                      onChange={(e) => {
+                        setFieldOfInterest(e.target.value);
+                        clearError("fieldOfInterest");
+                      }}
+                      placeholder="مثال: الأمن السيبراني، الطب، إدارة الأعمال..."
+                      className="field-input"
+                      aria-invalid={Boolean(errors.fieldOfInterest)}
+                      aria-describedby={errors.fieldOfInterest ? "lead-interest-error" : undefined}
+                    />
+                    <FieldError id="lead-interest-error" message={errors.fieldOfInterest} />
+                    <div className="flex flex-wrap gap-1.5 pt-2.5">
+                      {SUGGESTED_MAJORS.map((major) => (
+                        <button
+                          key={major}
+                          type="button"
+                          onClick={() => {
+                            setFieldOfInterest(major);
+                            clearError("fieldOfInterest");
+                          }}
+                          aria-pressed={fieldOfInterest === major}
+                          className={`choice-pill min-h-10 rounded-full px-3 py-1.5 text-xs ${
+                            fieldOfInterest === major ? "choice-pill-on" : "choice-pill-off"
+                          }`}
+                        >
+                          {major}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                </>
+              )}
 
-                {/* Field of Interest */}
-                <div>
-                  <label htmlFor="lead-interest" className="mb-1 flex items-center gap-1 text-sm font-bold text-slate-700">
-                    <BookOpen className="w-3.5 h-3.5 text-[#0F254B]" />
-                    <span>التخصص أو المجال الدراسي المطلوب *</span>
-                  </label>
-                  <input
-                    id="lead-interest"
-                    type="text"
-                    value={fieldOfInterest}
-                    onChange={(e) => {
-                      setFieldOfInterest(e.target.value);
-                      if (errors.fieldOfInterest)
-                        setErrors((prev) => ({ ...prev, fieldOfInterest: "" }));
-                    }}
-                    placeholder="مثال: الأمن السيبراني، الذكاء الاصطناعي، الطب، إدارة الأعمال..."
-                    className={`w-full px-4 py-2.5 min-h-[44px] rounded-xl bg-white border ${
-                      errors.fieldOfInterest
-                        ? "border-thiqa-danger bg-thiqa-danger-soft"
-                        : "border-slate-200"
-                    } min-h-12 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15`}
-                    aria-invalid={Boolean(errors.fieldOfInterest)}
-                    aria-describedby={errors.fieldOfInterest ? "lead-interest-error" : undefined}
-                  />
-                  {errors.fieldOfInterest && (
-                    <p id="lead-interest-error" className="field-error">
-                      <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                      <span>{errors.fieldOfInterest}</span>
-                    </p>
-                  )}
+              {step === 1 && (
+                <>
+                  <div>
+                    <label htmlFor="lead-name" className="field-label">
+                      <User className="h-4 w-4 text-brand-600" />
+                      الاسم الكامل *
+                    </label>
+                    <input
+                      id="lead-name"
+                      type="text"
+                      value={name}
+                      autoComplete="name"
+                      onChange={(e) => {
+                        setName(e.target.value);
+                        clearError("name");
+                      }}
+                      placeholder="مثال: عمر محمد أحمد"
+                      className="field-input"
+                      aria-invalid={Boolean(errors.name)}
+                      aria-describedby={errors.name ? "lead-name-error" : undefined}
+                    />
+                    <FieldError id="lead-name-error" message={errors.name} />
+                  </div>
 
-                  {/* Suggestion Chips */}
-                  <div className="flex flex-wrap items-center gap-1.5 pt-2">
-                    <span className="text-[10px] font-bold text-slate-400">
-                      مقترحات سريعة:
-                    </span>
-                    {SUGGESTED_MAJORS.map((major) => (
-                      <button
-                        key={major}
-                        type="button"
-                        onClick={() => {
-                          setFieldOfInterest(major);
-                          if (errors.fieldOfInterest)
-                            setErrors((prev) => ({
-                              ...prev,
-                              fieldOfInterest: "",
-                            }));
+                  <fieldset>
+                    <legend className="field-label">
+                      <MapPin className="h-4 w-4 text-brand-600" />
+                      دولة الإقامة الحالية *
+                    </legend>
+                    <div className="flex flex-wrap gap-1.5">
+                      {POPULAR_COUNTRIES.map((c) => (
+                        <button
+                          key={c.code}
+                          type="button"
+                          onClick={() => handleCountrySelect(c)}
+                          aria-pressed={country === c.name}
+                          className={`choice-pill min-h-10 rounded-full px-3 py-1.5 text-xs ${
+                            country === c.name ? "choice-pill-on" : "choice-pill-off"
+                          }`}
+                        >
+                          {c.name}
+                        </button>
+                      ))}
+                    </div>
+                    <input
+                      id="lead-country"
+                      type="text"
+                      value={country}
+                      autoComplete="country-name"
+                      onChange={(e) => {
+                        setCountry(e.target.value);
+                        clearError("country");
+                      }}
+                      placeholder="أو اكتب دولتك هنا..."
+                      aria-label="دولة الإقامة الحالية"
+                      className="field-input mt-2.5"
+                      aria-invalid={Boolean(errors.country)}
+                      aria-describedby={errors.country ? "lead-country-error" : undefined}
+                    />
+                    <FieldError id="lead-country-error" message={errors.country} />
+                  </fieldset>
+                </>
+              )}
+
+              {step === 2 && (
+                <>
+                  <div>
+                    <label htmlFor="lead-whatsapp" className="field-label">
+                      <Phone className="h-4 w-4 text-brand-600" />
+                      رقم واتساب (مع رمز الدولة) *
+                    </label>
+                    <div className="relative">
+                      <input
+                        id="lead-whatsapp"
+                        type="tel"
+                        value={whatsapp}
+                        autoComplete="tel"
+                        inputMode="tel"
+                        onChange={(e) => {
+                          setWhatsapp(e.target.value);
+                          clearError("whatsapp");
                         }}
-                        className="min-h-11 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-700 transition-colors hover:border-[#F59E0B] hover:text-[#0F254B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
-                        aria-pressed={fieldOfInterest === major}
-                      >
-                        {major}
-                      </button>
-                    ))}
+                        placeholder="+966501234567"
+                        dir="ltr"
+                        className="field-input pe-11 text-start font-latin"
+                        aria-invalid={Boolean(errors.whatsapp)}
+                        aria-describedby={errors.whatsapp ? "lead-whatsapp-error" : undefined}
+                      />
+                      {isWhatsappValid && (
+                        <CheckCircle2 className="absolute end-3.5 top-1/2 h-5 w-5 -translate-y-1/2 animate-pop text-success-600" aria-hidden="true" />
+                      )}
+                    </div>
+                    <FieldError id="lead-whatsapp-error" message={errors.whatsapp} />
                   </div>
-                </div>
 
-                {/* Optional Message */}
-                <div>
-                  <label htmlFor="lead-message" className="mb-1 flex items-center gap-1 text-sm font-bold text-slate-700">
-                    <FileText className="w-3.5 h-3.5 text-[#0F254B]" />
-                    <span>ملاحظات أو أسئلة إضافية (اختياري)</span>
-                  </label>
-                  <textarea
-                    id="lead-message"
-                    rows={2}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="أي تفاصيل عن معدلك، ميزانيتك، أو الجامعة المفضلة..."
-                    className="min-h-20 w-full resize-y rounded-xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 transition-all focus:border-[#0F254B] focus:outline-none focus:ring-2 focus:ring-[#0F254B]/15"
-                  />
-                </div>
-              </div>
+                  <div>
+                    <label htmlFor="lead-email" className="field-label">
+                      <Mail className="h-4 w-4 text-brand-600" />
+                      البريد الإلكتروني (اختياري)
+                    </label>
+                    <div className="relative">
+                      <input
+                        id="lead-email"
+                        type="email"
+                        value={email}
+                        autoComplete="email"
+                        inputMode="email"
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                          clearError("email");
+                        }}
+                        placeholder="name@example.com"
+                        dir="ltr"
+                        className="field-input pe-11 text-start"
+                        aria-invalid={Boolean(errors.email)}
+                        aria-describedby={errors.email ? "lead-email-error" : undefined}
+                      />
+                      {isEmailValid && (
+                        <CheckCircle2 className="absolute end-3.5 top-1/2 h-5 w-5 -translate-y-1/2 animate-pop text-success-600" aria-hidden="true" />
+                      )}
+                    </div>
+                    <FieldError id="lead-email-error" message={errors.email} />
+                  </div>
 
-              {/* Action Button & Footnote */}
-              <div className="space-y-2 pt-1">
+                  <div>
+                    <label htmlFor="lead-message" className="field-label">
+                      <FileText className="h-4 w-4 text-brand-600" />
+                      ملاحظات أو أسئلة إضافية (اختياري)
+                    </label>
+                    <textarea
+                      id="lead-message"
+                      rows={3}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="أي تفاصيل عن معدلك، ميزانيتك، أو الجامعة المفضلة..."
+                      className="field-input min-h-24 resize-y py-3"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex gap-2.5">
+                {step > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setErrors({});
+                      setStep(step - 1);
+                    }}
+                    className="btn btn-outline w-1/3 px-3"
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                    <span>رجوع</span>
+                  </button>
+                )}
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2.5 py-4 min-h-[50px] rounded-2xl text-base font-bold bg-thiqa-gold hover:bg-thiqa-gold-hover text-white shadow-md hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 cursor-pointer focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2"
+                  className={`btn flex-1 ${step === STEPS.length - 1 ? "btn-primary btn-shimmer min-h-14 text-base" : "btn-dark"}`}
                 >
-                  <span>متابعة إلى واتساب</span>
-                  <ArrowLeft className="w-5 h-5" />
+                  {step === STEPS.length - 1 ? (
+                    <>
+                      <MessageCircle className="h-5 w-5" />
+                      <span>متابعة إلى واتساب</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>التالي</span>
+                      <ArrowLeft className="h-4 w-4" />
+                    </>
+                  )}
                 </button>
-
-                {errors.form && (
-                  <p role="alert" className="field-error justify-center text-center">
-                    {errors.form}
-                  </p>
-                )}
-
-                <div className="flex items-center justify-center gap-1.5 text-center text-xs text-[#64748B] pt-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#F59E0B] shrink-0" />
-                  <span>
-                    ستفتح رسالة واتساب لتراجعها وترسلها بنفسك. لا تُرسل بياناتك قبل الضغط على إرسال داخل واتساب.
-                  </span>
-                </div>
               </div>
-            </form>
-          </div>
-        ) : (
-          <div className="text-center py-8 space-y-5">
-            <div className="w-16 h-16 rounded-2xl bg-amber-500/10 text-thiqa-gold border border-amber-500/20 flex items-center justify-center mx-auto shadow-sm">
-              <CheckCircle2 className="w-9 h-9" />
-            </div>
 
-            <div className="space-y-2">
-              <h2 id="lead-modal-title" className="text-2xl font-black text-[#0F254B]">
+              {errors.form && (
+                <p role="alert" className="field-error justify-center text-center">
+                  {errors.form}
+                </p>
+              )}
+
+              {step === STEPS.length - 1 && (
+                <p className="flex items-start justify-center gap-1.5 text-center text-xs leading-relaxed text-muted">
+                  <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-600" />
+                  ستفتح رسالة واتساب لتراجعها وترسلها بنفسك. لا تُرسل بياناتك قبل الضغط على إرسال داخل واتساب.
+                </p>
+              )}
+            </div>
+          </form>
+        </div>
+      ) : (
+        <div className="relative space-y-5 overflow-hidden py-8 text-center">
+          {/* Celebration burst */}
+          <div className="pointer-events-none absolute inset-x-0 top-6 flex justify-center" aria-hidden="true">
+            {Array.from({ length: 14 }).map((_, i) => {
+              const angle = (i / 14) * Math.PI * 2;
+              return (
+                <span
+                  key={i}
+                  className={`absolute h-2 w-2 rounded-sm ${CONFETTI_COLORS[i % CONFETTI_COLORS.length]}`}
+                  style={
+                    {
+                      "--dx": `${Math.cos(angle) * 120}px`,
+                      "--dy": `${Math.sin(angle) * 80 + 40}px`,
+                      animation: `confetti 1.1s cubic-bezier(0.22,1,0.36,1) ${i * 20}ms both`,
+                    } as React.CSSProperties
+                  }
+                />
+              );
+            })}
+          </div>
+
+          <div className="mx-auto flex h-20 w-20 animate-pop items-center justify-center rounded-3xl bg-gradient-to-br from-success-600 to-success-700 text-white shadow-lg">
+            <CheckCircle2 className="h-10 w-10" />
+          </div>
+
+          <div className="space-y-2">
+            <h2 id="lead-modal-title" className="text-2xl font-bold text-ink">
               رسالتك جاهزة في واتساب
-              </h2>
-
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-sm mx-auto font-medium">
-                شكراً لك يا{" "}
-                <span className="font-bold text-slate-900">{name}</span>. تم فتح
-                واتساب برسالة مُعبأة مسبقاً. راجعها ثم أرسلها إلى فريق ثقة يوني لبدء المحادثة.
-              </p>
-            </div>
-
-            <div className="pt-2 space-y-3">
-              <button
-                onClick={handleOpenWhatsAppDirect}
-                className="w-full flex items-center justify-center gap-2 py-3.5 min-h-[46px] rounded-2xl text-sm font-bold bg-emerald-600 text-white hover:bg-emerald-700 transition-all duration-200 shadow-md cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>إعادة فتح الواتساب إذا لم يفتح تلقائياً</span>
-              </button>
-
-              <button
-                onClick={onClose}
-                className="w-full py-3 min-h-[44px] rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors duration-200 cursor-pointer"
-              >
-                إغلاق النافذة
-              </button>
-            </div>
+            </h2>
+            <p className="mx-auto max-w-sm text-sm leading-relaxed text-muted">
+              شكراً لك يا <span className="font-bold text-ink">{name}</span>. تم فتح واتساب برسالة مُعبأة مسبقاً. راجعها ثم
+              أرسلها إلى فريق ثقة يوني لبدء المحادثة.
+            </p>
           </div>
-        )}
-      </div>
-    </div>
+
+          <div className="space-y-2.5 pt-2">
+            <button
+              type="button"
+              onClick={() => window.open(getWhatsAppUrl(), "_blank")}
+              className="btn w-full bg-success-600 text-white hover:bg-success-700"
+            >
+              <MessageCircle className="h-5 w-5" />
+              <span>إعادة فتح الواتساب إذا لم يفتح تلقائياً</span>
+            </button>
+            <button type="button" onClick={onClose} className="btn w-full text-slate-600 hover:bg-slate-100">
+              إغلاق النافذة
+            </button>
+          </div>
+        </div>
+      )}
+    </Modal>
   );
 };

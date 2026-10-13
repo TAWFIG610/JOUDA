@@ -1,11 +1,21 @@
 import React from "react";
 import { PARTNER_UNIVERSITIES } from "../data/thiqaData";
 import type { PartnerUniversity } from "../types";
-import { CheckCircle2, ArrowLeft, Award } from "lucide-react";
+import { ArrowLeft, Award, Landmark, MessageCircleQuestion, Users, WalletCards, ShieldCheck } from "lucide-react";
+import { SectionHeader } from "./ui/SectionHeader";
+import { Reveal } from "./ui/Reveal";
+import { CountUp } from "./ui/CountUp";
 
 interface UniversitiesSectionProps {
   onOpenLeadModal: (source?: string) => void;
 }
+
+const KPIS = [
+  { icon: Landmark, value: "+35", label: "جامعة ماليزية معتمدة", hint: "شراكات وتمثيل مباشر", tone: "brand" },
+  { icon: ShieldCheck, value: "100%", label: "متابعة تأشيرة EMGS", hint: "إشراف حكومي رسمي", tone: "gold" },
+  { icon: Users, value: "+1,500", label: "طالب تم توجيههم", hint: "من كافة الدول العربية", tone: "brand" },
+  { icon: WalletCards, value: "0$", label: "رسوم الاستشارة والتقديم", hint: "خدمة مجانية بالكامل", tone: "gold" },
+] as const;
 
 interface UniversityMarqueeRowProps {
   universities: PartnerUniversity[];
@@ -18,143 +28,123 @@ const UniversityMarqueeRow: React.FC<UniversityMarqueeRowProps> = ({
   onOpenLeadModal,
   reverse = false,
 }) => (
-  <div
-    className={`universities-marquee relative w-full overflow-hidden py-2 sm:py-3 ${
-      reverse ? "mt-1 sm:mt-2" : ""
-    }`}
-  >
-    <div
-      className={`${reverse ? "animate-marquee-reverse-rtl" : "animate-marquee-rtl"} flex items-center gap-3 sm:gap-5 hover:[animation-play-state:paused]`}
-    >
+  <div className="universities-marquee marquee-fade relative w-full overflow-hidden py-3">
+    <div className={`${reverse ? "animate-marquee-reverse-rtl" : "animate-marquee-rtl"} flex items-stretch gap-4 sm:gap-5`}>
       {[...universities, ...universities, ...universities].map((uni, index) => (
         <button
           type="button"
           key={`${uni.id}-${index}`}
           aria-label={`استفسر عن ${uni.nameAr}، ${uni.ranking}`}
-          className="group flex w-44 shrink-0 cursor-pointer flex-col items-center gap-2.5 rounded-2xl border border-slate-200/90 bg-white p-3 text-center shadow-2xs transition-all duration-300 hover:-translate-y-1 hover:border-[#F59E0B]/60 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F254B] focus-visible:ring-offset-2 sm:w-60 sm:p-5"
+          tabIndex={index < universities.length ? 0 : -1}
+          aria-hidden={index >= universities.length ? true : undefined}
+          className="group relative flex w-48 shrink-0 flex-col items-center gap-3 overflow-hidden rounded-3xl border border-line bg-white p-4 text-center shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-gold-300 hover:shadow-[0_20px_40px_-20px_rgb(10_24_56/0.3)] sm:w-60 sm:p-5"
           onClick={() => onOpenLeadModal(`university_${uni.id}`)}
         >
-          <div className="flex h-14 w-full items-center justify-center rounded-xl border border-slate-100 bg-[#F8FAFC] p-2 transition-colors group-hover:bg-white sm:h-[4.5rem]">
+          <div className="flex h-16 w-full items-center justify-center rounded-2xl bg-paper p-2.5 transition-colors group-hover:bg-white sm:h-20">
             {uni.logoUrl ? (
               <img
                 src={uni.logoUrl}
                 alt={uni.nameEn}
-                className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                className="max-h-full max-w-full object-contain opacity-80 grayscale transition-all duration-300 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0"
                 loading="lazy"
               />
             ) : (
-              <span className="text-xs font-bold text-[#0F254B]">
-                {uni.shortName}
-              </span>
+              <span className="text-xs font-bold text-brand-800">{uni.shortName}</span>
             )}
           </div>
 
-          <div className="w-full space-y-0.5 text-center">
-            <span             className="block text-[10px] font-bold text-thiqa-gold sm:text-[11px]">
+          <div className="w-full space-y-1">
+            <span className="inline-block rounded-full bg-gold-50 px-2 py-0.5 text-[11px] font-bold text-gold-700">
               {uni.ranking}
             </span>
-            <p
-              className="line-clamp-1 w-full text-center font-sans text-xs font-bold leading-snug tracking-wide text-[#0F172A] transition-colors group-hover:text-[#0F254B] sm:text-sm"
-              dir="ltr"
-            >
+            <p className="line-clamp-1 font-latin text-sm font-bold text-ink" dir="ltr">
               {uni.nameEn}
             </p>
           </div>
+
+          {/* Quick action revealed on hover/focus */}
+          <span className="absolute inset-x-0 bottom-0 flex translate-y-full items-center justify-center gap-1.5 bg-brand-800 py-2 text-xs font-bold text-white transition-transform duration-300 group-hover:translate-y-0 group-focus-visible:translate-y-0">
+            <MessageCircleQuestion className="h-3.5 w-3.5 text-gold-300" aria-hidden="true" />
+            اسأل عن هذه الجامعة
+          </span>
         </button>
       ))}
     </div>
   </div>
 );
 
-export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({
-  onOpenLeadModal,
-}) => {
+export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({ onOpenLeadModal }) => {
   const half = Math.ceil(PARTNER_UNIVERSITIES.length / 2);
   const row1 = PARTNER_UNIVERSITIES.slice(0, half);
   const row2 = PARTNER_UNIVERSITIES.slice(half);
 
   return (
-    <section
-      id="universities"
-      className="py-14 sm:py-20 lg:py-24 bg-[#F8FAFC] relative overflow-hidden border-y border-slate-200/80"
-    >
+    <section id="universities" className="relative overflow-hidden bg-white py-16 sm:py-24">
+      <div className="bg-dots absolute inset-x-0 top-0 h-64 opacity-50 [mask-image:linear-gradient(to_bottom,black,transparent)]" aria-hidden="true" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-8 sm:mb-12">
-        {/* KPI Trust Metrics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8 sm:mb-12">
-          <div className="text-center p-3.5 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
-            <span className="text-2xl sm:text-3xl font-black font-sans text-[#0F254B] block">+35</span>
-            <span className="text-xs sm:text-sm font-bold text-slate-800">جامعة ماليزية معتمدة</span>
-            <span className="text-[11px] text-slate-500 block">شراكات وتمثيل مباشر</span>
-          </div>
-          <div className="text-center p-3.5 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
-            <span className="text-2xl sm:text-3xl font-black font-sans text-thiqa-gold block">100%</span>
-            <span className="text-xs sm:text-sm font-bold text-slate-800">متابعة تأشيرة EMGS</span>
-            <span className="text-[11px] text-slate-500 block">إشراف حكومي رسمي</span>
-          </div>
-          <div className="text-center p-3.5 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
-            <span className="text-2xl sm:text-3xl font-black font-sans text-[#0F254B] block">+1,500</span>
-            <span className="text-xs sm:text-sm font-bold text-slate-800">طالب تم توجيههم</span>
-            <span className="text-[11px] text-slate-500 block">من كافة الدول العربية</span>
-          </div>
-          <div className="text-center p-3.5 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs">
-            <span className="text-2xl sm:text-3xl font-black font-sans text-thiqa-gold block">0$</span>
-            <span className="text-xs sm:text-sm font-bold text-slate-800">رسوم الاستشارة والتقديم</span>
-            <span className="text-[11px] text-slate-500 block">خدمة مجانية بالكامل</span>
-          </div>
+      <div className="relative mx-auto mb-10 max-w-7xl px-4 sm:mb-12 sm:px-6 lg:px-8">
+        {/* KPI counters */}
+        <div className="mb-14 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+          {KPIS.map(({ icon: Icon, value, label, hint, tone }, i) => (
+            <Reveal key={label} delay={i * 90}>
+              <div className="group h-full rounded-3xl border border-line bg-paper p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg sm:p-6">
+                <span
+                  className={`mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-2xl ${
+                    tone === "gold" ? "bg-gold-100 text-gold-700" : "bg-brand-100 text-brand-700"
+                  }`}
+                >
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <CountUp
+                  value={value}
+                  className={`block font-latin text-3xl font-extrabold sm:text-4xl ${
+                    tone === "gold" ? "text-gold-600" : "text-brand-700"
+                  }`}
+                />
+                <span className="mt-1 block text-sm font-bold text-ink">{label}</span>
+                <span className="block text-xs text-muted">{hint}</span>
+              </div>
+            </Reveal>
+          ))}
         </div>
 
-        {/* Section Header */}
-        <div className="text-center space-y-3 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F254B]/5 border border-[#0F254B]/15 text-[#0F254B] text-xs font-bold shadow-2xs">
-            <Award className="w-3.5 h-3.5 text-[#F59E0B]" />
-            <span>شراكات وتمثيل رسمي معتمد</span>
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F254B] tracking-tight leading-tight text-balance">
-            أعرق الجامعات الحكومية والخاصة في ماليزيا
-          </h2>
-
-          <p className="text-xs sm:text-base text-[#64748B] leading-relaxed font-medium">
-            استكشف أفضل الجامعات الماليزية وفروع الجامعات البريطانية والأسترالية العالمية، وقارن بين تخصصاتها بكل شفافية.
-          </p>
-        </div>
+        <SectionHeader
+          className="mb-0! sm:mb-0!"
+          icon={Award}
+          eyebrow="شراكات وتمثيل رسمي معتمد"
+          title={
+            <>
+              أعرق الجامعات <span className="text-gradient-gold">الحكومية والخاصة</span> في ماليزيا
+            </>
+          }
+          description="استكشف أفضل الجامعات الماليزية وفروع الجامعات البريطانية والأسترالية العالمية، واضغط على أي جامعة للاستفسار عنها مباشرة."
+        />
       </div>
 
-      <UniversityMarqueeRow
-        universities={row1}
-        onOpenLeadModal={onOpenLeadModal}
-      />
-      <UniversityMarqueeRow
-        universities={row2}
-        onOpenLeadModal={onOpenLeadModal}
-        reverse
-      />
+      <UniversityMarqueeRow universities={row1} onOpenLeadModal={onOpenLeadModal} />
+      <UniversityMarqueeRow universities={row2} onOpenLeadModal={onOpenLeadModal} reverse />
 
-      {/* Action Box Below Marquee */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 sm:mt-12">
-        <div className="rounded-2xl bg-[#0F254B] p-6 sm:p-8 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-start border border-[#F59E0B]/30">
-          <div className="space-y-1.5">
-            <h3 className="text-base sm:text-lg font-bold text-white flex items-center justify-center sm:justify-start gap-2">
-              <CheckCircle2 className="w-5 h-5 text-[#F59E0B] shrink-0" />
-              <span>شريك معتمد مع أكثر من 35 جامعة عالمية وماليزية مرموقة</span>
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-medium">
-              تواصل مع مستشاري ثقة يوني وسنساعدك في اختيار الجامعة الأنسب لطموحك ومعدلك الأكاديمي مجاناً.
-            </p>
-          </div>
-
-          <div className="shrink-0 w-full sm:w-auto">
+      <Reveal className="mx-auto mt-12 max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-l from-brand-800 to-brand-900 p-6 text-white shadow-xl sm:p-8">
+          <div className="bg-dots-light absolute inset-0" aria-hidden="true" />
+          <div className="relative flex flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-start">
+            <div className="space-y-1.5">
+              <h3 className="text-lg font-bold sm:text-xl">لم تجد جامعتك؟ لدينا أكثر من 35 خياراً معتمداً</h3>
+              <p className="text-sm leading-relaxed text-brand-100/80">
+                تواصل مع مستشاري ثقة يوني وسنساعدك في اختيار الجامعة الأنسب لطموحك ومعدلك الأكاديمي مجاناً.
+              </p>
+            </div>
             <button
+              type="button"
               onClick={() => onOpenLeadModal("universities_ticker_cta")}
-              className="w-full sm:w-auto min-h-[44px] flex items-center justify-center gap-2.5 px-7 py-3 rounded-xl text-xs sm:text-sm font-bold bg-thiqa-gold hover:bg-thiqa-gold-hover text-white shadow-lg transition-all duration-200 cursor-pointer"
+              className="btn btn-primary w-full shrink-0 sm:w-auto"
             >
               <span>استشر مجاناً الآن</span>
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="h-4 w-4" />
             </button>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 };
