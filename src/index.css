@@ -227,9 +227,6 @@
     @apply rounded-3xl border border-line bg-white shadow-[0_1px_2px_rgb(10_24_56/0.04),0_8px_24px_-12px_rgb(10_24_56/0.08)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-gold-300 hover:shadow-[0_24px_48px_-20px_rgb(10_24_56/0.25)];
   }
 
-  .icon-tile {
-    @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-50 to-brand-100 text-brand-700 ring-1 ring-brand-200/70 transition-all duration-300;
-  }
 
   /* ---------- Forms ---------- */
   .field-label {

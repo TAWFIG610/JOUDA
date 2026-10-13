@@ -11,8 +11,6 @@ export interface PartnerUniversity {
   location: string;
   ranking: string;
   badge: string;
-  accent: string;
-  logoBg: string;
   logoUrl?: string;
   popularFields: string[];
   type?: "حكومية" | "خاصة" | "دولية فرع";

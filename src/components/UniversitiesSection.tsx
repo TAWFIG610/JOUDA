@@ -109,7 +109,7 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({ onOpen
         </div>
 
         <SectionHeader
-          className="mb-0! sm:mb-0!"
+          className="!mb-0 sm:!mb-0"
           icon={Award}
           eyebrow="شراكات وتمثيل رسمي معتمد"
           title={
