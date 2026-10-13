@@ -138,10 +138,6 @@
     @apply inline-flex min-h-11 items-center gap-1.5 rounded-md font-bold text-brand-700 underline decoration-brand-200 decoration-2 underline-offset-4 transition-colors hover:text-brand-900 hover:decoration-brand-600;
   }
 
-  /* ---------- Cards ---------- */
-  .content-card {
-    @apply rounded-2xl border border-line bg-white transition-colors duration-200 hover:border-brand-200;
-  }
 
   /* ---------- Forms ---------- */
   .field-label {

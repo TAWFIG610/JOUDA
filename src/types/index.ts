@@ -13,13 +13,7 @@ export interface PartnerUniversity {
   nameAr: string;
   nameEn: string;
   shortName: string;
-  location: string;
   logoUrl?: string;
-  popularFields: string[];
-  type?: "حكومية" | "خاصة" | "دولية فرع";
-  annualTuitionUSD?: string;
-  nextAdmissionIntakes?: string[];
-  scholarshipAvailable?: string;
 }
 
 export interface Testimonial {
