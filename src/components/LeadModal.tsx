@@ -191,6 +191,11 @@ const FieldError: React.FC<{ id: string; message?: string }> = ({ id, message })
     </p>
   ) : null;
 
+/** Green tick shown inside an input once its value looks right. */
+const ValidTick: React.FC = () => (
+  <CheckCircle2 className="absolute end-3.5 top-1/2 h-5 w-5 -translate-y-1/2 animate-pop text-success-600" aria-hidden="true" />
+);
+
 export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialInterest, pathwaySummary = "" }) => {
   const { lang, t } = useLang();
   const text = TEXT[lang];
@@ -538,7 +543,7 @@ ${pathwaySummary ? `${m.pathway}: ${pathwaySummary}\n` : ""}${m.notes}: ${messag
                         aria-describedby={errors.whatsapp ? "lead-whatsapp-error" : undefined}
                       />
                       {isWhatsappValid && (
-                        <CheckCircle2 className="absolute end-3.5 top-1/2 h-5 w-5 -translate-y-1/2 animate-pop text-success-600" aria-hidden="true" />
+                        <ValidTick />
                       )}
                     </div>
                     <FieldError id="lead-whatsapp-error" message={errors.whatsapp} />
@@ -567,7 +572,7 @@ ${pathwaySummary ? `${m.pathway}: ${pathwaySummary}\n` : ""}${m.notes}: ${messag
                         aria-describedby={errors.email ? "lead-email-error" : undefined}
                       />
                       {isEmailValid && (
-                        <CheckCircle2 className="absolute end-3.5 top-1/2 h-5 w-5 -translate-y-1/2 animate-pop text-success-600" aria-hidden="true" />
+                        <ValidTick />
                       )}
                     </div>
                     <FieldError id="lead-email-error" message={errors.email} />

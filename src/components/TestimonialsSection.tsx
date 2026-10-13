@@ -9,6 +9,9 @@ const TEXT = {
   en: { title: "From students who applied with us", list: "Student stories", prev: "Previous story", next: "Next story", open: "“", close: "”" },
 };
 
+const ARROW_BUTTON =
+  "flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink disabled:opacity-40";
+
 export const TestimonialsSection: React.FC = () => {
   const { lang, t } = useLang();
   const text = TEXT[lang];
@@ -70,7 +73,7 @@ export const TestimonialsSection: React.FC = () => {
             type="button"
             onClick={() => goTo(index - 1)}
             disabled={index === 0}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink disabled:opacity-40"
+            className={ARROW_BUTTON}
             aria-label={text.prev}
           >
             <ChevronRight className="flip-ltr h-5 w-5" />
@@ -82,7 +85,7 @@ export const TestimonialsSection: React.FC = () => {
             type="button"
             onClick={() => goTo(index + 1)}
             disabled={index === TESTIMONIALS.length - 1}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white text-ink disabled:opacity-40"
+            className={ARROW_BUTTON}
             aria-label={text.next}
           >
             <ChevronLeft className="flip-ltr h-5 w-5" />

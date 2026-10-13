@@ -34,7 +34,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
 
   return (
     <section id="faq" className="bg-paper section">
-      <div className="page-container grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <div className="page-container split-layout">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeader align="start" className="mb-6 sm:mb-6" title={text.title} />
           <div className="surface-dark relative overflow-hidden rounded-2xl p-6 shadow-raised">
