@@ -29,7 +29,8 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
   return (
     <section className="bg-white section">
       <div className="page-container">
-        <div className="flex flex-col gap-8 rounded-3xl bg-brand-800 px-6 py-10 text-white sm:px-10 sm:py-12 lg:flex-row lg:items-center lg:justify-between lg:px-14">
+        <div className="surface-dark relative flex flex-col gap-8 overflow-hidden rounded-3xl px-6 py-10 shadow-raised sm:px-10 sm:py-14 lg:flex-row lg:items-center lg:justify-between lg:px-14">
+          <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-gold-400 to-gold-600" aria-hidden="true" />
           <div className="max-w-xl">
             <h2 className="text-balance text-2xl font-bold leading-snug sm:text-3xl">{text.title}</h2>
             <p className="mt-3 text-base leading-relaxed text-brand-100 sm:text-lg">{text.body}</p>
@@ -39,7 +40,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
             <button
               type="button"
               onClick={() => onOpenLeadModal("final_cta_primary")}
-              className="btn btn-primary min-h-14 px-8 focus-visible:ring-offset-brand-800"
+              className="btn btn-primary min-h-14 px-8 focus-visible:ring-offset-brand-900"
             >
               {text.primary}
             </button>
@@ -48,7 +49,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
               target="_blank"
               rel="noopener noreferrer"
               data-place="final_cta"
-              className="btn min-h-14 border border-white/30 px-6 text-white hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-brand-800"
+              className="btn btn-on-dark min-h-14 px-6"
             >
               <MessageCircle className="h-5 w-5" />
               <span dir="ltr" className="font-latin">{WHATSAPP_DISPLAY}</span>

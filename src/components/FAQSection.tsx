@@ -37,32 +37,36 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
       <div className="page-container grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeader align="start" className="mb-6 sm:mb-6" title={text.title} />
-          <div className="rounded-2xl border border-line bg-white p-5">
-            <p className="font-bold text-ink">{text.notHere}</p>
-            <p className="mt-1 text-sm leading-relaxed text-muted">{text.sendIt}</p>
+          <div className="surface-dark relative overflow-hidden rounded-2xl p-6 shadow-raised">
+            <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-gold-400 to-gold-600" aria-hidden="true" />
+            <p className="font-bold text-white">{text.notHere}</p>
+            <p className="mt-1 text-sm leading-relaxed text-brand-100">{text.sendIt}</p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row lg:flex-col xl:flex-row">
               <a
                 href={whatsappUrl(text.message)}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-place="faq"
-                className="btn btn-whatsapp flex-1"
+                className="btn btn-whatsapp flex-1 focus-visible:ring-offset-brand-900"
               >
                 <MessageCircle className="h-5 w-5" />
                 {text.whatsapp}
               </a>
-              <button type="button" onClick={() => onOpenLeadModal("faq_bottom_cta")} className="btn btn-outline flex-1">
+              <button type="button" onClick={() => onOpenLeadModal("faq_bottom_cta")} className="btn btn-on-dark flex-1">
                 {text.callMe}
               </button>
             </div>
           </div>
         </div>
 
-        <div className="divide-y divide-line border-y border-line">
+        <div className="space-y-3">
           {FAQS.map((faq, idx) => {
             const isOpen = openIdx === idx;
             return (
-              <div key={faq.q.en}>
+              <div
+                key={faq.q.en}
+                className={`card px-5 transition-[border-color,box-shadow] duration-200 ${isOpen ? "border-brand-200 shadow-raised" : ""}`}
+              >
                 <h3>
                   <button
                     type="button"
@@ -73,10 +77,13 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
                     className="flex min-h-16 w-full items-center justify-between gap-4 py-5 text-start"
                   >
                     <span className="text-base font-bold text-ink sm:text-lg">{t(faq.q)}</span>
-                    <Plus
-                      className={`h-5 w-5 shrink-0 text-brand-700 transition-transform duration-200 ${isOpen ? "rotate-45" : ""}`}
-                      aria-hidden="true"
-                    />
+                    <span
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors duration-200 ${
+                        isOpen ? "bg-brand-700 text-white" : "bg-brand-50 text-brand-700"
+                      }`}
+                    >
+                      <Plus className={`h-5 w-5 transition-transform duration-200 ${isOpen ? "rotate-45" : ""}`} aria-hidden="true" />
+                    </span>
                   </button>
                 </h3>
                 <div

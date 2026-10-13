@@ -35,7 +35,7 @@ interface MarqueeRowProps {
 const MarqueeRow: React.FC<MarqueeRowProps> = ({ universities, onOpenLeadModal, reverse = false }) => {
   const { lang } = useLang();
   return (
-    <div className="universities-marquee marquee-fade w-full overflow-hidden py-2">
+    <div className="universities-marquee marquee-fade w-full overflow-hidden py-3">
       <ul className={`${reverse ? "animate-marquee-reverse-rtl" : "animate-marquee-rtl"} gap-3 sm:gap-4`}>
         {[...universities, ...universities, ...universities].map((uni, index) => {
           const isCopy = index >= universities.length;
@@ -46,7 +46,7 @@ const MarqueeRow: React.FC<MarqueeRowProps> = ({ universities, onOpenLeadModal, 
                 tabIndex={isCopy ? -1 : 0}
                 aria-label={`${TEXT[lang].askAbout} ${lang === "ar" ? uni.nameAr : uni.nameEn}`}
                 onClick={() => onOpenLeadModal(`university_${uni.id}`)}
-                className="flex w-44 flex-col items-center gap-3 rounded-2xl border border-line bg-white p-4 text-center transition-colors hover:border-brand-500 sm:w-56 sm:p-5"
+                className="card flex w-44 flex-col items-center gap-3 p-4 text-center transition-[border-color,box-shadow] duration-200 hover:border-gold-400 hover:shadow-raised sm:w-56 sm:p-5"
               >
                 <span className="flex h-14 w-full items-center justify-center sm:h-16">
                   {uni.logoUrl ? (

@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/* Design tokens — derived from the THIQA UNI logo (royal blue + gold) */
-/* Gold is reserved for the main "apply" actions.                      */
+/* Design tokens — sampled from the THIQA UNI logo:                    */
+/*   shield/wordmark navy #002460 → royal #003c90                       */
+/*   cap & "UNI" gradient amber #f0a80c → burnt orange #cc6000          */
+/* Gold is reserved for main actions and small accent rules.           */
 /* ------------------------------------------------------------------ */
 @theme {
   --font-arabic:
@@ -11,25 +13,25 @@
   --font-display: "Readex Pro", "IBM Plex Sans Arabic", system-ui, sans-serif;
   --font-latin: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
 
-  /* Brand royal blue */
-  --color-brand-50: #eef3ff;
-  --color-brand-100: #dce6ff;
-  --color-brand-200: #b9ccff;
-  --color-brand-500: #2f5bd3;
-  --color-brand-600: #1f46b0;
-  --color-brand-700: #1a3a8f;
-  --color-brand-800: #142d6e;
-  --color-brand-900: #0e2150;
-  --color-ink: #0a1838;
+  /* Logo navy / royal blue */
+  --color-brand-50: #eef3fb;
+  --color-brand-100: #dbe5f6;
+  --color-brand-200: #b6c9ec;
+  --color-brand-500: #1f5bc4;
+  --color-brand-600: #0f4aa8;
+  --color-brand-700: #003c90;
+  --color-brand-800: #002f75;
+  --color-brand-900: #00245c;
+  --color-ink: #031a45;
 
-  /* Graduation-cap gold */
-  --color-gold-50: #fff8eb;
-  --color-gold-100: #feedc7;
-  --color-gold-300: #fcc75a;
-  --color-gold-400: #fbb12f;
-  --color-gold-500: #f59e0b;
-  --color-gold-600: #d97706;
-  --color-gold-700: #b45309;
+  /* Logo cap gold → orange */
+  --color-gold-50: #fff7e8;
+  --color-gold-100: #feebc4;
+  --color-gold-300: #fcc55a;
+  --color-gold-400: #f6ae1f;
+  --color-gold-500: #f09c00;
+  --color-gold-600: #dc7a00;
+  --color-gold-700: #b45800;
 
   /* Success / WhatsApp */
   --color-success-50: #f0fdfa;
@@ -39,10 +41,14 @@
   --color-danger: #b91c1c;
   --color-danger-soft: #fef2f2;
 
-  /* Surfaces */
-  --color-paper: #fafaf7;
-  --color-line: #e3e8f2;
-  --color-muted: #475569;
+  /* Surfaces — cool tint of the logo blue instead of beige */
+  --color-paper: #f4f7fc;
+  --color-line: #dfe6f1;
+  --color-muted: #46536b;
+
+  /* Elevation tinted with the logo navy */
+  --shadow-card: 0 1px 2px rgb(3 26 69 / 0.05), 0 10px 30px -18px rgb(3 26 69 / 0.22);
+  --shadow-raised: 0 2px 4px rgb(3 26 69 / 0.06), 0 22px 44px -22px rgb(3 26 69 / 0.38);
 
   /* Motion — short and functional */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -120,6 +126,11 @@
     @apply font-display text-balance text-[1.65rem] font-bold leading-[1.35] tracking-tight text-ink sm:text-3xl lg:text-[2.4rem];
   }
 
+  /* Short gold rule above section titles — echoes the lines around the logo tagline */
+  .title-rule {
+    @apply mb-4 block h-1 w-12 rounded-full bg-gradient-to-l from-gold-400 to-gold-600;
+  }
+
   .section-description {
     @apply text-pretty text-base leading-relaxed text-muted sm:text-lg;
   }
@@ -132,18 +143,38 @@
     @apply text-pretty text-lg leading-relaxed sm:text-xl;
   }
 
+  /* ---------- Surfaces ---------- */
+  .card {
+    @apply rounded-2xl border border-line bg-white shadow-card;
+  }
+
+  /* Navy brand band (same gradient direction as the logo shield) */
+  .surface-dark {
+    @apply bg-gradient-to-br from-brand-800 via-brand-900 to-ink text-white;
+  }
+
+  /* Icon tile styled like the logo shield */
+  .brand-tile {
+    @apply flex shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-900 text-white shadow-[0_6px_14px_-8px_rgb(0_36_92/0.8)];
+  }
+
   /* ---------- Buttons ---------- */
   .btn {
     @apply relative inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-6 py-3 text-base font-bold whitespace-nowrap transition-colors duration-150 select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-600 focus-visible:ring-offset-2 active:translate-y-px;
   }
 
-  /* Gold "apply" action — dark ink text keeps contrast above 8:1 */
+  /* Main action: the logo's cap gradient, navy text (contrast ≥ 7:1) */
   .btn-primary {
-    @apply bg-gold-500 text-ink hover:bg-gold-400;
+    @apply bg-gradient-to-b from-gold-400 to-gold-500 text-ink shadow-[0_8px_20px_-10px_rgb(220_122_0/0.75)] hover:from-gold-300 hover:to-gold-400;
   }
 
   .btn-dark {
-    @apply bg-brand-800 text-white hover:bg-brand-700;
+    @apply bg-brand-800 text-white shadow-[0_8px_20px_-12px_rgb(0_36_92/0.7)] hover:bg-brand-700;
+  }
+
+  /* On navy backgrounds */
+  .btn-on-dark {
+    @apply border border-white/30 text-white hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-brand-900;
   }
 
   .btn-outline {

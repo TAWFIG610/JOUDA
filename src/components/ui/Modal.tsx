@@ -48,6 +48,7 @@ export const Modal: React.FC<ModalProps> = ({
         aria-labelledby={labelledBy}
         className={`relative max-h-[94dvh] w-full animate-sheet-in overflow-y-auto rounded-t-3xl bg-white p-5 text-slate-900 shadow-2xl outline-none sm:my-8 sm:max-h-[90vh] sm:rounded-3xl sm:p-8 ${maxWidth}`}
       >
+        <span className="absolute inset-x-0 top-0 hidden h-1 bg-gradient-to-l from-gold-400 to-gold-600 sm:block" aria-hidden="true" />
         <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-slate-200 sm:hidden" aria-hidden="true" />
 
         <button

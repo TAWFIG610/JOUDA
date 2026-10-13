@@ -106,15 +106,16 @@ export const AboutSection: React.FC = () => {
           </div>
 
           <Reveal delay={80}>
-            <div className="rounded-2xl border border-line bg-paper p-6">
-              <h3 className="text-base font-bold text-ink">{text.factsTitle}</h3>
-              <dl className="mt-4 divide-y divide-line">
+            <div className="surface-dark relative overflow-hidden rounded-2xl p-6 shadow-raised sm:p-7">
+              <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-gold-400 to-gold-600" aria-hidden="true" />
+              <h3 className="text-base font-bold text-white">{text.factsTitle}</h3>
+              <dl className="mt-4 divide-y divide-white/10">
                 {facts.map(({ icon: Icon, label, value, ltr }) => (
-                  <div key={label} className="flex items-start gap-3 py-3 first:pt-0 last:pb-0">
-                    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-brand-700" aria-hidden="true" />
+                  <div key={label} className="flex items-start gap-3 py-3.5 first:pt-0 last:pb-0">
+                    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold-400" aria-hidden="true" />
                     <div className="min-w-0">
-                      <dt className="text-xs font-semibold text-slate-500">{label}</dt>
-                      <dd className={`text-base font-semibold text-ink ${ltr ? "font-latin" : ""}`} dir={ltr ? "ltr" : undefined}>
+                      <dt className="text-xs font-semibold text-brand-200">{label}</dt>
+                      <dd className={`text-base font-semibold text-white ${ltr ? "font-latin" : ""}`} dir={ltr ? "ltr" : undefined}>
                         {value}
                       </dd>
                     </div>
@@ -125,13 +126,15 @@ export const AboutSection: React.FC = () => {
           </Reveal>
         </div>
 
-        <div className="mt-12 border-t border-line pt-10 sm:mt-16">
+        <div className="mt-14 sm:mt-20">
           <h3 className="subsection-title">{text.commitmentsTitle}</h3>
-          <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
             {COMMITMENTS.map(({ icon: Icon, title, desc }, idx) => (
-              <Reveal as="li" key={title.en} delay={idx * 70}>
-                <Icon className="h-6 w-6 text-gold-600" aria-hidden="true" />
-                <p className="mt-3 font-bold text-ink">{t(title)}</p>
+              <Reveal as="li" key={title.en} delay={idx * 70} className="card p-5">
+                <span className="brand-tile h-11 w-11">
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <p className="mt-4 font-bold text-ink">{t(title)}</p>
                 <p className="mt-1.5 text-sm leading-relaxed text-muted">{t(desc)}</p>
               </Reveal>
             ))}

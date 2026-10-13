@@ -73,12 +73,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenLeadModa
           </button>
         </div>
 
-        <ul className="divide-y divide-line border-y border-line">
+        <ul className="grid gap-4">
           {SERVICES.map(({ icon: Icon, title, desc }, idx) => (
             <Reveal as="li" key={title.en} delay={idx * 60}>
-              <div className="flex gap-4 py-6 sm:gap-5 sm:py-7">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
+              <div className="card flex gap-4 p-5 transition-shadow duration-200 hover:shadow-raised sm:gap-5 sm:p-6">
+                <span className="brand-tile h-12 w-12">
+                  <Icon className="h-6 w-6" aria-hidden="true" />
                 </span>
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-ink sm:text-xl">{t(title)}</h3>

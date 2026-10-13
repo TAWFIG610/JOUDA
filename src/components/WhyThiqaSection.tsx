@@ -45,10 +45,10 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({ onOpenLeadModal }) =>
         <SectionHeader title={text.title} description={text.description} />
 
         {/* Desktop / tablet: a real table */}
-        <div className="hidden overflow-hidden rounded-2xl border border-line bg-white md:block">
+        <div className="card hidden overflow-hidden md:block">
           <table className="w-full border-collapse text-start">
             <thead>
-              <tr className="bg-brand-800 text-sm text-white">
+              <tr className="surface-dark text-sm">
                 <th scope="col" className="w-1/5 px-5 py-4 text-start font-bold">{text.topic}</th>
                 <th scope="col" className="w-2/5 px-5 py-4 text-start font-bold">{text.ask}</th>
                 <th scope="col" className="w-2/5 px-5 py-4 text-start font-bold text-gold-300">{text.weDo}</th>
@@ -69,8 +69,8 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({ onOpenLeadModal }) =>
         {/* Phones: one block per topic */}
         <dl className="space-y-4 md:hidden">
           {COMPARISON_ROWS.map((row) => (
-            <div key={row.feature.en} className="overflow-hidden rounded-2xl border border-line bg-white">
-              <dt className="bg-brand-800 px-4 py-3 font-bold text-white">{t(row.feature)}</dt>
+            <div key={row.feature.en} className="card overflow-hidden">
+              <dt className="surface-dark px-4 py-3 font-bold">{t(row.feature)}</dt>
               <dd className="px-4 py-3 text-base leading-relaxed text-muted">
                 <span className="block text-xs font-bold text-slate-500">{text.ask}</span>
                 {t(row.traditional)}
@@ -83,12 +83,12 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({ onOpenLeadModal }) =>
           ))}
         </dl>
 
-        <div className="mt-10 rounded-2xl border border-brand-200 bg-brand-50/60 p-6 sm:p-8">
+        <div className="mt-10 rounded-2xl border border-brand-100 bg-brand-50 p-6 sm:p-8">
           <h3 className="subsection-title">{text.verifyTitle}</h3>
           <p className="mt-1.5 text-base text-muted">{text.verifyBody}</p>
           <ul className="mt-5 grid gap-4 md:grid-cols-3">
             {OFFICIAL_CHECKS.map((check) => (
-              <li key={check.name} className="rounded-xl bg-white p-4">
+              <li key={check.name} className="card p-5">
                 {check.url ? (
                   <a
                     href={check.url}

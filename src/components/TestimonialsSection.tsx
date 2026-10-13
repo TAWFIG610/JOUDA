@@ -41,12 +41,12 @@ export const TestimonialsSection: React.FC = () => {
           ref={trackRef}
           onScroll={onScroll}
           aria-label={text.list}
-          className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0"
+          className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0"
         >
           {TESTIMONIALS.map((item) => (
             <li key={item.id} className="w-[86%] shrink-0 snap-center sm:w-[60%] lg:w-auto">
-              <figure className="flex h-full flex-col justify-between gap-6 rounded-2xl border border-line bg-paper p-6">
-                <blockquote className="text-base leading-loose text-slate-700">
+              <figure className="card flex h-full flex-col justify-between gap-6 border-s-4 border-s-gold-500 p-6">
+                <blockquote className="text-base leading-loose text-ink/85">
                   {text.open}
                   {t(item.quote)}
                   {text.close}

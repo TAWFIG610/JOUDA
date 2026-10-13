@@ -61,9 +61,11 @@ export const MalaysiaSection: React.FC<MalaysiaSectionProps> = ({ onOpenLeadModa
 
         <div className="grid gap-8 md:grid-cols-3 md:gap-10">
           {POINTS.map(({ icon: Icon, title, desc }, idx) => (
-            <Reveal key={title.en} delay={idx * 80} className="border-t-2 border-brand-700 pt-5">
-              <Icon className="h-6 w-6 text-brand-700" aria-hidden="true" />
-              <h3 className="mt-3 text-xl font-bold text-ink">{t(title)}</h3>
+            <Reveal key={title.en} delay={idx * 80} className="border-t-2 border-brand-700 pt-6">
+              <span className="brand-tile h-12 w-12">
+                <Icon className="h-6 w-6" aria-hidden="true" />
+              </span>
+              <h3 className="mt-4 text-xl font-bold text-ink">{t(title)}</h3>
               <p className="mt-2 text-base leading-relaxed text-muted">{t(desc)}</p>
             </Reveal>
           ))}
