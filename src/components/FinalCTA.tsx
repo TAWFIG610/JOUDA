@@ -30,7 +30,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
     <section className="bg-white section">
       <div className="page-container">
         <div className="surface-dark relative flex flex-col gap-8 overflow-hidden rounded-3xl px-6 py-10 shadow-raised sm:px-10 sm:py-14 lg:flex-row lg:items-center lg:justify-between lg:px-14">
-          <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-gold-400 to-gold-600" aria-hidden="true" />
+          <span className="accent-top" aria-hidden="true" />
           <div className="max-w-xl">
             <h2 className="text-balance text-2xl font-bold leading-snug sm:text-3xl">{text.title}</h2>
             <p className="mt-3 text-base leading-relaxed text-brand-100 sm:text-lg">{text.body}</p>

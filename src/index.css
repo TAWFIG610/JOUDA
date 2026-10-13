@@ -148,6 +148,11 @@
     @apply rounded-2xl border border-line bg-white shadow-card;
   }
 
+  /* Thin gold line along the top edge of navy panels and dialogs */
+  .accent-top {
+    @apply pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-gold-400 to-gold-600;
+  }
+
   /* Navy brand band (same gradient direction as the logo shield) */
   .surface-dark {
     @apply bg-gradient-to-br from-brand-800 via-brand-900 to-ink text-white;

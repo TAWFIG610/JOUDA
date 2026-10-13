@@ -38,7 +38,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeader align="start" className="mb-6 sm:mb-6" title={text.title} />
           <div className="surface-dark relative overflow-hidden rounded-2xl p-6 shadow-raised">
-            <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-gold-400 to-gold-600" aria-hidden="true" />
+            <span className="accent-top" aria-hidden="true" />
             <p className="font-bold text-white">{text.notHere}</p>
             <p className="mt-1 text-sm leading-relaxed text-brand-100">{text.sendIt}</p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row lg:flex-col xl:flex-row">

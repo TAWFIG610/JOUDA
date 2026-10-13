@@ -107,7 +107,7 @@ export const AboutSection: React.FC = () => {
 
           <Reveal delay={80}>
             <div className="surface-dark relative overflow-hidden rounded-2xl p-6 shadow-raised sm:p-7">
-              <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-gold-400 to-gold-600" aria-hidden="true" />
+              <span className="accent-top" aria-hidden="true" />
               <h3 className="text-base font-bold text-white">{text.factsTitle}</h3>
               <dl className="mt-4 divide-y divide-white/10">
                 {facts.map(({ icon: Icon, label, value, ltr }) => (

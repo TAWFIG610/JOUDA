@@ -88,7 +88,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenLeadModal, onOpenAdvisorModal 
 
         {/* Real proof instead of decoration: universities we apply to */}
         <aside className="surface-dark relative hidden animate-fade-up overflow-hidden rounded-3xl p-8 shadow-raised [animation-delay:120ms] xl:block">
-          <span className="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-gold-400 to-gold-600" aria-hidden="true" />
+          <span className="accent-top" aria-hidden="true" />
           <h2 className="text-lg font-bold text-white">{text.panelTitle}</h2>
           <p className="mt-1 text-sm text-brand-100">{text.panelBody}</p>
           <ul className="mt-6 grid grid-cols-3 gap-3">
