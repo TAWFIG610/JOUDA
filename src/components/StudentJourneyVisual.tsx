@@ -3,6 +3,7 @@ import { DISCOVER_TO_APPLY_STEPS } from "../data/thiqaData";
 import { ArrowLeft } from "lucide-react";
 import { SectionHeader } from "./ui/SectionHeader";
 import { useElementProgress } from "../hooks/useScroll";
+import { useLang } from "../i18n/LanguageContext";
 
 interface StudentJourneyVisualProps {
   onOpenLeadModal: (source?: string) => void;
@@ -10,7 +11,22 @@ interface StudentJourneyVisualProps {
 
 const LAST = DISCOVER_TO_APPLY_STEPS.length - 1;
 
+const TEXT = {
+  ar: {
+    title: "كيف نعمل معك، خطوة بخطوة",
+    description: "من أول رسالة على واتساب حتى أول يوم دراسة. تختلف المدد والشروط حسب الجامعة والبرنامج.",
+    cta: "ابدأ بالخطوة الأولى",
+  },
+  en: {
+    title: "How we work with you, step by step",
+    description: "From your first WhatsApp message to your first day of classes. Timings and requirements vary by university and program.",
+    cta: "Start with step one",
+  },
+};
+
 export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOpenLeadModal }) => {
+  const { lang, t } = useLang();
+  const text = TEXT[lang];
   const listRef = useRef<HTMLOListElement>(null);
   const progress = useElementProgress(listRef);
   const reachedIndex = Math.min(LAST, Math.floor(progress * (LAST + 0.999)));
@@ -18,10 +34,7 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOp
   return (
     <section id="journey" className="bg-paper py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          title="كيف نعمل معك، خطوة بخطوة"
-          description="من أول رسالة على واتساب حتى أول يوم دراسة. تختلف المدد والشروط حسب الجامعة والبرنامج."
-        />
+        <SectionHeader title={text.title} description={text.description} />
 
         <ol ref={listRef} className="relative grid gap-0 lg:grid-cols-4 lg:gap-6">
           {/* Progress line: vertical on phones, horizontal on desktop */}
@@ -29,7 +42,10 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOp
             <span className="block h-full w-full origin-top bg-gold-500" style={{ transform: `scaleY(${progress})` }} />
           </span>
           <span className="absolute inset-x-[12.5%] top-5 hidden h-0.5 bg-line lg:block" aria-hidden="true">
-            <span className="block h-full w-full origin-right bg-gold-500" style={{ transform: `scaleX(${progress})` }} />
+            <span
+              className="block h-full w-full bg-gold-500 ltr:origin-left rtl:origin-right"
+              style={{ transform: `scaleX(${progress})` }}
+            />
           </span>
 
           {DISCOVER_TO_APPLY_STEPS.map((step, idx) => {
@@ -44,8 +60,8 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOp
                   {step.number}
                 </span>
                 <span className="block pt-1.5 lg:pt-0">
-                  <span className="block text-lg font-bold text-ink">{step.titleAr}</span>
-                  <span className="mt-1.5 block max-w-sm text-base leading-relaxed text-muted">{step.desc}</span>
+                  <span className="block text-lg font-bold text-ink">{t(step.title)}</span>
+                  <span className="mt-1.5 block max-w-sm text-base leading-relaxed text-muted">{t(step.desc)}</span>
                 </span>
               </li>
             );
@@ -54,8 +70,8 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOp
 
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <button type="button" onClick={() => onOpenLeadModal("journey_cta")} className="btn btn-primary w-full sm:w-auto">
-            ابدأ بالخطوة الأولى
-            <ArrowLeft className="h-4 w-4" />
+            {text.cta}
+            <ArrowLeft className="flip-ltr h-4 w-4" />
           </button>
         </div>
       </div>

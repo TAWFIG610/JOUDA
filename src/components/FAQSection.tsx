@@ -1,32 +1,58 @@
 import React, { useState } from "react";
-import { FAQS, WHATSAPP_BASE_URL } from "../data/thiqaData";
+import { FAQS, whatsappUrl } from "../data/thiqaData";
 import { MessageCircle, Plus } from "lucide-react";
 import { SectionHeader } from "./ui/SectionHeader";
+import { useLang } from "../i18n/LanguageContext";
 
 interface FAQSectionProps {
   onOpenLeadModal: (source?: string) => void;
 }
 
-const WHATSAPP_URL = `${WHATSAPP_BASE_URL}?text=${encodeURIComponent("مرحباً فريق ثقة يوني، عندي سؤال عن الدراسة في ماليزيا.")}`;
+const TEXT = {
+  ar: {
+    title: "أسئلة شائعة",
+    notHere: "سؤالك غير موجود هنا؟",
+    sendIt: "أرسله لنا على واتساب أو اترك بياناتك ونتواصل معك.",
+    whatsapp: "واتساب",
+    callMe: "اطلب اتصالاً",
+    message: "مرحباً فريق ثقة يوني، عندي سؤال عن الدراسة في ماليزيا.",
+  },
+  en: {
+    title: "Frequently asked questions",
+    notHere: "Don't see your question?",
+    sendIt: "Send it to us on WhatsApp, or leave your details and we'll get back to you.",
+    whatsapp: "WhatsApp",
+    callMe: "Request a call",
+    message: "Hello THIQA UNI team, I have a question about studying in Malaysia.",
+  },
+};
 
 export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
+  const { lang, t } = useLang();
+  const text = TEXT[lang];
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
     <section id="faq" className="bg-white py-14 sm:py-20">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:px-8">
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <SectionHeader align="start" className="mb-6 sm:mb-6" title="أسئلة شائعة" />
+          <SectionHeader align="start" className="mb-6 sm:mb-6" title={text.title} />
           <div className="rounded-2xl bg-paper p-5">
-            <p className="font-bold text-ink">سؤالك غير موجود هنا؟</p>
-            <p className="mt-1 text-sm leading-relaxed text-muted">أرسله لنا على واتساب أو اترك بياناتك ونتواصل معك.</p>
+            <p className="font-bold text-ink">{text.notHere}</p>
+            <p className="mt-1 text-sm leading-relaxed text-muted">{text.sendIt}</p>
             <div className="mt-4 flex flex-col gap-2 sm:flex-row lg:flex-col xl:flex-row">
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-whatsapp flex-1">
+              <a
+                href={whatsappUrl(text.message)}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-place="faq"
+                className="btn btn-whatsapp flex-1"
+              >
                 <MessageCircle className="h-5 w-5" />
-                واتساب
+                {text.whatsapp}
               </a>
               <button type="button" onClick={() => onOpenLeadModal("faq_bottom_cta")} className="btn btn-outline flex-1">
-                اطلب اتصالاً
+                {text.callMe}
               </button>
             </div>
           </div>
@@ -36,7 +62,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
           {FAQS.map((faq, idx) => {
             const isOpen = openIdx === idx;
             return (
-              <div key={faq.q}>
+              <div key={faq.q.en}>
                 <h3>
                   <button
                     type="button"
@@ -46,7 +72,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
                     aria-controls={`faq-answer-${idx}`}
                     className="flex min-h-16 w-full items-center justify-between gap-4 py-5 text-start"
                   >
-                    <span className="font-arabic text-base font-bold text-ink sm:text-lg">{faq.q}</span>
+                    <span className="text-base font-bold text-ink sm:text-lg">{t(faq.q)}</span>
                     <Plus
                       className={`h-5 w-5 shrink-0 text-brand-700 transition-transform duration-200 ${isOpen ? "rotate-45" : ""}`}
                       aria-hidden="true"
@@ -61,7 +87,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
                   className={`grid transition-[grid-template-rows] duration-200 ease-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
                 >
                   <div className="overflow-hidden">
-                    <p className="pb-5 text-base leading-relaxed text-muted">{faq.a}</p>
+                    <p className="pb-5 text-base leading-relaxed text-muted">{t(faq.a)}</p>
                   </div>
                 </div>
               </div>

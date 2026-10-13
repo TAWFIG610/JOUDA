@@ -198,6 +198,10 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  html[lang="en"] {
+    font-family: var(--font-latin);
+  }
+
   section[id] {
     scroll-margin-top: 4.5rem;
   }
@@ -218,6 +222,13 @@
   h2,
   h3 {
     font-family: var(--font-display);
+  }
+
+  html[lang="en"] h1,
+  html[lang="en"] h2,
+  html[lang="en"] h3 {
+    font-family: var(--font-latin);
+    letter-spacing: -0.01em;
   }
 
   button,
@@ -276,6 +287,38 @@
 
 .animate-marquee-reverse-rtl {
   animation-name: marquee-reverse-rtl;
+}
+
+/* English (LTR): same motion, mirrored */
+@keyframes marquee-ltr {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes marquee-reverse-ltr {
+  from {
+    transform: translateX(-33.333%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+[dir="ltr"] .animate-marquee-rtl {
+  animation-name: marquee-ltr;
+}
+
+[dir="ltr"] .animate-marquee-reverse-rtl {
+  animation-name: marquee-reverse-ltr;
+}
+
+/* Arrow icons point "forward" in reading direction */
+[dir="ltr"] .flip-ltr {
+  transform: scaleX(-1);
 }
 
 .animate-marquee-rtl:hover,

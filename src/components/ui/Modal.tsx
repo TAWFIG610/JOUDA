@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { X } from "lucide-react";
+import { useLang } from "../../i18n/LanguageContext";
 
 interface ModalProps {
   isOpen: boolean;
@@ -21,6 +22,7 @@ export const Modal: React.FC<ModalProps> = ({
   maxWidth = "sm:max-w-xl",
 }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const { lang } = useLang();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -52,7 +54,7 @@ export const Modal: React.FC<ModalProps> = ({
           type="button"
           onClick={onClose}
           className="absolute start-3 top-3 z-10 flex h-11 w-11 items-center justify-center rounded-2xl text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 sm:start-4 sm:top-4"
-          aria-label="إغلاق"
+          aria-label={lang === "ar" ? "إغلاق" : "Close"}
         >
           <X className="h-5 w-5" />
         </button>

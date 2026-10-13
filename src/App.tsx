@@ -62,7 +62,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-paper font-arabic text-ink antialiased">
+    <div className="min-h-screen overflow-x-hidden bg-paper text-ink antialiased">
       {/* Sticky Header */}
       <Navbar
         onOpenLeadModal={handleOpenLeadModal}
