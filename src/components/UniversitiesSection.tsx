@@ -79,8 +79,8 @@ export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({ onOpen
   const half = Math.ceil(PARTNER_UNIVERSITIES.length / 2);
 
   return (
-    <section id="universities" className="overflow-hidden bg-white py-14 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="universities" className="overflow-hidden bg-paper section">
+      <div className="page-container">
         <SectionHeader title={text.title} description={text.description} />
       </div>
 

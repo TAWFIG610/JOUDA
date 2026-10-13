@@ -42,8 +42,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenLeadModal, onOpenAdvisorModal 
   const text = TEXT[lang];
 
   return (
-    <section id="hero" className="border-b border-line bg-gradient-to-b from-brand-50/70 to-paper pb-12 pt-24 sm:pb-20 sm:pt-32 lg:pt-36">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:px-8 xl:grid-cols-[1.15fr_0.85fr] xl:gap-16">
+    <section id="hero" className="border-b border-line bg-gradient-to-b from-brand-50/70 to-paper pb-16 pt-28 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-40">
+      <div className="page-container grid items-center gap-12 xl:grid-cols-[1.15fr_0.85fr] xl:gap-16">
         <div className="animate-fade-up">
           <p className="mb-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 sm:text-base">
             <MapPin className="h-4 w-4" aria-hidden="true" />
@@ -54,7 +54,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenLeadModal, onOpenAdvisorModal 
             {text.title}
           </h1>
 
-          <p className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-muted">{text.body}</p>
+          <p className="text-lead mt-5 max-w-xl text-muted">{text.body}</p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <button type="button" onClick={() => onOpenLeadModal("hero_primary")} className="btn btn-primary min-h-14 px-8 text-lg">

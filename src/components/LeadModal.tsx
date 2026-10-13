@@ -378,7 +378,7 @@ ${pathwaySummary ? `${m.pathway}: ${pathwaySummary}\n` : ""}${m.notes}: ${messag
                         )}
                       </span>
                       <span className="space-y-0.5">
-                        <span className="inline-block rounded-full bg-gold-100 px-2 py-0.5 text-[11px] font-bold text-gold-700">
+                        <span className="inline-block rounded-full bg-gold-100 px-2 py-0.5 text-xs font-bold text-gold-700">
                           {text.selectedUni}
                         </span>
                         <span className="block font-latin text-sm font-bold text-ink" dir="ltr">

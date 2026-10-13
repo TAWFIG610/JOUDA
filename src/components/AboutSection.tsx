@@ -94,19 +94,19 @@ export const AboutSection: React.FC = () => {
   ].filter((fact) => fact.value);
 
   return (
-    <section id="about" className="bg-paper py-14 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="about" className="bg-white section">
+      <div className="page-container">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
           <div>
             <SectionHeader align="start" className="mb-5 sm:mb-6" title={text.title} />
             <Reveal className="max-w-2xl space-y-4">
-              <p className="text-xl font-semibold leading-relaxed text-ink">{text.lead}</p>
+              <p className="text-lead font-semibold text-ink">{text.lead}</p>
               <p className="text-base leading-loose text-muted sm:text-lg">{text.body}</p>
             </Reveal>
           </div>
 
           <Reveal delay={80}>
-            <div className="rounded-2xl border border-line bg-white p-6">
+            <div className="rounded-2xl border border-line bg-paper p-6">
               <h3 className="text-base font-bold text-ink">{text.factsTitle}</h3>
               <dl className="mt-4 divide-y divide-line">
                 {facts.map(({ icon: Icon, label, value, ltr }) => (
@@ -126,7 +126,7 @@ export const AboutSection: React.FC = () => {
         </div>
 
         <div className="mt-12 border-t border-line pt-10 sm:mt-16">
-          <h3 className="text-xl font-bold text-ink sm:text-2xl">{text.commitmentsTitle}</h3>
+          <h3 className="subsection-title">{text.commitmentsTitle}</h3>
           <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {COMMITMENTS.map(({ icon: Icon, title, desc }, idx) => (
               <Reveal as="li" key={title.en} delay={idx * 70}>

@@ -66,9 +66,9 @@ export const OFFICIAL_CHECKS: { name: string; url: string; what: Localized }[] =
 
 export const NAV_LINKS: NavLink[] = [
   { name: { ar: "من نحن", en: "About us" }, href: "#about" },
-  { name: { ar: "الجامعات", en: "Universities" }, href: "#universities" },
-  { name: { ar: "خطوات التقديم", en: "How it works" }, href: "#journey" },
   { name: { ar: "خدماتنا", en: "Services" }, href: "#services" },
+  { name: { ar: "خطوات التقديم", en: "How it works" }, href: "#journey" },
+  { name: { ar: "الجامعات", en: "Universities" }, href: "#universities" },
   { name: { ar: "الأسئلة الشائعة", en: "FAQ" }, href: "#faq" },
 ];
 
@@ -354,9 +354,9 @@ export const FOOTER_DATA: {
   },
   links: [
     { title: { ar: "من نحن", en: "About us" }, href: "#about" },
-    { title: { ar: "الجامعات", en: "Universities" }, href: "#universities" },
-    { title: { ar: "خطوات التقديم", en: "How it works" }, href: "#journey" },
     { title: { ar: "خدماتنا", en: "Services" }, href: "#services" },
+    { title: { ar: "خطوات التقديم", en: "How it works" }, href: "#journey" },
+    { title: { ar: "الجامعات", en: "Universities" }, href: "#universities" },
     { title: { ar: "الدراسة في ماليزيا", en: "Studying in Malaysia" }, href: "#why-malaysia" },
     { title: { ar: "ما تسأل عنه قبل التقديم", en: "What to ask before applying" }, href: "#why-thiqa" },
     { title: { ar: "الأسئلة الشائعة", en: "FAQ" }, href: "#faq" },

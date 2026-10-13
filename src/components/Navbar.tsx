@@ -92,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenLeadModal, onOpenAdvisorMo
         aria-hidden="true"
       />
 
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:h-[4.5rem] sm:px-6 lg:px-8">
+      <div className="page-container flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]">
         <a href="#hero" className="shrink-0 rounded-lg" aria-label={`${BRAND_NAME_EN} - ${t(BRAND_TAGLINE)}`}>
           <img
             src="/thiqa-logo-trim.png"

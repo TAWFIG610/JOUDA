@@ -33,8 +33,8 @@ export const TestimonialsSection: React.FC = () => {
   };
 
   return (
-    <section id="testimonials" className="bg-white py-14 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="testimonials" className="bg-white section">
+      <div className="page-container">
         <SectionHeader align="start" title={text.title} />
 
         <ul

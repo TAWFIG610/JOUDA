@@ -27,8 +27,8 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenLeadModal }) => {
   const text = TEXT[lang];
 
   return (
-    <section className="bg-white py-14 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="bg-white section">
+      <div className="page-container">
         <div className="flex flex-col gap-8 rounded-3xl bg-brand-800 px-6 py-10 text-white sm:px-10 sm:py-12 lg:flex-row lg:items-center lg:justify-between lg:px-14">
           <div className="max-w-xl">
             <h2 className="text-balance text-2xl font-bold leading-snug sm:text-3xl">{text.title}</h2>

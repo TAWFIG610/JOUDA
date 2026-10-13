@@ -60,7 +60,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
 
   return (
     <footer className="bg-ink pb-28 pt-14 text-brand-100 lg:pb-10">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="page-container">
         <div className="grid gap-10 border-b border-white/10 pb-10 md:grid-cols-[1.5fr_1fr_1fr]">
           <div className="space-y-4">
             <span className="inline-flex rounded-xl bg-white px-4 py-3">

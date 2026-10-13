@@ -103,13 +103,33 @@
 }
 
 @layer components {
-  /* ---------- Section scaffolding ---------- */
+  /* ---------- Layout scale (one source for spacing) ---------- */
+  /* Page width and side gutters: 20px phones, 24px tablets, 32px desktop */
+  .page-container {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
+  }
+
+  /* Vertical rhythm between sections */
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  /* ---------- Type scale ---------- */
+  /* h1 (hero) 32 → 48 → 54px · h2 26 → 30 → 38px · h3 20 → 24px · lead 18 → 20px · body 16px · small 14px */
   .section-title {
     @apply font-display text-balance text-[1.65rem] font-bold leading-[1.35] tracking-tight text-ink sm:text-3xl lg:text-[2.4rem];
   }
 
   .section-description {
     @apply text-pretty text-base leading-relaxed text-muted sm:text-lg;
+  }
+
+  .subsection-title {
+    @apply font-display text-xl font-bold leading-snug text-ink sm:text-2xl;
+  }
+
+  .text-lead {
+    @apply text-pretty text-lg leading-relaxed sm:text-xl;
   }
 
   /* ---------- Buttons ---------- */

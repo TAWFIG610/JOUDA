@@ -55,8 +55,8 @@ export const MalaysiaSection: React.FC<MalaysiaSectionProps> = ({ onOpenLeadModa
   const text = TEXT[lang];
 
   return (
-    <section id="why-malaysia" className="bg-white py-14 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="why-malaysia" className="bg-white section">
+      <div className="page-container">
         <SectionHeader align="start" title={text.title} description={text.description} />
 
         <div className="grid gap-8 md:grid-cols-3 md:gap-10">

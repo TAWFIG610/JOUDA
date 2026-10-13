@@ -77,22 +77,31 @@ export function App() {
           onOpenAdvisorModal={() => setIsAdvisorModalOpen(true)}
         />
 
-        <UniversitiesSection onOpenLeadModal={handleOpenLeadModal} />
-
+        {/* 1. Who we are */}
         <AboutSection />
 
-        <StudentJourneyVisual onOpenLeadModal={handleOpenLeadModal} />
-
+        {/* 2. What we do */}
         <ServicesSection onOpenLeadModal={handleOpenLeadModal} />
 
+        {/* 3. How it works */}
+        <StudentJourneyVisual onOpenLeadModal={handleOpenLeadModal} />
+
+        {/* 4. Where you can study */}
+        <UniversitiesSection onOpenLeadModal={handleOpenLeadModal} />
+
+        {/* 5. Studying in Malaysia */}
         <MalaysiaSection onOpenLeadModal={handleOpenLeadModal} />
 
+        {/* 6. What to ask any agent + official checks */}
         <WhyThiqaSection onOpenLeadModal={handleOpenLeadModal} />
 
+        {/* 7. Students' experiences */}
         <TestimonialsSection />
 
+        {/* 8. Questions */}
         <FAQSection onOpenLeadModal={handleOpenLeadModal} />
 
+        {/* 9. Contact */}
         <FinalCTA onOpenLeadModal={handleOpenLeadModal} />
       </main>
 

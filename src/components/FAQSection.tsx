@@ -33,8 +33,8 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenLeadModal }) => {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="bg-paper py-14 sm:py-20">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:px-8">
+    <section id="faq" className="bg-paper section">
+      <div className="page-container grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeader align="start" className="mb-6 sm:mb-6" title={text.title} />
           <div className="rounded-2xl border border-line bg-white p-5">

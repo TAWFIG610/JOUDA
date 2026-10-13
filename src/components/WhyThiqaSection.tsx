@@ -40,8 +40,8 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({ onOpenLeadModal }) =>
   const text = TEXT[lang];
 
   return (
-    <section id="why-thiqa" className="bg-paper py-14 sm:py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section id="why-thiqa" className="bg-paper section">
+      <div className="page-container max-w-6xl">
         <SectionHeader title={text.title} description={text.description} />
 
         {/* Desktop / tablet: a real table */}
@@ -84,7 +84,7 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({ onOpenLeadModal }) =>
         </dl>
 
         <div className="mt-10 rounded-2xl border border-brand-200 bg-brand-50/60 p-6 sm:p-8">
-          <h3 className="text-lg font-bold text-ink sm:text-xl">{text.verifyTitle}</h3>
+          <h3 className="subsection-title">{text.verifyTitle}</h3>
           <p className="mt-1.5 text-base text-muted">{text.verifyBody}</p>
           <ul className="mt-5 grid gap-4 md:grid-cols-3">
             {OFFICIAL_CHECKS.map((check) => (

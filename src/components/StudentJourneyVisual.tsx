@@ -32,8 +32,8 @@ export const StudentJourneyVisual: React.FC<StudentJourneyVisualProps> = ({ onOp
   const reachedIndex = Math.min(LAST, Math.floor(progress * (LAST + 0.999)));
 
   return (
-    <section id="journey" className="bg-white py-14 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="journey" className="bg-white section">
+      <div className="page-container">
         <SectionHeader title={text.title} description={text.description} />
 
         <ol ref={listRef} className="relative grid gap-0 lg:grid-cols-4 lg:gap-6">
