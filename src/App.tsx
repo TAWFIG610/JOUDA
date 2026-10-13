@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { UniversitiesSection } from "./components/UniversitiesSection";
+import { AboutSection } from "./components/AboutSection";
 import { StudentJourneyVisual } from "./components/StudentJourneyVisual";
 import { ServicesSection } from "./components/ServicesSection";
 import { WhyThiqaSection } from "./components/WhyThiqaSection";
@@ -77,6 +78,8 @@ export function App() {
         />
 
         <UniversitiesSection onOpenLeadModal={handleOpenLeadModal} />
+
+        <AboutSection />
 
         <StudentJourneyVisual onOpenLeadModal={handleOpenLeadModal} />
 

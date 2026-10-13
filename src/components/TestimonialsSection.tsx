@@ -33,7 +33,7 @@ export const TestimonialsSection: React.FC = () => {
   };
 
   return (
-    <section id="testimonials" className="bg-paper py-14 sm:py-20">
+    <section id="testimonials" className="bg-white py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader align="start" title={text.title} />
 
@@ -45,7 +45,7 @@ export const TestimonialsSection: React.FC = () => {
         >
           {TESTIMONIALS.map((item) => (
             <li key={item.id} className="w-[86%] shrink-0 snap-center sm:w-[60%] lg:w-auto">
-              <figure className="flex h-full flex-col justify-between gap-6 rounded-2xl border border-line bg-white p-6">
+              <figure className="flex h-full flex-col justify-between gap-6 rounded-2xl border border-line bg-paper p-6">
                 <blockquote className="text-base leading-loose text-slate-700">
                   {text.open}
                   {t(item.quote)}

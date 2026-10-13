@@ -20,11 +20,55 @@ export const WHATSAPP_GREETING: Localized = {
 
 export const whatsappUrl = (text: string) => `${WHATSAPP_BASE_URL}?text=${encodeURIComponent(text)}`;
 
+/**
+ * Official company details shown in "Who we are" and the footer.
+ * Leave a field empty ("") to hide it; fill in real details only.
+ */
+export const COMPANY: {
+  registration: string;
+  address: Localized;
+  hours: Localized;
+  email: string;
+} = {
+  registration: "", // e.g. SSM registration number
+  address: { ar: "", en: "" }, // office address in Kuala Lumpur
+  hours: { ar: "", en: "" }, // e.g. "الأحد – الخميس، 9 ص – 6 م"
+  email: "",
+};
+
+/** Official bodies students can use to check programs and visas themselves. */
+export const OFFICIAL_CHECKS: { name: string; url: string; what: Localized }[] = [
+  {
+    name: "MQA",
+    url: "https://www.mqa.gov.my/",
+    what: {
+      ar: "هيئة المؤهلات الماليزية: تحقق أن البرنامج الذي تقدّم عليه معتمد.",
+      en: "Malaysian Qualifications Agency: check that your program is accredited.",
+    },
+  },
+  {
+    name: "EMGS",
+    url: "https://educationmalaysia.gov.my/",
+    what: {
+      ar: "الجهة الرسمية لتأشيرات الطلاب الدوليين: تابع حالة طلب تأشيرتك بنفسك.",
+      en: "The official body for international student visas: track your visa application yourself.",
+    },
+  },
+  {
+    name: "University",
+    url: "",
+    what: {
+      ar: "مكتب القبول في الجامعة: تأكد من خطاب القبول والرسوم مباشرة من موقعها الرسمي.",
+      en: "The university's admissions office: confirm your offer letter and fees on its official website.",
+    },
+  },
+];
+
 export const NAV_LINKS: NavLink[] = [
+  { name: { ar: "من نحن", en: "About us" }, href: "#about" },
   { name: { ar: "الجامعات", en: "Universities" }, href: "#universities" },
   { name: { ar: "خطوات التقديم", en: "How it works" }, href: "#journey" },
   { name: { ar: "خدماتنا", en: "Services" }, href: "#services" },
-  { name: { ar: "الدراسة في ماليزيا", en: "Studying in Malaysia" }, href: "#why-malaysia" },
   { name: { ar: "الأسئلة الشائعة", en: "FAQ" }, href: "#faq" },
 ];
 
@@ -309,6 +353,7 @@ export const FOOTER_DATA: {
     en: "THIQA UNI helps students study in Malaysia: choosing a university and major, applying for admission, following the EMGS visa, and arrival and housing.",
   },
   links: [
+    { title: { ar: "من نحن", en: "About us" }, href: "#about" },
     { title: { ar: "الجامعات", en: "Universities" }, href: "#universities" },
     { title: { ar: "خطوات التقديم", en: "How it works" }, href: "#journey" },
     { title: { ar: "خدماتنا", en: "Services" }, href: "#services" },

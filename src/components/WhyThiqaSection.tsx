@@ -1,6 +1,6 @@
 import React from "react";
-import { COMPARISON_ROWS } from "../data/thiqaData";
-import { ArrowLeft } from "lucide-react";
+import { COMPARISON_ROWS, OFFICIAL_CHECKS } from "../data/thiqaData";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import { SectionHeader } from "./ui/SectionHeader";
 import { useLang } from "../i18n/LanguageContext";
 
@@ -17,6 +17,9 @@ const TEXT = {
     weDo: "ما نقدّمه في ثقة يوني",
     weDoShort: "ما نقدّمه",
     cta: "اسأل مستشاراً من فريقنا",
+    verifyTitle: "تحقّق بنفسك قبل أن تدفع",
+    verifyBody: "لا تعتمد على كلامنا فقط. هذه الجهات الرسمية تساعدك على التأكد من كل خطوة:",
+    university: "الجامعة",
   },
   en: {
     title: "Questions to ask anyone helping you apply",
@@ -26,6 +29,9 @@ const TEXT = {
     weDo: "What THIQA UNI does",
     weDoShort: "What we do",
     cta: "Ask one of our advisors",
+    verifyTitle: "Check for yourself before you pay",
+    verifyBody: "Don't rely on our word alone. These official sources let you confirm each step:",
+    university: "The university",
   },
 };
 
@@ -34,12 +40,12 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({ onOpenLeadModal }) =>
   const text = TEXT[lang];
 
   return (
-    <section id="why-thiqa" className="bg-white py-14 sm:py-20">
+    <section id="why-thiqa" className="bg-paper py-14 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeader title={text.title} description={text.description} />
 
         {/* Desktop / tablet: a real table */}
-        <div className="hidden overflow-hidden rounded-2xl border border-line md:block">
+        <div className="hidden overflow-hidden rounded-2xl border border-line bg-white md:block">
           <table className="w-full border-collapse text-start">
             <thead>
               <tr className="bg-brand-800 text-sm text-white">
@@ -63,7 +69,7 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({ onOpenLeadModal }) =>
         {/* Phones: one block per topic */}
         <dl className="space-y-4 md:hidden">
           {COMPARISON_ROWS.map((row) => (
-            <div key={row.feature.en} className="overflow-hidden rounded-2xl border border-line">
+            <div key={row.feature.en} className="overflow-hidden rounded-2xl border border-line bg-white">
               <dt className="bg-brand-800 px-4 py-3 font-bold text-white">{t(row.feature)}</dt>
               <dd className="px-4 py-3 text-base leading-relaxed text-muted">
                 <span className="block text-xs font-bold text-slate-500">{text.ask}</span>
@@ -76,6 +82,31 @@ export const WhyThiqaSection: React.FC<WhyThiqaProps> = ({ onOpenLeadModal }) =>
             </div>
           ))}
         </dl>
+
+        <div className="mt-10 rounded-2xl border border-brand-200 bg-brand-50/60 p-6 sm:p-8">
+          <h3 className="text-lg font-bold text-ink sm:text-xl">{text.verifyTitle}</h3>
+          <p className="mt-1.5 text-base text-muted">{text.verifyBody}</p>
+          <ul className="mt-5 grid gap-4 md:grid-cols-3">
+            {OFFICIAL_CHECKS.map((check) => (
+              <li key={check.name} className="rounded-xl bg-white p-4">
+                {check.url ? (
+                  <a
+                    href={check.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-link font-latin text-base"
+                  >
+                    {check.name}
+                    <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                ) : (
+                  <p className="flex min-h-11 items-center font-bold text-ink">{text.university}</p>
+                )}
+                <p className="text-sm leading-relaxed text-muted">{t(check.what)}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <div className="mt-10 text-center">
           <button type="button" onClick={() => onOpenLeadModal("why_thiqa_cta")} className="btn btn-dark w-full sm:w-auto">

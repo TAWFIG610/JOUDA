@@ -63,7 +63,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenLeadModa
   const text = TEXT[lang];
 
   return (
-    <section id="services" className="bg-white py-14 sm:py-20">
+    <section id="services" className="bg-paper py-14 sm:py-20">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:px-8">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeader align="start" className="mb-6 sm:mb-6" title={text.title} description={text.description} />

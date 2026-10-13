@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  COMPANY,
   FOOTER_DATA,
   WHATSAPP_DISPLAY,
   whatsappUrl,
@@ -22,6 +23,7 @@ const TEXT = {
     legal: "معلومات قانونية",
     legalLinks: { privacy: "سياسة الخصوصية", terms: "الشروط والأحكام", refund: "الرسوم والشفافية" },
     top: "للأعلى",
+    registration: "رقم السجل التجاري",
     message: "مرحباً، أود التواصل مع مستشار ثقة يوني.",
   },
   en: {
@@ -30,6 +32,7 @@ const TEXT = {
     legal: "Legal",
     legalLinks: { privacy: "Privacy policy", terms: "Terms and conditions", refund: "Fees and transparency" },
     top: "Back to top",
+    registration: "Company registration",
     message: "Hello, I'd like to speak with a THIQA UNI advisor.",
   },
 };
@@ -126,9 +129,23 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-3 pt-6 text-xs text-brand-100/70 sm:flex-row">
-          <p>
-            © {new Date().getFullYear()} {brandName} · {t(BRAND_MOTTO)}
-          </p>
+          <div className="space-y-1 text-center sm:text-start">
+            <p>
+              © {new Date().getFullYear()} {brandName} · {t(BRAND_MOTTO)}
+            </p>
+            {/* Shown once the real details are filled in COMPANY (thiqaData.ts) */}
+            {(COMPANY.registration || t(COMPANY.address)) && (
+              <p>
+                {COMPANY.registration && (
+                  <>
+                    {text.registration}: <span className="font-latin" dir="ltr">{COMPANY.registration}</span>
+                  </>
+                )}
+                {COMPANY.registration && t(COMPANY.address) && " · "}
+                {t(COMPANY.address)}
+              </p>
+            )}
+          </div>
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
