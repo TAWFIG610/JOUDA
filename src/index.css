@@ -246,6 +246,49 @@
   }
 }
 
+/* ---------- Universities marquee (two rows, RTL) ---------- */
+/* Items are rendered three times, so moving one third loops seamlessly. */
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(33.333%);
+  }
+}
+
+@keyframes marquee-reverse-rtl {
+  from {
+    transform: translateX(33.333%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-rtl,
+.animate-marquee-reverse-rtl {
+  display: flex;
+  width: max-content;
+  animation: marquee-rtl 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-reverse-rtl {
+  animation-name: marquee-reverse-rtl;
+}
+
+.animate-marquee-rtl:hover,
+.animate-marquee-reverse-rtl:hover,
+.animate-marquee-rtl:focus-within,
+.animate-marquee-reverse-rtl:focus-within {
+  animation-play-state: paused;
+}
+
+.marquee-fade {
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
 /* Respect motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -259,5 +302,13 @@
   .reveal {
     opacity: 1;
     transform: none;
+  }
+  /* Static, swipeable rows instead of motion */
+  .animate-marquee-rtl,
+  .animate-marquee-reverse-rtl {
+    animation: none !important;
+  }
+  .universities-marquee {
+    overflow-x: auto;
   }
 }
