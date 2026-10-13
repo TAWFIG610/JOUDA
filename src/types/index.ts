@@ -9,15 +9,12 @@ export interface PartnerUniversity {
   nameEn: string;
   shortName: string;
   location: string;
-  ranking: string;
-  badge: string;
   logoUrl?: string;
   popularFields: string[];
   type?: "حكومية" | "خاصة" | "دولية فرع";
   annualTuitionUSD?: string;
   nextAdmissionIntakes?: string[];
   scholarshipAvailable?: string;
-  worldRank?: number;
 }
 
 export interface Testimonial {
@@ -31,7 +28,6 @@ export interface Testimonial {
 }
 
 export interface FAQItem {
-  category: string;
   q: string;
   a: string;
 }

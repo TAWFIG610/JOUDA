@@ -34,10 +34,3 @@ export function useInView<T extends Element>(
 
   return { ref, inView };
 }
-
-export function prefersReducedMotion() {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
-  );
-}
