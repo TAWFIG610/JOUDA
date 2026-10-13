@@ -8,10 +8,10 @@ import {
   Compass,
   Cpu,
   GraduationCap,
+  Landmark,
   Languages,
   Library,
   School,
-  Sparkles,
   Stethoscope,
   Wallet,
   Wrench,
@@ -32,10 +32,10 @@ interface Option {
 }
 
 const DEGREES: Option[] = [
-  { label: "بكالوريوس (جامعي)", hint: "3–5 سنوات", icon: GraduationCap },
-  { label: "ماجستير", hint: "1–2 سنة", icon: Library },
-  { label: "دكتوراه", hint: "3+ سنوات", icon: BookOpen },
-  { label: "دورة لغة إنجليزية مكثفة", hint: "تبدأ شهرياً غالباً", icon: Languages },
+  { label: "بكالوريوس (جامعي)", icon: GraduationCap },
+  { label: "ماجستير", icon: Library },
+  { label: "دكتوراه", icon: BookOpen },
+  { label: "دورة لغة إنجليزية مكثفة", icon: Languages },
   { label: "سنة تحضيرية (Foundation)", hint: "قبل البكالوريوس", icon: School },
 ];
 
@@ -50,7 +50,7 @@ const FIELDS: Option[] = [
 const BUDGETS: Option[] = [
   { label: "اقتصادية", hint: "أقل من 4,000 دولار سنوياً", icon: Wallet },
   { label: "متوسطة", hint: "4,000 – 7,500 دولار سنوياً", icon: Wallet },
-  { label: "متقدمة / جامعات عالمية", hint: "+7,500 دولار سنوياً", icon: Sparkles },
+  { label: "متقدمة / جامعات عالمية", hint: "+7,500 دولار سنوياً", icon: Landmark },
 ];
 
 const TOTAL_STEPS = 3;
@@ -70,7 +70,7 @@ const OptionCard: React.FC<{ option: Option; selected: boolean; onSelect: () => 
       style={{ animationDelay: `${delay}ms` }}
       className={`flex min-h-16 w-full animate-fade-up items-center gap-3 rounded-2xl border-2 p-3.5 text-start transition-all duration-200 ${
         selected
-          ? "border-gold-500 bg-gold-50 shadow-[0_10px_24px_-14px_rgb(245_158_11/0.9)]"
+          ? "border-gold-500 bg-gold-50 "
           : "border-line bg-white hover:-translate-y-0.5 hover:border-brand-200 hover:bg-brand-50/40"
       }`}
     >
@@ -109,12 +109,11 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({ isOpen
     <Modal isOpen={isOpen} onClose={onClose} labelledBy="advisor-modal-title" maxWidth="sm:max-w-lg">
       <div className="space-y-6 pt-6 sm:pt-2">
         <div className="space-y-3 text-center">
-          <div className="section-eyebrow">
-            <Compass className="h-3.5 w-3.5 text-gold-600" />
-            <span>{isResult ? "ملخص اختياراتك" : `مستشار التوجيه الأكاديمي • خطوة ${step} من ${TOTAL_STEPS}`}</span>
-          </div>
-          <h2 id="advisor-modal-title" className="text-2xl font-bold text-ink">
-            {isResult ? "مسارك جاهز للمناقشة" : "اكتشف مسارك الدراسي"}
+          <p className="text-sm font-semibold text-slate-500">
+            {isResult ? "ملخص اختياراتك" : `سؤال ${step} من ${TOTAL_STEPS}`}
+          </p>
+          <h2 id="advisor-modal-title" className="text-xl font-bold text-ink sm:text-2xl">
+            {isResult ? "هذا ما سنرسله للمستشار" : "ساعدني أختار التخصص"}
           </h2>
 
           {/* Progress */}
@@ -122,7 +121,7 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({ isOpen
             {Array.from({ length: TOTAL_STEPS }).map((_, i) => (
               <span key={i} className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100">
                 <span
-                  className={`block h-full origin-right rounded-full bg-gradient-to-l from-gold-400 to-gold-600 transition-transform duration-500 ${
+                  className={`block h-full origin-right rounded-full bg-gold-500 transition-transform duration-500 ${
                     i < step ? "scale-x-100" : "scale-x-0"
                   }`}
                 />
@@ -183,9 +182,6 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({ isOpen
 
           {isResult && (
             <div className="space-y-4">
-              <div className="mx-auto flex h-16 w-16 animate-pop items-center justify-center rounded-3xl bg-gradient-to-br from-gold-300 to-gold-500 text-ink shadow-lg">
-                <GraduationCap className="h-8 w-8" />
-              </div>
               <dl className="divide-y divide-line overflow-hidden rounded-2xl border border-line bg-paper">
                 {[
                   ["المرحلة", degree],
@@ -213,7 +209,7 @@ export const PathwayAdvisorModal: React.FC<PathwayAdvisorModalProps> = ({ isOpen
             </button>
           )}
           {isResult ? (
-            <button type="button" onClick={handleFinish} className="btn btn-primary btn-shimmer flex-1">
+            <button type="button" onClick={handleFinish} className="btn btn-primary flex-1">
               <span>أرسل اختياراتي للمستشار</span>
               <ArrowLeft className="h-4 w-4" />
             </button>

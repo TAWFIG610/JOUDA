@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { WHATSAPP_BASE_URL, PARTNER_UNIVERSITIES, DISCOVER_TO_APPLY_STEPS } from "../data/thiqaData";
+import { WHATSAPP_BASE_URL, PARTNER_UNIVERSITIES } from "../data/thiqaData";
 import {
   AlertCircle,
   ArrowLeft,
@@ -64,8 +64,6 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 /** Fields validated on each step (0-based). */
 const STEP_FIELDS: string[][] = [["fieldOfInterest"], ["name", "country"], ["whatsapp", "email"]];
 
-const CONFETTI_COLORS = ["bg-gold-400", "bg-brand-500", "bg-success-600", "bg-gold-600", "bg-brand-300"];
-
 const FieldError: React.FC<{ id: string; message?: string }> = ({ id, message }) =>
   message ? (
     <p id={id} className="field-error">
@@ -83,15 +81,11 @@ export const LeadModal: React.FC<LeadModalProps> = ({ isOpen, onClose, initialIn
   const [whatsapp, setWhatsapp] = useState("");
   const [country, setCountry] = useState("");
   const [degreeLevel, setDegreeLevel] = useState("بكالوريوس");
-  const [fieldOfInterest, setFieldOfInterest] = useState(selectedUni?.nameAr ?? "");
+  const presetMajor = initialInterest?.startsWith("major_") ? initialInterest.replace("major_", "") : "";
+  const [fieldOfInterest, setFieldOfInterest] = useState(selectedUni?.nameAr ?? presetMajor);
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const selectedStepNumber = initialInterest?.startsWith("journey_step_")
-    ? Number(initialInterest.replace("journey_step_", ""))
-    : null;
-  const selectedStep = selectedStepNumber ? DISCOVER_TO_APPLY_STEPS[selectedStepNumber - 1] : undefined;
 
   const clearError = (key: string) => {
     if (errors[key] || errors.form) setErrors((prev) => ({ ...prev, [key]: "", form: "" }));
@@ -195,16 +189,12 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
     <Modal isOpen={isOpen} onClose={onClose} labelledBy="lead-modal-title">
       {!submitted ? (
         <div className="space-y-6 pt-6 sm:pt-2">
-          <div className="space-y-2 text-center">
-            <div className="section-eyebrow">
-              <ShieldCheck className="h-3.5 w-3.5 text-gold-600" />
-              <span>تواصل مباشر مع فريق ثقة يوني</span>
-            </div>
-            <h2 id="lead-modal-title" className="text-xl font-bold text-ink sm:text-[1.7rem]">
-              ابدأ رحلتك الأكاديمية مع <span className="text-gradient-gold">ثقة يوني</span>
+          <div className="space-y-1.5 text-center">
+            <h2 id="lead-modal-title" className="text-xl font-bold text-ink sm:text-2xl">
+              اطلب استشارة مجانية
             </h2>
             <p className="mx-auto max-w-md text-sm leading-relaxed text-muted">
-              ثلاث خطوات قصيرة، أقل من دقيقة. تختلف الشروط والرسوم حسب البرنامج والجامعة.
+              ثلاث خطوات قصيرة، ثم نفتح لك رسالة واتساب جاهزة لترسلها لفريقنا.
             </p>
           </div>
 
@@ -217,7 +207,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                 <li key={title} aria-current={current ? "step" : undefined} className="space-y-2">
                   <span className="block h-1.5 overflow-hidden rounded-full bg-slate-100">
                     <span
-                      className={`block h-full origin-right rounded-full bg-gradient-to-l from-gold-400 to-gold-600 transition-transform duration-500 ${
+                      className={`block h-full origin-right rounded-full bg-gold-500 transition-transform duration-500 ${
                         i <= step ? "scale-x-100" : "scale-x-0"
                       }`}
                     />
@@ -239,12 +229,6 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                     <div className="rounded-2xl border border-brand-100 bg-brand-50/60 p-4">
                       <p className="text-xs font-bold text-brand-700">ملخص اختياراتك في مستشار المسار</p>
                       <p className="mt-1 text-sm leading-relaxed text-slate-700">{pathwaySummary}</p>
-                    </div>
-                  )}
-                  {selectedStep && (
-                    <div className="rounded-2xl border border-brand-100 bg-brand-50/60 p-4">
-                      <p className="text-xs font-bold text-brand-700">الخطوة التي تريد مناقشتها</p>
-                      <p className="mt-1 text-sm leading-relaxed text-slate-700">{selectedStep.titleAr}</p>
                     </div>
                   )}
                   {selectedUni && (
@@ -463,7 +447,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
               )}
             </div>
 
-            <div className="space-y-3">
+            <div className="sticky bottom-0 -mx-5 space-y-3 border-t border-line bg-white px-5 pb-5 pt-3 sm:static sm:mx-0 sm:border-0 sm:p-0">
               <div className="flex gap-2.5">
                 {step > 0 && (
                   <button
@@ -480,7 +464,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
                 )}
                 <button
                   type="submit"
-                  className={`btn flex-1 ${step === STEPS.length - 1 ? "btn-primary btn-shimmer min-h-14 text-base" : "btn-dark"}`}
+                  className={`btn flex-1 ${step === STEPS.length - 1 ? "btn-primary min-h-14 text-base" : "btn-dark"}`}
                 >
                   {step === STEPS.length - 1 ? (
                     <>
@@ -512,28 +496,8 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
           </form>
         </div>
       ) : (
-        <div className="relative space-y-5 overflow-hidden py-8 text-center">
-          {/* Celebration burst */}
-          <div className="pointer-events-none absolute inset-x-0 top-6 flex justify-center" aria-hidden="true">
-            {Array.from({ length: 14 }).map((_, i) => {
-              const angle = (i / 14) * Math.PI * 2;
-              return (
-                <span
-                  key={i}
-                  className={`absolute h-2 w-2 rounded-sm ${CONFETTI_COLORS[i % CONFETTI_COLORS.length]}`}
-                  style={
-                    {
-                      "--dx": `${Math.cos(angle) * 120}px`,
-                      "--dy": `${Math.sin(angle) * 80 + 40}px`,
-                      animation: `confetti 1.1s cubic-bezier(0.22,1,0.36,1) ${i * 20}ms both`,
-                    } as React.CSSProperties
-                  }
-                />
-              );
-            })}
-          </div>
-
-          <div className="mx-auto flex h-20 w-20 animate-pop items-center justify-center rounded-3xl bg-gradient-to-br from-success-600 to-success-700 text-white shadow-lg">
+        <div className="space-y-5 py-8 text-center">
+          <div className="mx-auto flex h-20 w-20 animate-pop items-center justify-center rounded-3xl bg-success-600 text-white">
             <CheckCircle2 className="h-10 w-10" />
           </div>
 
@@ -551,7 +515,7 @@ ${pathwaySummary ? `ملخص مستشار المسار: ${pathwaySummary}\n` : "
             <button
               type="button"
               onClick={() => window.open(getWhatsAppUrl(), "_blank")}
-              className="btn w-full bg-success-600 text-white hover:bg-success-700"
+              className="btn btn-whatsapp w-full"
             >
               <MessageCircle className="h-5 w-5" />
               <span>إعادة فتح الواتساب إذا لم يفتح تلقائياً</span>

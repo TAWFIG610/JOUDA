@@ -44,9 +44,8 @@ export const Modal: React.FC<ModalProps> = ({
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}
-        className={`relative max-h-[94dvh] w-full animate-sheet-in overflow-y-auto rounded-t-[28px] bg-white p-5 text-slate-900 shadow-2xl outline-none sm:my-8 sm:max-h-[90vh] sm:rounded-[28px] sm:p-8 ${maxWidth}`}
+        className={`relative max-h-[94dvh] w-full animate-sheet-in overflow-y-auto rounded-t-3xl bg-white p-5 text-slate-900 shadow-2xl outline-none sm:my-8 sm:max-h-[90vh] sm:rounded-3xl sm:p-8 ${maxWidth}`}
       >
-        <div className="absolute inset-x-0 top-0 hidden h-1.5 bg-gradient-to-l from-brand-700 via-gold-500 to-brand-700 sm:block" aria-hidden="true" />
         <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-slate-200 sm:hidden" aria-hidden="true" />
 
         <button

@@ -28,7 +28,6 @@ export interface Testimonial {
   program: string;
   quote: string;
   year: string;
-  rating: number;
 }
 
 export interface FAQItem {
