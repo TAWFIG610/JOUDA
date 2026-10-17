@@ -1,0 +1,1021 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ثقة يوني — نموذج التصميم الجديد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;700&family=Noto+Kufi+Arabic:wght@400;500;700&family=Almarai:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+/* =====================================================================
+   THIQA UNI — redesign mockup
+   Tokens: navy is the brand colour; sand is used ONLY on the primary button.
+   No gradients, no coloured shadows. Cards: border only.
+   ===================================================================== */
+:root {
+  --font: "Alexandria", system-ui, sans-serif;
+
+  /* Colour */
+  --navy: #00245c;        /* logo navy: header text, dark panels, icons */
+  --navy-2: #0a3577;      /* hover on navy */
+  --sand: #d6aa55;        /* calmer take on the logo gold — primary button only */
+  --sand-hover: #c99a42;
+  --text: #14213d;        /* text grey 1: headings and body */
+  --text-2: #4a5568;      /* text grey 2: secondary (7.4:1 on white) */
+  --on-navy: #ffffff;
+  --on-navy-2: #c9d3e6;   /* secondary text on navy (≈10:1) */
+  --line: #e3e7ee;
+  --tint: #f5f7fa;        /* the one light tint, used once */
+  --white: #ffffff;
+  --wa: #25d366;          /* WhatsApp brand green */
+
+  /* Type scale — 6 sizes */
+  --fs-1: 14px;   /* small labels */
+  --fs-2: 17px;   /* body */
+  --fs-3: 20px;   /* card titles, lead */
+  --fs-4: 24px;   /* h2 on phones */
+  --fs-5: 32px;   /* h2 desktop, hero on phones */
+  --fs-6: 40px;   /* hero desktop */
+
+  /* Radius — 3 values */
+  --r-sm: 8px;    /* buttons, inputs, chips */
+  --r-md: 14px;   /* cards, panels, dialog */
+  --r-full: 999px;
+
+  --header-h: 56px;
+  --section-y: 48px;
+  --gutter: 20px;
+}
+@media (min-width: 768px) {
+  :root { --header-h: 72px; --section-y: 80px; --gutter: 32px; }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 12px); }
+body {
+  margin: 0; font-family: var(--font); font-size: var(--fs-2); line-height: 1.75;
+  font-weight: 400; color: var(--text); background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--navy); }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--section-y); }
+.section + .section { border-top: 1px solid var(--line); }
+.tint { background: var(--tint); border-top: 0 !important; }
+.tint + .section { border-top: 0; }
+
+h1, h2, h3 { margin: 0; font-weight: 700; line-height: 1.35; color: var(--text); text-wrap: balance; }
+h2 { font-size: var(--fs-4); }
+h3 { font-size: var(--fs-3); }
+@media (min-width: 768px) { h2 { font-size: var(--fs-5); } }
+p { margin: 0; }
+.muted { color: var(--text-2); }
+.lead { font-size: var(--fs-3); line-height: 1.7; }
+.small { font-size: var(--fs-1); }
+.section-head { max-width: 680px; margin-bottom: 32px; }   /* all headings start-aligned */
+.section-head p { margin-top: 10px; color: var(--text-2); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Buttons: 3 styles ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 52px; padding: 0 24px; border-radius: var(--r-sm);
+  font-weight: 700; font-size: var(--fs-2); text-decoration: none; cursor: pointer;
+  border: 1px solid transparent; transition: background-color .15s;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--sand); color: var(--navy); }
+.btn-primary:hover { background: var(--sand-hover); }
+.btn-secondary { background: transparent; color: var(--navy); border-color: var(--navy); }
+.btn-secondary:hover { background: var(--tint); }
+.on-navy .btn-secondary { color: #fff; border-color: rgba(255,255,255,.6); }
+.on-navy .btn-secondary:hover { background: rgba(255,255,255,.08); }
+.link { color: var(--navy); font-weight: 500; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; background: none; border: 0; padding: 0; cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; }
+.on-navy .link { color: #fff; }
+
+/* ---------- Placeholders (clearly marked) ---------- */
+.ph {
+  display: inline-block; padding: 0 6px; border: 1px dashed #8a94a6; border-radius: 4px;
+  background: #eef1f6; color: var(--text-2); font-size: .92em; line-height: 1.6;
+}
+.on-navy .ph { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.5); color: #fff; }
+.ph-img {
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  background: #e9edf3; border: 1px dashed #8a94a6; border-radius: var(--r-md);
+  color: var(--text-2); font-size: var(--fs-1); padding: 16px;
+}
+.ph-img svg { width: 28px; height: 28px; margin-bottom: 6px; opacity: .7; }
+body.hide-ph .ph { border-color: transparent; background: transparent; }
+body.hide-ph .ph-img { border-style: solid; }
+
+/* ---------- Review bar (not part of the design) ---------- */
+.review {
+  background: #fff8e1; border-bottom: 1px solid #ecd9a4; font-size: var(--fs-1); color: #5b4a12;
+}
+.review .wrap { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding-block: 8px; }
+.review select, .review button { font-size: var(--fs-1); padding: 4px 8px; border: 1px solid #d9c38a; border-radius: 6px; background: #fff; cursor: pointer; }
+
+/* ---------- Header ---------- */
+.header { position: sticky; top: 0; z-index: 40; background: #fff; border-bottom: 1px solid var(--line); }
+.header .wrap { height: var(--header-h); display: flex; align-items: center; gap: 24px; }
+.header .logo img { height: 32px; width: auto; }
+@media (min-width: 768px) { .header .logo img { height: 40px; } }
+.nav { display: none; gap: 4px; margin-inline-start: auto; }
+.nav a { padding: 8px 12px; border-radius: var(--r-sm); text-decoration: none; color: var(--text); font-size: var(--fs-1); font-weight: 500; }
+.nav a:hover { background: var(--tint); }
+.header-actions { display: flex; align-items: center; gap: 8px; margin-inline-start: auto; }
+.lang { background: none; border: 0; padding: 8px 10px; min-height: 44px; font-size: var(--fs-1); font-weight: 500; color: var(--navy); cursor: pointer; border-radius: var(--r-sm); }
+.lang:hover { background: var(--tint); }
+.header .btn { min-height: 44px; padding: 0 18px; font-size: var(--fs-1); display: none; }
+.menu-btn { width: 44px; height: 44px; border: 1px solid var(--line); background: #fff; border-radius: var(--r-sm); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+@media (min-width: 1100px) {
+  .nav { display: flex; }
+  .header-actions { margin-inline-start: 8px; }
+  .header .btn { display: inline-flex; }
+  .menu-btn { display: none; }
+}
+.mobile-menu { display: none; position: fixed; inset: var(--header-h) 0 0; background: #fff; z-index: 39; overflow-y: auto; }
+.mobile-menu.open { display: block; }
+.mobile-menu .wrap { padding-block: 16px 32px; }
+.mobile-menu a { display: flex; align-items: center; min-height: 56px; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--text); font-size: var(--fs-3); font-weight: 500; }
+.mobile-menu .btn { width: 100%; margin-top: 24px; }
+body.menu-open { overflow: hidden; }
+body.menu-open .wa-float { display: none; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; color: #fff; background-color: var(--navy);
+  /* Real photo goes here: background-image: url(hero-students.jpg); background-size: cover; background-position: center; */
+}
+.hero::before { /* darkening layer so text stays readable on any photo */
+  content: ""; position: absolute; inset: 0; background: rgba(0, 24, 66, .72);
+}
+.hero .wrap { position: relative; padding-block: 64px 56px; }
+@media (min-width: 768px) { .hero .wrap { padding-block: 112px 96px; } }
+.hero h1 { color: #fff; font-size: var(--fs-5); max-width: 15ch; }
+@media (min-width: 768px) { .hero h1 { font-size: var(--fs-6); } }
+.hero .lead { color: var(--on-navy-2); margin-top: 16px; max-width: 560px; }
+.hero .btn { margin-top: 28px; }
+.hero .trust-line { margin-top: 20px; font-size: var(--fs-1); color: var(--on-navy-2); }
+.hero .photo-note {
+  position: absolute; inset-block-start: 12px; inset-inline-end: 12px; z-index: 1;
+  font-size: var(--fs-1); color: #fff; background: rgba(0,0,0,.35); border: 1px dashed rgba(255,255,255,.6);
+  border-radius: var(--r-sm); padding: 4px 10px; max-width: 70%;
+}
+
+/* ---------- Trust ---------- */
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+@media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stat { background: #fff; padding: 20px; }
+.stat b { display: block; font-size: var(--fs-4); color: var(--navy); line-height: 1.3; }
+.stat span { font-size: var(--fs-1); color: var(--text-2); }
+.about { display: grid; gap: 24px; margin-top: 32px; }
+@media (min-width: 900px) { .about { grid-template-columns: 1.1fr .9fr; gap: 40px; } }
+.facts { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
+.facts li { display: flex; gap: 10px; align-items: baseline; }
+.facts li > span:first-child { color: var(--text-2); min-width: 9.5em; font-size: var(--fs-1); }
+.team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.person .ph-img { aspect-ratio: 1; border-radius: var(--r-md); }
+.person p { font-size: var(--fs-1); margin-top: 8px; line-height: 1.5; }
+.logos { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (min-width: 768px) { .logos { grid-template-columns: repeat(6, 1fr); } }
+.logos li { list-style: none; height: 72px; border: 1px solid var(--line); border-radius: var(--r-md); display: flex; align-items: center; justify-content: center; padding: 12px; }
+.logos img { max-height: 44px; width: auto; }
+.logos { padding: 0; }
+
+/* ---------- How we work ---------- */
+.how { display: grid; gap: 24px; }
+@media (min-width: 900px) { .how { grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; } }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+@media (min-width: 600px) { .steps { grid-template-columns: 1fr 1fr; } }
+.card { background: #fff; border: 1px solid var(--line); border-radius: var(--r-md); padding: 20px; }
+.step .num { display: inline-flex; width: 32px; height: 32px; border-radius: var(--r-full); border: 1px solid var(--navy); color: var(--navy); align-items: center; justify-content: center; font-size: var(--fs-1); font-weight: 700; }
+.step h3 { margin-top: 12px; }
+.step p { margin-top: 6px; color: var(--text-2); }
+.how .ph-img { min-height: 260px; }
+
+/* ---------- Universities ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 24px; }
+.filter-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.filter-group > span { font-size: var(--fs-1); color: var(--text-2); margin-inline-end: 4px; }
+.chip {
+  min-height: 40px; padding: 0 14px; border-radius: var(--r-sm); border: 1px solid var(--line);
+  background: #fff; color: var(--text); font-size: var(--fs-1); cursor: pointer;
+}
+.chip:hover { border-color: var(--navy); }
+.chip[aria-pressed="true"], .opt[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; } /* one selected style site-wide */
+.uni-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+@media (min-width: 640px) { .uni-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .uni-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1200px) { .uni-grid { grid-template-columns: repeat(4, 1fr); } }
+.uni { display: flex; flex-direction: column; gap: 12px; height: 100%; }
+.uni .logo-box { height: 56px; display: flex; align-items: center; }
+.uni .logo-box img { max-height: 48px; max-width: 70%; width: auto; }
+.uni h3 { font-size: var(--fs-2); line-height: 1.5; }
+.uni .en { font-size: var(--fs-1); color: var(--text-2); direction: ltr; text-align: start; }
+html[dir="rtl"] .uni .en { text-align: right; }
+.uni .meta { font-size: var(--fs-1); color: var(--text-2); }
+.uni dl { margin: 0; display: grid; gap: 6px; font-size: var(--fs-1); border-top: 1px solid var(--line); padding-top: 12px; }
+.uni dl div { display: flex; justify-content: space-between; gap: 8px; }
+.uni dt { color: var(--text-2); }
+.uni dd { margin: 0; text-align: end; }
+.uni-more { display: none; margin-top: 16px; }
+.empty { padding: 24px; text-align: center; color: var(--text-2); }
+
+/* ---------- Costs & commitments ---------- */
+.costs-grid { display: grid; gap: 20px; }
+@media (min-width: 960px) { .costs-grid { grid-template-columns: 1.15fr .85fr; gap: 24px; align-items: start; } }
+.updated { display: inline-block; font-size: var(--fs-1); color: var(--navy); border: 1px solid var(--navy); border-radius: var(--r-full); padding: 0 10px; margin-top: 10px; }
+.cost-table { width: 100%; border-collapse: collapse; font-size: var(--fs-2); }
+.cost-table th, .cost-table td { padding: 14px 0; border-bottom: 1px solid var(--line); text-align: start; vertical-align: top; font-weight: 400; }
+.cost-table td { text-align: end; white-space: nowrap; }
+.cost-table tr:last-child th, .cost-table tr:last-child td { border-bottom: 0; }
+.dark { background: var(--navy); color: #fff; border-radius: var(--r-md); padding: 24px; }   /* the one dark emphasis style */
+.dark h3 { color: #fff; }
+.commit { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 16px; }
+.commit li { display: grid; grid-template-columns: 24px 1fr; gap: 12px; }
+.commit svg { width: 22px; height: 22px; margin-top: 4px; color: #fff; }
+.commit b { display: block; font-weight: 700; }
+.commit p { color: var(--on-navy-2); font-size: var(--fs-1); line-height: 1.7; margin-top: 2px; }
+.verify { margin-top: 24px; }
+.verify ul { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 12px; }
+@media (min-width: 768px) { .verify ul { grid-template-columns: repeat(3, 1fr); } }
+.verify li p { color: var(--text-2); font-size: var(--fs-1); margin-top: 4px; }
+.verify a { font-weight: 700; }
+
+/* ---------- Stories ---------- */
+.stories { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+@media (min-width: 900px) { .stories { grid-template-columns: repeat(3, 1fr); } }
+.story { display: flex; flex-direction: column; gap: 16px; }
+.story .who { display: flex; gap: 12px; align-items: center; }
+.story .avatar { width: 56px; height: 56px; flex: none; border-radius: var(--r-full); padding: 0; font-size: 11px; }
+.story .who p { font-size: var(--fs-1); color: var(--text-2); line-height: 1.6; }
+.story .who b { color: var(--text); font-size: var(--fs-2); display: block; }
+.proof { display: grid; gap: 12px; margin-top: 12px; }
+@media (min-width: 768px) { .proof { grid-template-columns: 1fr 1fr; } }
+.proof .ph-img { min-height: 180px; flex-direction: column; }
+
+/* ---------- FAQ ---------- */
+.faq { max-width: 860px; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  min-height: 64px; padding-block: 16px; font-weight: 700; font-size: var(--fs-2);
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-weight: 400; font-size: 26px; color: var(--navy); line-height: 1; flex: none; }
+.faq details[open] summary::after { content: "–"; }
+.faq .answer { padding-bottom: 20px; color: var(--text-2); }
+.faq .answer p + p { margin-top: 8px; }
+.faq .stamp { display: block; margin-top: 10px; font-size: var(--fs-1); }
+
+/* ---------- Final CTA ---------- */
+.final { display: grid; gap: 20px; align-items: center; }
+@media (min-width: 900px) { .final { grid-template-columns: 1fr auto; padding: 40px; } }
+.final p { color: var(--on-navy-2); margin-top: 8px; }
+
+/* ---------- Footer ---------- */
+.footer { background: var(--navy); color: #fff; padding-block: 40px 24px; }
+.footer .logo img { height: 36px; width: auto; }
+.footer .tagline { color: var(--on-navy-2); margin-top: 8px; font-size: var(--fs-1); }
+.foot-grid { display: grid; gap: 28px; }
+@media (min-width: 900px) { .foot-grid { grid-template-columns: 1.3fr 1fr 1fr; gap: 40px; } }
+.foot-grid h2 { color: #fff; font-size: var(--fs-1); margin-bottom: 8px; }
+.foot-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: var(--fs-1); }
+.foot-list a { color: #fff; text-decoration: none; min-height: 32px; display: inline-flex; align-items: center; }
+.foot-list a:hover { text-decoration: underline; }
+.foot-list .k { color: var(--on-navy-2); }
+.socials { display: flex; gap: 8px; margin-top: 16px; }
+.socials a { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border-radius: var(--r-sm); border: 1px solid rgba(255,255,255,.25); color: #fff; }
+.socials svg { width: 18px; height: 18px; fill: currentColor; }
+.foot-bottom { margin-top: 28px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.15); font-size: var(--fs-1); color: var(--on-navy-2); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
+.foot-links-mobile { display: block; }
+@media (max-width: 899px) { .foot-nav { display: none; } }  /* shorter footer on phones: section links live in the menu */
+
+/* ---------- WhatsApp float ---------- */
+.wa-float {
+  position: fixed; inset-block-end: 16px; inset-inline-end: 16px; z-index: 30;
+  width: 56px; height: 56px; border-radius: var(--r-full); background: var(--wa);
+  display: inline-flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.18); /* neutral grey shadow only */
+}
+.wa-float svg { width: 30px; height: 30px; fill: #fff; }
+.wa-icon { width: 18px; height: 18px; fill: currentColor; flex: none; }
+
+/* ---------- Dialog (one flow: consultation + optional major finder) ---------- */
+.overlay { position: fixed; inset: 0; z-index: 50; background: rgba(10, 20, 40, .55); display: none; align-items: flex-end; justify-content: center; }
+.overlay.open { display: flex; }
+@media (min-width: 640px) { .overlay { align-items: center; padding: 16px; } }
+.dialog {
+  width: 100%; max-width: 520px; background: #fff; display: flex; flex-direction: column;
+  max-height: 92dvh; border-radius: var(--r-md) var(--r-md) 0 0; overflow: hidden; /* scroll lives inside .dialog-body, never in the rounded corner */
+}
+@media (min-width: 640px) { .dialog { border-radius: var(--r-md); max-height: min(680px, 88vh); } }
+.dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 20px 20px 12px; border-bottom: 1px solid var(--line); }
+.dialog-head h2 { font-size: var(--fs-3); }
+.dialog-head p { font-size: var(--fs-1); color: var(--text-2); margin-top: 2px; }
+.close { width: 44px; height: 44px; flex: none; border: 0; background: none; border-radius: var(--r-sm); cursor: pointer; font-size: 24px; color: var(--text-2); }
+.close:hover { background: var(--tint); }
+.dialog-body { overflow-y: auto; padding: 20px; scrollbar-gutter: stable; scrollbar-width: thin; }
+.dialog-foot { padding: 12px 20px 20px; border-top: 1px solid var(--line); background: #fff; }
+.dialog-foot .btn { width: 100%; }
+.field { display: grid; gap: 6px; margin-bottom: 14px; }
+.field label { font-size: var(--fs-1); font-weight: 500; }
+.field input, .field select { min-height: 48px; padding: 0 14px; border: 1px solid #c5ccd8; border-radius: var(--r-sm); background: #fff; font-size: var(--fs-2); }
+.field input:focus, .field select:focus { outline: 2px solid var(--navy); outline-offset: 0; border-color: var(--navy); }
+.field .hint { font-size: var(--fs-1); color: var(--text-2); }
+.q { font-weight: 700; margin-bottom: 10px; }
+.opts { display: grid; gap: 8px; margin-bottom: 20px; }
+.opt { min-height: 48px; padding: 0 14px; text-align: start; border: 1px solid #c5ccd8; border-radius: var(--r-sm); background: #fff; cursor: pointer; font-size: var(--fs-2); }
+.opt:hover { border-color: var(--navy); }
+.progress { font-size: var(--fs-1); color: var(--text-2); margin-bottom: 12px; }
+.rec-block { margin-bottom: 20px; }
+.rec-block h3 { font-size: var(--fs-2); margin-bottom: 8px; }
+.rec-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.rec-list { gap: 0; }
+.rec-list li { border-bottom: 1px solid var(--line); padding: 10px 0; display: flex; gap: 12px; align-items: center; }
+.rec-list li:last-child { border-bottom: 0; }
+.rec-list img { height: 28px; width: 64px; object-fit: contain; flex: none; }
+.summary { background: var(--tint); border-radius: var(--r-sm); padding: 10px 12px; font-size: var(--fs-1); color: var(--text-2); margin-bottom: 16px; }
+.done { text-align: start; }
+.done .ok { width: 48px; height: 48px; border-radius: var(--r-full); background: var(--tint); color: var(--navy); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.done .btn { width: 100%; margin-top: 16px; }
+.view { display: none; }
+.view.active { display: block; }
+.error { color: #b42318; font-size: var(--fs-1); margin-top: 2px; }
+
+/* ---------- Phone: shorter page ---------- */
+@media (max-width: 767px) {
+  .review .wrap { padding-block: 6px; gap: 6px 12px; }
+  .hero .photo-note { position: relative; inset: auto; z-index: 1; display: block; max-width: none; margin: 12px var(--gutter) 0; }
+  .hero .wrap { padding-block: 32px 40px; }
+  .facts li { display: grid; grid-template-columns: 38% 1fr; gap: 8px; }
+  .facts li > span:first-child { min-width: 0; }
+  .company summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; min-height: 48px; }
+  .company summary::-webkit-details-marker { display: none; }
+  .company summary::after { content: "+"; font-size: 24px; color: var(--navy); }
+  .company[open] summary::after { content: "–"; }
+  .steps .card { padding: 16px; display: grid; grid-template-columns: 32px 1fr; column-gap: 12px; }
+  .steps .card h3 { margin-top: 2px; font-size: var(--fs-2); }
+  .steps .card p { grid-column: 2; margin-top: 2px; font-size: var(--fs-1); line-height: 1.7; }
+  .how .ph-img { min-height: 140px; }
+  .uni { display: grid; grid-template-columns: 72px 1fr; gap: 4px 12px; padding: 16px; }
+  .uni .logo-box { height: 48px; grid-row: span 1; }
+  .uni .logo-box img { max-width: 100%; max-height: 40px; }
+  .uni dl { grid-column: 1 / -1; padding-top: 10px; margin-top: 6px; }
+  .stories { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scrollbar-width: none; }
+  .stories::-webkit-scrollbar { display: none; }
+  .stories > li { flex: 0 0 86%; scroll-snap-align: center; }
+  .proof { grid-template-columns: 1fr 1fr; }
+  .proof .ph-img { min-height: 110px; }
+  .section-head { margin-bottom: 24px; }
+}
+@media (min-width: 768px) {
+  .company summary { list-style: none; pointer-events: none; }
+  .company summary::-webkit-details-marker { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ Review bar (mockup tool, not part of the design) ============ -->
+<div class="review" role="region" aria-label="Mockup review tools">
+  <div class="wrap">
+    <strong data-en="Mockup review — not part of the design">أداة مراجعة — ليست جزءاً من التصميم</strong>
+    <label><span data-en="Font:">الخط:</span>
+      <select id="fontPick">
+        <option value="Alexandria">Alexandria (مقترح)</option>
+        <option value="Noto Kufi Arabic">Noto Kufi Arabic</option>
+        <option value="Almarai">Almarai</option>
+      </select>
+    </label>
+    <button type="button" id="phToggle" data-en="Hide placeholder marks">إخفاء علامات المحتوى المطلوب</button>
+    <a href="fonts.html" data-en="Font comparison page">صفحة مقارنة الخطوط</a>
+  </div>
+</div>
+
+<!-- ============ Header ============ -->
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Thiqa Uni"><img src="thiqa-logo.png" alt="Thiqa Uni" width="581" height="162" /></a>
+    <nav class="nav" aria-label="القائمة الرئيسية" data-en-aria="Main navigation">
+      <a href="#how" data-en="How we work">كيف نعمل</a>
+      <a href="#universities" data-en="Universities">الجامعات</a>
+      <a href="#costs" data-en="Costs">التكاليف</a>
+      <a href="#stories" data-en="Student stories">تجارب الطلاب</a>
+      <a href="#faq" data-en="FAQ">الأسئلة الشائعة</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="lang" data-lang-toggle lang="en">English</button>
+      <button type="button" class="btn btn-primary" data-open-dialog data-en="Book a free consultation">احجز استشارة مجانية</button>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="القائمة" data-en-aria="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="wrap">
+    <a href="#how" data-en="How we work">كيف نعمل</a>
+    <a href="#universities" data-en="Universities">الجامعات</a>
+    <a href="#costs" data-en="Costs">التكاليف</a>
+    <a href="#stories" data-en="Student stories">تجارب الطلاب</a>
+    <a href="#faq" data-en="FAQ">الأسئلة الشائعة</a>
+    <button type="button" class="btn btn-primary" data-open-dialog data-en="Book a free consultation">احجز استشارة مجانية</button>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ============ 1. Hero ============ -->
+<section class="hero" aria-labelledby="hero-title">
+  <p class="photo-note" data-en="PLACEHOLDER: real photo of students on campus (or an airport pickup). Use stock only if needed and mark for replacement.">مكان صورة حقيقية: طلاب في الحرم الجامعي (أو استقبال في المطار). صورة مخزون مؤقتاً فقط، وتُستبدل.</p>
+  <div class="wrap">
+    <h1 id="hero-title" data-en="Study in Malaysia, step by step">الدراسة في ماليزيا، خطوة بخطوة</h1>
+    <p class="lead" data-en="We help you choose a university, apply for admission and follow your student visa until you arrive. Your first consultation is free.">نختار معك الجامعة، ونقدّم طلب القبول، ونتابع تأشيرة الطالب حتى وصولك. الاستشارة الأولى مجانية.</p>
+    <button type="button" class="btn btn-primary" data-open-dialog data-en="Book a free consultation">احجز استشارة مجانية</button>
+    <p class="trust-line">
+      <span data-en="We have helped">ساعدنا</span> <span class="ph" data-en="&lt;span class=&quot;ph&quot;&gt;[X]&lt;/span&gt;">[عدد]</span> <span data-en="students since">طالباً منذ</span> <span class="ph">[20XX]</span>
+      · <span data-en="Registered in Malaysia, SSM">شركة مسجّلة في ماليزيا، رقم SSM</span> <span class="ph" data-en="[number]">[الرقم]</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ 2. Trust ============ -->
+<section class="section" aria-labelledby="trust-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="trust-title" data-en="Who we are">من نحن</h2>
+      <p data-en="An admissions team based in Kuala Lumpur, helping Arab students and their families study in Malaysia. We deal with university admissions offices directly and speak with you in Arabic or English.">فريق قبول جامعي في كوالالمبور يساعد الطلاب العرب وأهاليهم على الدراسة في ماليزيا. نتعامل مع مكاتب القبول في الجامعات مباشرة، ونتواصل معك بالعربية أو الإنجليزية.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b class="ph">[—]</b><span data-en="students helped">طالب ساعدناهم</span></div>
+      <div class="stat"><b class="ph">[20XX]</b><span data-en="founded">سنة التأسيس</span></div>
+      <div class="stat"><b>12</b><span data-en="universities we apply to">جامعة نقدّم إليها</span></div>
+      <div class="stat"><b class="ph">[—]</b><span data-en="advisors on the team">مستشارون في الفريق</span></div>
+    </div>
+
+    <div class="about">
+      <details class="company" open>
+        <summary><h3 data-en="Company details">بيانات الشركة</h3></summary>
+        <ul class="facts">
+          <li><span data-en="Registered name">الاسم المسجّل</span><span class="ph" data-en="[registered company name]">[الاسم المسجّل للشركة]</span></li>
+          <li><span data-en="SSM registration no.">رقم التسجيل (SSM)</span><span class="ph" data-en="[SSM number]">[رقم SSM]</span></li>
+          <li><span data-en="Office address">عنوان المكتب</span><span><span class="ph" data-en="[address, Kuala Lumpur]">[العنوان، كوالالمبور]</span> · <a class="link" href="#" data-en="Map">الخريطة</a></span></li>
+          <li><span data-en="Office hours">ساعات العمل</span><span class="ph" data-en="[e.g. Sun–Thu, 9am–6pm]">[مثال: الأحد–الخميس، 9ص–6م]</span></li>
+          <li><span data-en="Languages">اللغات</span><span data-en="Arabic and English">العربية والإنجليزية</span></li>
+          <li><span data-en="University authorisation">تفويض الجامعات</span><span class="ph" data-en="[authorisation letters, if available]">[خطابات التفويض إن وُجدت]</span></li>
+        </ul>
+      </details>
+      <div>
+        <h3 data-en="Your advisors">مستشاروك</h3>
+        <div class="team" style="margin-top:16px">
+          <div class="person"><div class="ph-img" data-en="Photo">صورة</div><p><span class="ph" data-en="[Name]">[الاسم]</span><br/><span class="ph" data-en="[Role]">[المنصب]</span></p></div>
+          <div class="person"><div class="ph-img" data-en="Photo">صورة</div><p><span class="ph" data-en="[Name]">[الاسم]</span><br/><span class="ph" data-en="[Role]">[المنصب]</span></p></div>
+          <div class="person"><div class="ph-img" data-en="Photo">صورة</div><p><span class="ph" data-en="[Name]">[الاسم]</span><br/><span class="ph" data-en="[Role]">[المنصب]</span></p></div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="logos" aria-label="بعض الجامعات التي نقدّم إليها" data-en-aria="Some of the universities we apply to">
+      <li><img src="../../public/universities/um.svg" alt="Universiti Malaya" /></li>
+      <li><img src="../../public/universities/taylors.svg" alt="Taylor's University" /></li>
+      <li><img src="../../public/universities/monash.svg" alt="Monash University Malaysia" /></li>
+      <li><img src="../../public/universities/sunway.svg" alt="Sunway University" /></li>
+      <li><img src="../../public/universities/unikl.svg" alt="Universiti Kuala Lumpur" /></li>
+      <li><img src="../../public/universities/mmu.svg" alt="Multimedia University" /></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 3. How we work (services + steps merged) ============ -->
+<section class="section" id="how" aria-labelledby="how-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="how-title" data-en="How we work">كيف نعمل معك</h2>
+      <p data-en="One advisor follows your file from the first message to your first day on campus.">مستشار واحد يتابع ملفك من أول رسالة حتى أول يوم في الحرم الجامعي.</p>
+    </div>
+    <div class="how">
+      <ol class="steps">
+        <li class="card step"><span class="num">1</span><h3 data-en="We review your options">نراجع خياراتك</h3><p data-en="Your certificate, grades, major and budget, then a short list of suitable universities.">شهادتك ومعدلك والتخصص وميزانيتك، ثم قائمة جامعات مناسبة لك.</p></li>
+        <li class="card step"><span class="num">2</span><h3 data-en="We prepare and apply">نجهّز الملف ونقدّم</h3><p data-en="We check and translate documents, submit your application and follow it until the offer letter.">نراجع المستندات وترجمتها، ونقدّم الطلب ونتابعه حتى خطاب القبول.</p></li>
+        <li class="card step"><span class="num">3</span><h3 data-en="Student visa (EMGS)">تأشيرة الطالب (EMGS)</h3><p data-en="We follow the visa application and medical check until your approval letter (VAL).">نتابع طلب التأشيرة والفحص الطبي حتى خطاب الموافقة (VAL).</p></li>
+        <li class="card step"><span class="num">4</span><h3 data-en="Arrival and settling in">الوصول والاستقرار</h3><p data-en="Airport pickup in Kuala Lumpur, help with housing and university registration.">استقبال في مطار كوالالمبور، ومساعدة في السكن والتسجيل.</p></li>
+      </ol>
+      <div class="ph-img" role="img" aria-label="Photo placeholder" style="flex-direction:column">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 17-5-5-9 9"/></svg>
+        <span data-en="Real photo: our team meeting a student at KLIA airport">صورة حقيقية: فريقنا يستقبل طالباً في مطار كوالالمبور</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. Universities (static grid, filters) ============ -->
+<section class="section" id="universities" aria-labelledby="uni-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="uni-title" data-en="Universities we apply to">الجامعات التي نقدّم إليها</h2>
+      <p data-en="Filter by type or field of study.">صفِّ الجامعات حسب النوع أو مجال الدراسة.</p>
+    </div>
+    <div class="filters">
+      <div class="filter-group" role="group" aria-label="النوع" data-en-aria="Type">
+        <span data-en="Type:">النوع:</span>
+        <button type="button" class="chip" data-type="all" aria-pressed="true" data-en="All">الكل</button>
+        <button type="button" class="chip" data-type="public" aria-pressed="false" data-en="Public">حكومية</button>
+        <button type="button" class="chip" data-type="private" aria-pressed="false" data-en="Private">خاصة</button>
+      </div>
+      <div class="filter-group" role="group" aria-label="المجال" data-en-aria="Field">
+        <span data-en="Field:">المجال:</span>
+        <button type="button" class="chip" data-field="all" aria-pressed="true" data-en="All">الكل</button>
+        <button type="button" class="chip" data-field="med" aria-pressed="false" data-en="Medicine & health">الطب والصحة</button>
+        <button type="button" class="chip" data-field="eng" aria-pressed="false" data-en="Engineering">الهندسة</button>
+        <button type="button" class="chip" data-field="it" aria-pressed="false" data-en="Computing & IT">الحاسوب وتقنية المعلومات</button>
+        <button type="button" class="chip" data-field="bus" aria-pressed="false" data-en="Business">إدارة الأعمال</button>
+      </div>
+    </div>
+    <ul class="uni-grid" id="uniGrid" aria-live="polite"></ul>
+    <button type="button" class="btn btn-secondary uni-more" id="uniMore"></button>
+  </div>
+</section>
+
+<!-- ============ 5. Costs & commitments (the one tinted section) ============ -->
+<section class="section tint" id="costs" aria-labelledby="costs-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="costs-title" data-en="Costs and our commitments">التكاليف والتزاماتنا</h2>
+      <p data-en="Sample figures to help you plan. We send the official fees for each program in writing.">أرقام تقريبية تساعدك على التخطيط. نرسل لك الرسوم الرسمية لكل برنامج مكتوبة.</p>
+      <span class="updated"><span data-en="Updated">آخر تحديث:</span> <span class="ph" data-en="[month]">[الشهر]</span> 2026</span>
+    </div>
+
+    <div class="costs-grid">
+      <div class="card">
+        <h3 data-en="Sample yearly and monthly costs">تكاليف نموذجية</h3>
+        <table class="cost-table">
+          <caption class="sr-only" data-en="Sample costs">تكاليف نموذجية</caption>
+          <tbody>
+            <tr><th scope="row" data-en="Tuition, public university (per year)">الرسوم الدراسية — جامعة حكومية (سنوياً)</th><td><span class="ph">[RM — – —]</span></td></tr>
+            <tr><th scope="row" data-en="Tuition, private university (per year)">الرسوم الدراسية — جامعة خاصة (سنوياً)</th><td><span class="ph">[RM — – —]</span></td></tr>
+            <tr><th scope="row" data-en="Student housing in Kuala Lumpur (per month)">سكن طلابي في كوالالمبور (شهرياً)</th><td><span class="ph">[RM — – —]</span></td></tr>
+            <tr><th scope="row" data-en="Food and transport (per month)">الطعام والمواصلات (شهرياً)</th><td><span class="ph">[RM — – —]</span></td></tr>
+            <tr><th scope="row" data-en="Student visa and medical check (EMGS, one-off)">التأشيرة والفحص الطبي (EMGS، مرة واحدة)</th><td><span class="ph">[RM —]</span></td></tr>
+            <tr><th scope="row" data-en="Our consultation and university selection">استشارتنا واختيار الجامعة</th><td data-en="Free">مجاناً</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="dark on-navy">
+        <h3 data-en="Our commitments to you">التزاماتنا معك</h3>
+        <ul class="commit">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><div><b data-en="Your first consultation is free">الاستشارة الأولى مجانية</b><p data-en="We review your situation and suggest suitable options before you commit to anything.">نراجع وضعك ونقترح عليك خيارات مناسبة قبل أن تلتزم بأي شيء.</p></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><div><b data-en="Tuition is paid to the university directly">الرسوم الدراسية تُدفع للجامعة مباشرة</b><p data-en="You pay your fees to the university against its official invoice, with no hidden commissions.">تدفع رسومك للجامعة بفاتورة رسمية باسمها، بدون عمولات مخفية.</p></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><div><b data-en="Any cost is written down first">أي تكلفة تكون مكتوبة مسبقاً</b><p data-en="If an extra service has a fee, we put it in writing before we start.">إن كانت هناك رسوم على خدمة إضافية، نكتبها لك بوضوح قبل أن نبدأ.</p></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg><div><b data-en="Your documents are used only to apply">مستنداتك للتقديم فقط</b><p data-en="We use your documents only for your university and visa applications, and keep them confidential.">نستخدم وثائقك للتقديم للجامعة وطلب التأشيرة فقط، ونحفظها بسرية.</p></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card verify">
+      <h3 data-en="Verify before you pay">تحقّق بنفسك قبل أن تدفع</h3>
+      <p class="muted" data-en="Don't rely on our word alone. These official sources let you confirm each step:">لا تعتمد على كلامنا فقط. هذه الجهات الرسمية تساعدك على التأكد من كل خطوة:</p>
+      <ul>
+        <li><a href="https://www.mqa.gov.my/" target="_blank" rel="noopener">MQA ↗</a><p data-en="Malaysian Qualifications Agency: check that your program is accredited.">هيئة المؤهلات الماليزية: تحقق أن البرنامج الذي تقدّم عليه معتمد.</p></li>
+        <li><a href="https://educationmalaysia.gov.my/" target="_blank" rel="noopener">EMGS ↗</a><p data-en="The official body for international student visas: track your visa application yourself.">الجهة الرسمية لتأشيرات الطلاب الدوليين: تابع حالة طلب تأشيرتك بنفسك.</p></li>
+        <li><b data-en="The university">الجامعة</b><p data-en="The admissions office: confirm your offer letter and fees on its official website.">مكتب القبول في الجامعة: تأكد من خطاب القبول والرسوم مباشرة من موقعها الرسمي.</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. Student stories ============ -->
+<section class="section" id="stories" aria-labelledby="stories-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="stories-title" data-en="Student stories">تجارب الطلاب</h2>
+      <p><a class="link" href="#" data-en="Read our Google reviews [link to add]">اقرأ تقييماتنا على Google [يُضاف الرابط]</a></p>
+    </div>
+    <ul class="stories">
+      <li class="card story">
+        <p data-en="“THIQA UNI took away all the confusion. I got my official offer from Taylor's very quickly, and the visa follow-up was clear and simple.”">«منصة ثقة يوني اختصرت علي كل الحيرة. استلمت قبولي الرسمي في جامعة تيلورز في وقت قياسي، وكانت متابعة التأشيرة واضحة جداً وبدون أي تعقيد.»</p>
+        <div class="who"><div class="ph-img avatar" data-en="Photo">صورة</div><p><b data-en="Abdulrahman Al-Otaibi">عبدالرحمن العتيبي</b><span data-en="Software Engineering · Taylor's University · Saudi Arabia · 2024">هندسة البرمجيات · Taylor's University · السعودية · 2024</span></p></div>
+      </li>
+      <li class="card story">
+        <p data-en="“I didn't pay a single extra dollar, and someone was waiting for me at the airport and stayed until I moved into my housing.”">«لم أدفع أي دولار إضافي، ووجدت موظف الاستقبال بانتظاري في المطار لمساعدتي حتى دخولي السكن.»</p>
+        <div class="who"><div class="ph-img avatar" data-en="Photo">صورة</div><p><b data-en="Sara Al-Mahdi">سارة المهدي</b><span data-en="MSc Cyber Security · APU · Egypt · 2025">ماجستير الأمن السيبراني · APU · مصر · 2025</span></p></div>
+      </li>
+      <li class="card story">
+        <p data-en="“Applying to UM needs careful translation and attestation of documents. With THIQA UNI's guidance I was accepted and got a partial merit scholarship.”">«التقديم لجامعة مالايا يحتاج دقة عالية في ترجمة وتصديق الأوراق. مع إرشاد ثقة يوني تم قبولي وحصلت على منحة تفوق جزئية.»</p>
+        <div class="who"><div class="ph-img avatar" data-en="Photo">صورة</div><p><b data-en="Mohammed Bajaafar">محمد باجعفر</b><span data-en="Mechanical Engineering · Universiti Malaya · Yemen · 2024">الهندسة الميكانيكية · Universiti Malaya · اليمن · 2024</span></p></div>
+      </li>
+    </ul>
+    <div class="proof">
+      <div class="ph-img"><span data-en="Short video: a student talks about their first week (with consent)">فيديو قصير: طالب يتحدث عن أسبوعه الأول (بموافقته)</span></div>
+      <div class="ph-img"><span data-en="Acceptance letter, personal details hidden (with the owner's consent)">خطاب قبول بعد إخفاء البيانات الشخصية (بموافقة صاحبه)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. FAQ ============ -->
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="faq-title" data-en="Frequently asked questions">الأسئلة الشائعة</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary data-en="Is the consultation and university selection free?">هل الاستشارة واختيار الجامعة مجانية؟</summary>
+        <div class="answer">
+          <p data-en="Yes. The first consultation, the assessment of your file and choosing a university are free. Tuition is paid to the university directly against its official invoice.">نعم. الاستشارة الأولى وتقييم ملفك واختيار الجامعة مجانية. والرسوم الدراسية تُدفع للجامعة مباشرة بفاتورة رسمية.</p>
+          <span class="stamp"><span data-en="Updated:">آخر تحديث:</span> <span class="ph" data-en="[date]">[التاريخ]</span></span>
+        </div>
+      </details>
+      <details>
+        <summary data-en="Do you charge for any other services?">هل لديكم رسوم على خدمات أخرى؟</summary>
+        <div class="answer">
+          <p><span class="ph" data-en="[State clearly: which services are paid (e.g. visa handling, housing, airport pickup) and how much, or that they are free.]">[اكتب بوضوح: ما الخدمات المدفوعة (مثل التأشيرة، السكن، الاستقبال) وكم رسومها، أو أنها مجانية.]</span></p>
+          <p data-en="Whatever applies to you, we give it to you in writing before we start.">في كل الحالات نكتب لك أي رسوم قبل أن نبدأ.</p>
+          <span class="stamp"><span data-en="Updated:">آخر تحديث:</span> <span class="ph" data-en="[date]">[التاريخ]</span></span>
+        </div>
+      </details>
+      <details>
+        <summary data-en="When are the next intakes?">متى مواعيد القبول القادمة؟</summary>
+        <div class="answer">
+          <p data-en="Each university sets its own intakes. Next intakes:">لكل جامعة مواعيدها الخاصة. أقرب الدفعات:</p>
+          <p><span class="ph" data-en="[e.g. Taylor's: [month] · APU: [month] · UM: [month]]">[مثال: تايلورز: [الشهر] · APU: [الشهر] · مالايا: [الشهر]]</span></p>
+          <p data-en="Start at least &lt;span class=&quot;ph&quot;&gt;[X]&lt;/span&gt; months before the intake so there is time for the offer and the visa.">ابدأ قبل الموعد بـ <span class="ph">[X]</span> أشهر على الأقل ليتسع الوقت للقبول والتأشيرة.</p>
+          <span class="stamp"><span data-en="Updated:">آخر تحديث:</span> <span class="ph" data-en="[date]">[التاريخ]</span></span>
+        </div>
+      </details>
+      <details>
+        <summary data-en="Are there scholarships?">هل توجد منح دراسية؟</summary>
+        <div class="answer">
+          <p><span class="ph" data-en="[List the scholarships you can help with: university, percentage, minimum grade, deadline.]">[اذكر المنح التي يمكنكم المساعدة فيها: الجامعة، النسبة، المعدل المطلوب، الموعد النهائي.]</span></p>
+          <span class="stamp"><span data-en="Updated:">آخر تحديث:</span> <span class="ph" data-en="[date]">[التاريخ]</span></span>
+        </div>
+      </details>
+      <details>
+        <summary data-en="What is your refund policy?">ما سياسة الاسترداد؟</summary>
+        <div class="answer">
+          <p><span class="ph" data-en="[Your refund policy for any paid service, in one or two sentences.]">[سياسة الاسترداد لأي خدمة مدفوعة، في جملة أو جملتين.]</span></p>
+          <p data-en="University fees follow the university's own refund policy, written on your offer letter.">أما رسوم الجامعة فتخضع لسياسة الاسترداد الخاصة بالجامعة، المكتوبة في خطاب القبول.</p>
+        </div>
+      </details>
+      <details>
+        <summary data-en="How much does it cost to live in Kuala Lumpur?">كم تكلفة المعيشة الشهرية في كوالالمبور؟</summary>
+        <div class="answer">
+          <p data-en="About &lt;span class=&quot;ph&quot;&gt;[RM — – —]&lt;/span&gt; a month for housing, food and transport. See the cost table above.">حوالي <span class="ph">[RM — – —]</span> شهرياً للسكن والطعام والمواصلات. انظر جدول التكاليف أعلاه.</p>
+          <span class="stamp"><span data-en="Updated:">آخر تحديث:</span> <span class="ph" data-en="[date]">[التاريخ]</span></span>
+        </div>
+      </details>
+      <details>
+        <summary data-en="Do I need IELTS or TOEFL?">هل أحتاج IELTS أو TOEFL؟</summary>
+        <div class="answer">
+          <p data-en="Not always. Many programs accept other proof of English, or let you start with an English course at the university first. The minimum score for each program:">ليس دائماً. كثير من البرامج تقبل إثباتاً آخر للغة، أو تتيح لك البدء بدورة لغة في الجامعة أولاً. الحد الأدنى لكل برنامج:</p>
+          <p><span class="ph" data-en="[e.g. IELTS 5.5–6.0 for most bachelor's programs — confirm per university]">[مثال: IELTS 5.5–6.0 لمعظم برامج البكالوريوس — يُؤكَّد لكل جامعة]</span></p>
+        </div>
+      </details>
+      <details>
+        <summary data-en="How long does the student visa (EMGS) take?">كم تستغرق تأشيرة الطالب (EMGS)؟</summary>
+        <div class="answer">
+          <p data-en="The university submits the visa application after your offer. It usually takes &lt;span class=&quot;ph&quot;&gt;[X]&lt;/span&gt; weeks; you can track it yourself on the EMGS website.">تقدّم الجامعة طلب التأشيرة بعد قبولك. تستغرق عادةً <span class="ph">[X]</span> أسابيع، ويمكنك متابعتها بنفسك على موقع EMGS.</p>
+          <span class="stamp"><span data-en="Updated:">آخر تحديث:</span> <span class="ph" data-en="[date]">[التاريخ]</span></span>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. Final CTA ============ -->
+<section class="section" aria-labelledby="final-title">
+  <div class="wrap">
+    <div class="dark on-navy final">
+      <div>
+        <h2 id="final-title" style="color:#fff" data-en="Ready to start?">جاهز تبدأ؟</h2>
+        <p data-en="Tell us your certificate and the major you have in mind. An advisor replies within &lt;span class=&quot;ph&quot;&gt;[X]&lt;/span&gt; working hours.">أخبرنا بشهادتك والتخصص الذي تفكر فيه، ويرد عليك مستشار خلال <span class="ph">[X]</span> ساعات عمل.</p>
+      </div>
+      <button type="button" class="btn btn-primary" data-open-dialog data-en="Book a free consultation">احجز استشارة مجانية</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#top" aria-label="Thiqa Uni"><img src="thiqa-logo-white.png" alt="Thiqa Uni" width="581" height="162" /></a>
+        <p class="tagline" data-en="Your global education partner">شريكك الأكاديمي للتعليم الدولي</p>
+        <div class="socials" id="socials"></div>
+      </div>
+      <div>
+        <h2 data-en="Contact">التواصل</h2>
+        <ul class="foot-list">
+          <li><a href="https://wa.me/60175341969" target="_blank" rel="noopener" dir="ltr"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>&nbsp;+60 17-534 1969</a></li>
+          <li><span class="ph" data-en="[email@thiqauni.com]">[البريد الإلكتروني]</span></li>
+          <li><span class="ph" data-en="[office address]">[عنوان المكتب]</span></li>
+          <li><span class="ph" data-en="[office hours]">[ساعات العمل]</span></li>
+          <li><span class="k">SSM</span> <span class="ph" data-en="[number]">[الرقم]</span></li>
+        </ul>
+      </div>
+      <div class="foot-nav">
+        <h2 data-en="Site">الموقع</h2>
+        <ul class="foot-list">
+          <li><a href="#how" data-en="How we work">كيف نعمل</a></li>
+          <li><a href="#universities" data-en="Universities">الجامعات</a></li>
+          <li><a href="#costs" data-en="Costs">التكاليف</a></li>
+          <li><a href="#faq" data-en="FAQ">الأسئلة الشائعة</a></li>
+          <li><a href="#" data-en="Privacy policy">سياسة الخصوصية</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Thiqa Uni</span>
+      <a href="#" style="color:inherit" class="foot-links-mobile" data-en="Privacy policy">سياسة الخصوصية</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp: floating button (+ footer) only -->
+<a class="wa-float" href="https://wa.me/60175341969" target="_blank" rel="noopener" aria-label="واتساب" data-en-aria="WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+</a>
+
+<!-- ============ Dialog: one flow ============ -->
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+    <div class="dialog-head">
+      <div>
+        <h2 id="dlgTitle" data-en="Book a free consultation">احجز استشارة مجانية</h2>
+        <p data-en="An advisor replies within &lt;span class=&quot;ph&quot;&gt;[X]&lt;/span&gt; working hours.">يرد عليك مستشار خلال <span class="ph">[X]</span> ساعات عمل.</p>
+      </div>
+      <button type="button" class="close" id="dlgClose" aria-label="إغلاق" data-en-aria="Close">×</button>
+    </div>
+
+    <!-- View: contact form (also shown after the major finder) -->
+    <div class="dialog-body view active" id="vForm">
+      <div id="recs"></div>
+      <form id="leadForm" novalidate>
+        <div class="field">
+          <label for="fName" data-en="Full name">الاسم الكامل</label>
+          <input id="fName" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="fCountry" data-en="Country you live in">دولة الإقامة</label>
+          <input id="fCountry" list="countries" autocomplete="country-name" required />
+          <datalist id="countries"></datalist>
+        </div>
+        <div class="field">
+          <label for="fPhone" data-en="WhatsApp number with country code">رقم واتساب مع رمز الدولة</label>
+          <input id="fPhone" type="tel" inputmode="tel" dir="ltr" placeholder="+966 50 123 4567" autocomplete="tel" required />
+          <span class="error" id="fError" hidden></span>
+        </div>
+      </form>
+      <p class="small muted" id="quizLinkWrap"><button type="button" class="link" id="toQuiz" data-en="Not sure what to study? Answer 3 questions for suggestions">لست متأكداً ماذا تدرس؟ أجب عن 3 أسئلة واحصل على اقتراحات</button></p>
+    </div>
+
+    <!-- View: major finder -->
+    <div class="dialog-body view" id="vQuiz">
+      <p class="progress" id="quizProgress"></p>
+      <div id="quizStep"></div>
+    </div>
+
+    <!-- View: done -->
+    <div class="dialog-body view done" id="vDone">
+      <div class="ok"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg></div>
+      <h3 data-en="We've received your request">استلمنا طلبك</h3>
+      <p class="muted" data-en="Your details are saved. An advisor will message you on WhatsApp within &lt;span class=&quot;ph&quot;&gt;[X]&lt;/span&gt; working hours.">حفظنا بياناتك، وسيراسلك مستشار على واتساب خلال <span class="ph">[X]</span> ساعات عمل.</p>
+      <a class="btn btn-secondary" id="waAfter" target="_blank" rel="noopener"><svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg><span data-en="Or message us now on WhatsApp">أو راسلنا الآن على واتساب</span></a>
+    </div>
+
+    <div class="dialog-foot" id="dlgFoot">
+      <button type="button" class="btn btn-primary" id="dlgPrimary" data-en="Send">إرسال</button>
+    </div>
+  </div>
+</div>
+
+<!-- Official WhatsApp glyph (Simple Icons), referenced with <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+</svg>
+
+<script>
+/* ---------- Data ---------- */
+const UNIS = [
+  { id: "um",        logo: "um",        ar: "جامعة مالايا", en: "Universiti Malaya (UM)", type: "public",  city: ["كوالالمبور","Kuala Lumpur"], fields: ["med","eng","it"] },
+  { id: "utm",       logo: "utm",       ar: "الجامعة التكنولوجية الماليزية", en: "Universiti Teknologi Malaysia (UTM)", type: "public", city: ["جوهور باهرو / كوالالمبور","Johor Bahru / Kuala Lumpur"], fields: ["eng","it"] },
+  { id: "utem",      logo: "utem",      ar: "جامعة ملاكا التقنية الماليزية", en: "Universiti Teknikal Malaysia Melaka (UTeM)", type: "public", city: ["ملاكا","Melaka"], fields: ["eng","it"] },
+  { id: "taylors",   logo: "taylors",   ar: "جامعة تايلورز", en: "Taylor's University", type: "private", city: ["سوبانغ جايا","Subang Jaya"], fields: ["bus"] },
+  { id: "apu",       logo: "apu",       ar: "جامعة آسيا والمحيط الهادئ للتكنولوجيا والابتكار", en: "Asia Pacific University of Technology & Innovation (APU)", type: "private", city: ["كوالالمبور","Kuala Lumpur"], fields: ["it","bus"] },
+  { id: "sunway",    logo: "sunway",    ar: "جامعة صنواي", en: "Sunway University", type: "private", city: ["بندر صنواي","Bandar Sunway"], fields: ["bus","it"] },
+  { id: "monash",    logo: "monash",    ar: "جامعة موناش ماليزيا", en: "Monash University Malaysia", type: "private", branch: true, city: ["بندر صنواي","Bandar Sunway"], fields: ["med","bus"] },
+  { id: "unikl",     logo: "unikl",     ar: "جامعة كوالالمبور", en: "Universiti Kuala Lumpur (UniKL)", type: "private", city: ["كوالالمبور","Kuala Lumpur"], fields: ["it","eng"] },
+  { id: "cyberjaya", logo: "cyberjaya", ar: "جامعة سايبرجايا", en: "University of Cyberjaya", type: "private", city: ["سايبرجايا","Cyberjaya"], fields: ["med"] },
+  { id: "mahsa",     logo: "mahsa",     ar: "جامعة ماهسا", en: "MAHSA University", type: "private", city: ["سيلانجور","Selangor"], fields: ["med"] },
+  { id: "city",      logo: "city",      ar: "جامعة سيتي ماليزيا", en: "City University Malaysia", type: "private", city: ["بيتالينغ جايا","Petaling Jaya"], fields: ["bus","med"] },
+  { id: "mmu",       logo: "mmu",       ar: "جامعة الوسائط المتعددة", en: "Multimedia University (MMU)", type: "private", city: ["سايبرجايا / ملاكا","Cyberjaya / Melaka"], fields: ["it","eng"] },
+];
+const MAJORS = {
+  med: [["الطب البشري","Medicine"],["طب الأسنان","Dentistry"],["الصيدلة","Pharmacy"]],
+  eng: [["الهندسة الميكانيكية","Mechanical Engineering"],["الهندسة الكهربائية","Electrical Engineering"],["الهندسة المدنية","Civil Engineering"]],
+  it:  [["علوم الحاسب","Computer Science"],["الأمن السيبراني","Cyber Security"],["الذكاء الاصطناعي","Artificial Intelligence"]],
+  bus: [["إدارة الأعمال","Business Administration"],["المحاسبة والمالية","Accounting & Finance"],["التسويق","Marketing"]],
+  any: [["علوم الحاسب","Computer Science"],["إدارة الأعمال","Business Administration"],["الهندسة","Engineering"]],
+};
+const COUNTRIES = [["السعودية","Saudi Arabia"],["مصر","Egypt"],["اليمن","Yemen"],["الإمارات","UAE"],["عُمان","Oman"],["الكويت","Kuwait"],["قطر","Qatar"],["الأردن","Jordan"],["السودان","Sudan"],["العراق","Iraq"],["ماليزيا","Malaysia"]];
+const ICONS = { instagram: "M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077", facebook: "M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z", linkedin: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z", tiktok: "M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" };
+const SOCIAL = [["instagram","https://instagram.com/thiqauni","Instagram"],["facebook","https://facebook.com/thiqauni","Facebook"],["linkedin","https://linkedin.com/company/thiqauni","LinkedIn"],["tiktok","https://tiktok.com/@thiqauni","TikTok"]];
+
+/* ---------- Language ---------- */
+let lang = "ar";
+const L = (ar, en) => (lang === "ar" ? ar : en);
+function applyLang() {
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-en]").forEach((el) => {
+    if (el.dataset.ar === undefined) el.dataset.ar = el.innerHTML;
+    el.innerHTML = lang === "ar" ? el.dataset.ar : el.dataset.en;
+  });
+  document.querySelectorAll("[data-en-aria]").forEach((el) => {
+    if (el.dataset.arAria === undefined) el.dataset.arAria = el.getAttribute("aria-label") || "";
+    el.setAttribute("aria-label", lang === "ar" ? el.dataset.arAria : el.dataset.enAria);
+  });
+  document.querySelectorAll("[data-lang-toggle]").forEach((b) => { b.textContent = L("English", "العربية"); b.lang = L("en", "ar"); });
+  document.title = L("ثقة يوني — نموذج التصميم الجديد", "Thiqa Uni — redesign mockup");
+  document.getElementById("countries").innerHTML = COUNTRIES.map((c) => `<option value="${L(c[0], c[1])}">`).join("");
+  renderUnis();
+  if (quiz.done) renderRecs();
+  if (!document.getElementById("vQuiz").classList.contains("active")) setPrimaryLabel();
+  else renderQuiz();
+}
+document.querySelectorAll("[data-lang-toggle]").forEach((b) => b.addEventListener("click", () => { lang = lang === "ar" ? "en" : "ar"; applyLang(); }));
+
+/* ---------- Review tools ---------- */
+document.getElementById("fontPick").addEventListener("change", (e) => document.documentElement.style.setProperty("--font", `"${e.target.value}", system-ui, sans-serif`));
+document.getElementById("phToggle").addEventListener("click", (e) => {
+  const hidden = document.body.classList.toggle("hide-ph");
+  e.target.dataset.ar = hidden ? "إظهار علامات المحتوى المطلوب" : "إخفاء علامات المحتوى المطلوب";
+  e.target.dataset.en = hidden ? "Show placeholder marks" : "Hide placeholder marks";
+  e.target.innerHTML = L(e.target.dataset.ar, e.target.dataset.en);
+});
+
+/* ---------- Mobile menu ---------- */
+const menuBtn = document.getElementById("menuBtn"), menu = document.getElementById("mobileMenu");
+function setMenu(open) {
+  // The menu starts right under the header, wherever the header currently is.
+  menu.style.top = document.querySelector(".header").getBoundingClientRect().bottom + "px";
+  menu.classList.toggle("open", open); document.body.classList.toggle("menu-open", open); menuBtn.setAttribute("aria-expanded", open); }
+menuBtn.addEventListener("click", () => setMenu(!menu.classList.contains("open")));
+menu.querySelectorAll("a, button").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+
+/* ---------- Universities ---------- */
+let fType = "all", fField = "all", showAll = false;
+const MOBILE_LIMIT = 3;
+const FIELD_NAMES = { med: ["الطب والصحة","Medicine & health"], eng: ["الهندسة","Engineering"], it: ["الحاسوب","Computing"], bus: ["إدارة الأعمال","Business"] };
+function renderUnis() {
+  const list = UNIS.filter((u) => (fType === "all" || u.type === fType) && (fField === "all" || u.fields.includes(fField)));
+  const narrow = window.matchMedia("(max-width: 639px)").matches;
+  const shown = narrow && !showAll ? list.slice(0, MOBILE_LIMIT) : list;
+  const ph = (ar, en) => `<span class="ph">${L(ar, en)}</span>`;
+  document.getElementById("uniGrid").innerHTML = shown.length ? shown.map((u) => `
+    <li class="card uni">
+      <div class="logo-box"><img src="../../public/universities/${u.logo}.svg" alt="" /></div>
+      <div>
+        <h3>${L(u.ar, u.en)}</h3>
+        ${lang === "ar" ? `<p class="en" dir="ltr">${u.en}</p>` : ""}
+        <p class="meta">${u.type === "public" ? L("حكومية", "Public") : L("خاصة", "Private")}${u.branch ? L(" · فرع جامعة أسترالية", " · Australian branch campus") : ""} · ${L(u.city[0], u.city[1])}</p>
+        <p class="meta">${u.fields.map((f) => L(FIELD_NAMES[f][0], FIELD_NAMES[f][1])).join(" · ")}</p>
+      </div>
+      <dl>
+        <div><dt>${L("مواعيد القبول", "Intakes")}</dt><dd>${ph("[الأشهر]", "[months]")}</dd></div>
+        <div><dt>${L("الرسوم السنوية", "Yearly fees")}</dt><dd>${ph("[RM —]", "[RM —]")}</dd></div>
+        <div><dt>${L("شروط القبول", "Entry requirements")}</dt><dd>${ph("[المعدل / اللغة]", "[grades / English]")}</dd></div>
+      </dl>
+    </li>`).join("") : `<li class="empty">${L("لا توجد جامعة تطابق هذا الاختيار.", "No university matches this filter.")}</li>`;
+  const more = document.getElementById("uniMore");
+  const hidden = list.length - shown.length;
+  more.style.display = hidden > 0 ? "inline-flex" : "none";
+  more.textContent = L(`عرض كل الجامعات (${list.length})`, `Show all universities (${list.length})`);
+}
+document.querySelectorAll("[data-type]").forEach((b) => b.addEventListener("click", () => { fType = b.dataset.type; document.querySelectorAll("[data-type]").forEach((x) => x.setAttribute("aria-pressed", x === b)); showAll = false; renderUnis(); }));
+document.querySelectorAll("[data-field]").forEach((b) => b.addEventListener("click", () => { fField = b.dataset.field; document.querySelectorAll("[data-field]").forEach((x) => x.setAttribute("aria-pressed", x === b)); showAll = false; renderUnis(); }));
+document.getElementById("uniMore").addEventListener("click", () => { showAll = true; renderUnis(); });
+window.addEventListener("resize", renderUnis);
+
+/* ---------- Footer socials (official glyphs) ---------- */
+document.getElementById("socials").innerHTML = SOCIAL.map(([k, href, name]) => `<a href="${href}" target="_blank" rel="noopener" aria-label="${name}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${ICONS[k]}"/></svg></a>`).join("");
+
+/* ---------- Dialog: consultation + optional major finder ---------- */
+const overlay = document.getElementById("overlay");
+const views = { form: "vForm", quiz: "vQuiz", done: "vDone" };
+const quiz = { step: 0, level: null, field: null, pref: null, done: false };
+let lastFocus = null;
+
+function showView(name) {
+  Object.values(views).forEach((id) => document.getElementById(id).classList.toggle("active", id === views[name]));
+  document.getElementById("dlgFoot").style.display = name === "done" ? "none" : "block";
+  if (name === "form") setPrimaryLabel();
+}
+function setPrimaryLabel() { document.getElementById("dlgPrimary").textContent = L("إرسال", "Send"); }
+function openDialog() {
+  lastFocus = document.activeElement;
+  Object.assign(quiz, { step: 0, level: null, field: null, pref: null, done: false });
+  document.getElementById("recs").innerHTML = "";
+  document.getElementById("quizLinkWrap").hidden = false;
+  document.getElementById("leadForm").reset();
+  document.getElementById("fError").hidden = true;
+  showView("form");
+  overlay.classList.add("open"); overlay.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden";
+  setTimeout(() => document.getElementById("fName").focus(), 0);
+}
+function closeDialog() { overlay.classList.remove("open"); overlay.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; lastFocus?.focus(); }
+document.querySelectorAll("[data-open-dialog]").forEach((b) => b.addEventListener("click", openDialog));
+document.getElementById("dlgClose").addEventListener("click", closeDialog);
+overlay.addEventListener("mousedown", (e) => { if (e.target === overlay) closeDialog(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && overlay.classList.contains("open")) closeDialog(); });
+
+const QUESTIONS = [
+  { key: "level", q: ["ما المرحلة التي تريد دراستها؟", "What level do you want to study?"], opts: [["bach","بكالوريوس","Bachelor's"],["master","ماجستير","Master's"],["phd","دكتوراه","PhD"],["found","سنة تأسيسية","Foundation year"],["eng","دورة لغة إنجليزية","English course"]] },
+  { key: "field", q: ["أي مجال يهمّك أكثر؟", "Which field interests you most?"], opts: [["med","الطب والصحة","Medicine & health"],["eng","الهندسة","Engineering"],["it","الحاسوب وتقنية المعلومات","Computing & IT"],["bus","إدارة الأعمال","Business"],["any","لست متأكداً","Not sure yet"]] },
+  { key: "pref", q: ["هل تفضّل جامعة حكومية أم خاصة؟", "Do you prefer a public or private university?"], opts: [["public","حكومية","Public"],["private","خاصة","Private"],["any","لا يهم","No preference"]] },
+];
+function renderQuiz() {
+  const s = QUESTIONS[quiz.step];
+  document.getElementById("quizProgress").textContent = L(`سؤال ${quiz.step + 1} من 3`, `Question ${quiz.step + 1} of 3`);
+  document.getElementById("quizStep").innerHTML = `<p class="q" id="qLabel">${L(s.q[0], s.q[1])}</p>
+    <div class="opts" role="group" aria-labelledby="qLabel">${s.opts.map(([v, a, e]) => `<button type="button" class="opt" data-v="${v}" aria-pressed="${quiz[s.key] === v}">${L(a, e)}</button>`).join("")}</div>`;
+  document.querySelectorAll("#quizStep .opt").forEach((b) => b.addEventListener("click", () => {
+    quiz[s.key] = b.dataset.v;
+    document.querySelectorAll("#quizStep .opt").forEach((x) => x.setAttribute("aria-pressed", x === b));
+  }));
+  document.getElementById("dlgPrimary").textContent = quiz.step < 2 ? L("التالي", "Next") : L("اعرض الاقتراحات", "Show suggestions");
+}
+document.getElementById("toQuiz").addEventListener("click", () => { quiz.step = 0; showView("quiz"); renderQuiz(); });
+
+function recommend() {
+  const field = quiz.field || "any";
+  let list = UNIS.filter((u) => (field === "any" || u.fields.includes(field)) && (quiz.pref === "any" || !quiz.pref || u.type === quiz.pref));
+  if (!list.length) list = UNIS.filter((u) => field === "any" || u.fields.includes(field));
+  return { majors: MAJORS[field], unis: list.slice(0, 4) };
+}
+function renderRecs() {
+  const { majors, unis } = recommend();
+  const lvl = QUESTIONS[0].opts.find((o) => o[0] === quiz.level);
+  document.getElementById("recs").innerHTML = `
+    <div class="rec-block"><h3>${L("تخصصات مقترحة", "Suggested majors")}</h3>
+      <ul class="rec-list">${majors.map((m) => `<li>${L(m[0], m[1])}</li>`).join("")}</ul></div>
+    <div class="rec-block"><h3>${L("جامعات مقترحة", "Suggested universities")}</h3>
+      <ul class="rec-list">${unis.map((u) => `<li><img src="../../public/universities/${u.logo}.svg" alt="" /><span>${L(u.ar, u.en)}</span></li>`).join("")}</ul></div>
+    <p class="summary">${L("اقتراحات مبدئية حسب إجاباتك" + (lvl ? " (" + lvl[1] + ")" : "") + ". سيؤكدها المستشار حسب معدلك وميزانيتك. اترك بياناتك ليرسلها لك:", "Initial suggestions based on your answers" + (lvl ? " (" + lvl[2] + ")" : "") + ". An advisor will confirm them against your grades and budget. Leave your details to receive them:")}</p>`;
+}
+
+document.getElementById("dlgPrimary").addEventListener("click", () => {
+  if (document.getElementById("vQuiz").classList.contains("active")) {
+    const key = QUESTIONS[quiz.step].key;
+    if (!quiz[key]) return;               // must pick an option
+    if (quiz.step < 2) { quiz.step++; renderQuiz(); return; }
+    quiz.done = true;
+    renderRecs();
+    document.getElementById("quizLinkWrap").hidden = true;
+    showView("form");
+    document.getElementById("dlgPrimary").textContent = L("أرسل لي الاقتراحات", "Send me the suggestions");
+    return;
+  }
+  submitLead();
+});
+
+function submitLead() {
+  const name = document.getElementById("fName").value.trim();
+  const country = document.getElementById("fCountry").value.trim();
+  const phone = document.getElementById("fPhone").value.trim();
+  const err = document.getElementById("fError");
+  const digits = phone.replace(/\D/g, "");
+  if (!name || !country || !(phone.startsWith("+") || phone.startsWith("00")) || digits.length < 8) {
+    err.textContent = L("أدخل اسمك ودولتك ورقم واتساب مع رمز الدولة.", "Enter your name, country and WhatsApp number with country code.");
+    err.hidden = false; return;
+  }
+  // 1) Save the lead first (in the real site: POST to the leads endpoint / CRM).
+  // 2) Only then offer WhatsApp as an optional next step.
+  const parts = [L("مرحباً ثقة يوني، أنا ", "Hello Thiqa Uni, I'm ") + name + L(" من ", " from ") + country + "."];
+  if (quiz.done) {
+    const pick = (i, v) => QUESTIONS[i].opts.find((o) => o[0] === v);
+    parts.push(L("المرحلة: ", "Level: ") + L(pick(0, quiz.level)[1], pick(0, quiz.level)[2]) + " · " + L("المجال: ", "Field: ") + L(pick(1, quiz.field)[1], pick(1, quiz.field)[2]));
+  }
+  document.getElementById("waAfter").href = "https://wa.me/60175341969?text=" + encodeURIComponent(parts.join("\n"));
+  showView("done");
+}
+if (new URLSearchParams(location.search).get("lang") === "en") lang = "en";
+// Company details start closed on phones, open on larger screens.
+const company = document.querySelector(".company");
+const syncCompany = () => { company.open = !window.matchMedia("(max-width: 767px)").matches; };
+syncCompany();
+window.matchMedia("(max-width: 767px)").addEventListener("change", syncCompany);
+applyLang();
+</script>
+</body>
+</html>

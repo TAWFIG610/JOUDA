@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Font options — Thiqa Uni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;700&family=Noto+Kufi+Arabic:wght@400;500;700&family=Almarai:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --navy: #00245c; --text: #14213d; --text-2: #4a5568; --line: #e3e7ee; --tint: #f5f7fa; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--tint); color: var(--text); font-family: system-ui, sans-serif; }
+  header { padding: 32px 20px 8px; max-width: 1200px; margin: 0 auto; }
+  header h1 { font-size: 24px; margin: 0 0 6px; }
+  header p { margin: 0; color: var(--text-2); font-size: 16px; line-height: 1.6; }
+  .grid { max-width: 1200px; margin: 0 auto; padding: 20px; display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+  .opt { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .opt .name { font: 700 14px/1.4 system-ui, sans-serif; color: var(--navy); letter-spacing: .02em; margin-bottom: 4px; }
+  .opt .meta { font: 400 14px/1.5 system-ui, sans-serif; color: var(--text-2); margin-bottom: 20px; }
+  .sample { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 18px; }
+  .sample:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
+  .h { font-size: 32px; line-height: 1.35; font-weight: 700; margin: 0 0 10px; color: var(--text); }
+  .p { font-size: 17px; line-height: 1.75; font-weight: 400; margin: 0; color: var(--text-2); }
+  .weights { display: flex; gap: 16px; flex-wrap: wrap; font-size: 18px; margin-top: 14px; color: var(--text); }
+  .en { direction: ltr; text-align: left; }
+  .rec { display: inline-block; margin-inline-start: 8px; padding: 2px 8px; border-radius: 999px; background: var(--navy); color: #fff; font: 600 12px/1.6 system-ui, sans-serif; vertical-align: middle; }
+</style>
+</head>
+<body>
+<header>
+  <h1>خيارات الخط · Font options</h1>
+  <p>نفس العنوان والفقرة بثلاثة خطوط، بالعربية والإنجليزية. العنوان 32px عريض، والفقرة 17px عادي.<br/>
+  Same heading and paragraph in each font, Arabic and English. Heading 32px bold, body 17px regular.</p>
+</header>
+
+<div class="grid">
+  <section class="opt" style="font-family:'Alexandria',sans-serif">
+    <div class="name">Alexandria <span class="rec">مقترح · Recommended</span></div>
+    <div class="meta">أوزان 100–900 · عربي + لاتيني · Weights 100–900 · Arabic + Latin</div>
+    <div class="sample">
+      <h2 class="h">ادرس في ماليزيا بخطة واضحة من أول يوم</h2>
+      <p class="p">نساعدك على اختيار الجامعة والتخصص المناسبين لمعدلك وميزانيتك، ونتابع طلبك حتى تصل إلى ماليزيا وتبدأ الدراسة.</p>
+    </div>
+    <div class="sample en">
+      <h2 class="h">Study in Malaysia with a clear plan from day one</h2>
+      <p class="p">We help you choose the right university and major for your grades and budget, and follow your application until you arrive in Malaysia.</p>
+    </div>
+    <div class="weights"><span style="font-weight:400">عادي Regular</span><span style="font-weight:500">متوسط Medium</span><span style="font-weight:700">عريض Bold</span></div>
+  </section>
+
+  <section class="opt" style="font-family:'Noto Kufi Arabic',sans-serif">
+    <div class="name">Noto Kufi Arabic</div>
+    <div class="meta">أوزان 100–900 · عربي + لاتيني · Weights 100–900 · Arabic + Latin</div>
+    <div class="sample">
+      <h2 class="h">ادرس في ماليزيا بخطة واضحة من أول يوم</h2>
+      <p class="p">نساعدك على اختيار الجامعة والتخصص المناسبين لمعدلك وميزانيتك، ونتابع طلبك حتى تصل إلى ماليزيا وتبدأ الدراسة.</p>
+    </div>
+    <div class="sample en">
+      <h2 class="h">Study in Malaysia with a clear plan from day one</h2>
+      <p class="p">We help you choose the right university and major for your grades and budget, and follow your application until you arrive in Malaysia.</p>
+    </div>
+    <div class="weights"><span style="font-weight:400">عادي Regular</span><span style="font-weight:500">متوسط Medium</span><span style="font-weight:700">عريض Bold</span></div>
+  </section>
+
+  <section class="opt" style="font-family:'Almarai',sans-serif">
+    <div class="name">Almarai</div>
+    <div class="meta">أوزان 300، 400، 700، 800 فقط · Only 4 weights · Arabic + Latin</div>
+    <div class="sample">
+      <h2 class="h">ادرس في ماليزيا بخطة واضحة من أول يوم</h2>
+      <p class="p">نساعدك على اختيار الجامعة والتخصص المناسبين لمعدلك وميزانيتك، ونتابع طلبك حتى تصل إلى ماليزيا وتبدأ الدراسة.</p>
+    </div>
+    <div class="sample en">
+      <h2 class="h">Study in Malaysia with a clear plan from day one</h2>
+      <p class="p">We help you choose the right university and major for your grades and budget, and follow your application until you arrive in Malaysia.</p>
+    </div>
+    <div class="weights"><span style="font-weight:400">عادي Regular</span><span style="font-weight:700">عريض Bold</span><span style="font-weight:800">أعرض Extra bold</span></div>
+  </section>
+</div>
+</body>
+</html>
