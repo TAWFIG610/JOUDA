@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Check } from "lucide-react";
-import { COMPANY, COUNTRIES, CTA, MAJORS, PARTNER_UNIVERSITIES, whatsappUrl } from "../data/thiqaData";
+import { COMPANY, CTA, MAJORS, PARTNER_UNIVERSITIES, whatsappUrl } from "../data/thiqaData";
 import type { FieldId, Localized } from "../types";
 import { Modal } from "./ui/Modal";
 import { BrandIcon } from "./ui/BrandIcon";
 import { useLang } from "../i18n/LanguageContext";
 import { track } from "../lib/analytics";
-import { leadsEnabled, saveLead } from "../lib/leads";
+import { leadsEnabled } from "../lib/leads";
+import { consultationMessage, isValidContact, submitConsultation, type ContactDetails } from "../lib/consult";
+import { ContactFields } from "./ContactFields";
 
 interface ConsultModalProps {
   isOpen: boolean;
   onClose: () => void;
   source: string;
+  /** "quiz" opens the major finder; "done" shows the confirmation after the hero form. */
+  start?: View;
+  prefill?: ContactDetails;
 }
 
-type View = "form" | "quiz" | "done";
+export type View = "form" | "quiz" | "done";
 type Answer = { level: string; field: FieldId | "any"; pref: "public" | "private" | "any" };
 
 const QUESTIONS: { key: keyof Answer; q: Localized; opts: { v: string; label: Localized }[] }[] = [
@@ -55,9 +60,6 @@ const TEXT = {
   ar: {
     reply: (h: string) => `يرد عليك مستشار خلال ${h} ساعات عمل.`,
     replyDefault: "الاستشارة الأولى مجانية.",
-    name: "الاسم الكامل",
-    country: "دولة الإقامة",
-    phone: "رقم واتساب مع رمز الدولة",
     toQuiz: "لست متأكداً ماذا تدرس؟ أجب عن 3 أسئلة واحصل على اقتراحات",
     question: (n: number) => `سؤال ${n} من 3`,
     next: "التالي",
@@ -74,16 +76,10 @@ const TEXT = {
     lastStepTitle: "خطوة أخيرة",
     lastStep: "أرسل بياناتك لنا على واتساب ليبدأ مستشارك العمل على ملفك.",
     sendWhatsapp: "أرسل على واتساب",
-    msg: (n: string, c: string) => `مرحباً ثقة يوني، أنا ${n} من ${c}.`,
-    level: "المرحلة",
-    field: "المجال",
   },
   en: {
     reply: (h: string) => `An advisor replies within ${h} working hours.`,
     replyDefault: "Your first consultation is free.",
-    name: "Full name",
-    country: "Country you live in",
-    phone: "WhatsApp number with country code",
     toQuiz: "Not sure what to study? Answer 3 questions for suggestions",
     question: (n: number) => `Question ${n} of 3`,
     next: "Next",
@@ -100,31 +96,26 @@ const TEXT = {
     lastStepTitle: "One last step",
     lastStep: "Send your details to us on WhatsApp so your advisor can start on your file.",
     sendWhatsapp: "Send on WhatsApp",
-    msg: (n: string, c: string) => `Hello Thiqa Uni, I'm ${n} from ${c}.`,
-    level: "Level",
-    field: "Field",
   },
 };
 
 const EMPTY_ANSWER: Answer = { level: "", field: "any", pref: "any" };
 
 /** One flow: short consultation form, with an optional major finder that feeds into it. */
-export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, source }) => {
+export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, source, start = "form", prefill }) => {
   const { lang, t } = useLang();
   const text = TEXT[lang];
-  const [view, setView] = useState<View>("form");
+  const [view, setView] = useState<View>(start);
   const [step, setStep] = useState(0);
   const [answer, setAnswer] = useState<Answer>(EMPTY_ANSWER);
   const [picked, setPicked] = useState<Partial<Record<keyof Answer, boolean>>>({});
   const [quizDone, setQuizDone] = useState(false);
-  const [name, setName] = useState("");
-  const [country, setCountry] = useState("");
-  const [phone, setPhone] = useState("");
+  const [details, setDetails] = useState<ContactDetails>(prefill ?? { name: "", country: "", phone: "" });
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (isOpen) track("lead_form_open", { source });
-  }, [isOpen, source]);
+    if (isOpen && start !== "done") track(start === "quiz" ? "advisor_open" : "lead_form_open", { source });
+  }, [isOpen, source, start]);
 
   const labelOf = (key: keyof Answer) => QUESTIONS.find((q) => q.key === key)!.opts.find((o) => o.v === answer[key])?.label;
 
@@ -136,36 +127,20 @@ export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, sou
     return { majors: MAJORS[answer.field], unis: unis.slice(0, 4) };
   };
 
-  const message = () => {
-    const lines = [text.msg(name.trim(), country.trim())];
-    if (quizDone) {
-      const lvl = labelOf("level");
-      const fld = labelOf("field");
-      lines.push(`${text.level}: ${lvl ? t(lvl) : "-"} · ${text.field}: ${fld ? t(fld) : "-"}`);
-    }
-    return lines.join("\n");
+  const quizSummary = () => {
+    if (!quizDone) return undefined;
+    const lvl = labelOf("level");
+    const fld = labelOf("field");
+    return { level: lvl ? t(lvl) : "", field: fld ? t(fld) : "", raw: `${answer.level} / ${answer.field} / ${answer.pref}` };
   };
 
   const submit = () => {
-    const digits = phone.replace(/\D/g, "");
-    if (!name.trim() || !country.trim() || !(phone.trim().startsWith("+") || phone.trim().startsWith("00")) || digits.length < 8) {
+    if (!isValidContact(details)) {
       setError(text.error);
       return;
     }
     // Save the lead first; WhatsApp is offered only afterwards.
-    saveLead({
-      name: name.trim(),
-      whatsapp: phone.trim(),
-      email: "",
-      country: country.trim(),
-      degree: quizDone ? t(labelOf("level")!) : "",
-      field: quizDone ? t(labelOf("field")!) : "",
-      notes: "",
-      pathway: quizDone ? `${answer.level} / ${answer.field} / ${answer.pref}` : "",
-      source,
-      language: lang,
-    });
-    track("lead_submit", { source, quiz: quizDone ? "yes" : "no" });
+    submitConsultation(details, lang, source, quizSummary());
     setView("done");
   };
 
@@ -258,47 +233,24 @@ export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, sou
             </div>
           )}
 
-          <div className="grid gap-3.5">
-            <div>
-              <label htmlFor="c-name" className="field-label">{text.name}</label>
-              <input id="c-name" className="field-input" autoComplete="name" value={name} onChange={(e) => { setName(e.target.value); setError(""); }} />
-            </div>
-            <div>
-              <label htmlFor="c-country" className="field-label">{text.country}</label>
-              <input id="c-country" className="field-input" list="c-countries" autoComplete="country-name" value={country} onChange={(e) => { setCountry(e.target.value); setError(""); }} />
-              <datalist id="c-countries">
-                {COUNTRIES.map((c) => (
-                  <option key={c.en} value={t(c)} />
-                ))}
-              </datalist>
-            </div>
-            <div>
-              <label htmlFor="c-phone" className="field-label">{text.phone}</label>
-              <input
-                id="c-phone"
-                type="tel"
-                inputMode="tel"
-                dir="ltr"
-                placeholder="+966 50 123 4567"
-                className="field-input text-start"
-                autoComplete="tel"
-                value={phone}
-                aria-invalid={!!error}
-                aria-describedby={error ? "c-error" : undefined}
-                onChange={(e) => { setPhone(e.target.value); setError(""); }}
-              />
-              {error && (
-                <p id="c-error" role="alert" className="mt-1.5 text-sm text-danger">
-                  {error}
-                </p>
-              )}
-            </div>
-          </div>
+          <ContactFields
+            idPrefix="c"
+            value={details}
+            onChange={(v) => {
+              setDetails(v);
+              setError("");
+            }}
+            error={error}
+          />
           {/* Submits with Enter; the visible button is in the fixed footer */}
           <button type="submit" hidden />
 
           {!quizDone && (
-            <button type="button" className="link mt-3 text-sm" onClick={() => { setStep(0); setView("quiz"); track("advisor_open"); }}>
+            <button type="button" className="link mt-3 text-sm" onClick={() => {
+                setStep(0);
+                setView("quiz");
+                track("advisor_open", { source });
+              }}>
               {text.toQuiz}
             </button>
           )}
@@ -314,7 +266,7 @@ export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, sou
             <>
               <h3 className="text-lg">{text.savedTitle}</h3>
               <p className="mt-1 text-muted">{text.saved(COMPANY.replyHours)}</p>
-              <a href={whatsappUrl(message())} target="_blank" rel="noopener noreferrer" data-place="consult_done" className="btn btn-secondary mt-5 w-full">
+              <a href={whatsappUrl(consultationMessage(details, lang, quizSummary()))} target="_blank" rel="noopener noreferrer" data-place="consult_done" className="btn btn-secondary mt-5 w-full">
                 <BrandIcon name="whatsapp" className="h-5 w-5" />
                 {text.orWhatsapp}
               </a>
@@ -324,7 +276,7 @@ export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, sou
               {/* Without a lead store the details only reach the team through WhatsApp */}
               <h3 className="text-lg">{text.lastStepTitle}</h3>
               <p className="mt-1 text-muted">{text.lastStep}</p>
-              <a href={whatsappUrl(message())} target="_blank" rel="noopener noreferrer" data-place="consult_done" className="btn btn-primary mt-5 w-full">
+              <a href={whatsappUrl(consultationMessage(details, lang, quizSummary()))} target="_blank" rel="noopener noreferrer" data-place="consult_done" className="btn btn-primary mt-5 w-full">
                 <BrandIcon name="whatsapp" className="h-5 w-5" />
                 {text.sendWhatsapp}
               </a>

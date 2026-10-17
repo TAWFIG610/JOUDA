@@ -29,11 +29,11 @@ export const HowSection: React.FC = () => {
           <ol className={`grid gap-3 sm:grid-cols-2 ${PHOTOS.arrival ? "" : "lg:grid-cols-4"}`}>
             {STEPS.map((step, i) => (
               <li key={step.title.en} className="card grid grid-cols-[2rem_1fr] gap-x-3 sm:block">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full border border-navy text-sm font-bold text-navy">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full border border-navy text-sm font-bold text-navy lg:h-11 lg:w-11 lg:text-base">
                   {i + 1}
                 </span>
-                <h3 className="text-base sm:mt-3 sm:text-lg">{t(step.title)}</h3>
-                <p className="col-start-2 mt-1 text-sm text-muted sm:text-base">{t(step.desc)}</p>
+                <h3 className="text-base sm:mt-4 sm:text-lg">{t(step.title)}</h3>
+                <p className="col-start-2 mt-1 text-sm text-muted sm:mt-2 sm:text-base">{t(step.desc)}</p>
               </li>
             ))}
           </ol>

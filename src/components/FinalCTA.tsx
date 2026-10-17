@@ -26,12 +26,12 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onOpenConsult }) => {
   return (
     <section className="section" aria-labelledby="final-title">
       <div className="page-container">
-        <div className="panel-dark grid items-center gap-5 md:grid-cols-[1fr_auto] md:p-10">
+        <div className="panel-dark grid items-center gap-6 md:grid-cols-[1fr_auto] lg:p-14">
           <div>
-            <h2 id="final-title" className="text-xl md:text-2xl">
+            <h2 id="final-title" className="text-xl lg:text-2xl">
               {text.title}
             </h2>
-            <p className="mt-2 text-on-navy">{text.body(COMPANY.replyHours)}</p>
+            <p className="mt-3 text-on-navy lg:text-lg">{text.body(COMPANY.replyHours)}</p>
           </div>
           <button type="button" onClick={() => onOpenConsult("final_cta")} className="btn btn-primary">
             {t(CTA)}

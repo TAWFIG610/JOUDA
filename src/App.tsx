@@ -10,19 +10,20 @@ import { FAQSection } from "./components/FAQSection";
 import { FinalCTA } from "./components/FinalCTA";
 import { Footer } from "./components/Footer";
 import { WhatsAppFloatingButton } from "./components/WhatsAppFloatingButton";
-import { ConsultModal } from "./components/ConsultModal";
+import { ConsultModal, type View } from "./components/ConsultModal";
+import type { ContactDetails } from "./lib/consult";
 import { LegalModal } from "./components/LegalModal";
 
 export function App() {
-  const [consultSource, setConsultSource] = useState<string | null>(null);
+  const [consult, setConsult] = useState<{ source: string; start?: View; prefill?: ContactDetails } | null>(null);
   const [consultOpenCount, setConsultOpenCount] = useState(0);
   const [legal, setLegal] = useState<"privacy" | "terms" | "refund" | null>(null);
 
-  const openConsult = useCallback((source: string) => {
-    setConsultSource(source);
+  const openConsult = useCallback((source: string, start?: View, prefill?: ContactDetails) => {
+    setConsult({ source, start, prefill });
     setConsultOpenCount((n) => n + 1);
   }, []);
-  const closeConsult = useCallback(() => setConsultSource(null), []);
+  const closeConsult = useCallback(() => setConsult(null), []);
   const closeLegal = useCallback(() => setLegal(null), []);
 
   return (
@@ -43,7 +44,7 @@ export function App() {
         {/* 6 */}
         <TestimonialsSection />
         {/* 7 */}
-        <FAQSection />
+        <FAQSection onOpenConsult={openConsult} />
         {/* 8 */}
         <FinalCTA onOpenConsult={openConsult} />
       </main>
@@ -52,7 +53,16 @@ export function App() {
       <WhatsAppFloatingButton />
 
       {/* Remounted on each open so the form starts fresh */}
-      {consultSource !== null && <ConsultModal key={consultOpenCount} isOpen onClose={closeConsult} source={consultSource} />}
+      {consult && (
+        <ConsultModal
+          key={consultOpenCount}
+          isOpen
+          onClose={closeConsult}
+          source={consult.source}
+          start={consult.start}
+          prefill={consult.prefill}
+        />
+      )}
       <LegalModal type={legal} onClose={closeLegal} />
     </div>
   );
