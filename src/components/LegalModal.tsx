@@ -1,10 +1,8 @@
 import React from "react";
-import { Shield } from "lucide-react";
 import { Modal } from "./ui/Modal";
 import { useLang } from "../i18n/LanguageContext";
 
 interface LegalModalProps {
-  isOpen: boolean;
   type: "privacy" | "terms" | "refund" | null;
   onClose: () => void;
 }
@@ -33,27 +31,23 @@ const CONTENT = {
   },
 };
 
-export const LegalModal: React.FC<LegalModalProps> = ({ isOpen, type, onClose }) => {
+export const LegalModal: React.FC<LegalModalProps> = ({ type, onClose }) => {
   const { lang, t } = useLang();
   if (!type) return null;
   const content = CONTENT[type];
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} labelledBy="legal-modal-title" maxWidth="sm:max-w-lg">
-      <div className="space-y-5 pt-6 sm:pt-2">
-        <div className="flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gold-100 text-gold-700">
-            <Shield className="h-5 w-5" />
-          </span>
-          <h2 id="legal-modal-title" className="text-lg font-bold text-ink">
-            {t(content.title)}
-          </h2>
-        </div>
-        <p className="rounded-2xl border border-line bg-paper p-4 text-base leading-relaxed text-slate-700">{t(content.body)}</p>
-        <button type="button" onClick={onClose} className="btn btn-dark w-full">
+    <Modal
+      isOpen
+      onClose={onClose}
+      title={t(content.title)}
+      footer={
+        <button type="button" onClick={onClose} className="btn btn-secondary w-full">
           {lang === "ar" ? "إغلاق" : "Close"}
         </button>
-      </div>
+      }
+    >
+      <p>{t(content.body)}</p>
     </Modal>
   );
 };

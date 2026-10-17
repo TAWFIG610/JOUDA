@@ -1,145 +1,141 @@
 import React from "react";
-import { BadgeCheck, Clock, FileText, Languages, Mail, MapPin, MessageCircle, Receipt, ShieldCheck, Wallet } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import { COMPANY, WHATSAPP_DISPLAY } from "../data/thiqaData";
-import type { Localized } from "../types";
+import { COMPANY, PARTNER_UNIVERSITIES, TEAM, TRUST_LOGO_IDS } from "../data/thiqaData";
 import { SectionHeader } from "./ui/SectionHeader";
-import { Reveal } from "./ui/Reveal";
 import { useLang } from "../i18n/LanguageContext";
 
 const TEXT = {
   ar: {
     title: "من نحن",
-    lead: "ثقة يوني فريق استشارات قبول جامعي يعمل من كوالالمبور، ويساعد الطلاب العرب وأهاليهم على الدراسة في ماليزيا.",
-    body: "نساعدك على اختيار الجامعة والتخصص، ونقدّم طلب القبول ونتابعه مع الجامعة، ونتابع تأشيرة الطالب عبر EMGS، ثم نستقبلك عند وصولك ونساعدك في السكن والتسجيل. نتعامل مع مكاتب القبول في الجامعات مباشرة، ونتواصل معك بالعربية أو الإنجليزية طوال الطريق.",
-    factsTitle: "بيانات الشركة",
-    location: "المقر",
-    locationValue: "كوالالمبور، ماليزيا",
-    languages: "لغات التواصل",
-    languagesValue: "العربية والإنجليزية",
-    whatsapp: "واتساب",
-    registration: "رقم السجل التجاري",
-    address: "العنوان",
+    body: "فريق قبول جامعي في كوالالمبور يساعد الطلاب العرب وأهاليهم على الدراسة في ماليزيا. نتعامل مع مكاتب القبول في الجامعات مباشرة، ونتواصل معك بالعربية أو الإنجليزية.",
+    students: "طالب ساعدناهم",
+    founded: "سنة التأسيس",
+    universities: "جامعة نقدّم إليها",
+    advisors: "مستشارون في الفريق",
+    details: "بيانات الشركة",
+    registeredName: "الاسم المسجّل",
+    ssm: "رقم التسجيل (SSM)",
+    address: "عنوان المكتب",
+    map: "الخريطة",
     hours: "ساعات العمل",
-    email: "البريد الإلكتروني",
-    commitmentsTitle: "التزاماتنا معك",
+    languages: "اللغات",
+    languagesValue: "العربية والإنجليزية",
+    authorisation: "تفويض الجامعات",
+    team: "مستشاروك",
+    logos: "بعض الجامعات التي نقدّم إليها",
   },
   en: {
-    title: "About us",
-    lead: "THIQA UNI is a university admissions team based in Kuala Lumpur, helping Arab students and their families study in Malaysia.",
-    body: "We help you choose a university and major, submit and follow up your application with the university, follow your student visa through EMGS, then meet you on arrival and help with housing and registration. We work directly with university admissions offices and talk to you in Arabic or English the whole way.",
-    factsTitle: "Company details",
-    location: "Based in",
-    locationValue: "Kuala Lumpur, Malaysia",
+    title: "Who we are",
+    body: "An admissions team based in Kuala Lumpur, helping Arab students and their families study in Malaysia. We deal with university admissions offices directly and speak with you in Arabic or English.",
+    students: "students helped",
+    founded: "founded",
+    universities: "universities we apply to",
+    advisors: "advisors on the team",
+    details: "Company details",
+    registeredName: "Registered name",
+    ssm: "SSM registration no.",
+    address: "Office address",
+    map: "Map",
+    hours: "Office hours",
     languages: "Languages",
     languagesValue: "Arabic and English",
-    whatsapp: "WhatsApp",
-    registration: "Company registration",
-    address: "Address",
-    hours: "Office hours",
-    email: "Email",
-    commitmentsTitle: "Our commitments to you",
+    authorisation: "University authorisation",
+    team: "Your advisors",
+    logos: "Some of the universities we apply to",
   },
 };
-
-/** Taken from THIQA UNI's own fee, privacy and service terms. */
-const COMMITMENTS: { icon: LucideIcon; title: Localized; desc: Localized }[] = [
-  {
-    icon: BadgeCheck,
-    title: { ar: "الاستشارة الأولى مجانية", en: "Your first consultation is free" },
-    desc: {
-      ar: "نراجع وضعك ونقترح عليك خيارات مناسبة قبل أن تلتزم بأي شيء.",
-      en: "We review your situation and suggest suitable options before you commit to anything.",
-    },
-  },
-  {
-    icon: Receipt,
-    title: { ar: "الرسوم الدراسية تُدفع للجامعة مباشرة", en: "Tuition is paid to the university directly" },
-    desc: {
-      ar: "تدفع رسومك للجامعة بفاتورة رسمية باسمها، بدون عمولات مخفية.",
-      en: "You pay your fees to the university against its official invoice, with no hidden commissions.",
-    },
-  },
-  {
-    icon: Wallet,
-    title: { ar: "أي تكلفة تكون مكتوبة مسبقاً", en: "Any cost is written down first" },
-    desc: {
-      ar: "إن كانت هناك رسوم على خدمة إضافية، نكتبها لك بوضوح قبل أن نبدأ.",
-      en: "If an extra service has a fee, we put it in writing before we start.",
-    },
-  },
-  {
-    icon: ShieldCheck,
-    title: { ar: "مستنداتك للتقديم فقط", en: "Your documents are used only to apply" },
-    desc: {
-      ar: "نستخدم وثائقك للتقديم للجامعة وطلب التأشيرة فقط، ونحفظها بسرية.",
-      en: "We use your documents only for your university and visa applications, and keep them confidential.",
-    },
-  },
-];
 
 export const AboutSection: React.FC = () => {
   const { lang, t } = useLang();
   const text = TEXT[lang];
 
-  const facts: { icon: LucideIcon; label: string; value: string; ltr?: boolean }[] = [
-    { icon: MapPin, label: text.location, value: text.locationValue },
-    { icon: Languages, label: text.languages, value: text.languagesValue },
-    { icon: MessageCircle, label: text.whatsapp, value: WHATSAPP_DISPLAY, ltr: true },
-    // Optional details: shown only once filled in src/data/thiqaData.ts
-    { icon: FileText, label: text.registration, value: COMPANY.registration, ltr: true },
-    { icon: MapPin, label: text.address, value: t(COMPANY.address) },
-    { icon: Clock, label: text.hours, value: t(COMPANY.hours) },
-    { icon: Mail, label: text.email, value: COMPANY.email, ltr: true },
-  ].filter((fact) => fact.value);
+  // Only real, filled-in figures are shown.
+  const stats = [
+    { value: COMPANY.studentsHelped, label: text.students },
+    { value: COMPANY.founded, label: text.founded },
+    { value: String(PARTNER_UNIVERSITIES.length), label: text.universities },
+    { value: COMPANY.advisors, label: text.advisors },
+  ].filter((s) => s.value);
+
+  const facts: { label: string; value: React.ReactNode }[] = [
+    { label: text.registeredName, value: t(COMPANY.registeredName) },
+    { label: text.ssm, value: COMPANY.ssm },
+    {
+      label: text.address,
+      value: t(COMPANY.address) && (
+        <>
+          {t(COMPANY.address)}
+          {COMPANY.mapUrl && (
+            <>
+              {" · "}
+              <a href={COMPANY.mapUrl} target="_blank" rel="noopener noreferrer" className="link min-h-0">
+                {text.map}
+              </a>
+            </>
+          )}
+        </>
+      ),
+    },
+    { label: text.hours, value: t(COMPANY.hours) },
+    { label: text.languages, value: text.languagesValue },
+    { label: text.authorisation, value: t(COMPANY.authorisation) },
+  ].filter((f) => f.value);
+
+  const logos = TRUST_LOGO_IDS.map((id) => PARTNER_UNIVERSITIES.find((u) => u.id === id)!);
 
   return (
-    <section id="about" className="bg-white section">
+    <section className="section" aria-labelledby="about-title">
       <div className="page-container">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+        <SectionHeader id="about-title" title={text.title} description={text.body} />
+
+        <ul
+          className={`grid gap-px overflow-hidden rounded-xl border border-line bg-line ${
+            stats.length >= 4 ? "grid-cols-2 md:grid-cols-4" : stats.length === 3 ? "grid-cols-3" : stats.length === 2 ? "grid-cols-2" : "max-w-xs grid-cols-1"
+          }`}
+        >
+          {stats.map((s) => (
+            <li key={s.label} className="bg-white p-5">
+              <span className="block text-xl font-bold text-navy">{s.value}</span>
+              <span className="text-sm text-muted">{s.label}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className={`mt-8 grid gap-8 ${TEAM.length ? "lg:grid-cols-2 lg:gap-10" : ""}`}>
           <div>
-            <SectionHeader align="start" className="mb-5 sm:mb-6" title={text.title} />
-            <Reveal className="max-w-2xl space-y-4">
-              <p className="text-lead font-semibold text-ink">{text.lead}</p>
-              <p className="text-base leading-loose text-muted sm:text-lg">{text.body}</p>
-            </Reveal>
+            <h3 className="text-lg">{text.details}</h3>
+            <dl className="mt-3 grid gap-2.5">
+              {facts.map((f) => (
+                <div key={f.label} className="grid grid-cols-[40%_1fr] gap-3 md:grid-cols-[12rem_1fr]">
+                  <dt className="text-sm text-muted">{f.label}</dt>
+                  <dd>{f.value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
-          <Reveal delay={80}>
-            <div className="surface-dark relative overflow-hidden rounded-2xl p-6 shadow-raised sm:p-7">
-              <span className="accent-top" aria-hidden="true" />
-              <h3 className="text-base font-bold text-white">{text.factsTitle}</h3>
-              <dl className="mt-4 divide-y divide-white/10">
-                {facts.map(({ icon: Icon, label, value, ltr }) => (
-                  <div key={label} className="flex items-start gap-3 py-3.5 first:pt-0 last:pb-0">
-                    <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold-400" aria-hidden="true" />
-                    <div className="min-w-0">
-                      <dt className="text-xs font-semibold text-brand-200">{label}</dt>
-                      <dd className={`text-base font-semibold text-white ${ltr ? "font-latin" : ""}`} dir={ltr ? "ltr" : undefined}>
-                        {value}
-                      </dd>
-                    </div>
-                  </div>
+          {TEAM.length > 0 && (
+            <div>
+              <h3 className="text-lg">{text.team}</h3>
+              <ul className="mt-3 grid grid-cols-3 gap-3">
+                {TEAM.map((m) => (
+                  <li key={m.name.en}>
+                    <img src={m.photo} alt="" className="aspect-square w-full rounded-xl object-cover" loading="lazy" />
+                    <p className="mt-2 text-sm font-bold">{t(m.name)}</p>
+                    <p className="text-sm text-muted">{t(m.role)}</p>
+                  </li>
                 ))}
-              </dl>
+              </ul>
             </div>
-          </Reveal>
+          )}
         </div>
 
-        <div className="mt-14 sm:mt-20">
-          <h3 className="subsection-title">{text.commitmentsTitle}</h3>
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
-            {COMMITMENTS.map(({ icon: Icon, title, desc }, idx) => (
-              <Reveal as="li" key={title.en} delay={idx * 70} className="card p-5">
-                <span className="brand-tile h-11 w-11">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <p className="mt-4 font-bold text-ink">{t(title)}</p>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">{t(desc)}</p>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
+        <ul aria-label={text.logos} className="mt-8 grid grid-cols-3 gap-3 md:grid-cols-6">
+          {logos.map((u) => (
+            <li key={u.id} className="flex h-18 items-center justify-center rounded-xl border border-line p-3">
+              <img src={u.logoUrl} alt={u.nameEn} className="max-h-11 w-auto" loading="lazy" />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

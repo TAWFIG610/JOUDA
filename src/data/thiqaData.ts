@@ -1,45 +1,174 @@
-import type { FAQItem, Localized, NavLink, PartnerUniversity, Testimonial } from "../types";
+import type { FAQItem, FieldId, Localized, NavLink, PartnerUniversity, Testimonial } from "../types";
+
+/*
+ * Site content. Anything left as "" (or an empty list) is hidden on the site,
+ * so only real, checked information is ever shown. Fill these in as they
+ * become available: COMPANY, HERO_IMAGE, PHOTOS, COSTS, university details,
+ * FAQ answers and testimonial photos.
+ */
+
+const EMPTY: Localized = { ar: "", en: "" };
 
 export const BRAND_NAME_EN = "THIQA UNI";
 export const BRAND_NAME_AR = "ثقة يوني";
-export const BRAND_TAGLINE: Localized = {
-  ar: "شريكك الأكاديمي للتعليم الدولي",
-  en: "Your global education partner",
-};
-export const BRAND_MOTTO: Localized = { ar: "ثقة • تعليم • مستقبل عالمي", en: "Trust • Education • A global future" };
+/** The one tagline used across the site (matches the logo). */
+export const BRAND_TAGLINE: Localized = { ar: "شريكك الأكاديمي للتعليم الدولي", en: "Your global education partner" };
 
 export const WHATSAPP_PHONE = "60175341969";
 export const WHATSAPP_DISPLAY = "+60 17-534 1969";
 export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_PHONE}`;
-
-/** Default opening message for WhatsApp links. */
-export const WHATSAPP_GREETING: Localized = {
-  ar: "مرحباً فريق ثقة يوني، أود الاستفسار عن الدراسة في ماليزيا.",
-  en: "Hello THIQA UNI team, I'd like to ask about studying in Malaysia.",
-};
-
 export const whatsappUrl = (text: string) => `${WHATSAPP_BASE_URL}?text=${encodeURIComponent(text)}`;
 
-/**
- * Official company details shown in "Who we are" and the footer.
- * Leave a field empty ("") to hide it; fill in real details only.
- */
-export const COMPANY: {
-  registration: string;
-  address: Localized;
-  hours: Localized;
-  email: string;
-} = {
-  registration: "", // e.g. SSM registration number
-  address: { ar: "", en: "" }, // office address in Kuala Lumpur
-  hours: { ar: "", en: "" }, // e.g. "الأحد – الخميس، 9 ص – 6 م"
+/** The single call to action used everywhere. */
+export const CTA: Localized = { ar: "احجز استشارة مجانية", en: "Book a free consultation" };
+
+/** Official company details. Each filled field appears in "Who we are" and the footer. */
+export const COMPANY = {
+  registeredName: EMPTY, // e.g. "Thiqa Uni Sdn. Bhd."
+  ssm: "", // SSM registration number
+  address: EMPTY, // office address in Kuala Lumpur
+  mapUrl: "", // Google Maps link to the office
+  hours: EMPTY, // e.g. { ar: "الأحد – الخميس، 9 ص – 6 م", en: "Sun–Thu, 9am–6pm" }
   email: "",
+  founded: "", // e.g. "2019"
+  studentsHelped: "", // e.g. "350"
+  advisors: "", // e.g. "6"
+  replyHours: "", // e.g. "24" — "an advisor replies within 24 working hours"
+  authorisation: EMPTY, // e.g. "Authorised representative of APU and UCSI"
 };
 
-/** Official bodies students can use to check programs and visas themselves. */
-export const OFFICIAL_CHECKS: { name: string; url: string; what: Localized }[] = [
+/** Team members shown in "Who we are" (real names and photos only). */
+export const TEAM: { name: Localized; role: Localized; photo: string }[] = [];
+
+/** Real photos. Empty = the layout works without them. */
+export const HERO_IMAGE = ""; // e.g. "/photos/students-campus.jpg"
+export const PHOTOS = {
+  arrival: "", // e.g. "/photos/airport-pickup.jpg" — shown in "How we work"
+};
+
+export const NAV_LINKS: NavLink[] = [
+  { name: { ar: "كيف نعمل", en: "How we work" }, href: "#how" },
+  { name: { ar: "الجامعات", en: "Universities" }, href: "#universities" },
+  { name: { ar: "التكاليف", en: "Costs" }, href: "#costs" },
+  { name: { ar: "تجارب الطلاب", en: "Student stories" }, href: "#stories" },
+  { name: { ar: "الأسئلة الشائعة", en: "FAQ" }, href: "#faq" },
+];
+
+export const FIELDS: Record<FieldId, Localized> = {
+  med: { ar: "الطب والصحة", en: "Medicine & health" },
+  eng: { ar: "الهندسة", en: "Engineering" },
+  it: { ar: "الحاسوب وتقنية المعلومات", en: "Computing & IT" },
+  bus: { ar: "إدارة الأعمال", en: "Business" },
+};
+
+const uni = (u: Omit<PartnerUniversity, "intakes" | "fees" | "requirements"> & Partial<PartnerUniversity>): PartnerUniversity => ({
+  intakes: EMPTY,
+  fees: EMPTY,
+  requirements: EMPTY,
+  ...u,
+});
+
+/**
+ * Arabic names follow each university's official English name, without
+ * added words. Fill intakes/fees/requirements per university when confirmed.
+ */
+export const PARTNER_UNIVERSITIES: PartnerUniversity[] = [
+  uni({ id: "um", nameAr: "جامعة مالايا", nameEn: "Universiti Malaya (UM)", logoUrl: "/universities/um.svg", type: "public", city: { ar: "كوالالمبور", en: "Kuala Lumpur" }, fields: ["med", "eng", "it"] }),
+  uni({ id: "utm", nameAr: "الجامعة التكنولوجية الماليزية", nameEn: "Universiti Teknologi Malaysia (UTM)", logoUrl: "/universities/utm.svg", type: "public", city: { ar: "جوهور باهرو / كوالالمبور", en: "Johor Bahru / Kuala Lumpur" }, fields: ["eng", "it"] }),
+  uni({ id: "utem", nameAr: "جامعة ملاكا التقنية الماليزية", nameEn: "Universiti Teknikal Malaysia Melaka (UTeM)", logoUrl: "/universities/utem.svg", type: "public", city: { ar: "ملاكا", en: "Melaka" }, fields: ["eng", "it"] }),
+  uni({ id: "taylors", nameAr: "جامعة تايلورز", nameEn: "Taylor's University", logoUrl: "/universities/taylors.svg", type: "private", city: { ar: "سوبانغ جايا", en: "Subang Jaya" }, fields: ["bus"] }),
+  uni({ id: "apu", nameAr: "جامعة آسيا والمحيط الهادئ للتكنولوجيا والابتكار", nameEn: "Asia Pacific University of Technology & Innovation (APU)", logoUrl: "/universities/apu.svg", type: "private", city: { ar: "كوالالمبور", en: "Kuala Lumpur" }, fields: ["it", "bus"] }),
+  uni({ id: "sunway", nameAr: "جامعة صنواي", nameEn: "Sunway University", logoUrl: "/universities/sunway.svg", type: "private", city: { ar: "بندر صنواي", en: "Bandar Sunway" }, fields: ["bus", "it"] }),
+  uni({ id: "monash", nameAr: "جامعة موناش ماليزيا", nameEn: "Monash University Malaysia", logoUrl: "/universities/monash.svg", type: "private", branch: { ar: "فرع جامعة أسترالية", en: "Australian branch campus" }, city: { ar: "بندر صنواي", en: "Bandar Sunway" }, fields: ["med", "bus"] }),
+  uni({ id: "unikl", nameAr: "جامعة كوالالمبور", nameEn: "Universiti Kuala Lumpur (UniKL)", logoUrl: "/universities/unikl.svg", type: "private", city: { ar: "كوالالمبور", en: "Kuala Lumpur" }, fields: ["it", "eng"] }),
+  uni({ id: "cyberjaya", nameAr: "جامعة سايبرجايا", nameEn: "University of Cyberjaya", logoUrl: "/universities/cyberjaya.svg", type: "private", city: { ar: "سايبرجايا", en: "Cyberjaya" }, fields: ["med"] }),
+  uni({ id: "mahsa", nameAr: "جامعة ماهسا", nameEn: "MAHSA University", logoUrl: "/universities/mahsa.svg", type: "private", city: { ar: "سيلانجور", en: "Selangor" }, fields: ["med"] }),
+  uni({ id: "city", nameAr: "جامعة سيتي ماليزيا", nameEn: "City University Malaysia", logoUrl: "/universities/city.svg", type: "private", city: { ar: "بيتالينغ جايا", en: "Petaling Jaya" }, fields: ["bus", "med"] }),
+  uni({ id: "mmu", nameAr: "جامعة الوسائط المتعددة", nameEn: "Multimedia University (MMU)", logoUrl: "/universities/mmu.svg", type: "private", city: { ar: "سايبرجايا / ملاكا", en: "Cyberjaya / Melaka" }, fields: ["it", "eng"] }),
+];
+
+/** Readable logos shown in the trust section. */
+export const TRUST_LOGO_IDS = ["um", "taylors", "monash", "sunway", "unikl", "mmu"];
+
+/** "How we work": services and steps in one list. */
+export const STEPS: { title: Localized; desc: Localized }[] = [
   {
-    name: "MQA",
+    title: { ar: "نراجع خياراتك", en: "We review your options" },
+    desc: {
+      ar: "شهادتك ومعدلك والتخصص وميزانيتك، ثم قائمة جامعات مناسبة لك.",
+      en: "Your certificate, grades, major and budget, then a short list of suitable universities.",
+    },
+  },
+  {
+    title: { ar: "نجهّز الملف ونقدّم", en: "We prepare and apply" },
+    desc: {
+      ar: "نراجع المستندات وترجمتها، ونقدّم الطلب ونتابعه حتى خطاب القبول.",
+      en: "We check and translate documents, submit your application and follow it until the offer letter.",
+    },
+  },
+  {
+    title: { ar: "تأشيرة الطالب (EMGS)", en: "Student visa (EMGS)" },
+    desc: {
+      ar: "نتابع طلب التأشيرة والفحص الطبي حتى خطاب الموافقة (VAL).",
+      en: "We follow the visa application and medical check until your approval letter (VAL).",
+    },
+  },
+  {
+    title: { ar: "الوصول والاستقرار", en: "Arrival and settling in" },
+    desc: {
+      ar: "استقبال في مطار كوالالمبور، ومساعدة في السكن والتسجيل.",
+      en: "Airport pickup in Kuala Lumpur, help with housing and university registration.",
+    },
+  },
+];
+
+/** Sample costs. A row appears once its value is filled in. */
+export const COSTS_UPDATED: Localized = EMPTY; // e.g. { ar: "أكتوبر 2026", en: "October 2026" }
+export const COSTS: { label: Localized; value: Localized }[] = [
+  { label: { ar: "الرسوم الدراسية — جامعة حكومية (سنوياً)", en: "Tuition, public university (per year)" }, value: EMPTY },
+  { label: { ar: "الرسوم الدراسية — جامعة خاصة (سنوياً)", en: "Tuition, private university (per year)" }, value: EMPTY },
+  { label: { ar: "سكن طلابي في كوالالمبور (شهرياً)", en: "Student housing in Kuala Lumpur (per month)" }, value: EMPTY },
+  { label: { ar: "الطعام والمواصلات (شهرياً)", en: "Food and transport (per month)" }, value: EMPTY },
+  { label: { ar: "التأشيرة والفحص الطبي (EMGS، مرة واحدة)", en: "Student visa and medical check (EMGS, one-off)" }, value: EMPTY },
+  { label: { ar: "استشارتنا واختيار الجامعة", en: "Our consultation and university selection" }, value: { ar: "مجاناً", en: "Free" } },
+];
+
+/** From THIQA UNI's own fee, privacy and service terms. */
+export const COMMITMENTS: { title: Localized; desc: Localized }[] = [
+  {
+    title: { ar: "الاستشارة الأولى مجانية", en: "Your first consultation is free" },
+    desc: {
+      ar: "نراجع وضعك ونقترح عليك خيارات مناسبة قبل أن تلتزم بأي شيء.",
+      en: "We review your situation and suggest suitable options before you commit to anything.",
+    },
+  },
+  {
+    title: { ar: "الرسوم الدراسية تُدفع للجامعة مباشرة", en: "Tuition is paid to the university directly" },
+    desc: {
+      ar: "تدفع رسومك للجامعة بفاتورة رسمية باسمها، بدون عمولات مخفية.",
+      en: "You pay your fees to the university against its official invoice, with no hidden commissions.",
+    },
+  },
+  {
+    title: { ar: "أي تكلفة تكون مكتوبة مسبقاً", en: "Any cost is written down first" },
+    desc: {
+      ar: "إن كانت هناك رسوم على خدمة إضافية، نكتبها لك بوضوح قبل أن نبدأ.",
+      en: "If an extra service has a fee, we put it in writing before we start.",
+    },
+  },
+  {
+    title: { ar: "مستنداتك للتقديم فقط", en: "Your documents are used only to apply" },
+    desc: {
+      ar: "نستخدم وثائقك للتقديم للجامعة وطلب التأشيرة فقط، ونحفظها بسرية.",
+      en: "We use your documents only for your university and visa applications, and keep them confidential.",
+    },
+  },
+];
+
+/** Official bodies students can use to check programs and visas themselves. */
+export const OFFICIAL_CHECKS: { name: Localized; url: string; what: Localized }[] = [
+  {
+    name: { ar: "MQA", en: "MQA" },
     url: "https://www.mqa.gov.my/",
     what: {
       ar: "هيئة المؤهلات الماليزية: تحقق أن البرنامج الذي تقدّم عليه معتمد.",
@@ -47,7 +176,7 @@ export const OFFICIAL_CHECKS: { name: string; url: string; what: Localized }[] =
     },
   },
   {
-    name: "EMGS",
+    name: { ar: "EMGS", en: "EMGS" },
     url: "https://educationmalaysia.gov.my/",
     what: {
       ar: "الجهة الرسمية لتأشيرات الطلاب الدوليين: تابع حالة طلب تأشيرتك بنفسك.",
@@ -55,198 +184,11 @@ export const OFFICIAL_CHECKS: { name: string; url: string; what: Localized }[] =
     },
   },
   {
-    name: "University",
+    name: { ar: "الجامعة", en: "The university" },
     url: "",
     what: {
       ar: "مكتب القبول في الجامعة: تأكد من خطاب القبول والرسوم مباشرة من موقعها الرسمي.",
-      en: "The university's admissions office: confirm your offer letter and fees on its official website.",
-    },
-  },
-];
-
-export const NAV_LINKS: NavLink[] = [
-  { name: { ar: "من نحن", en: "About us" }, href: "#about" },
-  { name: { ar: "خدماتنا", en: "Services" }, href: "#services" },
-  { name: { ar: "خطوات التقديم", en: "How it works" }, href: "#journey" },
-  { name: { ar: "الجامعات", en: "Universities" }, href: "#universities" },
-  { name: { ar: "الأسئلة الشائعة", en: "FAQ" }, href: "#faq" },
-];
-
-export const PARTNER_UNIVERSITIES: PartnerUniversity[] = [
-  {
-    id: "um",
-    nameAr: "جامعة مالايا",
-    nameEn: "Universiti Malaya (UM)",
-    shortName: "UM",
-    logoUrl: "/universities/um.svg",
-  },
-  {
-    id: "utm",
-    nameAr: "جامعة التكنولوجيا ماليزيا",
-    nameEn: "Universiti Teknologi Malaysia (UTM)",
-    shortName: "UTM",
-    logoUrl: "/universities/utm.svg",
-  },
-  {
-    id: "taylors",
-    nameAr: "جامعة تيلورز العالمية",
-    nameEn: "Taylor's University",
-    shortName: "Taylor's",
-    logoUrl: "/universities/taylors.svg",
-  },
-  {
-    id: "apu",
-    nameAr: "جامعة آسيا باسيفيك للتكنولوجيا",
-    nameEn: "Asia Pacific University (APU)",
-    shortName: "APU",
-    logoUrl: "/universities/apu.svg",
-  },
-  {
-    id: "sunway",
-    nameAr: "جامعة صنواي الدولية",
-    nameEn: "Sunway University",
-    shortName: "Sunway",
-    logoUrl: "/universities/sunway.svg",
-  },
-  {
-    id: "monash",
-    nameAr: "جامعة موناش ماليزيا (فرع أسترالي)",
-    nameEn: "Monash University Malaysia",
-    shortName: "Monash",
-    logoUrl: "/universities/monash.svg",
-  },
-  {
-    id: "unikl",
-    nameAr: "جامعة كوالالمبور",
-    nameEn: "Universiti Kuala Lumpur (UniKL)",
-    shortName: "UniKL",
-    logoUrl: "/universities/unikl.svg",
-  },
-  {
-    id: "cyberjaya",
-    nameAr: "جامعة سايبرجايا للعلوم الطبية",
-    nameEn: "University of Cyberjaya (UOC)",
-    shortName: "UOC",
-    logoUrl: "/universities/cyberjaya.svg",
-  },
-  {
-    id: "utem",
-    nameAr: "جامعة ملاكا التقنية",
-    nameEn: "Universiti Teknikal Malaysia Melaka (UTeM)",
-    shortName: "UTeM",
-    logoUrl: "/universities/utem.svg",
-  },
-  {
-    id: "mahsa",
-    nameAr: "جامعة ماهسا الطبية",
-    nameEn: "MAHSA University",
-    shortName: "MAHSA",
-    logoUrl: "/universities/mahsa.svg",
-  },
-  {
-    id: "city",
-    nameAr: "جامعة سيتي ماليزيا",
-    nameEn: "City University Malaysia",
-    shortName: "City U",
-    logoUrl: "/universities/city.svg",
-  },
-  {
-    id: "mmu",
-    nameAr: "جامعة الوسائط المتعددة",
-    nameEn: "Multimedia University (MMU)",
-    shortName: "MMU",
-    logoUrl: "/universities/mmu.svg",
-  },
-];
-
-export const JOURNEY_STEPS: { number: string; title: Localized; desc: Localized }[] = [
-  {
-    number: "1",
-    title: { ar: "نتعرّف على وضعك", en: "We learn about you" },
-    desc: {
-      ar: "نسألك عن شهادتك ومعدلك والتخصص الذي تفكر فيه وميزانيتك السنوية، ونقترح عليك جامعات تناسبها.",
-      en: "We ask about your certificate, grades, the major you have in mind and your yearly budget, then suggest universities that fit.",
-    },
-  },
-  {
-    number: "2",
-    title: { ar: "تقارن وتختار", en: "You compare and choose" },
-    desc: {
-      ar: "نرسل لك الرسوم وشروط القبول ومواعيد الدفعات لكل خيار، وتختار أنت البرنامج الأنسب.",
-      en: "We send you the fees, entry requirements and payment dates for each option, and you pick the program that suits you.",
-    },
-  },
-  {
-    number: "3",
-    title: { ar: "نقدّم طلب القبول", en: "We submit your application" },
-    desc: {
-      ar: "نراجع مستنداتك ونرفع الطلب للجامعة ونتابعه معك حتى يصدر خطاب القبول (Offer Letter).",
-      en: "We check your documents, submit the application to the university and follow it up until your offer letter is issued.",
-    },
-  },
-  {
-    number: "4",
-    title: { ar: "التأشيرة والوصول", en: "Visa and arrival" },
-    desc: {
-      ar: "نتابع طلب تأشيرة الطالب عبر EMGS، ونستقبلك في مطار كوالالمبور ونساعدك في السكن والتسجيل.",
-      en: "We follow your student visa through EMGS, meet you at Kuala Lumpur airport and help with housing and registration.",
-    },
-  },
-];
-
-/** Majors visitors ask about most; each opens the form pre-filled. */
-export const POPULAR_MAJORS: Localized[] = [
-  { ar: "الطب البشري", en: "Medicine" },
-  { ar: "طب الأسنان", en: "Dentistry" },
-  { ar: "الذكاء الاصطناعي", en: "Artificial Intelligence" },
-  { ar: "الأمن السيبراني", en: "Cyber Security" },
-  { ar: "إدارة الأعمال", en: "Business" },
-  { ar: "الهندسة", en: "Engineering" },
-];
-
-export const COMPARISON_ROWS: { feature: Localized; traditional: Localized; thiqa: Localized }[] = [
-  {
-    feature: { ar: "الرسوم والتكاليف", en: "Fees and costs" },
-    traditional: {
-      ar: "هل استلمت الرسوم مكتوبة؟ وما الذي تشمله بالضبط؟",
-      en: "Did you get the fees in writing? What exactly do they cover?",
-    },
-    thiqa: {
-      ar: "نرسل لك رسوم الجامعة الرسمية مكتوبة، ونوضح أي تكلفة إضافية قبل أن تبدأ.",
-      en: "We send you the university's official fees in writing and explain any extra cost before you start.",
-    },
-  },
-  {
-    feature: { ar: "مدة صدور القبول", en: "Time to get an offer" },
-    traditional: {
-      ar: "كم تستغرق هذه الجامعة عادةً؟ ومن يتابع الطلب؟",
-      en: "How long does this university usually take? Who follows up?",
-    },
-    thiqa: {
-      ar: "نتابع طلبك مع الجامعة ونبلغك بأي مستند ناقص أولاً بأول.",
-      en: "We follow up with the university and tell you straight away if a document is missing.",
-    },
-  },
-  {
-    feature: { ar: "تأشيرة الطالب EMGS", en: "EMGS student visa" },
-    traditional: {
-      ar: "ما المستندات المطلوبة؟ ومن يتواصل مع EMGS؟",
-      en: "Which documents are needed? Who deals with EMGS?",
-    },
-    thiqa: {
-      ar: "نجهّز معك مستندات التأشيرة ونتابع حالة الطلب حتى صدور الموافقة.",
-      en: "We prepare the visa documents with you and track the application until it is approved.",
-    },
-  },
-  {
-    feature: { ar: "بعد الوصول إلى ماليزيا", en: "After you arrive" },
-    traditional: {
-      ar: "من يستقبلك؟ ومن يساعدك في السكن والتسجيل؟",
-      en: "Who meets you? Who helps with housing and registration?",
-    },
-    thiqa: {
-      ar: "نستقبلك في المطار ونساعدك في السكن والفحص الطبي والتسجيل.",
-      en: "We meet you at the airport and help with housing, the medical check and registration.",
+      en: "The admissions office: confirm your offer letter and fees on its official website.",
     },
   },
 ];
@@ -255,117 +197,155 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: "1",
     name: { ar: "عبدالرحمن العتيبي", en: "Abdulrahman Al-Otaibi" },
-    country: { ar: "المملكة العربية السعودية", en: "Saudi Arabia" },
+    country: { ar: "السعودية", en: "Saudi Arabia" },
     university: "Taylor's University",
-    program: { ar: "بكالوريوس هندسة البرمجيات", en: "BSc Software Engineering" },
+    program: { ar: "هندسة البرمجيات", en: "Software Engineering" },
     quote: {
       ar: "منصة ثقة يوني اختصرت علي كل الحيرة. استلمت قبولي الرسمي في جامعة تيلورز في وقت قياسي، وكانت متابعة التأشيرة واضحة جداً وبدون أي تعقيد.",
       en: "THIQA UNI took away all the confusion. I got my official offer from Taylor's very quickly, and the visa follow-up was clear and simple.",
     },
-    year: { ar: "دفعة 2024", en: "Class of 2024" },
+    year: "2024",
+    photo: "",
   },
   {
     id: "2",
     name: { ar: "سارة المهدي", en: "Sara Al-Mahdi" },
-    country: { ar: "جمهورية مصر العربية", en: "Egypt" },
-    university: "Asia Pacific University (APU)",
+    country: { ar: "مصر", en: "Egypt" },
+    university: "APU",
     program: { ar: "ماجستير الأمن السيبراني", en: "MSc Cyber Security" },
     quote: {
-      ar: "الشفافية والمصداقية هي أهم ما يميز ثقة يوني. لم أدفع أي دولار إضافي، ووجد موظف الاستقبال بانتظاري في المطار لمساعدتي حتى دخولي السكن.",
-      en: "Honesty is what sets THIQA UNI apart. I didn't pay a single extra dollar, and someone was waiting for me at the airport and stayed until I moved into my housing.",
+      ar: "لم أدفع أي دولار إضافي، ووجدت موظف الاستقبال بانتظاري في المطار لمساعدتي حتى دخولي السكن.",
+      en: "I didn't pay a single extra dollar, and someone was waiting for me at the airport and stayed until I moved into my housing.",
     },
-    year: { ar: "دفعة 2025", en: "Class of 2025" },
+    year: "2025",
+    photo: "",
   },
   {
     id: "3",
     name: { ar: "محمد باجعفر", en: "Mohammed Bajaafar" },
     country: { ar: "اليمن", en: "Yemen" },
-    university: "Universiti Malaya (UM)",
-    program: { ar: "بكالوريوس الهندسة الميكانيكية", en: "BEng Mechanical Engineering" },
+    university: "Universiti Malaya",
+    program: { ar: "الهندسة الميكانيكية", en: "Mechanical Engineering" },
     quote: {
-      ar: "التقديم للجامعات الحكومية الأولى مثل جامعة مالايا يحتاج دقة عالية في ترجمة وتصديق الأوراق. مع إرشاد ثقة يوني تم قبولي وحصلت على منحة تفوق جزئية.",
-      en: "Applying to a top public university like UM needs careful translation and attestation of documents. With THIQA UNI's guidance I was accepted and got a partial merit scholarship.",
+      ar: "التقديم لجامعة مالايا يحتاج دقة عالية في ترجمة وتصديق الأوراق. مع إرشاد ثقة يوني تم قبولي وحصلت على منحة تفوق جزئية.",
+      en: "Applying to UM needs careful translation and attestation of documents. With THIQA UNI's guidance I was accepted and got a partial merit scholarship.",
     },
-    year: { ar: "دفعة 2024", en: "Class of 2024" },
+    year: "2024",
+    photo: "",
   },
 ];
 
+/** Link to the company's Google reviews. Empty = hidden. */
+export const GOOGLE_REVIEWS_URL = "";
+
+/**
+ * FAQ with direct answers. Items whose answer is still empty are hidden,
+ * so add the real answer (and the "updated" date) to publish them.
+ */
 export const FAQS: FAQItem[] = [
   {
-    q: {
-      ar: "كم يستغرق استخراج القبول الجامعي الرسمي عبر ثقة يوني؟",
-      en: "How long does it take to get an official offer through THIQA UNI?",
-    },
-    a: {
-      ar: "تختلف مدة مراجعة الطلب باختلاف الجامعة والبرنامج والفصل الدراسي واكتمال المستندات. تحقّق من المدة الحالية لدى الجامعة قبل ترتيب السفر.",
-      en: "It depends on the university, the program, the intake and whether your documents are complete. Check the current processing time with the university before you book travel.",
-    },
+    q: { ar: "هل الاستشارة واختيار الجامعة مجانية؟", en: "Is the consultation and university selection free?" },
+    a: [
+      {
+        ar: "نعم. الاستشارة الأولى وتقييم ملفك واختيار الجامعة مجانية. والرسوم الدراسية تُدفع للجامعة مباشرة بفاتورة رسمية.",
+        en: "Yes. The first consultation, the assessment of your file and choosing a university are free. Tuition is paid to the university directly against its official invoice.",
+      },
+    ],
+    updated: EMPTY,
   },
   {
-    q: {
-      ar: "هل يمكنني التقديم وبدء الدراسة بدون شهادة IELTS أو TOEFL؟",
-      en: "Can I apply and start studying without IELTS or TOEFL?",
-    },
-    a: {
-      ar: "تختلف متطلبات اللغة وسياسة القبول المشروط من برنامج إلى آخر. راجع صفحة البرنامج واسأل الجامعة عن الخيارات المتاحة قبل التقديم.",
-      en: "Language requirements and conditional offers differ from program to program. Check the program page and ask the university about your options before applying.",
-    },
+    q: { ar: "هل لديكم رسوم على خدمات أخرى؟", en: "Do you charge for any other services?" },
+    a: [EMPTY], // which services are paid (visa handling, housing, airport pickup…) and how much
+    updated: EMPTY,
   },
   {
-    q: {
-      ar: "ما هي خطوات استخراج تأشيرة الطالب (EMGS) في ماليزيا؟",
-      en: "What are the steps for a Malaysian student visa (EMGS)?",
-    },
-    a: {
-      ar: "تتضمن الإجراءات تقديم المستندات ومتابعة الطلب عبر القنوات المعتمدة. المدة والقرار النهائي يخضعان للجهات المختصة وقد يختلفان حسب الحالة؛ راجع أحدث الإرشادات من EMGS.",
-      en: "You submit your documents and the application is tracked through the official channels. Timing and the final decision rest with the authorities and vary by case; check the latest guidance from EMGS.",
-    },
+    q: { ar: "متى مواعيد القبول القادمة؟", en: "When are the next intakes?" },
+    a: [EMPTY], // next intake months per university, and how early to start
+    updated: EMPTY,
   },
   {
-    q: {
-      ar: "هل خدمة التقييم واختيار الجامعة مجانية لدى ثقة يوني؟",
-      en: "Is the assessment and university selection free at THIQA UNI?",
-    },
-    a: {
-      ar: "اسأل الفريق عن نطاق التقييم الأولي وما إذا كانت هناك رسوم على خدمات إضافية. اطلب توضيحاً كتابياً لأي تكلفة قبل بدء الخدمة.",
-      en: "Ask the team what the first assessment covers and whether any extra services are charged. Ask for any cost in writing before the service starts.",
-    },
+    q: { ar: "هل توجد منح دراسية؟", en: "Are there scholarships?" },
+    a: [EMPTY], // university, percentage, minimum grade, deadline
+    updated: EMPTY,
   },
   {
-    q: {
-      ar: "كم تقدر تكلفة المعيشة الشهرية للطالب الدولي في كوالالمبور؟",
-      en: "What does it cost per month to live in Kuala Lumpur as a student?",
-    },
-    a: {
-      ar: "تعتمد الميزانية على المدينة والسكن ونمط الحياة، وقد تتغير الأسعار بمرور الوقت. استخدم تقديراً حديثاً يناسب خياراتك وتحقق مما إذا كان يشمل السكن والمواصلات والطعام.",
-      en: "It depends on the city, your housing and lifestyle, and prices change over time. Use a recent estimate for your choices and check whether it includes housing, transport and food.",
-    },
+    q: { ar: "ما سياسة الاسترداد؟", en: "What is your refund policy?" },
+    a: [EMPTY], // refund policy for any paid service
+    updated: EMPTY,
+  },
+  {
+    q: { ar: "كم تكلفة المعيشة الشهرية في كوالالمبور؟", en: "How much does it cost to live in Kuala Lumpur?" },
+    a: [EMPTY], // monthly range for housing, food and transport
+    updated: EMPTY,
+  },
+  {
+    q: { ar: "هل أحتاج IELTS أو TOEFL؟", en: "Do I need IELTS or TOEFL?" },
+    a: [
+      {
+        ar: "ليس دائماً. كثير من البرامج تقبل إثباتاً آخر للغة، أو تتيح لك البدء بدورة لغة إنجليزية في الجامعة قبل البرنامج. نخبرك بالحد الأدنى المطلوب لكل برنامج تختاره.",
+        en: "Not always. Many programs accept other proof of English, or let you start with an English course at the university before the program. We tell you the minimum required for each program you choose.",
+      },
+    ],
+    updated: EMPTY,
+  },
+  {
+    q: { ar: "كيف تتم تأشيرة الطالب (EMGS)؟", en: "How does the student visa (EMGS) work?" },
+    a: [
+      {
+        ar: "بعد صدور قبولك، تقدّم الجامعة طلب التأشيرة عبر EMGS، ونجهّز معك المستندات المطلوبة. يمكنك متابعة حالة الطلب بنفسك على موقع EMGS، والقرار النهائي للجهات الرسمية.",
+        en: "After your offer, the university submits the visa application through EMGS and we prepare the documents with you. You can track the application yourself on the EMGS website; the final decision rests with the authorities.",
+      },
+    ],
+    updated: EMPTY,
   },
 ];
 
-export const FOOTER_DATA: {
-  brandDesc: Localized;
-  links: { title: Localized; href: string }[];
-  socials: { name: string; href: string }[];
-} = {
-  brandDesc: {
-    ar: "ثقة يوني تساعد الطلاب العرب على الدراسة في ماليزيا: اختيار الجامعة والتخصص، تقديم طلب القبول، متابعة تأشيرة EMGS، والاستقبال والسكن.",
-    en: "THIQA UNI helps students study in Malaysia: choosing a university and major, applying for admission, following the EMGS visa, and arrival and housing.",
-  },
-  links: [
-    { title: { ar: "من نحن", en: "About us" }, href: "#about" },
-    { title: { ar: "خدماتنا", en: "Services" }, href: "#services" },
-    { title: { ar: "خطوات التقديم", en: "How it works" }, href: "#journey" },
-    { title: { ar: "الجامعات", en: "Universities" }, href: "#universities" },
-    { title: { ar: "الدراسة في ماليزيا", en: "Studying in Malaysia" }, href: "#why-malaysia" },
-    { title: { ar: "ما تسأل عنه قبل التقديم", en: "What to ask before applying" }, href: "#why-thiqa" },
-    { title: { ar: "الأسئلة الشائعة", en: "FAQ" }, href: "#faq" },
+/** Major finder: suggested majors per field. */
+export const MAJORS: Record<FieldId | "any", Localized[]> = {
+  med: [
+    { ar: "الطب البشري", en: "Medicine" },
+    { ar: "طب الأسنان", en: "Dentistry" },
+    { ar: "الصيدلة", en: "Pharmacy" },
   ],
-  socials: [
-    { name: "WhatsApp", href: `https://wa.me/${WHATSAPP_PHONE}` },
-    { name: "Instagram", href: "https://instagram.com/thiqauni" },
-    { name: "LinkedIn", href: "https://linkedin.com/company/thiqauni" },
-    { name: "Facebook", href: "https://facebook.com/thiqauni" },
-    { name: "TikTok", href: "https://tiktok.com/@thiqauni" },
+  eng: [
+    { ar: "الهندسة الميكانيكية", en: "Mechanical Engineering" },
+    { ar: "الهندسة الكهربائية", en: "Electrical Engineering" },
+    { ar: "الهندسة المدنية", en: "Civil Engineering" },
+  ],
+  it: [
+    { ar: "علوم الحاسب", en: "Computer Science" },
+    { ar: "الأمن السيبراني", en: "Cyber Security" },
+    { ar: "الذكاء الاصطناعي", en: "Artificial Intelligence" },
+  ],
+  bus: [
+    { ar: "إدارة الأعمال", en: "Business Administration" },
+    { ar: "المحاسبة والمالية", en: "Accounting & Finance" },
+    { ar: "التسويق", en: "Marketing" },
+  ],
+  any: [
+    { ar: "علوم الحاسب", en: "Computer Science" },
+    { ar: "إدارة الأعمال", en: "Business Administration" },
+    { ar: "الهندسة", en: "Engineering" },
   ],
 };
+
+export const COUNTRIES: Localized[] = [
+  { ar: "السعودية", en: "Saudi Arabia" },
+  { ar: "مصر", en: "Egypt" },
+  { ar: "اليمن", en: "Yemen" },
+  { ar: "الإمارات", en: "UAE" },
+  { ar: "عُمان", en: "Oman" },
+  { ar: "الكويت", en: "Kuwait" },
+  { ar: "قطر", en: "Qatar" },
+  { ar: "الأردن", en: "Jordan" },
+  { ar: "السودان", en: "Sudan" },
+  { ar: "العراق", en: "Iraq" },
+  { ar: "ماليزيا", en: "Malaysia" },
+];
+
+export const SOCIALS: { id: "instagram" | "facebook" | "linkedin" | "tiktok"; name: string; href: string }[] = [
+  { id: "instagram", name: "Instagram", href: "https://instagram.com/thiqauni" },
+  { id: "facebook", name: "Facebook", href: "https://facebook.com/thiqauni" },
+  { id: "linkedin", name: "LinkedIn", href: "https://linkedin.com/company/thiqauni" },
+  { id: "tiktok", name: "TikTok", href: "https://tiktok.com/@thiqauni" },
+];

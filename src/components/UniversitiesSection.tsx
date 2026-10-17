@@ -1,98 +1,133 @@
-import React from "react";
-import { PARTNER_UNIVERSITIES } from "../data/thiqaData";
-import type { PartnerUniversity } from "../types";
+import React, { useState } from "react";
+import { FIELDS, PARTNER_UNIVERSITIES } from "../data/thiqaData";
+import type { FieldId } from "../types";
 import { SectionHeader } from "./ui/SectionHeader";
 import { useLang } from "../i18n/LanguageContext";
-
-interface UniversitiesSectionProps {
-  onOpenLeadModal: (source?: string) => void;
-}
 
 const TEXT = {
   ar: {
     title: "الجامعات التي نقدّم إليها",
-    description: "اضغط على أي جامعة لتسألنا عن برامجها ورسومها ومواعيد القبول القادمة.",
-    askAbout: "اسأل عن",
-    notListed: "جامعتك غير موجودة في القائمة؟",
-    askUs: "اسألنا عنها",
+    body: "صفِّ الجامعات حسب النوع أو مجال الدراسة.",
+    type: "النوع:",
+    field: "المجال:",
+    all: "الكل",
+    public: "حكومية",
+    private: "خاصة",
+    intakes: "مواعيد القبول",
+    fees: "الرسوم السنوية",
+    requirements: "شروط القبول",
+    none: "لا توجد جامعة تطابق هذا الاختيار.",
+    showAll: (n: number) => `عرض كل الجامعات (${n})`,
   },
   en: {
     title: "Universities we apply to",
-    description: "Tap any university to ask us about its programs, fees and next intakes.",
-    askAbout: "Ask about",
-    notListed: "Your university isn't on the list?",
-    askUs: "Ask us about it",
+    body: "Filter by type or field of study.",
+    type: "Type:",
+    field: "Field:",
+    all: "All",
+    public: "Public",
+    private: "Private",
+    intakes: "Intakes",
+    fees: "Yearly fees",
+    requirements: "Entry requirements",
+    none: "No university matches this filter.",
+    showAll: (n: number) => `Show all universities (${n})`,
   },
 };
 
-interface MarqueeRowProps {
-  universities: PartnerUniversity[];
-  onOpenLeadModal: (source?: string) => void;
-  reverse?: boolean;
-}
+type TypeFilter = "all" | "public" | "private";
+/** On phones only the first few are shown until the visitor asks for more. */
+const PHONE_PREVIEW = 3;
 
-/** One moving row; items are repeated three times for a seamless loop. */
-const MarqueeRow: React.FC<MarqueeRowProps> = ({ universities, onOpenLeadModal, reverse = false }) => {
-  const { lang } = useLang();
-  return (
-    <div className="universities-marquee marquee-fade w-full overflow-hidden py-3">
-      <ul className={`${reverse ? "animate-marquee-reverse-rtl" : "animate-marquee-rtl"} gap-3 sm:gap-4`}>
-        {[...universities, ...universities, ...universities].map((uni, index) => {
-          const isCopy = index >= universities.length;
-          return (
-            <li key={`${uni.id}-${index}`} aria-hidden={isCopy || undefined} className="shrink-0">
-              <button
-                type="button"
-                tabIndex={isCopy ? -1 : 0}
-                aria-label={`${TEXT[lang].askAbout} ${lang === "ar" ? uni.nameAr : uni.nameEn}`}
-                onClick={() => onOpenLeadModal(`university_${uni.id}`)}
-                className="card flex w-44 flex-col items-center gap-3 p-4 text-center transition-[border-color,box-shadow] duration-200 hover:border-gold-400 hover:shadow-raised sm:w-56 sm:p-5"
-              >
-                <span className="flex h-14 w-full items-center justify-center sm:h-16">
-                  {uni.logoUrl ? (
-                    <img src={uni.logoUrl} alt="" className="max-h-full max-w-full object-contain" loading="lazy" />
-                  ) : (
-                    <span className="font-latin text-sm font-bold text-brand-800">{uni.shortName}</span>
-                  )}
-                </span>
-                <span className="w-full space-y-0.5">
-                  {lang === "ar" && <span className="block truncate text-sm font-bold text-ink">{uni.nameAr}</span>}
-                  <span
-                    className={`block truncate font-latin ${lang === "ar" ? "text-xs text-slate-500" : "text-sm font-bold text-ink"}`}
-                    dir="ltr"
-                  >
-                    {uni.nameEn}
-                  </span>
-                </span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-};
-
-export const UniversitiesSection: React.FC<UniversitiesSectionProps> = ({ onOpenLeadModal }) => {
-  const { lang } = useLang();
+/** Static grid: each university appears once, nothing moves. */
+export const UniversitiesSection: React.FC = () => {
+  const { lang, t } = useLang();
   const text = TEXT[lang];
-  const half = Math.ceil(PARTNER_UNIVERSITIES.length / 2);
+  const [type, setType] = useState<TypeFilter>("all");
+  const [field, setField] = useState<FieldId | "all">("all");
+  const [expanded, setExpanded] = useState(false);
+
+  const list = PARTNER_UNIVERSITIES.filter((u) => (type === "all" || u.type === type) && (field === "all" || u.fields.includes(field)));
+  const collapsed = !expanded && list.length > PHONE_PREVIEW;
 
   return (
-    <section id="universities" className="overflow-hidden bg-paper section">
+    <section id="universities" className="section" aria-labelledby="uni-title">
       <div className="page-container">
-        <SectionHeader title={text.title} description={text.description} />
+        <SectionHeader id="uni-title" title={text.title} description={text.body} />
+
+        <div className="mb-6 flex flex-wrap gap-x-6 gap-y-2">
+          <div role="group" aria-label={text.type} className="flex flex-wrap items-center gap-2">
+            <span className="text-sm text-muted">{text.type}</span>
+            {(["all", "public", "private"] as const).map((v) => (
+              <button key={v} type="button" className="chip" aria-pressed={type === v} onClick={() => { setType(v); setExpanded(false); }}>
+                {text[v]}
+              </button>
+            ))}
+          </div>
+          <div role="group" aria-label={text.field} className="flex flex-wrap items-center gap-2">
+            <span className="text-sm text-muted">{text.field}</span>
+            <button type="button" className="chip" aria-pressed={field === "all"} onClick={() => { setField("all"); setExpanded(false); }}>
+              {text.all}
+            </button>
+            {(Object.keys(FIELDS) as FieldId[]).map((f) => (
+              <button key={f} type="button" className="chip" aria-pressed={field === f} onClick={() => { setField(f); setExpanded(false); }}>
+                {t(FIELDS[f])}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {list.length === 0 ? (
+          <p className="py-6 text-muted">{text.none}</p>
+        ) : (
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" aria-live="polite">
+            {list.map((u, i) => {
+              const details = [
+                { label: text.intakes, value: t(u.intakes) },
+                { label: text.fees, value: t(u.fees) },
+                { label: text.requirements, value: t(u.requirements) },
+              ].filter((d) => d.value);
+              return (
+                <li key={u.id} className={`card flex flex-col gap-3 ${collapsed && i >= PHONE_PREVIEW ? "hidden sm:flex" : ""}`}>
+                  <div>
+                    <img src={u.logoUrl} alt="" className="block h-10 w-auto max-w-[70%] object-contain sm:h-12" loading="lazy" />
+                    <div className="mt-3">
+                      <h3 className="text-base leading-snug">{lang === "ar" ? u.nameAr : u.nameEn}</h3>
+                      {lang === "ar" && (
+                        <p className="text-sm text-muted" dir="ltr">
+                          {u.nameEn}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted">
+                    {u.type === "public" ? text.public : text.private}
+                    {u.branch && ` · ${t(u.branch)}`} · {t(u.city)}
+                    <br />
+                    {u.fields.map((f) => t(FIELDS[f])).join(" · ")}
+                  </p>
+                  {details.length > 0 && (
+                    <dl className="grid gap-1.5 border-t border-line pt-3 text-sm">
+                      {details.map((d) => (
+                        <div key={d.label} className="flex justify-between gap-2">
+                          <dt className="text-muted">{d.label}</dt>
+                          <dd className="text-end">{d.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+
+        {collapsed && (
+          <button type="button" onClick={() => setExpanded(true)} className="btn btn-secondary mt-4 w-full sm:hidden">
+            {text.showAll(list.length)}
+          </button>
+        )}
       </div>
-
-      <MarqueeRow universities={PARTNER_UNIVERSITIES.slice(0, half)} onOpenLeadModal={onOpenLeadModal} />
-      <MarqueeRow universities={PARTNER_UNIVERSITIES.slice(half)} onOpenLeadModal={onOpenLeadModal} reverse />
-
-      <p className="mt-8 px-4 text-center text-base text-muted">
-        {text.notListed}{" "}
-        <button type="button" onClick={() => onOpenLeadModal("universities_other")} className="text-link">
-          {text.askUs}
-        </button>
-      </p>
     </section>
   );
 };

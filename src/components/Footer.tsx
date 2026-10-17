@@ -1,15 +1,6 @@
 import React from "react";
-import {
-  COMPANY,
-  FOOTER_DATA,
-  WHATSAPP_DISPLAY,
-  whatsappUrl,
-  BRAND_NAME_AR,
-  BRAND_NAME_EN,
-  BRAND_TAGLINE,
-  BRAND_MOTTO,
-} from "../data/thiqaData";
-import { ArrowUp, Globe, MessageCircle, Video } from "lucide-react";
+import { BRAND_TAGLINE, COMPANY, NAV_LINKS, SOCIALS, WHATSAPP_DISPLAY, whatsappUrl } from "../data/thiqaData";
+import { BrandIcon } from "./ui/BrandIcon";
 import { useLang } from "../i18n/LanguageContext";
 
 interface FooterProps {
@@ -18,142 +9,98 @@ interface FooterProps {
 
 const TEXT = {
   ar: {
+    contact: "التواصل",
     site: "الموقع",
-    siteLinks: "روابط الموقع",
-    legal: "معلومات قانونية",
-    legalLinks: { privacy: "سياسة الخصوصية", terms: "الشروط والأحكام", refund: "الرسوم والشفافية" },
-    top: "للأعلى",
-    registration: "رقم السجل التجاري",
-    message: "مرحباً، أود التواصل مع مستشار ثقة يوني.",
+    legal: { privacy: "سياسة الخصوصية", terms: "الشروط والأحكام", refund: "الرسوم والشفافية" },
+    message: "مرحباً فريق ثقة يوني، أود الاستفسار عن الدراسة في ماليزيا.",
   },
   en: {
+    contact: "Contact",
     site: "Site",
-    siteLinks: "Site links",
-    legal: "Legal",
-    legalLinks: { privacy: "Privacy policy", terms: "Terms and conditions", refund: "Fees and transparency" },
-    top: "Back to top",
-    registration: "Company registration",
-    message: "Hello, I'd like to speak with a THIQA UNI advisor.",
+    legal: { privacy: "Privacy policy", terms: "Terms and conditions", refund: "Fees and transparency" },
+    message: "Hello Thiqa Uni team, I'd like to ask about studying in Malaysia.",
   },
-};
-
-const LEGAL_TYPES = ["privacy", "terms", "refund"] as const;
-
-const linkClass =
-  "inline-flex min-h-10 items-center rounded-md text-start transition-colors hover:text-white focus-visible:ring-white focus-visible:ring-offset-ink";
-
-const getSocialIcon = (name: string) => {
-  switch (name) {
-    case "WhatsApp":
-      return <MessageCircle className="h-4 w-4" />;
-    case "TikTok":
-      return <Video className="h-4 w-4" />;
-    default:
-      return <Globe className="h-4 w-4" />;
-  }
 };
 
 export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
   const { lang, t } = useLang();
   const text = TEXT[lang];
-  const brandName = lang === "ar" ? BRAND_NAME_AR : BRAND_NAME_EN;
+  const contact = [t(COMPANY.address), t(COMPANY.hours), COMPANY.ssm && `SSM ${COMPANY.ssm}`].filter(Boolean);
 
   return (
-    <footer className="bg-ink pb-28 pt-14 text-brand-100 lg:pb-10">
+    <footer className="bg-navy py-10 text-white">
       <div className="page-container">
-        <div className="grid gap-10 border-b border-white/10 pb-10 md:grid-cols-[1.5fr_1fr_1fr]">
-          <div className="space-y-4">
-            <span className="inline-flex rounded-xl bg-white px-4 py-3">
-              <img
-                src="/thiqa-logo-trim.png"
-                alt={`${brandName} — ${t(BRAND_TAGLINE)}`}
-                width="591"
-                height="170"
-                loading="lazy"
-                className="h-12 w-auto"
-              />
-            </span>
-            <p className="max-w-sm text-sm leading-relaxed text-brand-100/80">{t(FOOTER_DATA.brandDesc)}</p>
-            <a
-              href={whatsappUrl(text.message)}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-place="footer"
-              className="inline-flex min-h-11 items-center gap-2 rounded-lg font-bold text-white hover:text-gold-300 focus-visible:ring-white focus-visible:ring-offset-ink"
-            >
-              <MessageCircle className="h-5 w-5 text-gold-400" />
-              <span dir="ltr" className="font-latin">{WHATSAPP_DISPLAY}</span>
-            </a>
-            <div className="flex flex-wrap gap-2">
-              {FOOTER_DATA.socials.map((s) => (
-                <a
-                  key={s.name}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.name}
-                  data-place="footer_social"
-                  className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/15 transition-colors hover:border-white/40 hover:text-white focus-visible:ring-white focus-visible:ring-offset-ink"
-                >
-                  <span aria-hidden="true">{getSocialIcon(s.name)}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <nav aria-label={text.siteLinks}>
-            <h2 className="mb-3 text-sm font-bold text-white">{text.site}</h2>
-            <ul className="space-y-1 text-sm">
-              {FOOTER_DATA.links.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} className={linkClass}>
-                    {t(l.title)}
+        <div className="grid gap-8 md:grid-cols-[1.3fr_1fr_1fr] md:gap-10">
+          <div>
+            <img src="/thiqa-logo-white.png" alt="Thiqa Uni" width="581" height="162" className="h-9 w-auto" loading="lazy" />
+            <p className="mt-2 text-sm text-on-navy">{t(BRAND_TAGLINE)}</p>
+            <ul className="mt-4 flex gap-2">
+              {SOCIALS.map((s) => (
+                <li key={s.id}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.name}
+                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/25 hover:border-white/60"
+                  >
+                    <BrandIcon name={s.id} className="h-4.5 w-4.5" />
                   </a>
                 </li>
               ))}
             </ul>
-          </nav>
+          </div>
 
           <div>
-            <h2 className="mb-3 text-sm font-bold text-white">{text.legal}</h2>
-            <ul className="space-y-1 text-sm">
-              {LEGAL_TYPES.map((type) => (
-                <li key={type}>
-                  <button type="button" onClick={() => onOpenLegal(type)} className={linkClass}>
-                    {text.legalLinks[type]}
-                  </button>
+            <h2 className="mb-2 text-sm text-white">{text.contact}</h2>
+            <ul className="grid gap-1 text-sm">
+              <li>
+                <a href={whatsappUrl(text.message)} target="_blank" rel="noopener noreferrer" data-place="footer" className="inline-flex min-h-8 items-center gap-2 hover:underline" dir="ltr">
+                  <BrandIcon name="whatsapp" className="h-4.5 w-4.5" />
+                  {WHATSAPP_DISPLAY}
+                </a>
+              </li>
+              {COMPANY.email && (
+                <li>
+                  <a href={`mailto:${COMPANY.email}`} className="inline-flex min-h-8 items-center hover:underline">
+                    {COMPANY.email}
+                  </a>
+                </li>
+              )}
+              {contact.map((c) => (
+                <li key={c} className="text-on-navy">
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Section links live in the menu on phones, so the footer stays short there */}
+          <div className="hidden md:block">
+            <h2 className="mb-2 text-sm text-white">{text.site}</h2>
+            <ul className="grid gap-1 text-sm">
+              {NAV_LINKS.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="inline-flex min-h-8 items-center hover:underline">
+                    {t(l.name)}
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-3 pt-6 text-xs text-brand-100/70 sm:flex-row">
-          <div className="space-y-1 text-center sm:text-start">
-            <p>
-              © {new Date().getFullYear()} {brandName} · {t(BRAND_MOTTO)}
-            </p>
-            {/* Shown once the real details are filled in COMPANY (thiqaData.ts) */}
-            {(COMPANY.registration || t(COMPANY.address)) && (
-              <p>
-                {COMPANY.registration && (
-                  <>
-                    {text.registration}: <span className="font-latin" dir="ltr">{COMPANY.registration}</span>
-                  </>
-                )}
-                {COMPANY.registration && t(COMPANY.address) && " · "}
-                {t(COMPANY.address)}
-              </p>
-            )}
-          </div>
-          <button
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-2 hover:text-white focus-visible:ring-white focus-visible:ring-offset-ink"
-          >
-            {text.top}
-            <ArrowUp className="h-4 w-4" />
-          </button>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-white/15 pt-4 text-sm text-on-navy">
+          <span>© {new Date().getFullYear()} Thiqa Uni</span>
+          <ul className="flex flex-wrap gap-x-4">
+            {(["privacy", "terms", "refund"] as const).map((k) => (
+              <li key={k}>
+                <button type="button" onClick={() => onOpenLegal(k)} className="min-h-10 hover:text-white hover:underline">
+                  {text.legal[k]}
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>
