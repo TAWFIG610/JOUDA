@@ -17,8 +17,8 @@ It takes about 10 minutes and needs no paid service.
 ```js
 const SHEET_NAME = "Leads";
 const HEADERS = [
-  "submittedAt", "name", "whatsapp", "email", "country", "degree",
-  "field", "notes", "pathway", "source", "language", "page",
+  "submittedAt", "name", "whatsapp", "country", "degree",
+  "field", "pathway", "source", "language", "page",
 ];
 
 function doPost(e) {

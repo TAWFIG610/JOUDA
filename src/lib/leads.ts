@@ -11,18 +11,16 @@ export const leadsEnabled = Boolean(ENDPOINT);
 export interface Lead {
   name: string;
   whatsapp: string;
-  email: string;
   country: string;
   degree: string;
   field: string;
-  notes: string;
   pathway: string;
   source: string;
   language: string;
 }
 
 /**
- * Fire-and-forget: never blocks or breaks the WhatsApp hand-off.
+ * Fire-and-forget: a failure here never blocks the form.
  * Sent as text/plain so the browser needs no CORS preflight.
  */
 export function saveLead(lead: Lead) {
@@ -34,6 +32,6 @@ export function saveLead(lead: Lead) {
       void fetch(ENDPOINT, { method: "POST", mode: "no-cors", keepalive: true, body }).catch(() => {});
     }
   } catch {
-    // Saving the lead is a backup; WhatsApp remains the main channel.
+    // Never let a storage problem break the consultation form.
   }
 }

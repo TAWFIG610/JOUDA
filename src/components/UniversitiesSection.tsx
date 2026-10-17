@@ -47,6 +47,16 @@ export const UniversitiesSection: React.FC = () => {
   const [field, setField] = useState<FieldId | "all">("all");
   const [expanded, setExpanded] = useState(false);
 
+  // A new filter starts collapsed again on phones.
+  const chooseType = (v: TypeFilter) => {
+    setType(v);
+    setExpanded(false);
+  };
+  const chooseField = (f: FieldId | "all") => {
+    setField(f);
+    setExpanded(false);
+  };
+
   const list = PARTNER_UNIVERSITIES.filter((u) => (type === "all" || u.type === type) && (field === "all" || u.fields.includes(field)));
   const collapsed = !expanded && list.length > PHONE_PREVIEW;
 
@@ -59,18 +69,18 @@ export const UniversitiesSection: React.FC = () => {
           <div role="group" aria-label={text.type} className="flex flex-wrap items-center gap-2">
             <span className="text-sm text-muted">{text.type}</span>
             {(["all", "public", "private"] as const).map((v) => (
-              <button key={v} type="button" className="chip" aria-pressed={type === v} onClick={() => { setType(v); setExpanded(false); }}>
+              <button key={v} type="button" className="chip" aria-pressed={type === v} onClick={() => chooseType(v)}>
                 {text[v]}
               </button>
             ))}
           </div>
           <div role="group" aria-label={text.field} className="flex flex-wrap items-center gap-2">
             <span className="text-sm text-muted">{text.field}</span>
-            <button type="button" className="chip" aria-pressed={field === "all"} onClick={() => { setField("all"); setExpanded(false); }}>
+            <button type="button" className="chip" aria-pressed={field === "all"} onClick={() => chooseField("all")}>
               {text.all}
             </button>
             {(Object.keys(FIELDS) as FieldId[]).map((f) => (
-              <button key={f} type="button" className="chip" aria-pressed={field === f} onClick={() => { setField(f); setExpanded(false); }}>
+              <button key={f} type="button" className="chip" aria-pressed={field === f} onClick={() => chooseField(f)}>
                 {t(FIELDS[f])}
               </button>
             ))}

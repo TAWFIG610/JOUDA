@@ -17,9 +17,9 @@ const META: Record<Lang, { title: string; description: string }> = {
       "ثقة يوني تساعدك على اختيار الجامعة والتخصص في ماليزيا، وتقديم طلب القبول، ومتابعة تأشيرة الطالب EMGS، والاستقبال والسكن.",
   },
   en: {
-    title: "THIQA UNI | Study in Malaysia — admission, visa and housing",
+    title: "Thiqa Uni | Study in Malaysia — admission, visa and housing",
     description:
-      "THIQA UNI helps you choose a university and major in Malaysia, apply for admission, follow your EMGS student visa, and settle in on arrival.",
+      "Thiqa Uni helps you choose a university and major in Malaysia, apply for admission, follow your EMGS student visa, and settle in on arrival.",
   },
 };
 

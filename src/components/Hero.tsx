@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Check } from "lucide-react";
 import { COMPANY, CTA, HERO_IMAGE, PARTNER_UNIVERSITIES } from "../data/thiqaData";
 import { useLang } from "../i18n/LanguageContext";
-import { isValidContact, submitConsultation, type ContactDetails } from "../lib/consult";
+import { CONTACT_ERROR, isValidContact, submitConsultation, type ContactDetails } from "../lib/consult";
 import type { View } from "./ConsultModal";
 import { ContactFields } from "./ContactFields";
 
@@ -20,7 +20,6 @@ const TEXT = {
     formSub: (h: string) => (h ? `يرد عليك مستشار خلال ${h} ساعات عمل.` : "اترك بياناتك ويتواصل معك مستشار من فريقنا."),
     quiz: "لست متأكداً ماذا تدرس؟ ساعدني أختار",
     privacy: "نستخدم بياناتك للتواصل معك بخصوص دراستك فقط.",
-    error: "أدخل اسمك ودولتك ورقم واتساب مع رمز الدولة.",
   },
   en: {
     title: "Study in Malaysia, step by step",
@@ -31,16 +30,15 @@ const TEXT = {
     formSub: (h: string) => (h ? `An advisor replies within ${h} working hours.` : "Leave your details and one of our advisors will contact you."),
     quiz: "Not sure what to study? Help me choose",
     privacy: "We only use your details to contact you about your studies.",
-    error: "Enter your name, country and WhatsApp number with country code.",
   },
 };
 
-const EMPTY: ContactDetails = { name: "", country: "", phone: "" };
+const EMPTY_DETAILS: ContactDetails = { name: "", country: "", phone: "" };
 
 export const Hero: React.FC<HeroProps> = ({ onOpenConsult }) => {
   const { lang, t } = useLang();
   const text = TEXT[lang];
-  const [details, setDetails] = useState<ContactDetails>(EMPTY);
+  const [details, setDetails] = useState<ContactDetails>(EMPTY_DETAILS);
   const [error, setError] = useState("");
 
   // Real figures only; shown once they are filled in.
@@ -52,12 +50,12 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConsult }) => {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!isValidContact(details)) {
-      setError(text.error);
+      setError(t(CONTACT_ERROR));
       return;
     }
     submitConsultation(details, lang, "hero_form");
     onOpenConsult("hero_form", "done", details);
-    setDetails(EMPTY);
+    setDetails(EMPTY_DETAILS);
   };
 
   return (

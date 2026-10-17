@@ -9,15 +9,18 @@ import type { FAQItem, FieldId, Localized, NavLink, PartnerUniversity, Testimoni
 
 const EMPTY: Localized = { ar: "", en: "" };
 
-export const BRAND_NAME_EN = "THIQA UNI";
-export const BRAND_NAME_AR = "ثقة يوني";
 /** The one tagline used across the site (matches the logo). */
 export const BRAND_TAGLINE: Localized = { ar: "شريكك الأكاديمي للتعليم الدولي", en: "Your global education partner" };
 
-export const WHATSAPP_PHONE = "60175341969";
+const WHATSAPP_PHONE = "60175341969";
 export const WHATSAPP_DISPLAY = "+60 17-534 1969";
-export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_PHONE}`;
-export const whatsappUrl = (text: string) => `${WHATSAPP_BASE_URL}?text=${encodeURIComponent(text)}`;
+export const whatsappUrl = (text: string) => `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
+
+/** Opening message for the floating and footer WhatsApp links. */
+export const WHATSAPP_GREETING: Localized = {
+  ar: "مرحباً فريق ثقة يوني، أود الاستفسار عن الدراسة في ماليزيا.",
+  en: "Hello Thiqa Uni team, I'd like to ask about studying in Malaysia.",
+};
 
 /** The single call to action used everywhere. */
 export const CTA: Localized = { ar: "احجز استشارة مجانية", en: "Book a free consultation" };
@@ -133,7 +136,7 @@ export const COSTS: { label: Localized; value: Localized }[] = [
   { label: { ar: "استشارتنا واختيار الجامعة", en: "Our consultation and university selection" }, value: { ar: "مجاناً", en: "Free" } },
 ];
 
-/** From THIQA UNI's own fee, privacy and service terms. */
+/** From Thiqa Uni's own fee, privacy and service terms. */
 export const COMMITMENTS: { title: Localized; desc: Localized }[] = [
   {
     title: { ar: "الاستشارة الأولى مجانية", en: "Your first consultation is free" },
@@ -201,8 +204,8 @@ export const TESTIMONIALS: Testimonial[] = [
     university: "Taylor's University",
     program: { ar: "هندسة البرمجيات", en: "Software Engineering" },
     quote: {
-      ar: "منصة ثقة يوني اختصرت علي كل الحيرة. استلمت قبولي الرسمي في جامعة تيلورز في وقت قياسي، وكانت متابعة التأشيرة واضحة جداً وبدون أي تعقيد.",
-      en: "THIQA UNI took away all the confusion. I got my official offer from Taylor's very quickly, and the visa follow-up was clear and simple.",
+      ar: "منصة ثقة يوني اختصرت علي كل الحيرة. استلمت قبولي الرسمي في جامعة تايلورز في وقت قياسي، وكانت متابعة التأشيرة واضحة جداً وبدون أي تعقيد.",
+      en: "Thiqa Uni took away all the confusion. I got my official offer from Taylor's very quickly, and the visa follow-up was clear and simple.",
     },
     year: "2024",
     photo: "",
@@ -228,7 +231,7 @@ export const TESTIMONIALS: Testimonial[] = [
     program: { ar: "الهندسة الميكانيكية", en: "Mechanical Engineering" },
     quote: {
       ar: "التقديم لجامعة مالايا يحتاج دقة عالية في ترجمة وتصديق الأوراق. مع إرشاد ثقة يوني تم قبولي وحصلت على منحة تفوق جزئية.",
-      en: "Applying to UM needs careful translation and attestation of documents. With THIQA UNI's guidance I was accepted and got a partial merit scholarship.",
+      en: "Applying to UM needs careful translation and attestation of documents. With Thiqa Uni's guidance I was accepted and got a partial merit scholarship.",
     },
     year: "2024",
     photo: "",

@@ -3,7 +3,6 @@ import { X } from "lucide-react";
 import { useLang } from "../../i18n/LanguageContext";
 
 interface ModalProps {
-  isOpen: boolean;
   onClose: () => void;
   title: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -13,16 +12,16 @@ interface ModalProps {
 }
 
 /**
- * Dialog shell: bottom sheet on phones, centred on larger screens.
+ * Dialog shell (render it only while open): bottom sheet on phones,
+ * centred on larger screens.
  * Only the body scrolls, so the rounded corners never show a scrollbar
  * and the dialog always fits the screen.
  */
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, subtitle, footer, children }) => {
+export const Modal: React.FC<ModalProps> = ({ onClose, title, subtitle, footer, children }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   const { lang } = useLang();
 
   useEffect(() => {
-    if (!isOpen) return;
     const previous = document.activeElement as HTMLElement | null;
     dialogRef.current?.focus();
     document.body.classList.add("scroll-locked");
@@ -33,9 +32,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, subtitle, 
       window.removeEventListener("keydown", onKey);
       previous?.focus?.();
     };
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
+  }, [onClose]);
 
   return (
     <div

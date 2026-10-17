@@ -7,11 +7,10 @@ import { BrandIcon } from "./ui/BrandIcon";
 import { useLang } from "../i18n/LanguageContext";
 import { track } from "../lib/analytics";
 import { leadsEnabled } from "../lib/leads";
-import { consultationMessage, isValidContact, submitConsultation, type ContactDetails } from "../lib/consult";
+import { CONTACT_ERROR, consultationMessage, isValidContact, submitConsultation, type ContactDetails } from "../lib/consult";
 import { ContactFields } from "./ContactFields";
 
 interface ConsultModalProps {
-  isOpen: boolean;
   onClose: () => void;
   source: string;
   /** "quiz" opens the major finder; "done" shows the confirmation after the hero form. */
@@ -69,7 +68,6 @@ const TEXT = {
     majors: "تخصصات مقترحة",
     unis: "جامعات مقترحة",
     recNote: "اقتراحات مبدئية حسب إجاباتك، يؤكدها المستشار حسب معدلك وميزانيتك. اترك بياناتك ليرسلها لك:",
-    error: "أدخل اسمك ودولتك ورقم واتساب مع رمز الدولة.",
     savedTitle: "استلمنا طلبك",
     saved: (h: string) => `حفظنا بياناتك، وسيراسلك مستشار على واتساب${h ? ` خلال ${h} ساعات عمل` : " قريباً"}.`,
     orWhatsapp: "أو راسلنا الآن على واتساب",
@@ -89,7 +87,6 @@ const TEXT = {
     majors: "Suggested majors",
     unis: "Suggested universities",
     recNote: "Initial suggestions based on your answers; an advisor will confirm them against your grades and budget. Leave your details to receive them:",
-    error: "Enter your name, country and WhatsApp number with country code.",
     savedTitle: "We've received your request",
     saved: (h: string) => `Your details are saved. An advisor will message you on WhatsApp${h ? ` within ${h} working hours` : " soon"}.`,
     orWhatsapp: "Or message us now on WhatsApp",
@@ -101,8 +98,11 @@ const TEXT = {
 
 const EMPTY_ANSWER: Answer = { level: "", field: "any", pref: "any" };
 
-/** One flow: short consultation form, with an optional major finder that feeds into it. */
-export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, source, start = "form", prefill }) => {
+/**
+ * One flow: short consultation form, with an optional major finder that
+ * feeds into it. Render it only while open; it remounts for each opening.
+ */
+export const ConsultModal: React.FC<ConsultModalProps> = ({ onClose, source, start = "form", prefill }) => {
   const { lang, t } = useLang();
   const text = TEXT[lang];
   const [view, setView] = useState<View>(start);
@@ -114,8 +114,8 @@ export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, sou
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (isOpen && start !== "done") track(start === "quiz" ? "advisor_open" : "lead_form_open", { source });
-  }, [isOpen, source, start]);
+    if (start !== "done") track(start === "quiz" ? "advisor_open" : "lead_form_open", { source });
+  }, [source, start]);
 
   const labelOf = (key: keyof Answer) => QUESTIONS.find((q) => q.key === key)!.opts.find((o) => o.v === answer[key])?.label;
 
@@ -136,7 +136,7 @@ export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, sou
 
   const submit = () => {
     if (!isValidContact(details)) {
-      setError(text.error);
+      setError(t(CONTACT_ERROR));
       return;
     }
     // Save the lead first; WhatsApp is offered only afterwards.
@@ -167,7 +167,6 @@ export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, sou
 
   return (
     <Modal
-      isOpen={isOpen}
       onClose={onClose}
       title={t(CTA)}
       subtitle={COMPANY.replyHours ? text.reply(COMPANY.replyHours) : text.replyDefault}
@@ -246,11 +245,15 @@ export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, sou
           <button type="submit" hidden />
 
           {!quizDone && (
-            <button type="button" className="link mt-3 text-sm" onClick={() => {
+            <button
+              type="button"
+              className="link mt-3 text-sm"
+              onClick={() => {
                 setStep(0);
                 setView("quiz");
                 track("advisor_open", { source });
-              }}>
+              }}
+            >
               {text.toQuiz}
             </button>
           )}
@@ -262,26 +265,19 @@ export const ConsultModal: React.FC<ConsultModalProps> = ({ isOpen, onClose, sou
           <span className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-tint text-navy">
             <Check className="h-6 w-6" aria-hidden="true" />
           </span>
-          {leadsEnabled ? (
-            <>
-              <h3 className="text-lg">{text.savedTitle}</h3>
-              <p className="mt-1 text-muted">{text.saved(COMPANY.replyHours)}</p>
-              <a href={whatsappUrl(consultationMessage(details, lang, quizSummary()))} target="_blank" rel="noopener noreferrer" data-place="consult_done" className="btn btn-secondary mt-5 w-full">
-                <BrandIcon name="whatsapp" className="h-5 w-5" />
-                {text.orWhatsapp}
-              </a>
-            </>
-          ) : (
-            <>
-              {/* Without a lead store the details only reach the team through WhatsApp */}
-              <h3 className="text-lg">{text.lastStepTitle}</h3>
-              <p className="mt-1 text-muted">{text.lastStep}</p>
-              <a href={whatsappUrl(consultationMessage(details, lang, quizSummary()))} target="_blank" rel="noopener noreferrer" data-place="consult_done" className="btn btn-primary mt-5 w-full">
-                <BrandIcon name="whatsapp" className="h-5 w-5" />
-                {text.sendWhatsapp}
-              </a>
-            </>
-          )}
+          {/* Without a lead store the details only reach the team through WhatsApp, so it becomes the main action */}
+          <h3 className="text-lg">{leadsEnabled ? text.savedTitle : text.lastStepTitle}</h3>
+          <p className="mt-1 text-muted">{leadsEnabled ? text.saved(COMPANY.replyHours) : text.lastStep}</p>
+          <a
+            href={whatsappUrl(consultationMessage(details, lang, quizSummary()))}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-place="consult_done"
+            className={`btn mt-5 w-full ${leadsEnabled ? "btn-secondary" : "btn-primary"}`}
+          >
+            <BrandIcon name="whatsapp" className="h-5 w-5" />
+            {leadsEnabled ? text.orWhatsapp : text.sendWhatsapp}
+          </a>
         </div>
       )}
     </Modal>

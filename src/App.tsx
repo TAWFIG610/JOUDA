@@ -12,12 +12,12 @@ import { Footer } from "./components/Footer";
 import { WhatsAppFloatingButton } from "./components/WhatsAppFloatingButton";
 import { ConsultModal, type View } from "./components/ConsultModal";
 import type { ContactDetails } from "./lib/consult";
-import { LegalModal } from "./components/LegalModal";
+import { LegalModal, type LegalType } from "./components/LegalModal";
 
 export function App() {
   const [consult, setConsult] = useState<{ source: string; start?: View; prefill?: ContactDetails } | null>(null);
   const [consultOpenCount, setConsultOpenCount] = useState(0);
-  const [legal, setLegal] = useState<"privacy" | "terms" | "refund" | null>(null);
+  const [legal, setLegal] = useState<LegalType | null>(null);
 
   const openConsult = useCallback((source: string, start?: View, prefill?: ContactDetails) => {
     setConsult({ source, start, prefill });
@@ -31,21 +31,21 @@ export function App() {
       <Navbar onOpenConsult={openConsult} />
 
       <main>
-        {/* 1 */}
+        {/* 1. Hero with the consultation form */}
         <Hero onOpenConsult={openConsult} />
-        {/* 2. Trust: who we are, figures, company details, logos */}
+        {/* 2. Who we are: company details, figures, logos */}
         <AboutSection />
-        {/* 3. Services and steps in one section */}
+        {/* 3. How we work: services and steps */}
         <HowSection />
-        {/* 4 */}
+        {/* 4. Universities */}
         <UniversitiesSection />
         {/* 5. Costs, commitments and official checks */}
         <CostsSection />
-        {/* 6 */}
+        {/* 6. Student stories */}
         <TestimonialsSection />
-        {/* 7 */}
+        {/* 7. FAQ */}
         <FAQSection onOpenConsult={openConsult} />
-        {/* 8 */}
+        {/* 8. Final call to action */}
         <FinalCTA onOpenConsult={openConsult} />
       </main>
 
@@ -56,7 +56,6 @@ export function App() {
       {consult && (
         <ConsultModal
           key={consultOpenCount}
-          isOpen
           onClose={closeConsult}
           source={consult.source}
           start={consult.start}

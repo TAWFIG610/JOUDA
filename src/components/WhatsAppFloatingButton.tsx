@@ -1,19 +1,14 @@
 import React from "react";
-import { whatsappUrl } from "../data/thiqaData";
+import { WHATSAPP_GREETING, whatsappUrl } from "../data/thiqaData";
 import { BrandIcon } from "./ui/BrandIcon";
 import { useLang } from "../i18n/LanguageContext";
 
-const MESSAGE = {
-  ar: "مرحباً فريق ثقة يوني، أود الاستفسار عن الدراسة في ماليزيا.",
-  en: "Hello Thiqa Uni team, I'd like to ask about studying in Malaysia.",
-};
-
 /** The one WhatsApp shortcut on the page (the other is in the footer). */
 export const WhatsAppFloatingButton: React.FC = () => {
-  const { lang } = useLang();
+  const { t } = useLang();
   return (
     <a
-      href={whatsappUrl(MESSAGE[lang])}
+      href={whatsappUrl(t(WHATSAPP_GREETING))}
       target="_blank"
       rel="noopener noreferrer"
       data-place="floating"

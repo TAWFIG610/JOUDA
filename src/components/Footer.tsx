@@ -1,10 +1,11 @@
 import React from "react";
-import { BRAND_TAGLINE, COMPANY, NAV_LINKS, SOCIALS, WHATSAPP_DISPLAY, whatsappUrl } from "../data/thiqaData";
+import { BRAND_TAGLINE, COMPANY, NAV_LINKS, SOCIALS, WHATSAPP_DISPLAY, WHATSAPP_GREETING, whatsappUrl } from "../data/thiqaData";
 import { BrandIcon } from "./ui/BrandIcon";
 import { useLang } from "../i18n/LanguageContext";
+import type { LegalType } from "./LegalModal";
 
 interface FooterProps {
-  onOpenLegal: (type: "privacy" | "terms" | "refund") => void;
+  onOpenLegal: (type: LegalType) => void;
 }
 
 const TEXT = {
@@ -12,13 +13,11 @@ const TEXT = {
     contact: "التواصل",
     site: "الموقع",
     legal: { privacy: "سياسة الخصوصية", terms: "الشروط والأحكام", refund: "الرسوم والشفافية" },
-    message: "مرحباً فريق ثقة يوني، أود الاستفسار عن الدراسة في ماليزيا.",
   },
   en: {
     contact: "Contact",
     site: "Site",
     legal: { privacy: "Privacy policy", terms: "Terms and conditions", refund: "Fees and transparency" },
-    message: "Hello Thiqa Uni team, I'd like to ask about studying in Malaysia.",
   },
 };
 
@@ -55,7 +54,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
             <h2 className="mb-2 text-sm text-white">{text.contact}</h2>
             <ul className="grid gap-1 text-sm">
               <li>
-                <a href={whatsappUrl(text.message)} target="_blank" rel="noopener noreferrer" data-place="footer" className="inline-flex min-h-8 items-center gap-2 hover:underline" dir="ltr">
+                <a href={whatsappUrl(t(WHATSAPP_GREETING))} target="_blank" rel="noopener noreferrer" data-place="footer" className="inline-flex min-h-8 items-center gap-2 hover:underline" dir="ltr">
                   <BrandIcon name="whatsapp" className="h-4.5 w-4.5" />
                   {WHATSAPP_DISPLAY}
                 </a>
@@ -93,7 +92,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         <div className="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-white/15 pt-4 text-sm text-on-navy">
           <span>© {new Date().getFullYear()} Thiqa Uni</span>
           <ul className="flex flex-wrap gap-x-4">
-            {(["privacy", "terms", "refund"] as const).map((k) => (
+            {(Object.keys(text.legal) as LegalType[]).map((k) => (
               <li key={k}>
                 <button type="button" onClick={() => onOpenLegal(k)} className="min-h-10 hover:text-white hover:underline">
                   {text.legal[k]}

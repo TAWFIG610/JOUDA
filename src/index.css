@@ -13,7 +13,6 @@
 
   /* Colour */
   --color-navy: #00245c; /* logo navy */
-  --color-navy-2: #0a3577; /* hover on navy */
   --color-sand: #d6aa55; /* calmer take on the logo gold — primary button only */
   --color-sand-hover: #c99a42;
   --color-ink: #14213d; /* text grey 1 */
@@ -141,14 +140,8 @@
   .btn-secondary {
     @apply border-navy bg-transparent text-navy hover:bg-tint;
   }
-  .on-navy .btn-secondary {
-    @apply border-white/60 text-white hover:bg-white/10;
-  }
   .link {
     @apply inline-flex min-h-11 items-center font-medium text-navy underline decoration-1 underline-offset-4;
-  }
-  .on-navy .link {
-    @apply text-white;
   }
 
   /* ---------- Surfaces: one card, one dark panel ---------- */
@@ -178,11 +171,6 @@
   .field-input {
     @apply min-h-12 w-full rounded-lg border border-[#c5ccd8] bg-white px-3.5 text-base text-ink placeholder:text-muted focus:border-navy focus:outline-2 focus:outline-offset-0 focus:outline-navy;
   }
-}
-
-/* Arrow icons point "forward" in reading direction */
-[dir="ltr"] .flip-ltr {
-  transform: scaleX(-1);
 }
 
 /* Respect motion preferences */

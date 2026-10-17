@@ -1,4 +1,4 @@
-import type { Lang } from "../types";
+import type { Lang, Localized } from "../types";
 import { saveLead } from "./leads";
 import { track } from "./analytics";
 
@@ -14,6 +14,11 @@ export interface QuizSummary {
   raw: string; // e.g. "bachelor / it / private"
 }
 
+export const CONTACT_ERROR: Localized = {
+  ar: "أدخل اسمك ودولتك ورقم واتساب مع رمز الدولة.",
+  en: "Enter your name, country and WhatsApp number with country code.",
+};
+
 /** True when name, country and an international WhatsApp number are present. */
 export function isValidContact({ name, country, phone }: ContactDetails) {
   const p = phone.trim();
@@ -25,11 +30,9 @@ export function submitConsultation(details: ContactDetails, lang: Lang, source: 
   saveLead({
     name: details.name.trim(),
     whatsapp: details.phone.trim(),
-    email: "",
     country: details.country.trim(),
     degree: quiz?.level ?? "",
     field: quiz?.field ?? "",
-    notes: "",
     pathway: quiz?.raw ?? "",
     source,
     language: lang,
